@@ -16,7 +16,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.index');
+});
+Route::get('test', function () {
+    return view('admin.index');
+});
+Route::get('analytics', function () {
+    return view('admin.analytics');
+});
+Route::get('event', function () {
+    return view('admin.event');
+});
+Route::get('reviews', function () {
+    return view('admin.reviews');
+});
+Route::get('profile', function () {
+    return view('admin.profile');
 });
 
 Auth::routes();
