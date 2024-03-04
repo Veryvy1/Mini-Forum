@@ -9,15 +9,15 @@
 <meta name="keywords" content />
 <title>Socimo | Social Media Network Template</title>
 <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="css/main.min.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/color.css">
-<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="socimo/css/main.min.css">
+<link rel="stylesheet" href="socimo/css/style.css">
+<link rel="stylesheet" href="socimo/css/color.css">
+<link rel="stylesheet" href="socimo/css/responsive.css">
 </head>
 <body>
-<div class="page-loader" id="page-loader">
+{{-- <div class="page-loader" id="page-loader">
 <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-</div>
+</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="logo res"><img src="images/logo.png" alt><span>Socimo</span></div>
@@ -282,7 +282,7 @@
 </li>
 </ul>
 </nav>
-<section>
+{{-- <section>
 <div class="white-bg">
 <div class="container-fluid">
 <div class="menu-caro">
@@ -357,7 +357,7 @@
 </div>
 </div>
 </div>
-</section>
+</section> --}}
 <section>
 <div class="gap">
 <div class="container">

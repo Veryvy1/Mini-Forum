@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo/videos.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:24:03 GMT -->
+<!-- Mirrored from wpkixx.com/html/socimo/post-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:23:44 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +9,15 @@
 <meta name="keywords" content />
 <title>Socimo | Social Media Network Template</title>
 <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="css/main.min.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/color.css">
-<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="socimo/css/main.min.css">
+<link rel="stylesheet" href="socimo/css/style.css">
+<link rel="stylesheet" href="socimo/css/color.css">
+<link rel="stylesheet" href="socimo/css/responsive.css">
 </head>
 <body>
-<div class="page-loader" id="page-loader">
+{{-- <div class="page-loader" id="page-loader">
 <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-</div>
+</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="logo res"><img src="images/logo.png" alt><span>Socimo</span></div>
@@ -282,7 +282,7 @@
 </li>
 </ul>
 </nav>
-<section>
+{{-- <section>
 <div class="white-bg">
 <div class="container-fluid">
 <div class="menu-caro">
@@ -357,769 +357,523 @@
 </div>
 </div>
 </div>
-</section>
+</section> --}}
+<div class="gap no-gap">
+<div class="top-area mate-black low-opacity">
+<div class="bg-image" style="background-image: url(images/resources/top-bg.jpg)"></div>
+<div class="container">
+<div class="row">
+<div class="col-lg-12">
+<div class="post-subject">
+<a class="tagz" href="#" title>thesis</a>
+<h4>The Effect of Problem Based Learning Models on Students' Higher Order Thinking Skills in Mathematics Learning</h4>
+<ul class="sharing-options">
+<li><a href="#" title><i class="icofont-id-card"></i></a> Recommend</li>
+<li><a href="#" title><i class="icofont-star"></i></a> Follow</li>
+<li><a href="#" title><i class="icofont-share-alt"></i></a> Share</li>
+</ul>
+<ul class="nav nav-tabs post-detail-btn">
+<li class="nav-item"><a class="active" href="#overview" data-toggle="tab">Overview</a></li>
+<li class="nav-item"><a class href="#comment" data-toggle="tab">Comments</a></li>
+<li class="nav-item"><a class href="#reference" data-toggle="tab">References</a></li>
+</ul>
+<a class="download-btn" href="#" title data-ripple>Download it</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <section>
 <div class="gap">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
 <div id="page-contents" class="row merged20">
-<div class="col-lg-3">
-<aside class="sidebar static left">
-<div class="widget stick-widget ">
-<h4 class="widget-title">Watch</h4>
-<form class="video-search" method="post">
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></i>
-<input type="text" placeholder="Search Video">
-<button type="submit"></button>
-</form>
-<ul class="video-links">
+<div class="col-lg-8">
+<div class="tab-content">
+<div class="tab-pane fade active show" id="overview">
+<div class="main-wraper">
+<div class="post-detail">
+<figure><img src="images/resources/post-detail.jpg" alt></figure>
+<h4>The purpose of this study?</h4>
+<p>
+The purpose of this study was to determine the effect of Problem Based Learning (PBL) on students' higher-order thinking abilities in mathematics learning. This research is library literature so the data collection method used is documentation, which is tracking written sources that contain various themes and topics discussed. The model used in this study is a synchronous research model. This will be done by looking at and linking the characteristics and indicators of students' high-level thinking skills in mathematics learning with the characteristics of the Problem Based Learning (PBL) model. From the results of data analysis it can be concluded that there is an influence of Problem Based Learning (PBL) on the level of thinking ability student height on learning mathematics.
+</p>
+<div class="pic-gallery">
+<div class="row merged-10">
+<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+<img src="images/resources/gallery-1.jpg" alt>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-12">
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12">
+<img src="images/resources/gallery-2.jpg" alt>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12">
+<img src="images/resources/gallery-3.jpg" alt>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>
+<b>INTRODUCTION</b> Mathematics is an important subject, there are many activities related to mathematics. Mathematics is one of the subjects given from basic education to higher education. The objectives of learning mathematics, such as: "(1) understanding mathematical concepts, explaining the relationship between concepts and applying concepts or algorithms flexibly, accurately, efficiently and steadily, (2) using reasoning in patterns and properties, performing mathematical manipulations in making generalizations, proofs compile or explain mathematical ideas and achievements, (3) problem solving which includes the ability to understand problems, design mathematical models, solve models and find solutions (in Astriani, Surya, and Syahputa, 2017). Based on the objectives of mathematics learning above, mathematics learning requires students to be able to improve student problem solving ranging from simple levels to higher problem solving.This shows that the ability of problem solving is a competency that is very important to be developed in students in learning mathematics, this is because also in learning mathematics requires the ability to t is high so students are able to solve mathematical problems and are able to apply them in today's life that is not free from mathematical challenges and problems.
+</p>
+<p>
+In learning with the 2013 curriculum that is based on student-centered learning increasingly requires students to be able to the point of creating. To achieve this requires the ability of teachers to innovate in learning so that they are able to train students to think at a high level to solve problems and find solutions to be able to create something new. Also in the 2013 curriculum, learning uses scientific methods, multi-strategy, multimedia, adequate learning resources and technology, and utilizes the environment as a learning resource. The right learning model used is problem based learning. This model is appropriate for improving mathematical problem solving skills
+</p>
+</div>
+</div>
+<div class="main-wraper">
+<div class="charts">
+<h4 class="mb-4">Post Analytics / Stats</h4>
+<div class="quick-all-report">
+<div class="row">
+<div class="col-md-6">
+<div class="quick-all"> <span id="quick-view" class="sparkline">6,4,7,2,9,8,2,5,4</span>
+<div class="spark-meta">
+<h4>67,456</h4>
+<p>Reads</p>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="quick-all"> <span id="quick-time" class="sparkline">7,5,2,6,7,8,5,8,7</span>
+<div class="spark-meta">
+<h4>00:02:03</h4>
+<p>Recommend</p>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="quick-all"> <span id="quick-returning" class="sparkline">4,6,7,8,3,5,8,6,5</span>
+<div class="spark-meta">
+<h4>25%</h4>
+<p>Shares</p>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="quick-all"> <span id="quick-rate" class="sparkline">2,7,7,11,9,13,12,5,7</span>
+<div class="spark-meta">
+<h4>66.1%</h4>
+<p>References</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-pane fade mb-4" id="comment">
+<div class="comment-area">
+<h4 class="comment-title">03 comments</h4>
+<ul class="comments">
 <li>
-<a href="#" title><i class><svg class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Home</a>
-</li>
+<div class="comment-box">
+<div class="commenter-photo">
+<img alt src="images/resources/commenter-1.jpg">
+</div>
+<div class="commenter-meta">
+<div class="comment-titles">
+<h6>willimes doe</h6>
+<span>12 june 2017</span>
+<a title href="#" class="reply">reply</a>
+</div>
+<p>
+Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa
+pulvinar eu aliquet nibh dapibus.
+</p>
+</div>
+</div>
+<ul>
 <li>
-<a href="#" title><i class><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></svg></i> Latest</a>
-</li>
-<li>
-<a href="#" title><i class><svg class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i> Trending</a>
-</li>
-<li>
-<a href="#" title><i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mic"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg></i> Live</a>
-</li>
-<li>
-<a href="#" title><i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg></i> Saved Videos</a>
+<div class="comment-box">
+<div class="commenter-photo">
+<img alt src="images/resources/commenter-2.jpg">
+</div>
+<div class="commenter-meta">
+<div class="comment-titles">
+<h6>Qlark Jack</h6>
+<span>22 july 2017</span>
+<a title href="#" class="reply">reply</a>
+</div>
+<p>
+Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa
+pulvinar eu aliquet nibh dapibus.
+</p>
+</div>
+</div>
 </li>
 </ul>
-<h4 class="main-title"><i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></i> Your Watch List</h4>
-<ul class="watchlist">
-<li class="unread">
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<a href="#" title>Rosie Garebal</a>
-<span class="new-highlight"></span>
 </li>
 <li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<a href="#" title>Danial Cabral</a>
-<span class="new-highlight"></span>
+<div class="comment-box">
+<div class="commenter-photo">
+<img alt src="images/resources/commenter-3.jpg">
+</div>
+<div class="commenter-meta">
+<div class="comment-titles">
+<h6>Olivia Take</h6>
+<span>15 jan 2016</span>
+<a title href="#" class="reply">reply</a>
+</div>
+<p>
+Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa pulvinar eu aliquet nibh dapibus.
+</p>
+</div>
+</div>
 </li>
-<li class="unread">
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<a href="#" title>William John</a>
-<span class="new-highlight"></span>
+</ul>
+</div>
+</div>
+<div class="tab-pane fade" id="reference">
+<h4 class="mb-4">References (15)</h4>
+<div class="main-wraper">
+<div class="user-post">
+<div class="friend-info">
+<figure>
+<img src="images/resources/user2.jpg" alt>
+</figure>
+<div class="friend-name">
+<div class="more">
+<div class="more-post-optns">
+<i class>
+<svg class="feather feather-more-horizontal" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><circle r="1" cy="12" cx="12" /><circle r="1" cy="12" cx="19" /><circle r="1" cy="12" cx="5" /></svg></i>
+<ul>
+<li>
+<i class="icofont-pen-alt-1"></i>Edit Post
+<span>Edit This Post within a Hour</span>
 </li>
 <li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<a href="#" title>Adrew Jane</a>
-<span class="new-highlight"></span>
-</li>
-<li class="unread">
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<a href="#" title>Billgates</a>
-<span class="new-highlight"></span>
+<i class="icofont-ban"></i>Hide Post
+<span>Hide This Post</span>
 </li>
 <li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<a href="#" title>Rita Arvind</a>
-<span class="new-highlight"></span>
+<i class="icofont-ui-delete"></i>Delete Post
+<span>If inappropriate Post By Mistake</span>
+</li>
+<li>
+<i class="icofont-flag"></i>Report
+<span>Inappropriate content</span>
+</li>
+</ul>
+</div>
+</div>
+<ins><a href="time-line.html" title>Sarah K.</a> added a chapter</ins>
+<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
+</div>
+<div class="post-meta">
+<a class="post-title" href="post-detail.html">Supervision as a Personnel Development Device</a>
+<p>
+Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.
+</p>
+<div class="we-video-info">
+<ul>
+<li>
+<span class="views" title="views">
+<i class="icofont-eye"></i>
+<ins>1.2k</ins>
+</span>
+</li>
+<li>
+<span class="Recommend" title="recomend">
+<i class="icofont-id-card"></i>
+</span>
+</li>
+<li>
+<span class="Follow" title="follow">
+<i class="icofont-star"></i>
+</span>
+</li>
+<li>
+<span title="Share" class="share-pst">
+<i class="icofont-share-alt"></i>
+<ins>20</ins>
+</span>
+</li>
+</ul>
+<a class="reply" title href="post-detail.html">Reply <i class="icofont-reply"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="main-wraper">
+<div class="user-post">
+<div class="friend-info">
+<figure>
+<img src="images/resources/user1.jpg" alt>
+</figure>
+<div class="friend-name">
+<div class="more">
+<div class="more-post-optns">
+<i class>
+<svg class="feather feather-more-horizontal" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><circle r="1" cy="12" cx="12" /><circle r="1" cy="12" cx="19" /><circle r="1" cy="12" cx="5" /></svg></i>
+<ul>
+<li>
+<i class="icofont-pen-alt-1"></i>Edit Post
+<span>Edit This Post within a Hour</span>
+</li>
+<li>
+<i class="icofont-ban"></i>Hide Post
+<span>Hide This Post</span>
+</li>
+<li>
+<i class="icofont-ui-delete"></i>Delete Post
+<span>If inappropriate Post By Mistake</span>
+</li>
+<li>
+<i class="icofont-flag"></i>Report
+<span>Inappropriate content</span>
+</li>
+</ul>
+</div>
+</div>
+<ins><a href="time-line.html" title>Jack Carter</a> added a chapter</ins>
+<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
+</div>
+<div class="post-meta">
+<a class="post-title" href="post-detail.html">Supervision as a Personnel Development Device</a>
+<p>
+Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.
+</p>
+<div class="we-video-info">
+<ul>
+<li>
+<span class="views" title="views">
+<i class="icofont-eye"></i>
+<ins>1.2k</ins>
+</span>
+</li>
+<li>
+<span class="Recommend" title="recomend">
+<i class="icofont-id-card"></i>
+</span>
+</li>
+<li>
+<span class="Follow" title="follow">
+<i class="icofont-star"></i>
+</span>
+</li>
+<li>
+<span title="Share" class="share-pst">
+<i class="icofont-share-alt"></i>
+<ins>20</ins>
+</span>
+</li>
+</ul>
+<a class="reply" title href="post-detail.html">Reply <i class="icofont-reply"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="main-wraper">
+<div class="user-post">
+<div class="friend-info">
+<figure>
+<img src="images/resources/user3.jpg" alt>
+</figure>
+<div class="friend-name">
+<div class="more">
+<div class="more-post-optns">
+<i class>
+<svg class="feather feather-more-horizontal" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><circle r="1" cy="12" cx="12" /><circle r="1" cy="12" cx="19" /><circle r="1" cy="12" cx="5" /></svg></i>
+<ul>
+<li>
+<i class="icofont-pen-alt-1"></i>Edit Post
+<span>Edit This Post within a Hour</span>
+</li>
+<li>
+<i class="icofont-ban"></i>Hide Post
+<span>Hide This Post</span>
+</li>
+<li>
+<i class="icofont-ui-delete"></i>Delete Post
+<span>If inappropriate Post By Mistake</span>
+</li>
+<li>
+<i class="icofont-flag"></i>Report
+<span>Inappropriate content</span>
+</li>
+</ul>
+</div>
+</div>
+<ins><a href="time-line.html" title>William John</a> added a chapter</ins>
+<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
+</div>
+<div class="post-meta">
+<a class="post-title" href="post-detail.html">Supervision as a Personnel Development Device</a>
+<p>
+Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.
+</p>
+<div class="we-video-info">
+<ul>
+<li>
+<span class="views" title="views">
+<i class="icofont-eye"></i>
+<ins>1.2k</ins>
+</span>
+</li>
+<li>
+<span class="Recommend" title="recomend">
+<i class="icofont-id-card"></i>
+</span>
+</li>
+<li>
+<span class="Follow" title="follow">
+<i class="icofont-star"></i>
+</span>
+</li>
+<li>
+<span title="Share" class="share-pst">
+<i class="icofont-share-alt"></i>
+<ins>20</ins>
+</span>
+</li>
+</ul>
+<a class="reply" title href="post-detail.html">Reply <i class="icofont-reply"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h5 class="tags-title">Tags:</h5>
+<ul class="tags">
+<li><a href="#" title data-ripple>Thesis</a></li>
+<li><a href="#" title data-ripple>article</a></li>
+<li><a href="#" title data-ripple>book</a></li>
+<li><a href="#" title data-ripple>data</a></li>
+<li><a href="#" title data-ripple>exprement</a></li>
+<li><a href="#" title data-ripple>research</a></li>
+</ul>
+<div class="main-wraper">
+<div class="user-post">
+<div class="friend-info">
+<figure>
+<i class="icofont-learn"></i>
+</figure>
+<div class="friend-name">
+<ins><a title href="time-line.html">Suggested</a></ins>
+<span><i class="icofont-runner-alt-1"></i> Follow similar Research People</span>
+</div>
+<ul class="suggested-caro">
+<li>
+<figure><img src="images/resources/speak-1.jpg" alt></figure>
+<span>Amy Watson</span>
+<ins>Department of Socilolgy</ins>
+<a href="#" title data-ripple><i class="icofont-star"></i> Follow</a>
+</li>
+<li>
+<figure><img src="images/resources/speak-2.jpg" alt></figure>
+<span>Muhammad Khan</span>
+<ins>Department of Socilolgy</ins>
+<a href="#" title data-ripple><i class="icofont-star"></i> Follow</a>
+</li>
+<li>
+<figure><img src="images/resources/speak-3.jpg" alt></figure>
+<span>Sadia Gill</span>
+<ins>Department of Socilolgy</ins>
+<a href="#" title data-ripple><i class="icofont-star"></i> Follow</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4">
+<aside class="sidebar static right">
+<div class="widget">
+<h4 class="widget-title">Post Analytics</h4>
+<ul class="widget-analytics">
+<li>Reads <span>56</span></li>
+<li>Recommendations <span>3</span></li>
+<li>Shares <span>22</span></li>
+<li>References <span>17</span></li>
+</ul>
+</div>
+<div class="widget">
+<h4 class="widget-title">Ask Research Question?</h4>
+<div class="ask-question">
+<i class="icofont-question-circle"></i>
+<h6>Ask questions in Q&A to get help from experts in your field.</h6>
+<a href="#" title>Ask a question</a>
+</div>
+</div>
+<div class="widget">
+<h4 class="widget-title">Explor Events <a class="see-all" href="#" title>See All</a></h4>
+<div class="rec-events bg-purple">
+<i class="icofont-gift"></i>
+<h6><a title href>BZ University good night event in columbia</a></h6>
+<img alt src="images/clock.png">
+</div>
+<div class="rec-events bg-blue">
+<i class="icofont-microphone"></i>
+<h6><a title href>The 3rd International Conference 2020</a></h6>
+<img alt src="images/clock.png">
+</div>
+</div>
+<div class="widget stick-widget">
+<h4 class="widget-title">Who's follownig</h4>
+<ul class="followers">
+<li>
+<figure><img alt src="images/resources/friend-avatar.jpg"></figure>
+<div class="friend-meta">
+<h4>
+<a title href="time-line.html">Kelly Bill</a>
+<span>Dept colleague</span>
+</h4>
+<a class="underline" title href="#">Follow</a>
+</div>
+</li>
+<li>
+<figure><img alt src="images/resources/friend-avatar2.jpg"></figure>
+<div class="friend-meta">
+<h4>
+<a title href="time-line.html">Issabel</a>
+<span>Dept colleague</span>
+</h4>
+<a class="underline" title href="#">Follow</a>
+</div>
+</li>
+<li>
+<figure><img alt src="images/resources/friend-avatar3.jpg"></figure>
+<div class="friend-meta">
+<h4>
+<a title href="time-line.html">Andrew</a>
+<span>Dept colleague</span>
+</h4>
+<a class="underline" title href="#">Follow</a>
+</div>
+</li>
+<li>
+<figure><img alt src="images/resources/friend-avatar4.jpg"></figure>
+<div class="friend-meta">
+<h4>
+<a title href="time-line.html">Sophia</a>
+<span>Dept colleague</span>
+</h4>
+<a class="underline" title href="#">Follow</a>
+</div>
+</li>
+<li>
+<figure><img alt src="images/resources/friend-avatar5.jpg"></figure>
+<div class="friend-meta">
+<h4>
+<a title href="time-line.html">Allen</a>
+<span>Dept colleague</span>
+</h4>
+<a class="underline" title href="#">Follow</a>
+</div>
 </li>
 </ul>
 </div>
 </aside>
-</div>
-<div class="col-lg-9">
-<div class="main-wraper">
-<div class="main-title">Latest Videos</div>
-<div class="main-wraper">
-<div class="user-post video">
-<div class="friend-info">
-<figure>
-<img alt src="images/resources/user1.jpg">
-</figure>
-<div class="friend-name">
-<div class="more">
-<div class="more-post-optns">
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></i>
-<ul>
-<li>
-<i class="icofont-pen-alt-1"></i>Edit Post
-<span>Edit This Post within a Hour</span>
-</li>
-<li>
-<i class="icofont-ban"></i>Hide Post
-<span>Hide This Post</span>
-</li>
-<li>
-<i class="icofont-ui-delete"></i>Delete Post
-<span>If inappropriate Post By Mistake</span>
-</li>
-<li>
-<i class="icofont-flag"></i>Report
-<span>Inappropriate content</span>
-</li>
-</ul>
-</div>
-</div>
-<ins><a title href="time-line.html">Jack Carter</a> Upload video <em><a class="folow" href="#" title>Follow</a></em></ins>
-<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
-</div>
-<div class="post-meta">
-<h4>When your private pictures are used against you</h4>
-<p>A film about a secret of a housewife which is revealed on her 3rd Wedding Anniversary</p>
-<iframe height="400" src="https://www.youtube.com/embed/zdow47FQRfQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<div class="we-video-info">
-<ul>
-<li>
-<span title="views" class="views">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></i>
-<ins>1.2k</ins>
-</span>
-</li>
-<li>
-<span title="Comments" class="Recommend">
-<i>
-<svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-<ins>54</ins>
-</span>
-</li>
-<li>
-<span title="follow" class="Follow">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>
-<ins>5k</ins>
-</span>
-</li>
-<li>
-<span class="share-pst" title="Share">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></i>
-<ins>205</ins>
-</span>
-</li>
-</ul>
-<a href="post-detail.html" title class="reply">Reply <i class="icofont-reply"></i></a>
-</div>
-<div class="stat-tools">
-<div class="box">
-<div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
-<div class="Emojis">
-<div class="Emoji Emoji--like">
-<div class="icon icon--like"></div>
-</div>
-<div class="Emoji Emoji--love">
-<div class="icon icon--heart"></div>
-</div>
-<div class="Emoji Emoji--haha">
-<div class="icon icon--haha"></div>
-</div>
-<div class="Emoji Emoji--wow">
-<div class="icon icon--wow"></div>
-</div>
-<div class="Emoji Emoji--sad">
-<div class="icon icon--sad"></div>
-</div>
-<div class="Emoji Emoji--angry">
-<div class="icon icon--angry"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="box">
-<div class="Emojis">
-<div class="Emoji Emoji--like">
-<div class="icon icon--like"></div>
-</div>
-<div class="Emoji Emoji--love">
-<div class="icon icon--heart"></div>
-</div>
-<div class="Emoji Emoji--haha">
-<div class="icon icon--haha"></div>
-</div>
-<div class="Emoji Emoji--wow">
-<div class="icon icon--wow"></div>
-</div>
-<div class="Emoji Emoji--sad">
-<div class="icon icon--sad"></div>
-</div>
-<div class="Emoji Emoji--angry">
-<div class="icon icon--angry"></div>
-</div>
-</div>
-</div>
-<a title href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
-<a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a>
-<div class="emoji-state">
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/thumb.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/thumb.png"> Likes</span>
-<ul class="namelist">
-<li>Jhon Doe</li>
-<li>Amara Sin</li>
-<li>Sarah K.</li>
-<li><span>20+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/heart.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/heart.png"> Love</span>
-<ul class="namelist">
-<li>Amara Sin</li>
-<li>Jhon Doe</li>
-<li><span>10+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/smile.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/smile.png"> Happy</span>
-<ul class="namelist">
-<li>Sarah K.</li>
-<li>Jhon Doe</li>
-<li>Amara Sin</li>
-<li><span>100+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/weep.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/weep.png"> Dislike</span>
-<ul class="namelist">
-<li>Danial Carbal</li>
-<li>Amara Sin</li>
-<li>Sarah K.</li>
-<li><span>15+ more</span></li>
-</ul>
-</div>
-</div>
-<p>10+</p>
-</div>
-<div class="new-comment" style="display: none;">
-<form method="post">
-<input type="text" placeholder="write comment">
-<button type="submit"><i class="icofont-paper-plane"></i></button>
-</form>
-<div class="comments-area">
-<ul>
-<li>
-<figure><img alt src="images/resources/user1.jpg"></figure>
-<div class="commenter">
-<h5><a title href="#">Jack Carter</a></h5>
-<span>2 hours ago</span>
-<p>
-i think that some how, we learn who we really are and then live with that decision, great post!
-</p>
-<span>you can view the more detail via link</span>
-<a title href="https://www.youtube.com/watch?v=HpZgwHU1GcI" target="_blank">https://www.youtube.com/watch?v=HpZgwHU1GcI</a>
-</div>
-<a title="Like" href="#"><i class="icofont-heart"></i></a>
-<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
-</li>
-<li>
-<figure><img alt src="images/resources/user2.jpg"></figure>
-<div class="commenter">
-<h5><a title href="#">Ching xang</a></h5>
-<span>2 hours ago</span>
-<p>
-i think that some how, we learn who we really are and then live with that decision, great post!
-</p>
-</div>
-<a title="Like" href="#"><i class="icofont-heart"></i></a>
-<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="main-wraper">
-<div class="user-post video">
-<div class="friend-info">
-<figure>
-<img alt src="images/resources/user2.jpg">
-</figure>
-<div class="friend-name">
-<div class="more">
-<div class="more-post-optns">
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></i>
-<ul>
-<li>
-<i class="icofont-pen-alt-1"></i>Edit Post
-<span>Edit This Post within a Hour</span>
-</li>
-<li>
-<i class="icofont-ban"></i>Hide Post
-<span>Hide This Post</span>
-</li>
-<li>
-<i class="icofont-ui-delete"></i>Delete Post
-<span>If inappropriate Post By Mistake</span>
-</li>
-<li>
-<i class="icofont-flag"></i>Report
-<span>Inappropriate content</span>
-</li>
-</ul>
-</div>
-</div>
-<ins><a title href="time-line.html">Farhea</a> Shared Vimeo Link <em><a href="#" title>Follow</a></em></ins>
-<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
-</div>
-<div class="post-meta">
-<h4>Hypoglycemia | Endocrinology Medicine Lectures | Medical Online Education | V-Learning</h4>
-<p>A film about a secret of a housewife which is revealed on her 3rd Wedding Anniversary</p>
-<iframe src="https://player.vimeo.com/video/464733913" height="350" allow="autoplay; fullscreen" allowfullscreen></iframe>
-<div class="we-video-info">
-<ul>
-<li>
-<span title="views" class="views">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></i>
-<ins>1.2k</ins>
-</span>
-</li>
-<li>
-<span title="Comments" class="Recommend">
-<i>
-<svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-<ins>54</ins>
-</span>
-</li>
-<li>
-<span title="follow" class="Follow">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>
-<ins>5k</ins>
-</span>
-</li>
-<li>
-<span class="share-pst" title="Share">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></i>
-<ins>205</ins>
-</span>
-</li>
-</ul>
-<a href="post-detail.html" title class="reply">Reply <i class="icofont-reply"></i></a>
-</div>
-<div class="stat-tools">
-<div class="box">
-<div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
-<div class="Emojis">
-<div class="Emoji Emoji--like">
-<div class="icon icon--like"></div>
-</div>
-<div class="Emoji Emoji--love">
-<div class="icon icon--heart"></div>
-</div>
-<div class="Emoji Emoji--haha">
-<div class="icon icon--haha"></div>
-</div>
-<div class="Emoji Emoji--wow">
-<div class="icon icon--wow"></div>
-</div>
-<div class="Emoji Emoji--sad">
-<div class="icon icon--sad"></div>
-</div>
-<div class="Emoji Emoji--angry">
-<div class="icon icon--angry"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="box">
-<div class="Emojis">
-<div class="Emoji Emoji--like">
-<div class="icon icon--like"></div>
-</div>
-<div class="Emoji Emoji--love">
-<div class="icon icon--heart"></div>
-</div>
-<div class="Emoji Emoji--haha">
-<div class="icon icon--haha"></div>
-</div>
-<div class="Emoji Emoji--wow">
-<div class="icon icon--wow"></div>
-</div>
-<div class="Emoji Emoji--sad">
-<div class="icon icon--sad"></div>
-</div>
-<div class="Emoji Emoji--angry">
-<div class="icon icon--angry"></div>
-</div>
-</div>
-</div>
-<a title href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
-<a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a>
-<div class="emoji-state">
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/thumb.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/thumb.png"> Likes</span>
-<ul class="namelist">
-<li>Jhon Doe</li>
-<li>Amara Sin</li>
-<li>Sarah K.</li>
-<li><span>20+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/heart.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/heart.png"> Love</span>
-<ul class="namelist">
-<li>Amara Sin</li>
-<li>Jhon Doe</li>
-<li><span>10+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/smile.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/smile.png"> Happy</span>
-<ul class="namelist">
-<li>Sarah K.</li>
-<li>Jhon Doe</li>
-<li>Amara Sin</li>
-<li><span>100+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/weep.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/weep.png"> Dislike</span>
-<ul class="namelist">
-<li>Danial Carbal</li>
-<li>Amara Sin</li>
-<li>Sarah K.</li>
-<li><span>15+ more</span></li>
-</ul>
-</div>
-</div>
-<p>10+</p>
-</div>
-<div class="new-comment" style="display: none;">
-<form method="post">
-<input type="text" placeholder="write comment">
-<button type="submit"><i class="icofont-paper-plane"></i></button>
-</form>
-<div class="comments-area">
-<ul>
-<li>
-<figure><img alt src="images/resources/user1.jpg"></figure>
-<div class="commenter">
-<h5><a title href="#">Jack Carter</a></h5>
-<span>2 hours ago</span>
-<p>
-i think that some how, we learn who we really are and then live with that decision, great post!
-</p>
-<span>you can view the more detail via link</span>
-<a title href="https://www.youtube.com/watch?v=HpZgwHU1GcI" target="_blank">https://www.youtube.com/watch?v=HpZgwHU1GcI</a>
-</div>
-<a title="Like" href="#"><i class="icofont-heart"></i></a>
-<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
-</li>
-<li>
-<figure><img alt src="images/resources/user2.jpg"></figure>
-<div class="commenter">
-<h5><a title href="#">Ching xang</a></h5>
-<span>2 hours ago</span>
-<p>
-i think that some how, we learn who we really are and then live with that decision, great post!
-</p>
-</div>
-<a title="Like" href="#"><i class="icofont-heart"></i></a>
-<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="main-wraper">
-<div class="wraper-title">
-<span><i class="icofont-video-alt"></i> Videos Play List</span>
-<a href="videos.html" title>See all Videos</a>
-</div>
-<div class="videos-caro">
-<div class="item-video" data-merge="2">
-<a class="owl-video" href="https://www.youtube.com/watch?v=8iZTb9NWbz8"></a>
-<div class="posted-user">
-<img src="images/resources/user4.jpg" alt>
-<span>Frank J.</span>
-</div>
-<div class="vid-info">
-<span>1 year ago</span>
-<span><i class="icofont-eye-open"></i> 3.1k</span>
-</div>
-</div>
-<div class="item-video" data-merge="2">
-<a class="owl-video" href="https://www.youtube.com/watch?v=8itUNRIWVIs"></a>
-<div class="posted-user">
-<img src="images/resources/user2.jpg" alt>
-<span>Maria K.</span>
-</div>
-<div class="vid-info">
-<span>2 weeks ago</span>
-<span><i class="icofont-eye-open"></i> 1.1k</span>
-</div>
-</div>
-<div class="item-video" data-merge="2">
-<a class="owl-video" href="https://www.youtube.com/watch?v=JpxsRwnRwCQ"></a>
-<div class="posted-user">
-<img src="images/resources/user1.jpg" alt>
-<span>Jack Carter</span>
-</div>
-<div class="vid-info">
-<span>4 weeks ago</span>
-<span><i class="icofont-eye-open"></i> 20k</span>
-</div>
-</div>
-<div class="item-video" data-merge="2">
-<a class="owl-video" href="https://www.youtube.com/watch?v=WNeLUngb-Xg"></a>
-<div class="posted-user">
-<img src="images/resources/user3.jpg" alt>
-<span>Fawad Jan</span>
-</div>
-<div class="vid-info">
-<span>1 Month ago</span>
-<span><i class="icofont-eye-open"></i> 8k</span>
-</div>
-</div>
-</div>
-</div>
-<div class="main-wraper">
-<div class="user-post video">
-<div class="friend-info">
-<figure>
-<img alt src="images/resources/user3.jpg">
-</figure>
-<div class="friend-name">
-<div class="more">
-<div class="more-post-optns">
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></i>
-<ul>
-<li>
-<i class="icofont-pen-alt-1"></i>Edit Post
-<span>Edit This Post within a Hour</span>
-</li>
-<li>
-<i class="icofont-ban"></i>Hide Post
-<span>Hide This Post</span>
-</li>
-<li>
-<i class="icofont-ui-delete"></i>Delete Post
-<span>If inappropriate Post By Mistake</span>
-</li>
-<li>
-<i class="icofont-flag"></i>Report
-<span>Inappropriate content</span>
-</li>
-</ul>
-</div>
-</div>
-<ins><a title href="time-line.html">Fawad Khanzada</a> Shared video <em><a href="#" title>Follow</a></em></ins>
-<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
-</div>
-<div class="post-meta">
-<h4>After watching this, your brain will not be the same..</h4>
-<p>In a classic research-based TEDx Talk, Dr. Lara Boyd describes how neuroplasticity gives you the power to shape the brain you ...</p>
-<iframe height="400" src="https://www.youtube.com/embed/LNHBMFCzznE" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-<div class="we-video-info">
-<ul>
-<li>
-<span title="views" class="views">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></i>
-<ins>1.2k</ins>
-</span>
-</li>
-<li>
-<span title="Comments" class="Recommend">
-<i>
-<svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-<ins>54</ins>
-</span>
-</li>
-<li>
-<span title="follow" class="Follow">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>
-<ins>5k</ins>
-</span>
-</li>
-<li>
-<span class="share-pst" title="Share">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></i>
-<ins>205</ins>
-</span>
-</li>
-</ul>
-<a href="post-detail.html" title class="reply">Reply <i class="icofont-reply"></i></a>
-</div>
-<div class="stat-tools">
-<div class="box">
-<div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
-<div class="Emojis">
-<div class="Emoji Emoji--like">
-<div class="icon icon--like"></div>
-</div>
-<div class="Emoji Emoji--love">
-<div class="icon icon--heart"></div>
-</div>
-<div class="Emoji Emoji--haha">
-<div class="icon icon--haha"></div>
-</div>
-<div class="Emoji Emoji--wow">
-<div class="icon icon--wow"></div>
-</div>
-<div class="Emoji Emoji--sad">
-<div class="icon icon--sad"></div>
-</div>
-<div class="Emoji Emoji--angry">
-<div class="icon icon--angry"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="box">
-<div class="Emojis">
-<div class="Emoji Emoji--like">
-<div class="icon icon--like"></div>
-</div>
-<div class="Emoji Emoji--love">
-<div class="icon icon--heart"></div>
-</div>
-<div class="Emoji Emoji--haha">
-<div class="icon icon--haha"></div>
-</div>
-<div class="Emoji Emoji--wow">
-<div class="icon icon--wow"></div>
-</div>
-<div class="Emoji Emoji--sad">
-<div class="icon icon--sad"></div>
-</div>
-<div class="Emoji Emoji--angry">
-<div class="icon icon--angry"></div>
-</div>
-</div>
-</div>
-<a title href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
-<a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a>
-<div class="emoji-state">
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/thumb.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/thumb.png"> Likes</span>
-<ul class="namelist">
-<li>Jhon Doe</li>
-<li>Amara Sin</li>
-<li>Sarah K.</li>
-<li><span>20+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/heart.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/heart.png"> Love</span>
-<ul class="namelist">
-<li>Amara Sin</li>
-<li>Jhon Doe</li>
-<li><span>10+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/smile.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/smile.png"> Happy</span>
-<ul class="namelist">
-<li>Sarah K.</li>
-<li>Jhon Doe</li>
-<li>Amara Sin</li>
-<li><span>100+ more</span></li>
-</ul>
-</div>
-</div>
-<div class="popover_wrapper">
-<a class="popover_title" href="#" title><img alt src="images/smiles/weep.png"></a>
-<div class="popover_content">
-<span><img alt src="images/smiles/weep.png"> Dislike</span>
-<ul class="namelist">
-<li>Danial Carbal</li>
-<li>Amara Sin</li>
-<li>Sarah K.</li>
-<li><span>15+ more</span></li>
-</ul>
-</div>
-</div>
-<p>10+</p>
-</div>
-<div class="new-comment" style="display: none;">
-<form method="post">
-<input type="text" placeholder="write comment">
-<button type="submit"><i class="icofont-paper-plane"></i></button>
-</form>
-<div class="comments-area">
-<ul>
-<li>
-<figure><img alt src="images/resources/user1.jpg"></figure>
-<div class="commenter">
-<h5><a title href="#">Jack Carter</a></h5>
-<span>2 hours ago</span>
-<p>
-i think that some how, we learn who we really are and then live with that decision, great post!
-</p>
-<span>you can view the more detail via link</span>
-<a title href="https://www.youtube.com/watch?v=HpZgwHU1GcI" target="_blank">https://www.youtube.com/watch?v=HpZgwHU1GcI</a>
-</div>
-<a title="Like" href="#"><i class="icofont-heart"></i></a>
-<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
-</li>
-<li>
-<figure><img alt src="images/resources/user2.jpg"></figure>
-<div class="commenter">
-<h5><a title href="#">Ching xang</a></h5>
-<span>2 hours ago</span>
-<p>
-i think that some how, we learn who we really are and then live with that decision, great post!
-</p>
-</div>
-<a title="Like" href="#"><i class="icofont-heart"></i></a>
-<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sp sp-bars"></div>
-</div>
 </div>
 </div>
 </div>
@@ -1701,9 +1455,11 @@ Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling 
 </div>
 </div>
 </div>
-<script src="js/main.min.js" type="e9fd0c400d460e6e5627e5ab-text/javascript"></script>
-<script src="js/script.js" type="e9fd0c400d460e6e5627e5ab-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e9fd0c400d460e6e5627e5ab-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70af5de13836b',t:'MTcwOTI3NDA0NC4wMDUwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script src="js/main.min.js" type="10fc43dc7dd9c0a32b534eab-text/javascript"></script>
+<script src="js/sparkline.js" type="10fc43dc7dd9c0a32b534eab-text/javascript"></script>
+<script src="js/chart.js" type="10fc43dc7dd9c0a32b534eab-text/javascript"></script>
+<script src="js/script.js" type="10fc43dc7dd9c0a32b534eab-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="10fc43dc7dd9c0a32b534eab-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70ae8ae04836b',t:'MTcwOTI3NDA0MS45MDMwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 
-<!-- Mirrored from wpkixx.com/html/socimo/videos.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:24:03 GMT -->
+<!-- Mirrored from wpkixx.com/html/socimo/post-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:23:47 GMT -->
 </html>

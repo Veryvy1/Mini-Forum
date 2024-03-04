@@ -870,7 +870,6 @@ Profile
 <li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
 <li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
 </ul>
-
 <div class="tab-content">
 <div class="tab-pane active fade show" id="messages">
 <h4><i class="icofont-envelope"></i> messages</h4>

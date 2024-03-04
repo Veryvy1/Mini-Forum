@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:03:20 GMT -->
+<!-- Mirrored from wpkixx.com/html/socimo-panel/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>GetForums | Admin</title>
+<title>socimo | Dashboard</title>
 <link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -16,10 +16,10 @@
 <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
+{{-- <div class="page-loader" id="page-loader">
 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
-</div>
+</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="res-logo"><img src="images/logo.png" alt></div>
@@ -42,23 +42,7 @@
 <li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
 <li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
 <li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-
-
-<li>
-    <a title href="{{ route('logout') }}" class="logout"
-       onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-                     <i class="icofont-logout"></i>
-        {{ __('Logout') }}
-    </a>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
-</li>
-
-
-{{-- <li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li> --}}
+<li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
 </ul>
 </div>
 <div class="res-search">
@@ -75,7 +59,7 @@
 </div>
 <header class>
 <div class="topbar stick">
-<div class="logo"><img alt src="images/logo.png"><span>GetForums</span></div>
+<div class="logo"><img alt src="images/logo.png"><span>Socimo</span></div>
 <div class="searches">
 <form method="post">
 <input type="text" placeholder="Search...">
@@ -126,25 +110,16 @@
 </i>
 </a>
 <ul class="dropdown">
-<li><a href="profile" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-
-{{-- <li class="logout">
-    <a href="#">
-        <i class="icofont-power">
-            </i> Logout</a>
-        </li>
-</ul> --}}
-    <li class="logout">
-    <a title href="{{ route('logout') }}" class="logout"
-       onclick="event.preventDefault();
-                     document.getElementById('logout-form').submit();">
-                     <i class="icofont-power"></i>
-        {{ __('Logout') }}
-    </a>
-</li>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
+<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
+<li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
+<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
+<li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
+<li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
+<li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
+<li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
+<li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
+<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
+<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
 </ul>
 </li>
 </ul>
@@ -174,39 +149,77 @@
 <nav class="sidebar">
 <ul class="menu-slide">
 <li class="active">
-<a class href="#" title>
+<a class href="index-2.html" title>
 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
 </a>
 </li>
 <li class>
-<a class href="analytics" title>
-<i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
+<a class href="analytics.html" title>
+<i class><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Analytics
 </a>
 </li>
 <li class>
-<a class href="profile" title>
-<i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
+<a class href="profile.html" title>
+<i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>
+Profile
 </a>
 </li>
 <li class>
-<a class href="kategori" title>
+<a class href="reviews.html" title>
 <i class>
-<svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
+<svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Reviews
 </a>
 </li>
 <li class>
-<a class href="event" title><i class>
-<svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Manage Content
+<a class href="events.html" title><i class>
+<svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Events
 </a>
 </li>
 <li class>
-<a class href="product" title>
+<a class href="products.html" title>
 <i class>
-<svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
+<svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Products
 </a>
 </li>
-
-
+<li class>
+<a class href="blog.html" title>
+<i class>
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+</i>Blogs
+</a>
+</li>
+<li class>
+<a class href="messages-inbox.html" title>
+<i class>
+<svg id="ab2" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>Messages
+</a>
+</li>
+<li class>
+<a class href="team.html" title>
+<i class>
+<svg id="team" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></i>Team
+</a>
+</li>
+<li class>
+<a class href="login-register.html" title>
+<i class>
+<svg id="ab9" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></i>Login/Register
+</a>
+</li>
+<li class="menu-item-has-children">
+<a class href="#" title>
+<i><svg id="ab8" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" /><polyline points="13 2 13 9 20 9" /></svg></i>Pages
+</a>
+<ul class="submenu">
+<li><a href="404.html" title>Error 404</a></li>
+<li><a href="forgot-password.html" title>Forgot Password</a></li>
+<li><a href="loaders.html" title>Loaders/spiners</a></li>
+<li><a href="invoice-edit.html" title>Invoice</a></li>
+<li><a href="maps.html" title>Google Maps</a></li>
+<li><a href="https://wpkixx.com/html/socimo/development-elements.html" title>Elements</a></li>
+<li><a href="https://wpkixx.com/html/socimo/development-component.html" title>Components</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 <div class="container-fluid">
@@ -218,11 +231,11 @@
 <div class="col-lg-4 col-md-4 col-sm-4">
 <div class="d-widget soft-red">
 <div class="d-widget-title">
-<h5>Total Users</h5>
+<h5>Realtime Users</h5>
 </div>
 <div class="d-widget-content">
 <span class="realtime-ico pulse"></span>
-<h6>Updating</h6>
+<h6>Updating live</h6>
 <h5>223</h5>
 <i class="icofont-users-alt-3"></i>
 </div>
@@ -231,11 +244,11 @@
 <div class="col-lg-4 col-md-4 col-sm-4">
 <div class="d-widget soft-blue">
 <div class="d-widget-title">
-<h5>Total Category</h5>
+<h5>Realtime Watch</h5>
 </div>
 <div class="d-widget-content">
 <span class="realtime-ico pulse"></span>
-<h6>Updating </h6>
+<h6>Updating live</h6>
 <h5>5016</h5>
 <i class="icofont-optic"></i>
 </div>
@@ -244,11 +257,11 @@
 <div class="col-lg-4 col-md-4 col-sm-4">
 <div class="d-widget soft-green">
 <div class="d-widget-title">
-<h5>Total Content</h5>
+<h5>Realtime Posts</h5>
 </div>
 <div class="d-widget-content">
 <span class="realtime-ico pulse"></span>
-<h6>Updating </h6>
+<h6>Updating live</h6>
 <h5>5.3K</h5>
 <i class="icofont-computer"></i>
 </div>
@@ -726,7 +739,7 @@ Report about abuse violation of socimo
 </div>
 </div>
 </div>
-{{-- <div class="row merged20 mb-4">
+<div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">
 <div class="d-widget-title">
@@ -825,7 +838,7 @@ Report about abuse violation of socimo
 </div>
 </div>
 </div>
-</div> --}}
+</div>
 <div class="popup-wraper">
 <div class="popup">
 <span class="popup-closed"><i class="icofont-close"></i></span>
@@ -946,12 +959,12 @@ Report about abuse violation of socimo
 </div>
 </div>
 </div>
-<script src="js/main.min.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="js/vivus.min.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="js/script.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="plugins/apex/apexcharts.min.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="js/graphs-scripts.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-{{-- <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e5e03c9b1570d9cc510b13ff-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d591d5cbf49e29',t:'MTcwOTI1ODU5Ny4xNjAwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body> --}}
+<script src="js/main.min.js" type="b0b69c897329ca8df8d88290-text/javascript"></script>
+<script src="js/vivus.min.js" type="b0b69c897329ca8df8d88290-text/javascript"></script>
+<script src="js/script.js" type="b0b69c897329ca8df8d88290-text/javascript"></script>
+<script src="plugins/apex/apexcharts.min.js" type="b0b69c897329ca8df8d88290-text/javascript"></script>
+<script src="js/graphs-scripts.js" type="b0b69c897329ca8df8d88290-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b0b69c897329ca8df8d88290-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5920968d79e29',t:'MTcwOTI1ODYwNS4yMjEwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:03:54 GMT -->
+<!-- Mirrored from wpkixx.com/html/socimo-panel/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
 </html>

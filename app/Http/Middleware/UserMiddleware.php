@@ -18,6 +18,6 @@ class UserMiddleware
         if(auth()->user()->role == 'user'){
             return $next($request);
         }else{
-            return redirect()->route('signin.index');
+            return redirect()->back();
         }    }
 }

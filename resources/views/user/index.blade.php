@@ -7,22 +7,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>Socimo | Social Media Network Template</title>
+<title>GetForums | Social Media Network </title>
 <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="css/main.min.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/color.css">
-<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="socimo/css/main.min.css">
+<link rel="stylesheet" href="socimo/css/style.css">
+<link rel="stylesheet" href="socimo/css/color.css">
+<link rel="stylesheet" href="socimo/css/responsive.css">
+<style>
+    .large-label {
+        font-size: 16px;
+    }
+</style>
 </head>
 <body>
-<!-- <div class="page-loader" id="page-loader">
+{{-- <div class="page-loader" id="page-loader">
 <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-</div> -->
+</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
-<div class="logo res"><img src="images/logo.png" alt><span>Socimo</span></div>
+<div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
 <div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
+<a href="{{ route('user_profile') }}" title="View Profile"><img src="images/resources/user.jpg" alt="User Profile"></a>
 <div class="name">
 <h4>Danial Cardos</h4>
 <span>Ontario, Canada</span>
@@ -47,17 +52,17 @@
 </div>
 <header class>
 <div class="topbar stick">
-<div class="logo"><img src="images/logo.png" alt><span>Socimo</span></div>
-<div class="searches">
+<div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
+{{--<div class="searches">
 <form method="post">
-<input type="text" placeholder="Search...">
+ <input type="text" placeholder="Search...">
 <button type="submit"><i class="icofont-search"></i></button>
-<span class="cancel-search"><i class="icofont-close"></i></span>
-<div class="recent-search">
+<span class="cancel-search"><i class="icofont-close"></i></span>--}}
+{{--<div class="recent-search">
 <h4 class="recent-searches">Your's Recent Search</h4>
 <ul class="so-history">
 <li>
-<div class="searched-user">
+ <div class="searched-user">
 <figure><img src="images/resources/user1.jpg" alt></figure>
 <span>Danial Carabal</span>
 </div>
@@ -94,7 +99,7 @@
 </ul>
 </div>
 </form>
-</div>
+</div>--}}
 <ul class="web-elements">
 <li>
 <div class="user-dp">
@@ -145,7 +150,7 @@
 </i>
 </a>
 <ul class="dropdown">
-<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
+<li><a href="{{ route('user_profile') }}" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
 <li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
 <li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
 <li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
@@ -154,9 +159,14 @@
 <li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
 <li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
 <li><a class="dark-mod" href="#" title><i class="icofont-moon"></i> Dark Mode</a></li>
-<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
-</ul>
+<li class="logout">
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="icofont-power"></i>{{ __('Logout') }}
+    </a>
 </li>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
 </ul>
 </div>
 </header>
@@ -282,7 +292,7 @@
 </li>
 </ul>
 </nav>
-<section>
+{{-- <section>
 <div class="white-bg">
 <div class="container-fluid">
 <div class="menu-caro">
@@ -357,7 +367,7 @@
 </div>
 </div>
 </div>
-</section>
+</section> --}}
 <section>
 <div class="gap">
 <div class="container">
@@ -421,7 +431,7 @@
 </li>
 </ul>
 </div>
-<div class="widget">
+{{-- <div class="widget">
 <h4 class="widget-title">Recent Blogs <a class="see-all" href="#" title>See All</a></h4>
 <ul class="recent-links">
 <li>
@@ -446,14 +456,14 @@
 </div>
 </li>
 </ul>
-</div>
-<div class="widget">
+</div> --}}
+{{-- <div class="widget">
 <h4 class="widget-title">Your profile has a new Experience section</h4>
 <p>
 Showcase your professional experience and education to help potential employers and collaborators find and contact you about career opportunities.
 </p>
-<a class="main-btn" href="profile.html" title data-ripple>view profile</a>
-</div>
+<a class="main-btn" href="{{ route('user_profile') }}" title data-ripple>view profile</a>
+</div> --}}
 <div class="widget web-links stick-widget">
 <h4 class="widget-title">Useful Links <a title href="#" class="see-all">See All</a></h4>
 <ul>
@@ -478,11 +488,11 @@ Showcase your professional experience and education to help potential employers 
 <li><a href="#" title>Favourit</a></li>
 </ul>
 <div class="main-wraper">
-<span class="new-title">Create New Post</span>
+<span class="new-title">Search Post</span>
 <div class="new-post">
 <form method="post">
-<i class="icofont-pen-alt-1"></i>
-<input type="text" placeholder="Create New Post">
+<i class="icofont-search"></i>
+<input type="text" placeholder="Search...">
 </form>
 <ul class="upload-media">
 <li>
@@ -506,7 +516,7 @@ Showcase your professional experience and education to help potential employers 
 </ul>
 </div>
 </div>
-<div class="story-card">
+{{-- <div class="story-card">
 <div class="story-title">
 <h5>Recent Stories</h5>
 <a href="#" title>See all</a>
@@ -602,8 +612,8 @@ Showcase your professional experience and education to help potential employers 
 <a class="say-hi send-mesg" href="#" title="Send Message"><i class="icofont-facebook-messenger"></i></a>
 </li>
 </ul>
-</div>
-<div class="main-wraper">
+</div> --}}
+{{-- <div class="main-wraper">
 <div class="user-post">
 <div class="friend-info">
 <figure>
@@ -626,26 +636,27 @@ Showcase your professional experience and education to help potential employers 
 <ins>Department of Socilolgy</ins>
 <a href="#" title data-ripple><i class="icofont-star"></i> Follow</a>
 </li>
-<li>
-<figure><img src="images/resources/speak-3.jpg" alt></figure>
-<span>Sadia Gill</span>
-<ins>Department of Socilolgy</ins>
+<li>lgy</ins>
 <a href="#" title data-ripple><i class="icofont-star"></i> Follow</a>
 </li>
 </ul>
 </div>
 </div>
-</div>
+</div>--}}
 <div class="main-wraper">
 <div class="user-post">
 <div class="friend-info">
-<figure>
+{{-- <figure>
 <em>
 <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
 <img alt src="images/resources/user7.jpg">
-</figure>
+</figure>--}}
+
 <div class="friend-name">
 <div class="more">
+<figure><img src="images/resources/speak-3.jpg" alt></figure>
+<span>Sadia Gill</span>
+<ins>Department of Socilo
 <div class="more-post-optns">
 <i class>
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></i>
@@ -1509,7 +1520,7 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 </div>
 </div>
-<div class="main-wraper">
+{{-- <div class="main-wraper">
 <div class="wraper-title">
 <span><i class="icofont-video-alt"></i> Videos Play List</span>
 <a href="videos.html" title>See all Videos</a>
@@ -1560,7 +1571,7 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 </div>
 </div>
-</div>
+</div> --}}
 <div class="main-wraper">
 <div class="user-post">
 <div class="friend-info">
@@ -2674,7 +2685,7 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 </div>
 </div>
-<div class="main-wraper">
+{{-- <div class="main-wraper">
 <div class="user-post">
 <div class="friend-info">
 <figure>
@@ -2704,8 +2715,8 @@ i think that some how, we learn who we really are and then live with that decisi
 </li>
 </ul>
 </div>
-</div>
-<ins><a title href="time-line.html">Sponsors Ads</a></ins>
+</div> --}}
+{{-- <ins><a title href="time-line.html">Sponsors Ads</a></ins>
 <span><i class="icofont-globe"></i> Sponsor</span>
 </div>
 <div class="post-meta">
@@ -2932,8 +2943,24 @@ i think that some how, we learn who we really are and then live with that decisi
 <a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a>
 </div>
 </li>
-</ul>
+</ul> --}}
+
+
 </div>
+<div class="col-lg-3">
+    <aside class="sidebar static right">
+    <div class="widget">
+     <h4 class="widget-title">category</h4>
+    @foreach ($kategori as $key => $category)
+        <input type="checkbox" id="category{{ $category->id }}" name="categories[]" value="{{ $category->id }}">
+        <label for="category{{ $category->id }}" class="large-label">
+            {{ $category->kategori }}
+        </label><br>
+    @endforeach
+
+    </div>
+    </aside>
+    </div>
 </div>
 </div>
 </div>
@@ -2942,10 +2969,10 @@ i think that some how, we learn who we really are and then live with that decisi
 <a href="#" title data-ripple>Load More..</a>
 </div>
 </div>
-<div class="col-lg-3">
+{{-- <div class="col-lg-3">
 <aside class="sidebar static right">
 <div class="widget">
-<h4 class="widget-title">Your Groups</h4>
+ <h4 class="widget-title">Your Groups</h4>
 <ul class="ak-groups">
 <li>
 <figure><img src="images/resources/your-group1.jpg" alt></figure>
@@ -2965,136 +2992,8 @@ i think that some how, we learn who we really are and then live with that decisi
 </li>
 </ul>
 </div>
-<!--<div class="widget">
-<h4 class="widget-title">Suggested Group</h4>
-<div class="sug-caro">
-<div class="friend-box">
-<figure>
-<img alt src="images/resources/sidebar-info.jpg">
-<span>Members: 505K</span>
-</figure>
-<div class="frnd-meta">
-<img alt src="images/resources/frnd-figure2.jpg">
-<div class="frnd-name">
-<a title href="#">Social Research</a>
-<span>@biolabest</span>
-</div>
-<a class="main-btn2" href="#" title>Join Community</a>
-</div>
-</div>
-<div class="friend-box">
-<figure>
-<img alt src="images/resources/sidebar-info2.jpg">
-<span>Members: 505K</span>
-</figure>
-<div class="frnd-meta">
-<img alt src="images/resources/frnd-figure3.jpg">
-<div class="frnd-name">
-<a title href="#">Bio Labest Group</a>
-<span>@biolabest</span>
-</div>
-<a class="main-btn2" href="#" title>Join Community</a>
-</div>
-</div>
-</div>
-</div>
-<div class="widget">
-<h4 class="widget-title">Ask Research Question?</h4>
-<div class="ask-question">
-<i class="icofont-question-circle"></i>
-<h6>Ask questions in Q&A to get help from experts in your field.</h6>
-<a class="ask-qst" href="#" title>Ask a question</a>
-</div>
-</div>
-<div class="widget">
-<h4 class="widget-title">Explor Events <a class="see-all" href="#" title>See All</a></h4>
-<div class="rec-events bg-purple">
-<i class="icofont-gift"></i>
-<h6><a title href>BZ University good night event in columbia</a></h6>
-<img alt src="images/clock.png">
-</div>
-<div class="rec-events bg-blue">
-<i class="icofont-microphone"></i>
-<h6><a title href>The 3rd International Conference 2020</a></h6>
-<img alt src="images/clock.png">
-</div>
-</div>
-<div class="widget">
-<span><i class="icofont-globe"></i> Sponsored</span>
-<ul class="sponsors-ad">
-<li>
-<figure><img src="images/resources/sponsor.jpg" alt></figure>
-<div class="sponsor-meta">
-<h5><a href="#" title>IQ Options Broker</a></h5>
-<a href="#" title target="_blank">www.iqvie.com</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/sponsor2.jpg" alt></figure>
-<div class="sponsor-meta">
-<h5><a href="#" title>BM Fashion Designer</a></h5>
-<a href="#" title target="_blank">www.abcd.com</a>
-</div>
-</li>
-</ul>
-</div>
-<div class="widget stick-widget">
-<h4 class="widget-title">Who's follownig</h4>
-<ul class="followers">
-<li>
-<figure><img alt src="images/resources/friend-avatar.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Kelly Bill</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar2.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Issabel</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar3.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Andrew</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar4.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Sophia</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar5.jpg"></figure>
- <div class="friend-meta">
-<h4>
-<a title href="time-line.html">Allen</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-</ul>
-</div> -->
 </aside>
-</div>
+</div> --}}
 </div>
 </div>
 </div>
