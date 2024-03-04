@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
     return view('admin.index');
 });
@@ -27,17 +30,18 @@ Route::get('analytics', function () {
 Route::get('event', function () {
     return view('admin.event');
 });
-Route::get('reviews', function () {
-    return view('admin.reviews');
+Route::get('kategori', function () {
+    return view('admin.kategori');
 });
 Route::get('profile', function () {
     return view('admin.profile');
 });
 
+
+
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-
