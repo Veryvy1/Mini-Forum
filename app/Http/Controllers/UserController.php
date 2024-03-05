@@ -20,7 +20,7 @@ class UserController extends Controller
             $filteredContent = Content::all();
         }
 
-        return view('user.index', [
+        return view('home', [
 
             'kategori' => $kategori,
         ]);

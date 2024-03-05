@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes(['verify' => true]);
 Route::middleware(['auth'])->group(function () {
@@ -26,9 +25,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', function () {
             return view('admin.index');
         });
-        Route::get('test', function () {
-            return view('admin.index');
-        });
+        // Route::get('test', function () {
+        //     return view('admin.index');
+        // });
         Route::get('analytics', function () {
             return view('admin.analytics');
         });
@@ -38,19 +37,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('reviews', function () {
             return view('admin.reviews');
         });
-        Route::get('admin_profile', function () {
-            return view('admin.profile');
-        });
+
     });
 
     Route::middleware('user')->group(function(){
 
-        // Route::middleware('verified')->get('dashboard', function () {
-        //     return view('user.index');
-        // });
-
-        Route::middleware('verified')->get('dashboard', [UserController::class, 'index'])->name('dashboard');
-
+        Route::middleware('verified')->get('home', [UserController::class, 'index'])->name('home');
 
         Route::get('dashboard2', function () {
             return view('user.index2');
@@ -58,6 +50,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('blog', function () {
             return view('user.blog');
+        });
+
+        Route::get('notifikasi', function () {
+            return view('user.notifikasi');
         });
 
         Route::get('videos', function () {

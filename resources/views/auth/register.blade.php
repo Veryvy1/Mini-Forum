@@ -22,7 +22,7 @@
 <div class="verticle-center">
 <div class="welcome-note">
 <div class="logo">
-    {{-- <img src="images/logo.png" alt> --}}
+    <img src="images/LOGO/logo.png" alt>
     <span>GetForums</span></div>
 <h1>Welcome to GetForums</h1>
 <p>
