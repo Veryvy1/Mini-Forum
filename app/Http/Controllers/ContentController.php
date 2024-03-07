@@ -64,7 +64,9 @@ class ContentController extends Controller
 
     public function show(string $id)
     {
-        //
+        $content = Content::findOrFail($id);
+        $comments= $content->comments()->with('user')->get();
+        return view('comment', compact('content','comments'));
     }
 
 

@@ -201,9 +201,9 @@
 <thead>
 <tr>
 <th>ID#</th>
-<th>Client</th>
-<th>Event Name</th>
-<th>Venue</th>
+<th>Name</th>
+<th>Email</th>
+<th></th>
 <th>Speakers</th>
 <th>Email</th>
 <th>Status</th>
@@ -213,8 +213,9 @@
 </tr>
 </thead>
 <tbody>
+
 <tr>
-<td>1001</td>
+<td></td>
 <td class="user-pic"><figure><img src="images/resources/small-pic2.png" alt></figure> <span>Andrew</span></td>
 <td>Developers Meetup</td>
 <td>Antalia University</td>
@@ -235,6 +236,7 @@
 <div class="button soft-primary"><i class="icofont-pen-alt-1"></i></div>
 </td>
 </tr>
+
 <tr>
 <td>1002</td>
 <td class="user-pic"><figure><img src="images/resources/small-pic1.png" alt></figure> <span>Maria K</span></td>
@@ -252,72 +254,6 @@
 <td class="text-danger">Unpaid</td>
 <td>08:PM</td>
 <td>Oct-10</td>
-<td>
-<div class="button soft-danger"><i class="icofont-trash"></i></div>
-<div class="button soft-primary"><i class="icofont-pen-alt-1"></i></div>
-</td>
-</tr>
-<tr>
-<td>1003</td>
-<td class="user-pic"><figure><img src="images/resources/small-pic3.png" alt></figure> <span>Sandra</span></td>
-<td>Doctors Meetup</td>
-<td>King Advert University</td>
-<td>
-<div class="image-bunch">
-<img src="images/resources/small-pic2.png" alt>
-<img src="images/resources/small-pic4.png" alt>
-<img src="images/resources/small-pic5.png" alt>
-<span>1+</span>
-</div>
-</td>
-<td><a href="#" title><span class="__cf_email__" data-cfemail="2152404c514d4461424c40484d0f424e4c">[email&#160;protected]</span></a></td>
-<td class="text-primary">Pending</td>
-<td>07:PM</td>
-<td>Oct-10</td>
-<td>
-<div class="button soft-danger"><i class="icofont-trash"></i></div>
-<div class="button soft-primary"><i class="icofont-pen-alt-1"></i></div>
-</td>
-</tr>
-<tr>
-<td>1004</td>
-<td class="user-pic"><figure><img src="images/resources/small-pic4.png" alt></figure> <span>King Leo</span></td>
-<td>Cyber Monday</td>
-<td>Oxford University</td>
-<td>
-<div class="image-bunch">
-<img src="images/resources/small-pic3.png" alt>
-<img src="images/resources/small-pic5.png" alt>
-<img src="images/resources/small-pic4.png" alt>
-<span>2+</span>
-</div>
-</td>
-<td><a href="#" title><span class="__cf_email__" data-cfemail="fd8e9c908d9198bd9e909c9491d39e9290">[email&#160;protected]</span></a></td>
-<td class="text-success">Paid</td>
-<td>11:PM</td>
-<td>Oct-09</td>
-<td>
-<div class="button soft-danger"><i class="icofont-trash"></i></div>
-<div class="button soft-primary"><i class="icofont-pen-alt-1"></i></div>
-</td>
-</tr>
-<tr>
-<td>1005</td>
-<td class="user-pic"><figure><img src="images/resources/small-pic5.png" alt></figure> <span>Alblert</span></td>
-<td>Hollowen Day</td>
-<td>USA University</td>
-<td>
-<div class="image-bunch">
-<img src="images/resources/small-pic4.png" alt>
-<img src="images/resources/small-pic5.png" alt>
-<img src="images/resources/small-pic1.png" alt>
-<span>8+</span>
-</div>
-</td>
-<td><a href="#" title><span class="__cf_email__" data-cfemail="a2d1c3cfd2cec7e2c1cfc3cbce8cc1cdcf">[email&#160;protected]</span></a></td>
-<td class="text-success">Paid</td>
-<td>12:PM</td>
-<td>Oct-08</td>
 <td>
 <div class="button soft-danger"><i class="icofont-trash"></i></div>
 <div class="button soft-primary"><i class="icofont-pen-alt-1"></i></div>

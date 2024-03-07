@@ -373,7 +373,12 @@ In learning with the 2013 curriculum that is based on student-centered learning 
 {{-- <div class="tab-pane fade mb-4" id="comment"> --}}
     <div class="container"><br><br>
     <h3>yutiyui</h3>
-    <textarea name="" id="" placeholder="comment..." cols="120" rows="3" style="border-radius: 10px; border: 1px solid #ccc; padding: 5px;"></textarea><br><br>
+    <form action="{{ Route('comment.store', ['contentId' => $contentId]) }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <textarea name="comment" id="comment" placeholder="comment..." cols="120" rows="3" style="border-radius: 10px; border: 1px solid #ccc; padding: 5px;">{{ old('comment') }}</textarea>
+        <button type="submit" class="btn btn-primary rounded-circle" style="background-color:  rgb(40, 144, 204); width:60px; height:60px; font-size:28px; margin-top:-6%;"><i class="icofont-paper-plane"></i></button>
+    </form>
+    <br><br>
     <div class="comment-area">
 <h4 class="comment-title">03 comments</h4>
 <ul class="comments">

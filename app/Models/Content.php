@@ -19,4 +19,9 @@ protected $fillable = [
     {
         return $this->belongsTo(Kategori::class);
     }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

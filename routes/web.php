@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -42,8 +44,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('user')->group(function(){
 
-        Route::middleware('verified')->get('home', [UserController::class, 'index'])->name('home');
-
+        Route::middleware('verified')->get('home', [HomeUserController::class, 'index'])->name('home');
+        Route::get('home', [HomeUserController::class, 'filter'])->name('home');
         Route::get('dashboard2', function () {
             return view('user.index2');
         });
@@ -63,9 +65,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('post-detail', function () {
             return view('user.postdetail');
         });
-        Route::get('comment', function () {
-            return view('user.comment');
-        });
+
+        Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
 
         Route::get('user_profile', function () {
             return view('user.profile');

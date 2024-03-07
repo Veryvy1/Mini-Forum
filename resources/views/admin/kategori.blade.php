@@ -154,7 +154,7 @@
     <form action="{{ route('kategori.store') }}" method="POST">
         @csrf
         <input type="text" name="kategori">
-        <button type="submit" class="btn btn-primary" style="background-color: rgb(40, 144, 204)"><b>Add Category</b></button>
+        <button type="submit" id="filterButton" class="btn btn-primary" style="background-color: rgb(40, 144, 204); border:none;"><b>Add Category</b></button>
     </form>
 <div class="d-widget-title">
 </div>

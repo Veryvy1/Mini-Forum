@@ -221,19 +221,29 @@
     @foreach ($content as $key => $contents)
 <tr>
     <td>{{ $key + 1 }}</td>
-<td>
+<td style="width: 25%">
 <div class="d-flex align-items-center">
 <div class="avatar avatar-xs">
     <span class="avatar-initial rounded-circle bg-secondary">
         <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="border-radius: 50%;">
     </span>
 </div>
-<span class="tx-medium mg-l-10">{{ $contents->judul }}</span>
+{{-- <span class="tx-medium mg-l-10">{{ $contents->judul }}</span> --}}
+@if(strlen($contents->judul) > 15)
+        {{ substr($contents->judul, 0, 15) }}...
+    @else
+        {{ $contents->judul }}
+    @endif
 </div>
 </td>
-<td>{{ $contents->deskripsi }}</td>
 <td>
-<span>1</span>
+    @if(strlen($contents->deskripsi) > 70)
+        {{ substr($contents->deskripsi, 0, 70) }}...
+    @else
+        {{ $contents->deskripsi }}
+    @endif
+<td style="width: 10%">
+<center><span>1</span></center>
 </td>
 </tr>
 @endforeach

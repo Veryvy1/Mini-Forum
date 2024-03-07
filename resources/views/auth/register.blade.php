@@ -125,11 +125,12 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus iste, ad
 </div>
 </div>--}}
 <div class="col-lg-12">
-<div class="checkbox">
+{{-- <div class="checkbox">
 <input type="checkbox" id="checkbox" checked>
 <label for="checkbox"><span>I agree the terms of Services and acknowledge the privacy policy</span></label>
-</div>
+</div> --}}
 <button class="main-btn" type="submit"><i class="icofont-key"></i> Signup</button>
+<button class="main-btn" style="background-color: #fff; color: #218acb;" type="button"><i class="icofont-key"></i> Already have an account? Sign In</button>
 </div>
 </div>
 </form>
