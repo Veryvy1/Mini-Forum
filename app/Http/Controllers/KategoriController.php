@@ -11,14 +11,14 @@ class KategoriController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
-        return view('test', compact('kategori'));
+        return view('admin.kategori', compact('kategori'));
     }
 
 
     public function create()
     {
         $kategori = Kategori::all();
-        return view('test', compact('kategori'));
+        return view('kategori', compact('kategori'));
     }
 
 
@@ -29,10 +29,12 @@ class KategoriController extends Controller
         ],[
             'kategori.required'=>'Category must be filled in.',
         ]);
+
         Kategori::create([
             'kategori'=>$request->kategori,
+            'totalPost' => 0,
         ]);
-        return redirect()->route('test');
+        return redirect()->route('kategori.index');
     }
 
 
@@ -45,7 +47,7 @@ class KategoriController extends Controller
     public function edit(string $id)
     {
         $kategori = Kategori::all();
-        return view('test',compact('kategori'));
+        return view('kategori',compact('kategori'));
     }
 
 
@@ -77,6 +79,6 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
-        return redirect()->route('test');
+        return redirect()->route('kategori.index');
     }
 }

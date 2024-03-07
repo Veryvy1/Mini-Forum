@@ -8,7 +8,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Social Media Network </title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
@@ -867,7 +867,7 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 </div>
 </div> --}}
-<div class="main-wraper">
+{{-- <div class="main-wraper">
 <div class="user-post">
 <div class="friend-info">
 <figure>
@@ -1045,7 +1045,7 @@ Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, s
 </div>
 </div>
 <p>10+</p>
-</div>
+</div> --}}
 <div class="new-comment" style="display: none;">
 <form method="post">
 <input type="text" placeholder="write comment">

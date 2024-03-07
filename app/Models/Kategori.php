@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
+    protected $fillable = [
+        'kategori',
+        'totalPost'
+    ];
 
     public function Content()
     {

@@ -13,7 +13,12 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+<link href="css/apexcharts.css" rel="stylesheet" type="text/css">
+<style>
+.dropdown-custom {
+    font-size: 16px;
+}
+    </style>
 </head>
 <body>
 {{-- <div class="page-loader" id="page-loader"> --}}
@@ -42,8 +47,6 @@
 <li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
 <li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
 <li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-
-
 <li>
     <a title href="{{ route('logout') }}" class="logout"
        onclick="event.preventDefault();
@@ -75,7 +78,7 @@
 </div>
 <header class>
 <div class="topbar stick">
-<div class="logo"><img alt src="images/logo.png"><span>GetForums</span></div>
+<div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
 <div class="searches">
 <form method="post">
 <input type="text" placeholder="Search...">
@@ -84,68 +87,14 @@
 </div>
 <ul class="web-elements">
 <li>
-<div class="user-dp">
-<a href="profile-page2.html" title>
-<img src="images/resources/user.jpg" alt>
-<div class="name">
-<h4>Danial Cardos</h4>
-</div>
-</a>
-</div>
-</li>
-<li>
-<a href="index-2.html" title="Home" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
-</a>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
-</a>
-</li>
-<li>
-<a title href="#">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-</i>
-</a>
-<ul class="dropdown">
-<li><a href="profile" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-
-{{-- <li class="logout">
-    <a href="#">
-        <i class="icofont-power">
-            </i> Logout</a>
-        </li>
-</ul> --}}
-    <li class="logout">
-    <a title href="{{ route('logout') }}" class="logout"
+    <a title href="{{ route('logout') }}"
        onclick="event.preventDefault();
                      document.getElementById('logout-form').submit();">
                      <i class="icofont-power"></i>
-        {{ __('Logout') }}
     </a>
-</li>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
         @csrf
     </form>
-</ul>
 </li>
 </ul>
 </div>
@@ -179,12 +128,12 @@
 </a>
 </li>
 <li class>
-<a class href="analytics" title>
+<a class href="content" title>
 <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
 </a>
 </li>
 <li class>
-<a class href="profile" title>
+<a class href="usermanage" title>
 <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
 </a>
 </li>
@@ -205,8 +154,6 @@
 <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
 </a>
 </li>
-
-
 </ul>
 </nav>
 <div class="container-fluid">
@@ -256,227 +203,48 @@
 </div>
 </div>
 <div class="row merged20 mb-4">
-<div class="col-lg-8">
+<div class="col-lg-12">
 <div class="d-widget">
 <div class="d-widget-title">
-<h5>Top Users</h5>
+<h5>Most Liked Posts</h5>
 </div>
 <table class="table-default table table-striped table-responsive-md">
 <thead>
 <tr>
-<th class="wd-35p">Name</th>
-<th class="wd-15p">Sales</th>
-<th class="wd-25p">Ratings</th>
-<th class="wd-25p">Earnings ($)</th>
+<th class="wd-10p">No.</th>
+<th class="wd-25p">Title</th>
+<th class="wd-35p">Description</th>
+<th class="wd-20p">Total Liked</th>
 </tr>
 </thead>
 <tbody>
+    @foreach ($content as $key => $contents)
 <tr>
+    <td>{{ $key + 1 }}</td>
 <td>
 <div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><span class="avatar-initial rounded-circle bg-secondary">s</span></div>
-<span class="tx-medium mg-l-10">Socrates Itumay</span>
+<div class="avatar avatar-xs">
+    <span class="avatar-initial rounded-circle bg-secondary">
+        <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="border-radius: 50%;">
+    </span>
+</div>
+<span class="tx-medium mg-l-10">{{ $contents->judul }}</span>
 </div>
 </td>
-<td>58</td>
+<td>{{ $contents->deskripsi }}</td>
 <td>
-<div class="rating-stars">
-<span>96%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
+<span>1</span>
 </td>
-<td>302, 422.50</td>
 </tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><img src="images/resources/user2.jpg" class="rounded-circle" alt></div>
-<span class="tx-medium mg-l-10">Dianne Aceron</span>
-</div>
-</td>
-<td>49</td>
-<td>
-<div class="rating-stars">
-<span>85%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>264, 090.00</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><img src="images/resources/user6.jpg" class="rounded-circle" alt></div>
-<span class="tx-medium mg-l-10">Katherine Movera</span>
-</div>
-</td>
-<td>40</td>
-<td>
-<div class="rating-stars">
-<span>79%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>238, 720.80</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><span class="avatar-initial rounded-circle bg-primary">r</span></div>
-<span class="tx-medium mg-l-10">Reynante Labares</span>
-</div>
-</td>
-<td>38</td>
-<td>
-<div class="rating-stars">
-<span>45%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>227, 063.20</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><span class="avatar-initial rounded-circle bg-dark">d</span></div>
-<span class="tx-medium mg-l-10">Dexter Dela Cruz</span>
-</div>
-</td>
-<td>26</td>
-<td>
-<div class="rating-stars">
-<span>76%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>202, 918.00</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><span class="avatar-initial rounded-circle bg-purple">j</span></div>
-<span class="tx-medium mg-l-10">Johnwyne Mendez</span>
-</div>
-</td>
-<td>26</td>
-<td>
-<div class="rating-stars">
-<span>88%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>202, 918.00</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><img src="images/resources/user8.jpg" class="rounded-circle" alt></div>
-<span class="tx-medium mg-l-10">Evelyn Movera</span>
-</div>
-</td>
-<td>40</td>
-<td>
-<div class="rating-stars">
-<span>79%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>238, 720.80</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><img src="images/resources/user7.jpg" class="rounded-circle" alt></div>
-<span class="tx-medium mg-l-10">Jackson will</span>
-</div>
-</td>
-<td>40</td>
-<td>
-<div class="rating-stars">
-<span>79%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>238, 720.80</td>
-</tr>
-<tr>
-<td>
-<div class="d-flex align-items-center">
-<div class="avatar avatar-xs"><img src="images/resources/user2.jpg" class="rounded-circle" alt></div>
-<span class="tx-medium mg-l-10">Katherine Sima</span>
-</div>
-</td>
-<td>40</td>
-<td>
-<div class="rating-stars">
-<span>79%</span>
-<ul>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</td>
-<td>238, 720.80</td>
-</tr>
+@endforeach
 </tbody>
 </table>
 </div>
 </div>
-<div class="col-lg-4">
+{{--<div class="col-lg-4">
 <div class="d-widget mb-4">
 <div class="d-widget-title">
-<h5>Todsy's Earnings</h5>
+ <h5>Todsy's Earnings</h5>
 </div>
 <div class="d-widget-content">
 <ul class="earningz">
@@ -527,8 +295,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="row merged20 mb-4">
+</div>--}}
+{{-- <div class="row merged20 mb-4">
 <div class="col-lg-6">
 <div class="d-widget pd-0 soft-red mb-4">
 <div class="d-widget-meta">
@@ -543,8 +311,8 @@
 <div id="hybrid_followers1"></div>
 </div>
 </div>
-</div>
-<div class="d-widget bg-danger uk-light">
+</div> --}}
+{{-- <div class="d-widget bg-danger uk-light">
 <div class="d-widget-title">
 <h5>Violation Reports</h5>
 </div>
@@ -570,162 +338,8 @@ Report about abuse violation of socimo
 <div id="uniqueVisits"></div>
 </div>
 </div>
-</div>
-<div class="row merged20 mb-4">
-<div class="col-lg-12">
-<div class="d-widget">
-<div class="d-widget-title">
-<h5>Manage Users</h5>
-</div>
-<div class="d-widget-content">
-<table class="table manage-user table-default table-responsive-md">
-<thead>
-<tr>
-<th>User Name</th>
-<th>View profile</th>
-<th>Chat History</th>
-<th>Blocked</th>
-<th>Hide</th>
-<th>Delete</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<figure><img src="images/resources/user.png" alt></figure>
-<h5>Maria K.</h5>
-</td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch1">
-<label class="switch" for="switch1"></label>
-</div>
-</td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch2">
-<label class="switch" for="switch2"></label>
-</div>
-</td>
-<td>
-<div class="actions-btn">
-<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<h5>Sarika sing.</h5>
-</td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch3">
-<label class="switch" for="switch3"></label>
-</div>
-</td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch4">
-<label class="switch" for="switch4"></label>
-</div>
-</td>
-<td>
-<div class="actions-btn">
-<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<h5>King Khan</h5>
-</td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch5">
-<label class="switch" for="switch5"></label>
-</div>
-</td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch6">
-<label class="switch" for="switch6"></label>
-</div>
-</td>
-<td>
-<div class="actions-btn">
-<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<h5>jacob</h5>
-</td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch7">
-<label class="switch" for="switch7"></label>
-</div>
-</td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch8">
-<label class="switch" for="switch8"></label>
-</div>
-</td>
-<td>
-<div class="actions-btn">
-<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<h5>Andrew</h5>
-</td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td><a class="mini-btn" href="#" title>view</a></td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch9">
-<label class="switch" for="switch9"></label>
-</div>
-</td>
-<td>
-<div class="switch-btn">
-<input type="checkbox" hidden="hidden" id="switch10">
-<label class="switch" for="switch10"></label>
-</div>
-</td>
-<td>
-<div class="actions-btn">
-<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
+</div>--}}
+
 {{-- <div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">

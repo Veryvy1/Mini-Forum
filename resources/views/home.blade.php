@@ -8,7 +8,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Social Media Network </title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
@@ -494,7 +494,7 @@ Showcase your professional experience and education to help potential employers 
 <i class="icofont-search"></i>
 <input type="text" placeholder="Search...">
 </form>
-<ul class="upload-media">
+{{-- <ul class="upload-media">
 <li>
 <a href="#" title>
 <i><img src="images/image.png" alt></i>
@@ -513,7 +513,7 @@ Showcase your professional experience and education to help potential employers 
 <span>Live Stream</span>
 </a>
 </li>
-</ul>
+</ul> --}}
 </div>
 </div>
 {{-- <div class="story-card">

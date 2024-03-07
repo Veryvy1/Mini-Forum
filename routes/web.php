@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,20 +25,17 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::middleware('admin')->group(function(){
-        Route::get('/', function () {
-            return view('admin.index');
-        });
-        // Route::get('test', function () {
-        //     return view('admin.index');
-        // });
-        Route::get('analytics', function () {
-            return view('admin.analytics');
-        });
-        Route::get('event', function () {
-            return view('admin.event');
-        });
+
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
+        Route::resource('content', ContentController::class);
+        Route::resource('kategori', KategoriController::class);
+
         Route::get('reviews', function () {
             return view('admin.reviews');
+        });
+        Route::get('usermanage', function () {
+            return view('admin.usermanage');
         });
 
     });
@@ -62,6 +62,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('post-detail', function () {
             return view('user.postdetail');
+        });
+        Route::get('comment', function () {
+            return view('user.comment');
         });
 
         Route::get('user_profile', function () {

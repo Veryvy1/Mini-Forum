@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Kategori;
+use Illuminate\Support\Facades\Response;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
 class ContentController extends Controller
@@ -14,7 +16,7 @@ class ContentController extends Controller
     {
         $content = Content::all();
         $kategori = Kategori::all();
-        return view('test', compact('content','kategori'));
+        return view('admin.content', compact('content','kategori'));
     }
 
 
@@ -22,7 +24,7 @@ class ContentController extends Controller
     {
         $content = Content::all();
         $kategori = Kategori::all();
-        return view('test', compact('content'));
+        return view('content', compact('content','kategori'));
     }
 
 
@@ -41,15 +43,22 @@ class ContentController extends Controller
             'kategori_id.required'=>'Category must be filled in.',
         ]);
 
+        $gambar = $request->file('gambar');
+        $path = Storage::disk('public')->put('content', $gambar);
+
         $dataToStore = [
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'kategori_id' => $request->kategori_id,
-            'gambar' => $request->hasFile('gambar') ? $request->file('gambar')->store('content', 'public') : null,
+            'gambar' => $path,
         ];
 
+
         Content::create($dataToStore);
-        return redirect()->route('test');
+
+        Alert::success('Success!', 'Data berhasil disimpan')->persistent(true);
+
+        return redirect()->route('content.index');
     }
 
 
@@ -63,7 +72,7 @@ class ContentController extends Controller
     {
         $content = Content::find($id);
         $kategori = Kategori::all();
-        return view('test',compact('content','kategori'));
+        return view('content',compact('content','kategori'));
     }
 
 
@@ -108,6 +117,6 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
         $content->delete();
-        return redirect()->route('test');
+        return redirect()->route('content');
     }
 }

@@ -1,3 +1,5 @@
+@include('sweetalert::alert')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,22 +9,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>GetForums | Admin Analytics</title>
-<link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
+<title>GetForums | Admin Content</title>
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+ <!-- Bootstrap JS -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+ <link href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+ <style>
+    .prod-meta {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+</style>
 </head>
 <body>
 {{-- <div class="page-loader" id="page-loader"> --}}
-<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+{{-- <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
-</div>
+</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
-<div class="res-logo"><img src="images/logo.png" alt></div>
+<div class="res-logo"><img src="images/LOGO/logo.png" alt></div>
 <div class="user-avatar mobile">
 <a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
 <div class="name">
@@ -59,7 +73,7 @@
 </div>
 <header class>
 <div class="topbar stick">
-<div class="logo"><img alt src="images/logo.png"><span>GetForums</span></div>
+<div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
 <div class="searches">
 <form method="post">
 <input type="text" placeholder="Search...">
@@ -67,8 +81,8 @@
 </form>
 </div>
 <ul class="web-elements">
-<li>
-<div class="user-dp">
+{{--<li>
+ <div class="user-dp">
 <a href="profile-page2.html" title>
 <img src="images/resources/user.jpg" alt>
 <div class="name">
@@ -76,7 +90,7 @@
 </div>
 </a>
 </div>
-</li>
+</li>--}}
 <li>
 <a href="index-2.html" title="Home" data-toggle="tooltip">
 <i>
@@ -98,7 +112,8 @@
 <span></span>
 </li>
 <li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
+</button>
+<a type="button" class="create" title="Add New" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal">
 <i>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
 </a>
@@ -125,6 +140,9 @@
 </ul>
 </div>
 </header>
+
+
+
 <div class="top-sub-bar">
 <div class="container-fluid">
 <div class="row">
@@ -134,101 +152,120 @@
 <svg id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
 </div>
 <div class="page-title">
-<h4>Analytics</h4>
+<h4>Content</h4>
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
 <li><a href="#" title>Home</a></li>
-<li><a href="#" title>Analytics</a></li>
+<li><a href="#" title>Content</a></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 <nav class="sidebar">
-<ul class="menu-slide">
+    <ul class="menu-slide">
+    <li class>
+    <a class href="/" title>
+    <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
+    </a>
+    </li>
+    <li class="active">
+    <a class href="#" title>
+    <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
+    </a>
+    </li>
+    <li class>
+    <a class href="usermanage" title>
+    <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
+    </a>
+    </li>
+    <li class>
+    <a class href="kategori" title>
+    <i class>
+    <svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
+    </a>
+    </li>
+    <li class>
+    <a class href="event" title><i class>
+    <svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Manage Content
+    </a>
+    </li>
+    <li class>
+    <a class href="product" title>
+    <i class>
+    <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
+    </a>
+    </li>
+    </ul>
+    </nav>
+
+
+{{--<div class="main-wraper">
+<span class="new-title">Create New Post</span>
+<div class="new-post">
+<form method="post">
+<i class="icofont-pen-alt-1"></i>
+<input type="text" placeholder="Create New Post">
+</form>
+<ul class="upload-media">
 <li>
-<a class href="/" title>
-<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
+<a href="#" title>
+<i><img src="images/image.png" alt></i>
+<span>Photo/Video</span>
 </a>
 </li>
-<li class="active">
-<a class href="#" title>
-<i class><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Analytics
+<li>
+<a href="#" title>
+<i><img src="images/activity.png" alt></i>
+<span>Feeling/Activity</span>
 </a>
 </li>
-<li class>
-<a class href="profile" title>
-<i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>
-Profile
+<li>
+<a href="live-stream.html" title>
+<i><img src="images/live-stream.png" alt></i>
+<span>Live Stream</span>
 </a>
-</li>
-<li class>
-<a class href="reviews" title>
-<i class>
-<svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Reviews
-</a>
-</li>
-<li class>
-<a class href="event" title><i class>
-<svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Events
-</a>
-</li>
-<li class>
-<a class href="product" title>
-<i class>
-<svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Products
-</a>
-</li>
-<li class>
-<a class href="blog" title>
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-</i>Blogs
-</a>
-</li>
-<li class>
-<a class href="messages" title>
-<i class>
-<svg id="ab2" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>Messages
-</a>
-</li>
-<li class>
-<a class href="team" title>
-<i class>
-<svg id="team" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></i>Team
-</a>
-</li>
-<li class>
-<a class href="login-register.html" title>
-<i class>
-<svg id="ab9" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></i>Login/Register
-</a>
-</li>
-<li class="menu-item-has-children">
-<a class href="#" title>
-<i><svg id="ab8" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" /><polyline points="13 2 13 9 20 9" /></svg></i>Pages
-</a>
-<ul class="submenu">
-<li><a href="404.html" title>Error 404</a></li>
-<li><a href="forgot-password.html" title>Forgot Password</a></li>
-<li><a href="loaders.html" title>Loaders/spiners</a></li>
-<li><a href="invoice-edit.html" title>Invoice</a></li>
-<li><a href="maps.html" title>Google Maps</a></li>
-<li><a href="https://wpkixx.com/html/socimo/development-elements.html" title>Elements</a></li>
-<li><a href="https://wpkixx.com/html/socimo/development-component.html" title>Components</a></li>
-</ul>
 </li>
 </ul>
-</nav>
+</div>
+</div> --}}
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
+
 <div class="panel-content">
-<h4 class="main-title">Welcome To GetForums</h4>
-<div class="row merged20 mb-4">
-<div class="col-lg-4 col-md-6">
+<h3 class="main-title">Content to GetForums</h3>
+
+<a href="#" type="button" class="btn btn-primary" style="margin-left: 90%; background-color:rgb(40, 144, 204);"><b>add content</b></a>
+<br><br>
+{{-- <div class="row merged20 mb-4"> --}}
+
+    <div class="row merged-10">
+        @foreach($content as $contents)
+        <div class="col-lg-3">
+                <div class="mb-4 prod-item" style="border: 1px solid #cacaca;">
+                    <div class="overflow-hidden" style="height: 300px; display: flex; max-width: 100%; align-items: center; justify-content: center;">
+            <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="Deskripsi gambar"  style="object-fit: cover; height: auto;">
+                    </div>
+            <div class="more-opt">
+        <span><i class="icofont-dotted-down"></i></span>
+        <ul>
+        <li><a href="#" title  style="font-size: 15px;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
+        <li><a href="#" title  style="font-size: 15px;"><i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit</a></li>
+        <li><a href="#" title style="font-size: 15px;"><i class="icofont-trash" style="color: #b91e1e"></i> Delete</a></li>
+        </ul>
+        </div>
+        <div class="prod-meta">
+        <h4 title>{{ $contents->judul }}</h4>
+        <p>{{ $contents->deskripsi }}</p>
+        </div>
+        </div>
+    </div>
+    @endforeach
+        </div>
+{{--<div class="col-lg-4 col-md-6">
 <div class="w-chart-section">
 <div class="w-detail">
 <p class="w-title">Total Visits</p>
@@ -254,7 +291,7 @@ Profile
 </div>
 </div>
 </div>
-<div class="col-lg-4 col-md-12">
+ <div class="col-lg-4 col-md-12">
 <div class="w-chart-section">
 <div class="w-detail">
 <p class="w-title">Total Downloads</p>
@@ -416,7 +453,7 @@ Profile
 </div>
 </div>
 </div>
-</div>
+</div>--}}
 <div class="side-slide">
 <span class="popup-closed"><i class="icofont-close"></i></span>
 <div class="slide-meta">
@@ -553,12 +590,113 @@ Profile
 </div>
 </div>
 </div>
+
+
+<div class="modal" tabindex="-1" id="tambahModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>TAMBAH DATA KATEGORI</h6>
+                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">judul</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
+                        @error('judul')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">deskripsi</label>
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">gambar</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        @error('gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">kategori</label>
+                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                            <option value="" selected>pilih kategori</option>
+                            @foreach ($kategori as $kat)
+                                <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
+                                    {{ $kat->kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>BATAL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SIMPAN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <!-- SweetAlert2 JavaScript -->
+  <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+
+  @if(session('success'))
+      <script>
+          Swal.fire({
+              title: 'Success!',
+              text: '{{ session('success') }}',
+              icon: 'success',
+              confirmButtonText: 'OK'
+          });
+      </script>
+  @elseif(session('error'))
+      <script>
+          Swal.fire({
+              title: 'Error!',
+              text: '{{ session('error') }}',
+              icon: 'error',
+              confirmButtonText: 'OK'
+          });
+      </script>
+  @endif
+
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/script.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="101cca6ef11d27050cf841ef-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924a5f8c018b',t:'MTcwOTI1ODYxNS41OTYwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+
+<!-- Mirrored from wpkixx.com/html/socimo-panel/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
+</html>
+<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/vivus.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/script.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="plugins/apex/apexcharts.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="101cca6ef11d27050cf841ef-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924a5f8c018b',t:'MTcwOTI1ODYxNS41OTYwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
+</body>
 
 <!-- Mirrored from wpkixx.com/html/socimo-panel/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
 </html>

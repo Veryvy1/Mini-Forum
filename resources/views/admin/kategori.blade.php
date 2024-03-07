@@ -58,73 +58,28 @@
 </div>
 </div>
 <header class>
-<div class="topbar stick">
-<div class="logo"><img alt src="images/logo.png"><span>Socimo</span></div>
-<div class="searches">
-<form method="post">
-<input type="text" placeholder="Search...">
-<button type="submit"><i class="icofont-search"></i></button>
-</form>
-</div>
-<ul class="web-elements">
-<li>
-<div class="user-dp">
-<a href="profile-page2.html" title>
-<img src="images/resources/user.jpg" alt>
-<div class="name">
-<h4>Danial Cardos</h4>
-</div>
-</a>
-</div>
-</li>
-<li>
-<a href="index-2.html" title="Home" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
-</a>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
-</a>
-</li>
-<li>
-<a title href="#">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-</i>
-</a>
-<ul class="dropdown">
-<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-<li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
-<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
-<li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
-<li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
-<li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
-<li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
-<li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
-<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</header>
+    <div class="topbar stick">
+    <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
+    <div class="searches">
+    <form method="post">
+    <input type="text" placeholder="Search...">
+    <button type="submit"><i class="icofont-search"></i></button>
+    </form>
+    </div>
+    <ul class="web-elements">
+    <li>
+        <a title href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+                         <i class="icofont-power"></i>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </li>
+    </ul>
+    </div>
+    </header>
 <div class="top-sub-bar">
 <div class="container-fluid">
 <div class="row">
@@ -154,17 +109,17 @@
 </a>
 </li>
 <li class>
-<a class href="analytics" title>
+<a class href="content" title>
 <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
 </a>
 </li>
 <li class>
-<a class href="profile" title>
+<a class href="usermanage" title>
 <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
 </a>
 </li>
-<li class>
-<a class href="reviews" title>
+<li class="active">
+<a class href="#" title>
 <i class>
 <svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
 </a>
@@ -196,7 +151,11 @@
 <div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">
-    <a href="/" type="button" class="btn btn-primary">Add Category</a>
+    <form action="{{ route('kategori.store') }}" method="POST">
+        @csrf
+        <input type="text" name="kategori">
+        <button type="submit" class="btn btn-primary" style="background-color: rgb(40, 144, 204)"><b>Add Category</b></button>
+    </form>
 <div class="d-widget-title">
 </div>
 <table class="table-default manage-user table table-striped table-responsive-md">
@@ -204,28 +163,44 @@
 <tr>
 <th>No.</th>
 <th>Category</th>
-
+<th>Total Post</th>
+<th>Date</th>
 <th>Del/Edit</th>
 </tr>
 </thead>
 <tbody>
+@foreach ($kategori as $key => $kategories)
 <tr>
     <td>
-        <span>1.</span>
+        <span><b>{{ $key + 1 }}</b></span>
     </td>
 <td>
-<figure><img alt src="images/resources/user.png"></figure>
-<h5>Maria K.</h5>
+<h5>{{ $kategories->kategori }}</h5>
 </td>
 <td>
+@if($kategories->totalpost)
+    <h5>{{ $kategories->totalpost }} Post</h5>
+@else
+    <h5>0 Post</h5>
+@endif
+</td>
+<td>
+    <h5>{{  \Carbon\Carbon::parse($kategories->created_at)->isoFormat('D MMMM YYYY') }}</h5>
+</td>
+<td style="width: 10%">
 <div class="actions-btn">
 <span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+    <form action="{{ route('kategori.destroy', ['kategori' => $kategories->id]) }}" method="POST" style="display:inline">
+        @csrf
+        @method('DELETE')
+        <button type="submit"  class="iconbox button soft-danger"  onclick="return confirm('Apakah Anda yakin ingin menghapus ini?');">
+        <i class="icofont-trash"></i>
+        </button>
+    </form>
 </div>
 </td>
 </tr>
-
-</tr>
+ @endforeach
 </tbody>
 </table>
 </div>
