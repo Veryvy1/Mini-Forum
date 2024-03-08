@@ -16,7 +16,6 @@
 
 </head>
 <body>
-
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="res-logo"><img src="images/logo.png" alt></div>
@@ -86,6 +85,9 @@
     </div>
     </header>
 
+    <form action="{{ route('profile.update', ['id'=>$user->id]) }}" method="POST" enctype="multipart/form-data"
+    @method('PUT')
+    @csrf
     <<div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
@@ -106,7 +108,7 @@
                                     <img src="images/resources/admin.jpg" alt>
                                     <div class="fileupload">
                                         <span class="btn-text"><i class="icofont-camera"></i></span>
-                                        <input type="file" class="upload">
+                                        <input type="file" name="profile" id="profile" class="upload">
                                     </div>
                                 </figure>
                                 <div class="users-name">
@@ -152,6 +154,7 @@
     </div>
 </div>
 <a href="#" title class="button primary circle mt-5">Save Changes</a>
+</form>
 <div class="popup-wraper">
     <div class="popup">
         <span class="popup-closed"><i class="icofont-close"></i></span>
@@ -198,3 +201,30 @@
 
 <!-- Mirrored from wpkixx.com/html/socimo-panel/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:31 GMT -->
 </html>
+<script>
+    function previewImage(){
+        var input = document.getElementById('avatarFile');
+        var preview = document.getElementById('avatarPreview');
+
+        if (input,files.length > 0){
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function(){
+                preview.src = reader.result;
+                preview.style.borderRadius = '50%';
+                preview.style.width = '100%';
+                preview.style.height = '100%';
+            }
+            reader.readAsDataURL(file);
+
+        }else{
+            preview.src = '{{ asset('images/LOGO/logo.png') }}';
+            preview.style.borderRadius = '50%';
+            preview.style.width = '100%';
+            preview.style.height = '100%';
+        }
+
+    }
+</script>
+

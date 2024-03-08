@@ -6,6 +6,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('post-detail', function () {
             return view('user.postdetail');
+        });
+        Route::prefix('profile')->middleware('auth')->group(function(){
+            Route::get('',[ProfileController::class,'index'])->name('profile');
+            Route::get('edit/{id}',[ProfileController::class,'edit'])->name('profile.edit');
+            Route::put('edit/{id}',[ProfileController::class,'update'])->name('profile.update');
         });
 
         Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
