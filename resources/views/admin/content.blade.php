@@ -28,6 +28,8 @@
         word-wrap: break-word;
     }
 </style>
+
+
 </head>
 <body>
 {{-- <div class="page-loader" id="page-loader"> --}}
@@ -142,12 +144,12 @@
     </a>
     </li>
     <li class>
-    <a class href="event" title><i class>
+    <a class href="#" title><i class>
     <svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Manage Content
     </a>
     </li>
     <li class>
-    <a class href="product" title>
+    <a class href="#" title>
     <i class>
     <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
     </a>
@@ -206,12 +208,14 @@
         <span><i class="icofont-dotted-down"></i></span>
         <ul>
         <li><a href="#" title  style="font-size: 15px; margin-left:7%;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
-        <li><a href="#" title  style="font-size: 15px; margin-left:7%;"><i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit</a></li>
+        <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
+            <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
+        </button></li>
         <li>
         <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline">
             @csrf
             @method('DELETE')
-            <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="return confirm('Apakah Anda yakin ingin menghapus ini?');">
+            <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="return confirm('Are you sure you want to delete this?');">
                 <i class="icofont-trash" style="color: #b91e1e"></i> Delete
             </button>
         </form></li>
@@ -565,7 +569,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>TAMBAH DATA KATEGORI</h6>
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
                 {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body">
@@ -573,7 +577,7 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label for="judul" class="form-label">judul</label>
+                        <label for="judul" class="form-label">Title</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
                         @error('judul')
                             <span class="invalid-feedback" role="alert">
@@ -582,7 +586,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">deskripsi</label>
+                        <label for="deskripsi" class="form-label">Description</label>
                         <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <span class="invalid-feedback" role="alert">
@@ -591,7 +595,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="gambar" class="form-label">gambar</label>
+                        <label for="gambar" class="form-label">Image</label>
                         <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
                         @error('gambar')
                             <span class="invalid-feedback" role="alert">
@@ -600,9 +604,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="kategoris" class="form-label">kategori</label>
+                        <label for="kategoris" class="form-label">Category</label>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-                            <option value="" selected>pilih kategori</option>
+                            <option value="" selected>Select Category</option>
                             @foreach ($kategori as $kat)
                                 <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
                                     {{ $kat->kategori }}
@@ -617,8 +621,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>BATAL</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SIMPAN</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
                     </div>
                 </form>
             </div>
@@ -627,10 +631,85 @@
 </div>
 
 
-  <!-- SweetAlert2 JavaScript -->
-  <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+@foreach ($content as $contents)
+<div class="modal" tabindex="-1" id="editModal{{ $contents->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CONTENT</h6>
+                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
 
-  @if(session('success'))
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Title</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
+                        @error('judul')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Description</label>
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        @if ($contents->gambar)
+                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="gambar" width="50" height="50">
+                    @else
+                        No Image
+                    @endif
+
+                    @error('gambar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">Category</label>
+                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+                            @foreach ($kategori as $kat)
+                                <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                                    {{ $kat->kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+
+
+  <!-- SweetAlert2 JavaScript -->
+  {{-- <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script> --}}
+
+  {{-- @if(session('success'))
       <script>
           Swal.fire({
               title: 'Success!',
@@ -648,7 +727,17 @@
               confirmButtonText: 'OK'
           });
       </script>
-  @endif
+  @endif --}}
+
+@if(session('warning'))
+<div class="alert alert-warning">
+  {{ session('warning') }}
+</div>
+@endif
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+  crossorigin="anonymous"></script>
 
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>

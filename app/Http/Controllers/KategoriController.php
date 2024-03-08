@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 
@@ -10,7 +11,7 @@ class KategoriController extends Controller
 
     public function index()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::withCount('Content')->get();
         return view('admin.kategori', compact('kategori'));
     }
 
@@ -54,9 +55,9 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama'=>'required',
+            'kategori'=>'required',
         ],[
-            'nama.required'=>'Category must be filled in.',
+            'kategori.required'=>'Category must be filled in.',
         ]);
 
         $kategori = Kategori::findOrFail($id);
@@ -66,7 +67,7 @@ class KategoriController extends Controller
         }
 
         $dataToUpdate = [
-            'nama' => $request->nama,
+            'kategori' => $request->kategori,
         ];
 
         $kategori->update($dataToUpdate);

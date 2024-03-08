@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Kategori;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,8 +14,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $jkategori = Kategori::count();
+        $kategori = Kategori::all();
+        $jcontent = Content::count();
         $content = Content::all();
-        return view('admin.index', compact('content'));
+
+        $totalUsers = User::where('role', 'user')->count();
+
+        return view('admin.index', compact('content','kategori','jcontent','jkategori','totalUsers'));
     }
 
     /**

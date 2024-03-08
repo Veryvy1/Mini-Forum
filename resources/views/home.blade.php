@@ -27,13 +27,7 @@
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
-<div class="user-avatar mobile">
-<a href="{{ route('user_profile') }}" title="View Profile"><img src="images/resources/user.jpg" alt="User Profile"></a>
-<div class="name">
-<h4>Danial Cardos</h4>
-<span>Ontario, Canada</span>
-</div>
-</div>
+
 <div class="right-compact">
 <div class="sidemenu">
 <i>
@@ -56,16 +50,22 @@
 <div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
 
 <ul class="web-elements">
-<li>
+{{-- <li>
+ @if(auth()->check())
 <div class="user-dp">
-<a href="profile-page2.html" title>
-<img alt src="images/resources/user.jpg">
-<div class="name">
-<h4>Danial Cardos</h4>
+    <a href="{{ route('user_profile') }}" title="View Profile">
+        @if(auth()->user()->profil)
+            <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
+        @else
+            <img src="{{ asset('images/LOGO/logo.png') }}" alt="{{ auth()->user()->name }} Profile">
+        @endif
+    </a>
+    <div class="name">
+        <h4>{{ auth()->user()->name }}</h4>
+    </div>
 </div>
-</a>
-</div>
-</li>
+@endif
+</li> --}}
 <li>
 <a href="#" title>
 <i>
@@ -278,7 +278,11 @@
 </div>
 </div>
 
-<div id=""></div>
+@if ($content->isEmpty())
+    <center>
+        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
+    </center>
+@else
 
 @forelse ($content as $contents)
 
@@ -292,7 +296,7 @@
 </figure>
 <div class="friend-name">
 <ins><a title href="time-line.html">Admin</a> Has Posted</ins>
-<span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+{{-- <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span> --}}
 </div>
 <div class="post-meta">
     <figure>
@@ -366,6 +370,9 @@
     <img src="images/LOGO/datakosong.png" alt="" style="width: 60%;">
 </center>
 @endforelse
+@endif
+
+
 
 <div class="loadmore">
     <div class="sp sp-bars"></div>
@@ -373,24 +380,24 @@
     </div>
     </div>
 
-
     <div class="col-lg-3">
     <aside class="sidebar static right">
         <div class="widget">
-       <div class="d-flex justify-content-between align-items-center">
-           <h4 class="widget-title"><b>Category</b></h4>
-           <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
-       </div>
-   @foreach ($kategori as $key => $category)
-       <input type="checkbox" id="category{{ $category->id }}" name="categories[]" value="{{ $category->id }}">
-       <label for="category{{ $category->id }}" class="large-label">
-           {{ $category->kategori }}
-       </label><br>
-   @endforeach
+            <form action="{{ route('home.filter') }}" method="GET">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="widget-title"><b>Category</b></h4>
+                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                </div>
+                @foreach ($kategori as $key => $category)
+                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                    <label for="category{{ $category->id }}" class="large-label">
+                        {{ $category->kategori }}
+                    </label><br>
+                @endforeach
+            </form>
         </div>
    </aside>
    </div>
-
 
 </div>
 </div>
@@ -744,14 +751,14 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 <button type="submit" class="main-btn">Publish</button>
 </div>
 </div>
-<div class="cart-product">
+{{-- <div class="cart-product">
 <a href="product-cart.html" title="View Cart" data-toggle="tooltip"><i class="icofont-cart-alt"></i></a>
 <span>03</span>
-</div>
-<div class="chat-live">
+</div> --}}
+{{-- <div class="chat-live">
 <a class="chat-btn" href="#" title="Start Live Chat" data-toggle="tooltip"><i class="icofont-facebook-messenger"></i></a>
 <span>07</span>
-</div>
+</div> --}}
 <div class="chat-box">
 <div class="chat-head">
 <h4>New Messages</h4>

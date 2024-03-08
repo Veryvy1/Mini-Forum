@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,19 +47,18 @@ class ContentController extends Controller
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
-        $dataToStore = [
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'kategori_id' => $request->kategori_id,
+        Content::create([
+            'judul' => $request->input('judul'),
+            'deskripsi' => $request->input('deskripsi'),
+            'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
-        ];
+        ]);
 
+        // Content::create($dataToStore);
 
-        Content::create($dataToStore);
+        // Alert::success('Success!', 'Data berhasil disimpan')->persistent(true);
 
-        Alert::success('Success!', 'Data berhasil disimpan')->persistent(true);
-
-        return redirect()->route('content.index');
+        return redirect()->route('content.index')->with('success', 'content added successfully');
     }
 
 
@@ -80,24 +80,27 @@ class ContentController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $content = Content::findOrFail($id);
+
         $request->validate([
             'judul'=>'required',
             'deskripsi'=>'required',
-            'gambar'=>'required|image',
+            'gambar'=>'image',
             'kategori_id'=>'required'
         ],[
             'judul.required'=>'Title must be filled in.',
             'deskripsi.required'=>'Description must be filled in.',
-            'gambar.required'=>'Picture must be filled in.',
+            // 'gambar.required'=>'Picture must be filled in.',
             'gambar.image'=>'Must be filled with images.',
             'kategori_id.required'=>'Category must be filled in.',
         ]);
 
-        $content = Content::findOrFail($id);
 
-        if (!$content) {
-            return redirect()->route('content');
-        }
+        // if (!$content) {
+        //     return redirect()->route('content');
+        // }
+
+        $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
             'judul' => $request->input('judul'),
@@ -106,12 +109,27 @@ class ContentController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            $dataToUpdate['gambar'] = $request->file('gambar')->store('content', 'public');
+            $foto = $request->file('gambar');
+            $path = $foto->store('content', 'public');
+            $dataToUpdate['gambar'] = $path;
         }
+
+
+        // if ($request->hasFile('gambar')) {
+        //     $dataToUpdate['gambar'] = $request->file('gambar')->store('content', 'public');
+        // }
 
         $content->update($dataToUpdate);
 
-        return redirect()->route('content');
+        if ($content->wasChanged('gambar') && $oldPhotoPath) {
+            Storage::disk('public')->delete($oldPhotoPath);
+            $localFilePath = public_path('storage/' . $oldPhotoPath);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
+        }
+
+        return redirect()->route('content.index')->with('success', 'content updated successfully');
     }
 
 
@@ -119,6 +137,6 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
         $content->delete();
-        return redirect()->route('content');
+        return redirect()->route('content.index');
     }
 }

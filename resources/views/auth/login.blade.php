@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
 
 <!-- Mirrored from wpkixx.com/html/socimo/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:23:05 GMT -->
 <head>
@@ -7,7 +7,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Social Media Network</title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
@@ -18,7 +18,8 @@
 <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
 </div> --}}
 <div class="theme-layout">
-<div class="authtication animated-circ">
+<div class="authtication">
+    <img src="images/LOGO/bgLogin.png" alt="">
 {{-- <div class="mockups"> --}}
     {{-- <img src="images/resources/login-1.png" alt></div> --}}
 {{-- <ul class="welcome-caro">

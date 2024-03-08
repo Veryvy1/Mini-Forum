@@ -178,8 +178,8 @@
 <h5>{{ $kategories->kategori }}</h5>
 </td>
 <td>
-@if($kategories->totalpost)
-    <h5>{{ $kategories->totalpost }} Post</h5>
+@if($kategories->content_count)
+    <h5>{{ $kategories->content_count }} Post</h5>
 @else
     <h5>0 Post</h5>
 @endif
@@ -193,7 +193,7 @@
     <form action="{{ route('kategori.destroy', ['kategori' => $kategories->id]) }}" method="POST" style="display:inline">
         @csrf
         @method('DELETE')
-        <button type="submit"  class="iconbox button soft-danger"  onclick="return confirm('Apakah Anda yakin ingin menghapus ini?');">
+        <button type="submit"  class="iconbox button soft-danger"  onclick="return confirm('Are you sure you want to delete this?');">
         <i class="icofont-trash"></i>
         </button>
     </form>

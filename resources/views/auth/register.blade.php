@@ -7,7 +7,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums </title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
@@ -124,13 +124,17 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus iste, ad
 <label for="female">Female</label>
 </div>
 </div>--}}
+<div style="margin-bottom:3%;">
+    <span>Already have an account? <a href="{{ Route('login') }}">Sign In</a></span>
+</div>
 <div class="col-lg-12">
 {{-- <div class="checkbox">
 <input type="checkbox" id="checkbox" checked>
 <label for="checkbox"><span>I agree the terms of Services and acknowledge the privacy policy</span></label>
 </div> --}}
+
 <button class="main-btn" type="submit"><i class="icofont-key"></i> Signup</button>
-<button class="main-btn" style="background-color: #fff; color: #218acb;" type="button"><i class="icofont-key"></i> Already have an account? Sign In</button>
+{{-- <button class="main-btn" style="background-color: #fff; color: #218acb;" type="button"><i class="icofont-key"></i> Already have an account? Sign In</button> --}}
 </div>
 </div>
 </form>
