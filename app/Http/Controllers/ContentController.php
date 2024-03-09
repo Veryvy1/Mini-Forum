@@ -15,6 +15,7 @@ Use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ContentController extends Controller
 {
 
+
     public function index()
     {
         $content = Content::all();
@@ -22,16 +23,22 @@ class ContentController extends Controller
         return view('admin.content', compact('content','kategori'));
     }
 
-
-    public function create()
+    public function createForAdmin()
     {
         $content = Content::all();
         $kategori = Kategori::all();
         return view('content', compact('content','kategori'));
     }
 
+    public function createForUser()
+    {
+        $content = Content::all();
+        $kategori = Kategori::all();
+        return view('home', compact('content','kategori'));
+    }
 
-    public function store(ContectRequest $request)
+
+    public function storeForAdmin(ContectRequest $request)
     {
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
@@ -41,9 +48,26 @@ class ContentController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
+            'dibuat' => 'admin'
         ]);
 
         return redirect()->route('content.index')->with('success', 'content added successfully');
+    }
+
+    public function storeForUser(ContectRequest $request)
+    {
+        $gambar = $request->file('gambar');
+        $path = Storage::disk('public')->put('content', $gambar);
+
+        Content::create([
+            'judul' => $request->input('judul'),
+            'deskripsi' => $request->input('deskripsi'),
+            'kategori_id' => $request->input('kategori_id'),
+            'gambar' => $path,
+            'dibuat' => 'user'
+        ]);
+
+        return redirect()->route('home.index')->with('success', 'Content added successfully');
     }
 
 
