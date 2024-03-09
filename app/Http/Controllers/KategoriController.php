@@ -80,6 +80,9 @@ class KategoriController extends Controller
     public function destroy(string $id)
     {
         $kategori = Kategori::findOrFail($id);
+        if ($kategori->Content ()->exists()) {
+            return redirect()->route('kategori.index')->with('warning', 'Cannot be deleted because there is still related data.');
+        }
         $kategori->delete();
         return redirect()->route('kategori.index')->with('success','Category successfully deleted');
     }

@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,12 +16,12 @@
 <link rel="stylesheet" href="css/color.css">
 <link rel="stylesheet" href="css/responsive.css">
 <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
  <!-- Bootstrap JS -->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
- <link href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
- <style>
+  <style>
     .prod-meta {
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -33,16 +32,7 @@
 </style>
 </head>
 <body>
-<div class="theme-layout">
 <div class="responsive-header">
-<div class="res-logo"><img src="images/LOGO/logo.png" alt></div>
-<div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-<div class="name">
-<h4>Saim Turan</h4>
-<span>Antalaya, Turky</span>
-</div>
-</div>
 <div class="right-compact">
 <div class="menu-area">
 <div id="nav-icon3">
@@ -93,7 +83,7 @@
     </li>
     </ul>
     </div>
-    </header>
+</header>
 
 
 <div class="top-sub-bar">
@@ -110,13 +100,14 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
-<li><a href="#" title>Home</a></li>
-<li><a href="#" title>Content</a></li>
+<li><a href="home" title>Home</a></li>
+<li><a href="content" title>Content</a></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+
 <nav class="sidebar">
     <ul class="menu-slide">
     <li class>
@@ -152,38 +143,8 @@
     </a>
     </li>
     </ul>
-    </nav>
+</nav>
 
-
-{{--<div class="main-wraper">
-<span class="new-title">Create New Post</span>
-<div class="new-post">
-<form method="post">
-<i class="icofont-pen-alt-1"></i>
-<input type="text" placeholder="Create New Post">
-</form>
-<ul class="upload-media">
-<li>
-<a href="#" title>
-<i><img src="images/image.png" alt></i>
-<span>Photo/Video</span>
-</a>
-</li>
-<li>
-<a href="#" title>
-<i><img src="images/activity.png" alt></i>
-<span>Feeling/Activity</span>
-</a>
-</li>
-<li>
-<a href="live-stream.html" title>
-<i><img src="images/live-stream.png" alt></i>
-<span>Live Stream</span>
-</a>
-</li>
-</ul>
-</div>
-</div> --}}
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
@@ -192,14 +153,13 @@
 <h3 class="main-title">Content to GetForums</h3>
 <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" style="margin-left: 90%; background-color:rgb(40, 144, 204); color:#fff;"><b>add content</b></a>
 <br><br>
-{{-- <div class="row merged20 mb-4"> --}}
 
     <div class="row merged-10">
         @forelse($content as $contents)
         <div class="col-lg-3">
                 <div class="mb-4 prod-item" style="border: 1px solid #cacaca;">
                     <div class="overflow-hidden" style="height: 300px; display: flex; max-width: 100%; align-items: center; justify-content: center;">
-            <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="Deskripsi gambar"  style="object-fit: cover; height: auto;">
+                    <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="Deskripsi gambar"  style="object-fit: cover; height: auto;">
                     </div>
             <div class="more-opt">
         <span><i class="icofont-dotted-down"></i></span>
@@ -235,330 +195,6 @@
     </center>
     @endforelse
         </div>
-{{--<div class="col-lg-4 col-md-6">
-<div class="w-chart-section">
-<div class="w-detail">
-<p class="w-title">Total Visits</p>
-<p class="w-stats">423,964</p>
-<span>
-<svg id="user-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></span>
-</div>
-<div class="w-chart-render-one">
-<div id="total-users"></div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-6">
-<div class="w-chart-section">
-<div class="w-detail">
-<p class="w-title">Total Orders</p>
-<p class="w-stats">7,929</p>
-<span>
-<svg id="bag" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></span>
-</div>
-<div class="w-chart-render-one">
-<div id="paid-visits"></div>
-</div>
-</div>
-</div>
- <div class="col-lg-4 col-md-12">
-<div class="w-chart-section">
-<div class="w-detail">
-<p class="w-title">Total Downloads</p>
-<p class="w-stats">7,929</p>
-<span>
-<svg id="download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg></span>
-</div>
-<div class="w-chart-render-one">
-<div id="total-downloads"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="row merged20 mb-4">
-<div class="col-lg-8 col-md-6 col-sm-12">
-<div class="d-widget">
-<div class="d-widget-title">
-<h5 class>Revenue</h5>
-<select class="browser-default custom-select">
-<option value="3">last day</option>
-<option value="2">week</option>
-<option selected>Monthly</option>
-<option value="1">Yearly</option>
-</select>
-</div>
-<div class="d-widget-content">
-<div class="tabs tab-content">
-<div id="content_1" class="tabcontent">
-<div id="revenueMonthly"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-6 col-sm-12">
-<div class="d-widget blue-bg pd-0">
-<div class="d-widget-content">
-<div class="w-numeric-value">
-<div class="w-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-</div>
-<div class="d-content">
-<span class="w-numeric-title">This Month Orders</span>
-<span class="w-value">3,192</span>
-</div>
-</div>
-<div class="w-chart">
-<div id="total-orders"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="row merged20 mb-4">
-<div class="col-lg-3 col-md-6 col-sm-12">
-<div class="d-widget">
-<div class="d-widget-title"><h5 class>Revenue</h5></div>
-<div class="d-widget-content">
-<div class="w-content">
-<p>Daily sales Go to columns for details.</p>
-</div>
-<div class="d-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-<span>201</span>
-</div>
-<div class="w-chart">
-<div id="daily-sales"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-12">
-<div class="d-widget pd-0 soft-blue">
-<div class="d-widget-meta">
-<div class="w-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-</div>
-<h5 class>Followers</h5>
-<p class="w-value">31.6K</p>
-</div>
-<div class="d-widget-content">
-<div class="w-chart">
-<div id="hybrid_followers"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-12">
-<div class="d-widget pd-0 soft-red">
-<div class="d-widget-meta">
-<div class="w-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-</div>
-<h5 class>Referral</h5>
-<p class="w-value">1,900</p>
-</div>
-<div class="d-widget-content">
-<div class="w-chart">
-<div id="hybrid_followers1"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-md-6 col-sm-12">
-<div class="d-widget pd-0 soft-green">
-<div class="d-widget-meta">
-<div class="w-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-</div>
-<h5 class>Engagement</h5>
-<p class="w-value">18.2%</p>
-</div>
-<div class="d-widget-content">
-<div class="w-chart">
-<div id="hybrid_followers3"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="row merged20">
-<div class="col-lg-3 col-md-6">
-<div class="d-widget">
-<div class="d-widget-title"><h5>Monthly Product Sales</h5></div>
-<div id="chart-2" class></div>
-</div>
-</div>
-<div class="col-lg-9 col-md-6">
-<div class="d-widget">
-<div class="d-widget-title"><h5>Monthly Visitors</h5></div>
-<div id="uniqueVisits"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="popup-wraper">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i class="icofont-envelope"></i> Send Message</h5>
-</div>
-<div class="send-message">
-<form method="post" class="c-form">
-<input type="text" placeholder="Enter Name..">
-<input type="text" placeholder="Subject">
-<textarea placeholder="Write Message"></textarea>
-<div class="uploadimage">
-<i class="icofont-file-jpg"></i>
-<label class="fileContainer">
-<input type="file">Attach file
-</label>
-</div>
-<button type="submit" class="main-btn">Send</button>
-</form>
-</div>
-</div>
-</div>
-</div>--}}
-<div class="side-slide">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="slide-meta">
-<ul class="nav nav-tabs slide-btns">
-<li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-<li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-</ul>
-
-<div class="tab-content">
-<div class="tab-pane active fade show" id="messages">
-<h4><i class="icofont-envelope"></i> messages</h4>
-<a href="#" class="send-mesg" title="New Message" data-toggle="tooltip"><i class="icofont-edit"></i></a>
-<ul class="new-messages">
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Ibrahim Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fatima J.</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fawad Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Saim Turan</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-<div class="tab-pane fade" id="notifications">
-<h4><i class="icofont-bell-alt"></i> notifications</h4>
-<ul class="notificationz">
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-</div>
-</div>
-</div>
-<div class="post-new-popup">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i class="icofont-envelope"></i> Post New</h5>
-</div>
-<div class="post-new">
-<form method="post" class="c-form">
-<input type="text" placeholder="Title">
-<textarea placeholder="Post Something"></textarea>
-<select>
-<option>Select Your Publication Type</option>
-<option>Article</option>
-<option>Book</option>
-<option>Chapter</option>
-<option>Code</option>
-<option>conference Paper</option>
-<option>Cover Page</option>
-<option>Data</option>
-<option>Exprement Finding</option>
-<option>Method</option>
-<option>Poster</option>
-<option>Preprint</option>
-<option>Technicial Report</option>
-<option>Thesis</option>
-<option>Research</option>
-</select>
-<div class="uploadimage">
-<i class="icofont-eye-alt"></i>
-<label class="fileContainer">
-<input type="file">Upload File
-</label>
-</div>
-<button type="submit" class="main-btn">Post</button>
-</form>
-</div>
-</div>
-</div>
-</div>
 </div>
 
 
@@ -702,54 +338,48 @@
 </div>
 @endforeach
 
+@if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
+@if (Session::has('success'))
+    <script>
+        toastr.success("{{ Session::get('success') }}");
+    </script>
+@endif
 
 <script>
-    @if (Session::has('success'))
-    toastr.success("{{ Session::get('success') }}")
-    @endif
-    function swalpFunction() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log("Data dihapus");
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
-    }
-</script>
+function swalpFunction(message, type) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: type,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Data dihapus");
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
 
-@if(session('warning'))
-<div class="alert alert-warning">
-  {{ session('warning') }}
-</div>
+@if (Session::has('success'))
+    swalpFunction("{{ Session::get('success') }}", "success");
 @endif
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-  crossorigin="anonymous"></script>
 
-<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="js/vivus.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="js/script.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="plugins/apex/apexcharts.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="101cca6ef11d27050cf841ef-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924a5f8c018b',t:'MTcwOTI1ODYxNS41OTYwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
-
-<!-- Mirrored from wpkixx.com/html/socimo-panel/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
-</html>
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/script.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
@@ -757,6 +387,4 @@
 <script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="101cca6ef11d27050cf841ef-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924a5f8c018b',t:'MTcwOTI1ODYxNS41OTYwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
 </body>
-
-<!-- Mirrored from wpkixx.com/html/socimo-panel/analytics.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:32 GMT -->
 </html>

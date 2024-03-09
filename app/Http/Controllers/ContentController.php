@@ -45,7 +45,7 @@ class ContentController extends Controller
         ]);
 
         $gambar = $request->file('gambar');
-        $path = Storage::disk('public')->put('content', $gambar);
+        $path = Storage::disk('public')->put('images', $gambar);
 
         Content::create([
             'judul' => $request->input('judul'),
@@ -91,11 +91,6 @@ class ContentController extends Controller
             'kategori_id.required'=>'Category must be filled in.',
         ]);
 
-
-        // if (!$content) {
-        //     return redirect()->route('content');
-        // }
-
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
@@ -109,11 +104,6 @@ class ContentController extends Controller
             $path = $foto->store('content', 'public');
             $dataToUpdate['gambar'] = $path;
         }
-
-
-        // if ($request->hasFile('gambar')) {
-        //     $dataToUpdate['gambar'] = $request->file('gambar')->store('content', 'public');
-        // }
 
         $content->update($dataToUpdate);
 

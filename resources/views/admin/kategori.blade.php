@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>SOCIMO | Dashboard</title>
+<title>Category | Dashboard</title>
 <link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -20,7 +20,7 @@
 {{-- <div class="page-loader" id="page-loader"> --}}
 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
-</div>
+{{-- </div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="right-compact">
@@ -87,8 +87,8 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
-<li><a href="#" title>Home</a></li>
-<li><a href="#" title>User's Reviews</a></li>
+<li><a href="home" title>Home</a></li>
+<li><a href="kategori" title>Category</a></li>
 </ul>
 </div>
 </div>
@@ -128,7 +128,6 @@
 <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
 </a>
 </li>
-
 </ul>
 </nav>
 <div class="container-fluid">
@@ -152,6 +151,7 @@
     </form>
 <div class="d-widget-title">
 </div>
+
 <table class="table-default manage-user table table-striped table-responsive-md">
 <thead>
 <tr>
@@ -183,11 +183,11 @@
 </td>
 <td style="width: 10%">
 <div class="actions-btn">
-<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
+<button class="iconbox button soft-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $kategories->id }}"><i class="icofont-pen-alt-1"></i></button>
     <form action="{{ route('kategori.destroy', ['kategori' => $kategories->id]) }}" method="POST" style="display:inline">
         @csrf
         @method('DELETE')
-        <button type="submit"  class="iconbox button soft-danger" onclick="swalpFunction()">
+        <button type="submit" class="iconbox button soft-danger" onclick="swalpFunction()">
         <i class="icofont-trash"></i>
         </button>
     </form>
@@ -197,133 +197,76 @@
  @endforeach
 </tbody>
 </table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="popup-wraper">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i class="icofont-envelope"></i> Send Message</h5>
-</div>
-<div class="send-message">
-<form method="post" class="c-form">
-<input type="text" placeholder="Enter Name..">
-<input type="text" placeholder="Subject">
-<textarea placeholder="Write Message"></textarea>
-<div class="uploadimage">
-<i class="icofont-file-jpg"></i>
-<label class="fileContainer">
-<input type="file">Attach file
-</label>
-</div>
-<button type="submit" class="main-btn">Send</button>
-</form>
-</div>
-</div>
-</div>
-</div>
-<div class="side-slide">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="slide-meta">
-<ul class="nav nav-tabs slide-btns">
-<li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-<li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-</ul>
 
-<div class="tab-content">
-<div class="tab-pane active fade show" id="messages">
-<h4><i class="icofont-envelope"></i> messages</h4>
-<a href="#" class="send-mesg" title="New Message" data-toggle="tooltip"><i class="icofont-edit"></i></a>
-<ul class="new-messages">
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Ibrahim Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
+@foreach ($kategori as $kategoris)
+<div class="modal" tabindex="-1" id="editModal{{ $kategoris->id }}">
+<div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CATEGORY</h6>
+        </div>
+        <div class="modal-body">
+            <form action="{{ route('kategori.update', $kategoris->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label for="kategori" class="form-label">Title</label>
+                    <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori', $kategoris->kategori) }}">
+                    @error('kategori')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+            </div>
+        </form>
+    </div>
 </div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fatima J.</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
 </div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fawad Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Saim Turan</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-<div class="tab-pane fade" id="notifications">
-<h4><i class="icofont-bell-alt"></i> notifications</h4>
-<ul class="notificationz">
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
+@endforeach
+
 </div>
 </div>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+    @if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+    @endif
+<script>
+function swalpFunction() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Data dihapus");
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
+</script>
+
 <script>
     @if (Session::has('success'))
     toastr.success("{{ Session::get('success') }}")
