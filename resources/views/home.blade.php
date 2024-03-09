@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
 <link rel="stylesheet" href="socimo/css/responsive.css">
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
     .large-label {
         font-size: 16px;
@@ -20,7 +23,10 @@
     .emoji-state {
     position: relative;
     top: -20px;
-}
+    }
+    .post-new-popup {
+        display: none;
+    }
 </style>
 </head>
 <body>
@@ -268,7 +274,38 @@
 </div>
 <div class="col-lg-6">
 
-<div class="main-wraper">
+    <div class="main-wraper">
+        <span class="new-title">Create New Post</span>
+        <div class="new-post">
+        <form method="post">
+        <i class="icofont-pen-alt-1"></i>
+        <input type="text" placeholder="Create New Post" id="createPostInput">
+    </form>
+        <ul class="upload-media">
+        <li>
+        <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" title>
+        <i><img src="images/image.png" alt></i>
+        <span>Photo/Video</span>
+        </a>
+        </li>
+        <li>
+        <a href="#" title>
+        <i><img src="images/activity.png" alt></i>
+        <span>Feeling/Activity</span>
+        </a>
+        </li>
+        <li>
+        <a href="live-stream.html" title>
+        <i><img src="images/live-stream.png" alt></i>
+        <span>Live Stream</span>
+        </a>
+        </li>
+        </ul>
+        </div>
+        </div>
+
+
+{{-- <div class="main-wraper">
 <span class="new-title">Search Post</span>
 <div class="new-post">
 <form method="post">
@@ -276,7 +313,7 @@
 <input type="text" placeholder="Search...">
 </form>
 </div>
-</div>
+</div> --}}
 
 @if ($content->isEmpty())
     <center>
@@ -311,6 +348,7 @@
     {{ $contents->judul }}
 @endif</a>
 <p>
+
     @if(strlen($contents->deskripsi) > 70)
     {{ substr($contents->deskripsi, 0, 70) }}...
 @else
@@ -381,6 +419,15 @@
     </div>
 
     <div class="col-lg-3">
+        <div class="main-wraper">
+<span class="new-title">Search Post</span>
+<div class="new-post">
+<form method="post">
+<i class="icofont-search"></i>
+<input type="text" placeholder="Search...">
+</form>
+</div>
+</div>
     <aside class="sidebar static right">
         <div class="widget">
             <form action="{{ route('home.filter') }}" method="GET">
@@ -559,7 +606,8 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 </div>
 </div>
-<div class="post-new-popup">
+
+<div class="post-new-popup"  id="postPopup">
 <div class="popup" style="width: 800px;">
 <span class="popup-closed"><i class="icofont-close"></i></span>
 <div class="popup-meta">
@@ -634,6 +682,25 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 </div>
 </div>
+
+
+<style>
+    /* CSS */
+    .post-new-popup {
+        display: none; /* Initially hide the popup */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+    }
+</style>
+
+
+
 <div class="new-question-popup">
 <div class="popup">
 <span class="popup-closed"><i class="icofont-close"></i></span>
@@ -1306,6 +1373,85 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 </div>
 </div>
+
+<div class="modal" tabindex="-1" id="tambahModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Title</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
+                        @error('judul')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Description</label>
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        @error('gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">Category</label>
+                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                            <option value="" selected>Select Category</option>
+                            @foreach ($kategori as $kat)
+                                <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
+                                    {{ $kat->kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Script is executing!"); // Check if script is executing
+        document.getElementById('createPostInput').addEventListener('click', function() {
+            console.log("Input clicked!"); // Check if input click event is triggered
+            document.getElementById('postPopup').style.display = 'block';
+        });
+    });
+</script>
+<script src="script.js"></script>
+
+
 <script src="js/main.min.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
 <script src="js/date-time.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
 <script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>

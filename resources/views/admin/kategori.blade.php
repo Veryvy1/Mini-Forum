@@ -15,6 +15,11 @@
 <link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+ <!-- Bootstrap JS -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 {{-- <div class="page-loader" id="page-loader"> --}}
@@ -183,7 +188,7 @@
 </td>
 <td style="width: 10%">
 <div class="actions-btn">
-<button class="iconbox button soft-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $kategories->id }}"><i class="icofont-pen-alt-1"></i></button>
+<button type="button" class="iconbox button soft-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $kategories->id }}"><i class="icofont-pen-alt-1"></i></button>
     <form action="{{ route('kategori.destroy', ['kategori' => $kategories->id]) }}" method="POST" style="display:inline">
         @csrf
         @method('DELETE')
@@ -198,21 +203,30 @@
 </tbody>
 </table>
 
-@foreach ($kategori as $kategoris)
-<div class="modal" tabindex="-1" id="editModal{{ $kategoris->id }}">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+@foreach ($kategori as $kategories)
+<div class="modal" tabindex="-1" id="editModal{{ $kategories->id }}">
 <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CATEGORY</h6>
         </div>
         <div class="modal-body">
-            <form action="{{ route('kategori.update', $kategoris->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('kategori.update', $kategories->id) }}" method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-3">
                     <label for="kategori" class="form-label">Title</label>
-                    <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori', $kategoris->kategori) }}">
+                    <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori', $kategories->kategori) }}">
                     @error('kategori')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -231,14 +245,9 @@
 </div>
 @endforeach
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+
+
     @if (session('warning'))
     <script>
         toastr.warning("{{ session('warning') }}");

@@ -6,6 +6,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -37,9 +38,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('reviews', function () {
             return view('admin.reviews');
         });
-        Route::get('usermanage', function () {
-            return view('admin.usermanage');
-        });
+
+        Route::get('usermanage', [ManageUserController::class, 'index'])->name('admin.usermanage');
 
     });
 
@@ -54,7 +54,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('blog', function () {
             return view('user.blog');
         });
-
 
         Route::get('notifikasi', function () {
             return view('user.notifikasi');
