@@ -8,12 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Content extends Model
 {
     use HasFactory;
-protected $fillable = [
-    'judul',
-    'deskripsi',
-    'gambar',
-    'kategori_id'
-];
+protected $guarded = ['id'];
 
     public function kategori()
     {

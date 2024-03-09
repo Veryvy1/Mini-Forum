@@ -1427,7 +1427,7 @@ i think that some how, we learn who we really are and then live with that decisi
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
             </div>
             <div class="modal-body">
-                <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">

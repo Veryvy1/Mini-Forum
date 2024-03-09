@@ -32,7 +32,17 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
-        Route::resource('content', ContentController::class);
+
+        Route::get('/content', [ContentController::class, 'index'])->name('content.index');
+        Route::get('/content/create', [ContentController::class, 'createForAdmin'])->name('content.create');
+        Route::post('/content', [ContentController::class, 'storeForAdmin'])->name('content.store');
+        Route::put('/content/{content}/edit', [ContentController::class, 'edit'])->name('content.edit');
+        Route::put('/content/{content}', [ContentController::class, 'update'])->name('content.update');
+        Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
+
+
+
+        // Route::resource('content', ContentController::class);
         Route::resource('kategori', KategoriController::class);
 
         Route::get('reviews', function () {
@@ -70,13 +80,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('post-detail', function () {
             return view('user.postdetail');
         });
+
         Route::prefix('profile')->middleware('auth')->group(function(){
             Route::get('',[ProfileController::class,'index'])->name('profile');
             Route::get('edit/{id}',[ProfileController::class,'edit'])->name('profile.edit');
             Route::put('edit/{id}',[ProfileController::class,'update'])->name('profile.update');
         });
 
-        Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
+        // Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
 
         Route::get('user_profile', function () {
             return view('user.profile');

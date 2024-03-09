@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('deskripsi');
             $table->string('gambar');
             $table->foreignId('kategori_id')->constrained();
+            $table->enum('dibuat', ['admin', 'user']);
             $table->timestamps();
         });
     }
@@ -26,7 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        
+
         Schema::dropIfExists('contents');
     }
 };
