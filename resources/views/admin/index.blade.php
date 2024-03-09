@@ -7,12 +7,16 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Admin</title>
-<link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
+<link rel="icon" href="images/fav.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link href="css/apexcharts.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 .dropdown-custom {
     font-size: 16px;
@@ -26,14 +30,6 @@
 </div>
 <div class="theme-layout">
 <div class="responsive-header">
-<div class="res-logo"><img src="images/logo.png" alt></div>
-<div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-<div class="name">
-<h4>Saim Turan</h4>
-<span>Antalaya, Turky</span>
-</div>
-</div>
 <div class="right-compact">
 <div class="menu-area">
 <div id="nav-icon3">
@@ -371,12 +367,8 @@
 </div>
 </div>
 </div>
-<script src="js/main.min.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="js/vivus.min.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="js/script.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="plugins/apex/apexcharts.min.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-<script src="js/graphs-scripts.js" type="e5e03c9b1570d9cc510b13ff-text/javascript"></script>
-{{-- <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="e5e03c9b1570d9cc510b13ff-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d591d5cbf49e29',t:'MTcwOTI1ODU5Ny4xNjAwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body> --}}
-
-<!-- Mirrored from wpkixx.com/html/socimo-panel/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:03:54 GMT -->
+<script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/vivus.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="js/graphs-scripts.js" type="text/javascript"></script>
 </html>

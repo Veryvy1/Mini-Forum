@@ -1,35 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/events.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:34 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Dashboard</title>
-<link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
+<link rel="icon" href="images/fav.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
 </div>
 <div class="theme-layout">
 <div class="responsive-header">
-<div class="res-logo"><img src="images/logo.png" alt></div>
-<div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-<div class="name">
-<h4>Saim Turan</h4>
-<span>Antalaya, Turky</span>
-</div>
-</div>
 <div class="right-compact">
 <div class="menu-area">
 <div id="nav-icon3">
@@ -95,12 +89,13 @@
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
 <li><a href="#" title>Home</a></li>
-<li><a href="#" title>All Events</a></li>
+<li><a href="#" title>Manage User</a></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+
 <nav class="sidebar">
     <ul class="menu-slide">
     <li >
@@ -136,7 +131,8 @@
     </a>
     </li>
     </ul>
-    </nav>
+</nav>
+
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
@@ -179,146 +175,7 @@
 </div>
 </div>
 </div>
-{{-- <div class="row merged20 mb-4">
-<div class="col-lg-6">
-<div class="d-widget">
-<div class="d-widget-title">
-<h5>Events Schedule</h5>
-</div>
-<ul class="upcoming-event">
-<li>
-<div class="event-date soft-red">
-<i>24 FEB</i>
-<span>2021</span>
-</div>
-<div class="event-deta">
-<h5>digital marketing summit</h5>
-<ul>
-<li><i class="icofont-user"></i> steve Josef</li>
-<li><i class="icofont-map-pins"></i> New York City</li>
-<li><i class="icofont-clock-time"></i> 9:00PM-12AM</li>
-</ul>
-</div>
-</li>
-<li>
-<div class="event-date soft-green">
-<i>10 MAR</i>
-<span>2021</span>
-</div>
-<div class="event-deta">
-<h5>digital marketing summit</h5>
-<ul>
-<li><i class="icofont-user"></i> steve Josef</li>
-<li><i class="icofont-map-pins"></i> New York City</li>
-<li><i class="icofont-clock-time"></i> 9:00PM-12AM</li>
-</ul>
-</div>
-</li>
-<li>
-<div class="event-date soft-blue">
-<i>20 OCT</i>
-<span>2021</span>
-</div>
-<div class="event-deta">
-<h5>digital marketing summit</h5>
-<ul>
-<li><i class="icofont-user"></i> steve Josef</li>
-<li><i class="icofont-map-pins"></i> New York City</li>
-<li><i class="icofont-clock-time"></i> 9:00PM-12AM</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="d-widget">
-<div class="d-widget-title">
-<h5>Web Traffic</h5>
-<select class="browser-default custom-select">
-<option value="3">last day</option>
-<option value="2">week</option>
-<option selected>Monthly</option>
-<option value="1">Yearly</option>
-</select>
-</div>
-<div class="web-traffic">
-<div class="chart-legend">
-<p>Today's visitors</p>
-<h5>98,300</h5>
-</div>
-<div id="hybrid_traffic"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="row merged20 mb-4">
-<div class="col-lg-6">
-<div class="d-widget">
-<div class="d-widget-title">
-<h5>Notice Borad</h5>
-</div>
-<div class="d-Notices">
-<ul>
-<li>
-<p>March 21, 2021</p>
-<h6><a href="#" title>Mr. William</a> <span>5 mint ago</span></h6>
-<p>
-invited to join the meeting in the conference room at 9.45 am
-</p>
-<div class="action-btns">
-<div class="button soft-danger" title="ignore"><i class="icofont-trash"></i></div>
-<div class="button soft-primary" title="save"><i class="icofont-star"></i></div>
-</div>
-</li>
-<li>
-<p>Feb 15, 2021</p>
-<h6><a href="#" title>Andrew </a> <span>35 mint ago</span></h6>
-<p>
-created a group 'Hencework' in the discussion forum
-</p>
-<div class="action-btns">
-<div class="button soft-danger" title="ignore"><i class="icofont-trash"></i></div>
-<div class="button soft-primary" title="save"><i class="icofont-star"></i></div>
-</div>
-</li>
-<li>
-<p>Jan 10, 2021</p>
-<h6><a href="#" title>Franklyn J.</a> <span>40 mint ago</span></h6>
-<p>
-Prepare the conference schedule
-</p>
-<div class="action-btns">
-<div class="button soft-danger" title="ignore"><i class="icofont-trash"></i></div>
-<div class="button soft-primary" title="save"><i class="icofont-star"></i></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="col-lg-6">
-<div class="d-widget">
-<div class="d-widget-title">
-<h5>Logs</h5>
-</div>
-<ul class="recent-log">
-<li class="hole-circle red-circle"><span>New User Registration</span> <i>23:13</i></li>
-<li class="hole-circle blue-circle"><span>New 14 products added.</span> <i>22:10</i></li>
-<li class="hole-circle green-circle"><span>New sale: Napole.</span> <i>21:33</i></li>
-<li class="hole-circle yellow-circle"><span>New notifications</span> <i>20:40</i></li>
-<li class="hole-circle orange-circle"><span>New Comments</span> <i>19:20</i></li>
-<li class="hole-circle blue-circle"><span>New sale: souffle.</span> <i>18:00</i></li>
-<li class="hole-circle yellow-circle"><span>New notifications</span> <i>20:40</i></li>
-<li class="hole-circle red-circle"><span>New User Registration</span> <i>23:13</i></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>--}}
+
 <div class="popup-wraper">
 <div class="popup">
 <span class="popup-closed"><i class="icofont-close"></i></span>
@@ -350,101 +207,14 @@ Prepare the conference schedule
 <li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
 <li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
 </ul>
+</div>
+</div>
+</div>
 
-<div class="tab-content">
-<div class="tab-pane active fade show" id="messages">
-<h4><i class="icofont-envelope"></i> messages</h4>
-<a href="#" class="send-mesg" title="New Message" data-toggle="tooltip"><i class="icofont-edit"></i></a>
-<ul class="new-messages">
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Ibrahim Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fatima J.</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fawad Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Saim Turan</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-<div class="tab-pane fade" id="notifications">
-<h4><i class="icofont-bell-alt"></i> notifications</h4>
-<ul class="notificationz">
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="0fbf767ee7a90013180ed1b7-text/javascript"></script>
-<script src="js/vivus.min.js" type="0fbf767ee7a90013180ed1b7-text/javascript"></script>
-<script src="js/script.js" type="0fbf767ee7a90013180ed1b7-text/javascript"></script>
-<script src="plugins/apex/apexcharts.min.js" type="0fbf767ee7a90013180ed1b7-text/javascript"></script>
-<script src="js/graphs-scripts.js" type="0fbf767ee7a90013180ed1b7-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="0fbf767ee7a90013180ed1b7-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924df9cc018b',t:'MTcwOTI1ODYxNi4xNzUwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/events.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:34 GMT -->
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/vivus.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
+<script src="js/graphs-scripts.js" type="text/javascript"></script>
 </html>

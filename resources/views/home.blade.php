@@ -27,6 +27,14 @@
     .post-new-popup {
         display: none;
     }
+    .like {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+    .like i {
+            color: #000;
+        }
 </style>
 </head>
 <body>
@@ -304,17 +312,6 @@
         </div>
         </div>
 
-
-{{-- <div class="main-wraper">
-<span class="new-title">Search Post</span>
-<div class="new-post">
-<form method="post">
-<i class="icofont-search"></i>
-<input type="text" placeholder="Search...">
-</form>
-</div>
-</div> --}}
-
 @if ($content->isEmpty())
     <center>
         <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
@@ -359,7 +356,56 @@
 <div class="we-video-info">
 <div class="stat-tools">
 <div class="box">
+
 <div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
+    <script>
+        let posts = [];
+
+        function submitPost() {
+            const postInput = document.getElementById('postInput').value;
+
+            if (postInput.trim() !== '') {
+                const post = {
+                    content: postInput,
+                    likes: 0,
+                    liked: false
+                };
+
+                posts.push(post);
+                renderPosts();
+                document.getElementById('postInput').value = '';
+            }
+        }
+
+        function toggleLike(index) {
+            posts[index].liked = !posts[index].liked;
+
+            if (posts[index].liked) {
+                posts[index].likes++;
+            } else {
+                posts[index].likes--;
+            }
+
+            renderPosts();
+        }
+
+        function renderPosts() {
+            const postList = document.getElementById('postList');
+            postList.innerHTML = '';
+
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
+                    <p>${post.content}</p>
+                    <div class="like" onclick="toggleLike(${index})">
+                        <a class="like__link"><i class="icofont-like${post.liked ? ' liked' : ''}"></i> <span>${post.likes}</span> Like</a>
+                    </div>
+                `;
+                postList.appendChild(postElement);
+            });
+        }
+    </script>
 
 </div>
 </div>
