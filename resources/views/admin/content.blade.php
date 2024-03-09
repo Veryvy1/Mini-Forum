@@ -1,5 +1,6 @@
 @include('sweetalert::alert')
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,8 @@
  <!-- Bootstrap JS -->
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
  <link href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <style>
     .prod-meta {
         display: -webkit-box;
@@ -28,14 +31,8 @@
         word-wrap: break-word;
     }
 </style>
-
-
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
-{{-- <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-<span>Loading...</span>
-</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="res-logo"><img src="images/LOGO/logo.png" alt></div>
@@ -212,10 +209,10 @@
             <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
         </button></li>
         <li>
-        <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline">
+        <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete">
             @csrf
             @method('DELETE')
-            <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="return confirm('Are you sure you want to delete this?');">
+            <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="swalpFunction()">
                 <i class="icofont-trash" style="color: #b91e1e"></i> Delete
             </button>
         </form></li>
@@ -706,34 +703,39 @@
 @endforeach
 
 
-  <!-- SweetAlert2 JavaScript -->
-  {{-- <script src="{{ asset('vendor/sweetalert2/sweetalert2.min.js') }}"></script> --}}
-
-  {{-- @if(session('success'))
-      <script>
-          Swal.fire({
-              title: 'Success!',
-              text: '{{ session('success') }}',
-              icon: 'success',
-              confirmButtonText: 'OK'
-          });
-      </script>
-  @elseif(session('error'))
-      <script>
-          Swal.fire({
-              title: 'Error!',
-              text: '{{ session('error') }}',
-              icon: 'error',
-              confirmButtonText: 'OK'
-          });
-      </script>
-  @endif --}}
+<script>
+    @if (Session::has('success'))
+    toastr.success("{{ Session::get('success') }}")
+    @endif
+    function swalpFunction() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Data dihapus");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
+</script>
 
 @if(session('warning'))
 <div class="alert alert-warning">
   {{ session('warning') }}
 </div>
 @endif
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

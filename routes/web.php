@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('user')->group(function(){
 
         Route::middleware('verified')->get('home', [HomeUserController::class, 'index'])->name('home');
-        Route::get('home', [HomeUserController::class, 'filter'])->name('home');
+        Route::get('home', [HomeUserController::class, 'filter'])->name('home.filter');
         Route::get('dashboard2', function () {
             return view('user.index2');
         });
@@ -54,6 +54,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('blog', function () {
             return view('user.blog');
         });
+
 
         Route::get('notifikasi', function () {
             return view('user.notifikasi');

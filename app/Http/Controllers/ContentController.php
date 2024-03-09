@@ -54,10 +54,6 @@ class ContentController extends Controller
             'gambar' => $path,
         ]);
 
-        // Content::create($dataToStore);
-
-        // Alert::success('Success!', 'Data berhasil disimpan')->persistent(true);
-
         return redirect()->route('content.index')->with('success', 'content added successfully');
     }
 
@@ -137,6 +133,6 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
         $content->delete();
-        return redirect()->route('content.index');
+        return redirect()->route('content.index')->with('success', 'content successfully deleted');
     }
 }
