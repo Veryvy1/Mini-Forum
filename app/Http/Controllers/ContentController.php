@@ -110,11 +110,6 @@ class ContentController extends Controller
             $dataToUpdate['gambar'] = $path;
         }
 
-
-        // if ($request->hasFile('gambar')) {
-        //     $dataToUpdate['gambar'] = $request->file('gambar')->store('content', 'public');
-        // }
-
         $content->update($dataToUpdate);
 
         if ($content->wasChanged('gambar') && $oldPhotoPath) {

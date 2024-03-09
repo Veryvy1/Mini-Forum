@@ -10,18 +10,18 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Admin Content</title>
-<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
+<link rel="icon" href="images/fav.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
 <link rel="stylesheet" href="css/responsive.css">
-<link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
- <!-- Bootstrap JS -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-  <style>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
     .prod-meta {
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -379,12 +379,9 @@ function swalpFunction(message, type) {
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="js/vivus.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="js/script.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="plugins/apex/apexcharts.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="101cca6ef11d27050cf841ef-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924a5f8c018b',t:'MTcwOTI1ODYxNS41OTYwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
+<script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/vivus.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
 </body>
 </html>

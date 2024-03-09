@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content />
-<meta name="keywords" content />
-<title>Category | Dashboard</title>
-<link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="css/main.min.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/color.css">
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <title>Category | Dashboard</title>
+    <link rel="icon" href="images/fav.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/color.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
- <!-- Bootstrap JS -->
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 {{-- <div class="page-loader" id="page-loader"> --}}
@@ -144,16 +141,8 @@
 <div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">
-    <form action="{{ route('kategori.store') }}" method="POST">
-        @csrf
-        <input type="text" class="@error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori') }}">
-        <button type="submit" id="filterButton" class="btn btn-primary" style="background-color: rgb(40, 144, 204); border:none;"><b>Add Category</b></button>
-        @error('kategori')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-    </form>
+
+    <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" style="background-color:rgb(40, 144, 204); color:#fff;"><b>Add category</b></a>
 <div class="d-widget-title">
 </div>
 
@@ -202,14 +191,45 @@
  @endforeach
 </tbody>
 </table>
+{{ $kategori->links() }}
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+<div class="modal" tabindex="-1" id="tambahModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CATEGORY</h6>
+                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Category</label>
+                        <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori') }}">
+                        @error('kategori')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @foreach ($kategori as $kategories)
@@ -225,7 +245,7 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label for="kategori" class="form-label">Title</label>
+                    <label for="kategori" class="form-label">Category</label>
                     <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori', $kategories->kategori) }}">
                     @error('kategori')
                         <span class="invalid-feedback" role="alert">
@@ -303,11 +323,9 @@ function swalpFunction() {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script src="js/main.min.js" type="fd51bd89bf1414ad047a74dd-text/javascript"></script>
-<script src="js/vivus.min.js" type="fd51bd89bf1414ad047a74dd-text/javascript"></script>
-<script src="js/script.js" type="fd51bd89bf1414ad047a74dd-text/javascript"></script>
-<script src="plugins/apex/apexcharts.min.js" type="fd51bd89bf1414ad047a74dd-text/javascript"></script>
-<script src="js/graphs-scripts.js" type="fd51bd89bf1414ad047a74dd-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="fd51bd89bf1414ad047a74dd-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d5924c2e059e29',t:'MTcwOTI1ODYxNS45MDMwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
+<script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/vivus.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
 </body>
 </html>

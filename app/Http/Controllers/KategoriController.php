@@ -11,7 +11,7 @@ class KategoriController extends Controller
 
     public function index()
     {
-        $kategori = Kategori::withCount('Content')->get();
+        $kategori = Kategori::withCount('Content')->paginate(5);
         return view('admin.kategori', compact('kategori'));
     }
 
@@ -33,7 +33,7 @@ class KategoriController extends Controller
         ]);
 
         Kategori::create([
-            'kategori'=>$request->input('kategori'),
+            'kategori' => $request->kategori,
             'totalPost' => 0,
         ]);
         return redirect()->route('kategori.index')->with('success','Category added successfully');
@@ -56,9 +56,10 @@ class KategoriController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'kategori'=>'required',
-        ],[
-            'kategori.required'=>'Category must be filled in.',
+            'kategori' => 'required|unique:kategoris,kategori',
+        ], [
+            'kategori.required' => 'Category must be filled in.',
+            'kategori.unique' => 'This category already exists.',
         ]);
 
         $kategori = Kategori::findOrFail($id);
@@ -73,7 +74,7 @@ class KategoriController extends Controller
 
         $kategori->update($dataToUpdate);
 
-        return redirect()->route('kategori')->with('success','Categories updated successfully');
+        return redirect()->route('kategori.index')->with('success','Categories updated successfully');
     }
 
 
