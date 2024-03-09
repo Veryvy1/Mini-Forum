@@ -414,7 +414,7 @@
                 {
                     "name": "Chris Tankersley",
                     "email": "chris@ctankersley.com",
-                    "homepage": "https://github.com/dragonmantank"
+                    "page": "https://github.com/dragonmantank"
                 }
             ],
             "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",

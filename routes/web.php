@@ -47,6 +47,10 @@ Route::middleware(['auth'])->group(function () {
 
         Route::middleware('verified')->get('home', [HomeUserController::class, 'index'])->name('home');
         Route::get('home', [HomeUserController::class, 'filter'])->name('home.filter');
+
+        Route::get('home', [ContentController::class, 'createForUser'])->name('user.content.create');
+        Route::post('home', [ContentController::class, 'storeForUser'])->name('user.content.store');
+
         Route::get('dashboard2', function () {
             return view('user.index2');
         });
