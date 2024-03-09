@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContectRequest;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Kategori;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
+Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
 {
@@ -29,21 +31,8 @@ class ContentController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ContectRequest $request)
     {
-        $request->validate([
-            'judul'=>'required',
-            'deskripsi'=>'required',
-            'gambar'=>'required|image',
-            'kategori_id' => 'required'
-        ],[
-            'judul.required'=>'Title must be filled in.',
-            'deskripsi.required'=>'Description must be filled in.',
-            'gambar.required'=>'Picture must be filled in.',
-            'gambar.image'=>'Must be filled with images.',
-            'kategori_id.required'=>'Category must be filled in.',
-        ]);
-
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -74,27 +63,9 @@ class ContentController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(ContectRequest $request, string $id)
     {
         $content = Content::findOrFail($id);
-
-        $request->validate([
-            'judul'=>'required',
-            'deskripsi'=>'required',
-            'gambar'=>'image',
-            'kategori_id'=>'required'
-        ],[
-            'judul.required'=>'Title must be filled in.',
-            'deskripsi.required'=>'Description must be filled in.',
-            // 'gambar.required'=>'Picture must be filled in.',
-            'gambar.image'=>'Must be filled with images.',
-            'kategori_id.required'=>'Category must be filled in.',
-        ]);
-
-
-        // if (!$content) {
-        //     return redirect()->route('content');
-        // }
 
         $oldPhotoPath = $content->gambar;
 
@@ -126,8 +97,23 @@ class ContentController extends Controller
 
     public function destroy(string $id)
     {
-        $content = Content::findOrFail($id);
-        $content->delete();
-        return redirect()->route('content.index')->with('success', 'content successfully deleted');
+        try {
+            $content = Content::findOrFail($id);
+
+            if (Storage::disk('public')->exists($content->gambar)) {
+                Storage::disk('public')->delete($content->gambar);
+            }
+
+            $localFilePath = public_path('storage/' . $content->gambar);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
+
+            $content->delete();
+
+            return redirect()->route('content.index')->with('success', 'Content successfully deleted');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('content.index')->with('error', 'Content not found');
+        }
     }
 }
