@@ -211,10 +211,9 @@
 </div>
 </div>
 
-
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
-<script src="js/graphs-scripts.js" type="text/javascript"></script>
+
 </html>

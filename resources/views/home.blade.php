@@ -1488,9 +1488,9 @@ i think that some how, we learn who we really are and then live with that decisi
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        console.log("Script is executing!"); // Check if script is executing
+        console.log("Script is executing!");
         document.getElementById('createPostInput').addEventListener('click', function() {
-            console.log("Input clicked!"); // Check if input click event is triggered
+            console.log("Input clicked!");
             document.getElementById('postPopup').style.display = 'block';
         });
     });
@@ -1503,5 +1503,4 @@ i think that some how, we learn who we really are and then live with that decisi
 <script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
 <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b792af529d8fc78a3581caf5-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70a9af83e836b',t:'MTcwOTI3NDAyOS42NjIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 
-<!-- Mirrored from wpkixx.com/html/socimo/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:21:43 GMT -->
 </html>
