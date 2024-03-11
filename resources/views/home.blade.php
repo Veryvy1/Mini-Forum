@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>GetForums | Social Media Network </title>
+<title>GetForums | Social Media </title>
 <link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
@@ -64,14 +64,14 @@
 <div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
 
 <ul class="web-elements">
-{{-- <li>
+<li>
  @if(auth()->check())
 <div class="user-dp">
     <a href="{{ route('user_profile') }}" title="View Profile">
         @if(auth()->user()->profil)
             <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
         @else
-            <img src="{{ asset('images/LOGO/logo.png') }}" alt="{{ auth()->user()->name }} Profile">
+            <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
         @endif
     </a>
     <div class="name">
@@ -79,7 +79,7 @@
     </div>
 </div>
 @endif
-</li> --}}
+</li>
 <li>
 <a href="#" title>
 <i>
@@ -329,8 +329,9 @@
 <img alt src="images/LOGO/logo.png">
 </figure>
 <div class="friend-name">
-<ins><a title href="time-line.html">Admin</a> Has Posted</ins>
-{{-- <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span> --}}
+    <ins><a title href="time-line.html">Admin</a> Has Posted</ins>
+    {{-- <ins><a title href="time-line.html">{{ $contents->dibuat }}</a> Has Posted</ins> --}}
+    {{-- <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span> --}}
 </div>
 <div class="post-meta">
     <figure>
@@ -1458,7 +1459,7 @@ i think that some how, we learn who we really are and then live with that decisi
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label>
+                        <label for="kategoris" class="form-label">Category</label><br>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                             <option value="" selected>Select Category</option>
                             @foreach ($kategori as $kat)
@@ -1473,6 +1474,7 @@ i think that some how, we learn who we really are and then live with that decisi
                             </span>
                         @enderror
                     </div>
+
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
@@ -1495,12 +1497,51 @@ i think that some how, we learn who we really are and then live with that decisi
         });
     });
 </script>
-<script src="script.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="js/main.min.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
-<script src="js/date-time.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
+<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/date-time.js" type="text/javascript"></script>
 <script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b792af529d8fc78a3581caf5-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70a9af83e836b',t:'MTcwOTI3NDAyOS42NjIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+{{-- <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="b792af529d8fc78a3581caf5-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70a9af83e836b',t:'MTcwOTI3NDAyOS42NjIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body> --}}
+{{--
+<script>
+    (function(){
+        var js = "window['__CF$cv$params']={r:'85d70a9af83e836b',t:'MTcwOTI3NDAyOS42NjIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";
+        var _0xh = document.createElement('iframe');
+        _0xh.height = 1;
+        _0xh.width = 1;
+        _0xh.style.position = 'absolute';
+        _0xh.style.top = 0;
+        _0xh.style.left = 0;
+        _0xh.style.border = 'none';
+        _0xh.style.visibility = 'hidden';
+        document.body.appendChild(_0xh);
+        function handler() {
+            var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;
+            if (_0xi) {
+                var _0xj = _0xi.createElement('script');
+                _0xj.innerHTML = js;
+                _0xi.getElementsByTagName('head')[0].appendChild(_0xj);
+            }
+        }
+        if (document.readyState !== 'loading') {
+            handler();
+        } else if (window.addEventListener) {
+            document.addEventListener('DOMContentLoaded', handler);
+        } else {
+            var prev = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (e) {
+                prev(e);
+                if (document.readyState !== 'loading') {
+                    document.onreadystatechange = prev;
+                    handler();
+                }
+            };
+        }
+    })();
+</script> --}}
+</body>
+
 
 </html>

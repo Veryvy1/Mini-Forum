@@ -67,7 +67,7 @@ class ContentController extends Controller
             'dibuat' => 'user'
         ]);
 
-        return back()->with('success', 'Content added successfully');
+    return redirect()->back()->with('success', 'Content added successfully');
     }
 
 

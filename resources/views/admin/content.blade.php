@@ -8,8 +8,8 @@
     <meta name="keywords" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>GetForums | Admin Content</title>
-    <link rel="icon" href="images/fav.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/main.min.css">
+    <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="socimo/css/main.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -19,6 +19,9 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+            .large-label {
+        font-size: 16px;
+    }
         .prod-meta {
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -200,7 +203,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body">
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
@@ -324,7 +326,6 @@
                         @enderror
                     </div>
 
-                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
                     <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
@@ -376,10 +377,11 @@ function swalpFunction(message, type) {
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
-<script src="js/script.js" type="text/javascript"></script>
+<script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
 <script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 </body>

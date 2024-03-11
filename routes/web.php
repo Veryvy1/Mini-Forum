@@ -38,7 +38,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/content/{content}', [ContentController::class, 'update'])->name('content.update');
         Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
 
-        // Route::resource('content', ContentController::class);
+
+
         Route::resource('kategori', KategoriController::class);
 
         Route::get('reviews', function () {
@@ -50,17 +51,11 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware('user')->group(function(){
+        Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
+        Route::get('/home/create', [ContentController::class, 'createForUser'])->name('user.content.create');
+        Route::post('/home', [ContentController::class, 'storeForUser'])->name('user.content.store');
+        Route::get('/home', [HomeUserController::class, 'filter'])->name('home.filter');
 
-        Route::middleware('verified')->get('home', [HomeUserController::class, 'index'])->name('home');
-
-        Route::get('home', [HomeUserController::class, 'filter'])->name('home.filter');
-
-        Route::get('home', [ContentController::class, 'createForUser'])->name('user.content.create');
-        Route::post('home', [ContentController::class, 'storeForUser'])->name('user.content.store');
-
-        Route::get('dashboard2', function () {
-            return view('user.index2');
-        });
 
         Route::get('blog', function () {
             return view('user.blog');
