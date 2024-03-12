@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('user')->group(function(){
         Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
-        Route::get('/', [ContentController::class, 'indexForUser'])->name('user.contect.index');
+        Route::get('/', [HomeUserController::class, 'indexForUser'])->name('user.contect.index');
         Route::get('/home/create', [ContentController::class, 'createForUser'])->name('user.content.create');
         Route::post('/home', [ContentController::class, 'storeForUser'])->name('user.content.store');
         Route::get('/home', [HomeUserController::class, 'filter'])->name('home.filter');
@@ -81,6 +81,19 @@ Route::middleware(['auth'])->group(function () {
             return view('user.profile');
         })->name('user_profile');
 
+        Route::get('signin', function () {
+            return view('signin');
+        })->name('signin');
+
+        Route::get('abc', function () {
+            return view('user.abc');
+        })->name('abc');
+
+
+    });
+
+    Route::get('landingpage', function () {
+        return view('landingpage');
     });
 
 });

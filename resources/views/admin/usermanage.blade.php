@@ -19,9 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-<span>Loading...</span>
-</div>
+
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="right-compact">
@@ -148,7 +146,7 @@
 <table class="table table-default all-events table-striped table-responsive-lg">
 <thead>
 <tr>
-<th>ID#</th>
+<th style="width:5%;">ID#</th>
 <th>Name</th>
 <th>Email</th>
 <th>Date</th>
@@ -157,19 +155,28 @@
 </thead>
 <tbody>
     @foreach ($users as $key => $use)
-<tr>
-<td><b>{{ $key + 1 }}</b></td>
-<td class="user-pic"><figure>
-    <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="">
-</figure> <span>{{ $use->name }}</span></td>
-<td>{{ $use->email }}</td>
-<td>{{  \Carbon\Carbon::parse($use->created_at)->isoFormat('D MMMM YYYY') }}</td>
-<td>
-<div class="button soft-danger"><i class="icofont-trash"></i></div>
-{{-- <div class="button soft-primary"><i class="icofont-pen-alt-1"></i></div> --}}
-</td>
-</tr>
-@endforeach
+        @if ($use->role == 'user')
+            <tr>
+                <td style="width: 5%;"><b>{{ $key + 1 }}</b></td>
+                <td class="user-pic" style=" display: flex; justify-content: flex-start; width:50%;">
+                    <figure style="margin-right: 10px; justify-content: flex-start;">
+                        @if(auth()->user()->profil)
+                            <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="">
+                        @else
+                            <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="">
+                        @endif
+                        <span>{{ $use->name }}</span>
+                    </figure>
+                </td>
+
+                <td>{{ $use->email }}</td>
+                <td>{{ \Carbon\Carbon::parse($use->created_at)->isoFormat('D MMMM YYYY') }}</td>
+                <td>
+                    <div class="button soft-danger"><i class="icofont-trash"></i></div>
+                </td>
+            </tr>
+        @endif
+    @endforeach
 </tbody>
 </table>
 </div>

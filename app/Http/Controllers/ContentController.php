@@ -22,6 +22,7 @@ class ContentController extends Controller
         $kategori = Kategori::all();
         return view('admin.content', compact('content','kategori'));
     }
+    
 
     public function createForAdmin()
     {

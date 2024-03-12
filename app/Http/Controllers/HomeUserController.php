@@ -23,6 +23,18 @@ class HomeUserController extends Controller
         return view('home', compact('kategori', 'content'));
     }
 
+    public function indexForUser(Request $request)
+    {
+        if ($request->has('search')) {
+            $ccontent = $request->input('search');
+            $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
+        } else {
+            $content = Content::all();
+        }
+        $kategori = Kategori::all();
+        return view('home', compact('content','kategori'));
+    }
+    
 
     public function filter(Request $request)
 {

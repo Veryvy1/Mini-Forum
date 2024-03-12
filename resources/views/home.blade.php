@@ -474,12 +474,12 @@
 <span class="new-title">Search Post</span>
 <div class="new-post">
 
-    <form action="{{ route('user.contect.index') }}" method="get">
-        @csrf
-        <i class="icofont-search"></i>
-        <input type="search" name="search" placeholder="Search...">
-    </form>
-
+        <form id="searchForm" action="{{ route('user.contect.index') }}" method="get">
+            @csrf
+            <div class="input-group">
+                <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+            </div>
+        </form>
 </div>
 </div>
     <aside class="sidebar static right">
@@ -1494,6 +1494,12 @@ i think that some how, we learn who we really are and then live with that decisi
     </div>
 </div>
 
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         console.log("Script is executing!");
