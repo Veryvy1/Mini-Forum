@@ -473,10 +473,13 @@
         <div class="main-wraper">
 <span class="new-title">Search Post</span>
 <div class="new-post">
-<form method="post">
-<i class="icofont-search"></i>
-<input type="text" placeholder="Search...">
-</form>
+
+    <form action="{{ route('user.contect.index') }}" method="get">
+        @csrf
+        <i class="icofont-search"></i>
+        <input type="search" name="search" placeholder="Search...">
+    </form>
+
 </div>
 </div>
     <aside class="sidebar static right">
@@ -1432,6 +1435,7 @@ i think that some how, we learn who we really are and then live with that decisi
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
             </div>
             <div class="modal-body">
+                <div id="searchResultsContainer"></div>
                 <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -1490,8 +1494,6 @@ i think that some how, we learn who we really are and then live with that decisi
     </div>
 </div>
 
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         console.log("Script is executing!");
@@ -1501,6 +1503,7 @@ i think that some how, we learn who we really are and then live with that decisi
         });
     });
 </script>
+
 
 <script>
     @if (Session::has('success'))

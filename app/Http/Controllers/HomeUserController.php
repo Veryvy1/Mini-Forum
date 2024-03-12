@@ -9,11 +9,18 @@ use Illuminate\Support\Facades\DB;
 
 class HomeUserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $content = Content::where('judul', 'LIKE', "%$searchTerm%")->get();
+        } else {
+            $content = Content::take(3)->get();
+        }
+
         $kategori = Kategori::all();
-        $content = Content::take(3)->get();
-        return view('home', compact('kategori','content'));
+
+        return view('home', compact('kategori', 'content'));
     }
 
 
