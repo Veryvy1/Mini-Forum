@@ -105,6 +105,7 @@
 </ul>
 </div>
 </header>
+
 <nav class="sidebar">
 <ul class="menu-slide">
 <li class="active menu-item-has-children">
@@ -280,7 +281,7 @@
 <li><i class="icofont-dotted-right"></i> <a title href="#">content policy</a></li>
 <li><i class="icofont-dotted-right"></i> <a title href="#">User Policy</a></li>
 </ul>
-<p>&copy; Socimo 2020. All Rights Reserved.</p>
+<p>&copy; GetForums 2024. All Rights Reserved.</p>
 </div>
 </aside>
 </div>
@@ -334,8 +335,6 @@
 </figure>
 <div class="friend-name">
     <ins><a title href="time-line.html">Admin</a> Has Posted</ins>
-    {{-- <ins><a title href="time-line.html">{{ $contents->dibuat }}</a> Has Posted</ins> --}}
-    {{-- <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span> --}}
 </div>
 <div class="post-meta">
     <figure>
@@ -414,9 +413,11 @@
 
 </div>
 </div>
+
 <a title href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
 {{-- <a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a> --}}
 <div class="emoji-state">
+
 <div class="popover_wrapper">
     <div class="we-video-info">
 
@@ -429,6 +430,7 @@
 </li></ul>
     </div>
 </div>
+
 <div class="popover_wrapper">
     <div class="we-video-info">
     <ul><li>
@@ -440,6 +442,7 @@
         </li></ul>
     </div>
 </div>
+
 </div>
 </div>
 <div class="new-comment" style="display: none;">
@@ -474,7 +477,7 @@
 <span class="new-title">Search Post</span>
 <div class="new-post">
 
-    <form action="{{ route('user.contect.index') }}" method="get">
+    <form action="" method="get">
         @csrf
         <i class="icofont-search"></i>
         <input type="search" name="search" placeholder="Search...">
@@ -516,7 +519,7 @@
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
-<span class>&copy; copyright All rights reserved by socimo 2020</span>
+<span class>&copy; copyright All rights reserved by GetForums 2024</span>
 </div>
 </div>
 </div>
@@ -739,9 +742,8 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 
 
 <style>
-    /* CSS */
     .post-new-popup {
-        display: none; /* Initially hide the popup */
+        display: none;
         position: fixed;
         top: 50%;
         left: 50%;
@@ -872,14 +874,6 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 <button type="submit" class="main-btn">Publish</button>
 </div>
 </div>
-{{-- <div class="cart-product">
-<a href="product-cart.html" title="View Cart" data-toggle="tooltip"><i class="icofont-cart-alt"></i></a>
-<span>03</span>
-</div> --}}
-{{-- <div class="chat-live">
-<a class="chat-btn" href="#" title="Start Live Chat" data-toggle="tooltip"><i class="icofont-facebook-messenger"></i></a>
-<span>07</span>
-</div> --}}
 <div class="chat-box">
 <div class="chat-head">
 <h4>New Messages</h4>
