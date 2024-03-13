@@ -6,6 +6,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -26,6 +27,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('landingpage', function () {
+        return view('landingpage');
+    });
+
     Route::middleware('admin')->group(function(){
 
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -39,25 +44,30 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('kategori', KategoriController::class);
 
+        Route::resource('contact', ContactController::class);
+
         Route::get('reviews', function () {
             return view('admin.reviews');
         });
 
         Route::get('usermanage', [ManageUserController::class, 'index'])->name('admin.usermanage');
-
     });
 
     Route::middleware('user')->group(function(){
         Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
-        Route::get('/', [HomeUserController::class, 'indexForUser'])->name('user.contect.index');
         Route::get('/home/create', [ContentController::class, 'createForUser'])->name('user.content.create');
-        Route::post('/home', [ContentController::class, 'storeForUser'])->name('user.content.store');
-        Route::get('/home', [HomeUserController::class, 'filter'])->name('home.filter');
+        Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
+        Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
+        Route::get('/homesearch', [HomeUserController::class, 'index'])->name('home.search');
 
 
         Route::get('blog', function () {
             return view('user.blog');
         });
+
+        // Route::get('contact', function () {
+        //     return view('user.contact');
+        // });
 
         Route::get('notifikasi', function () {
             return view('user.notifikasi');
@@ -88,12 +98,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('abc', function () {
             return view('user.abc');
         })->name('abc');
-
-
-    });
-
-    Route::get('landingpage', function () {
-        return view('landingpage');
     });
 
 });
+
+
+

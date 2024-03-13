@@ -93,7 +93,36 @@
 <ul class="dropdown">
 <li><a href="{{ route('user_profile') }}" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
 <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
-<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i>Sugestion</a></li>
+<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-brand-slideshare"></i> Messages</a></li>
+<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addContactForm" action="{{ route('contact.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="messages" class="form-label">Messages</label>
+                        <input type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" value="{{ old('messages') }}">
+                        @error('messages')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>
 <li class="logout">
     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <i class="icofont-power"></i> Logout
@@ -471,13 +500,13 @@
     <a href="#" title data-ripple>Load More..</a>
     </div>
     </div>
+<div class="col-lg-3">
 
-    <div class="col-lg-3">
-        <div class="main-wraper">
+<div class="main-wraper">
 <span class="new-title">Search Post</span>
 <div class="new-post">
 
-        <form id="searchForm" action="{{ route('user.contect.index') }}" method="get">
+        <form id="searchForm" action="{{ route('home.search') }}" method="get">
             @csrf
             <div class="input-group">
                 <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
@@ -492,6 +521,9 @@
                     <h4 class="widget-title"><b>Category</b></h4>
                     <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
                 </div>
+                @php
+                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                @endphp
                 @foreach ($kategori as $key => $category)
                     <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
                     <label for="category{{ $category->id }}" class="large-label">
@@ -501,8 +533,6 @@
             </form>
         </div>
    </aside>
-   </div>
-
 </div>
 </div>
 </div>

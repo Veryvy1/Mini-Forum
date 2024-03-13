@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <title>Category | Dashboard</title>
+    <title>Contact | Dashboard</title>
     <link rel="icon" href="images/fav.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -90,7 +90,7 @@
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
 <li><a href="home" title>Home</a></li>
-<li><a href="kategori" title>Category</a></li>
+<li><a href="contact" title>Category</a></li>
 </ul>
 </div>
 </div>
@@ -120,7 +120,7 @@
 </a>
 </li>
 <li class>
-<a class href="contact" title><i class>
+<a class href="" title><i class>
 <svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Manage Content
 </a>
 </li>
@@ -150,35 +150,22 @@
 <thead>
 <tr>
 <th>No.</th>
-<th>Category</th>
-<th>Total Post</th>
-<th>Date</th>
+<th>Messages</th>
 <th>Del/Edit</th>
 </tr>
 </thead>
 <tbody>
-@foreach ($kategori as $key => $kategories)
+@foreach ($contact as $key => $contactes)
 <tr>
     <td>
         <span><b>{{ $key + 1 }}</b></span>
     </td>
 <td>
-<h5>{{ $kategories->kategori }}</h5>
-</td>
-<td>
-@if($kategories->content_count)
-    <h5>{{ $kategories->content_count }} Post</h5>
-@else
-    <h5>0 Post</h5>
-@endif
-</td>
-<td>
-    <h5>{{  \Carbon\Carbon::parse($kategories->created_at)->isoFormat('D MMMM YYYY') }}</h5>
+<h5>{{ $contactes->messages }}</h5>
 </td>
 <td style="width: 10%">
 <div class="actions-btn">
-<button type="button" class="iconbox button soft-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $kategories->id }}"><i class="icofont-pen-alt-1"></i></button>
-    <form action="{{ route('kategori.destroy', ['kategori' => $kategories->id]) }}" method="POST" style="display:inline">
+    <form action="{{ route('contact.destroy', ['contact' => $contactes->id]) }}" method="POST" style="display:inline">
         @csrf
         @method('DELETE')
         <button type="submit" class="iconbox button soft-danger" onclick="swalpFunction()">
@@ -191,7 +178,7 @@
  @endforeach
 </tbody>
 </table>
-{{ $kategori->links() }}
+{{ $contact->links() }}
 </div>
 </div>
 </div>
@@ -200,71 +187,6 @@
 </div>
 </div>
 </div>
-
-<div class="modal" tabindex="-1" id="tambahModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CATEGORY</h6>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('kategori.store') }}" method="POST">
-                    @csrf
-
-                    <div class="mb-3">
-                        <label for="kategori" class="form-label">Category</label>
-                        <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori') }}">
-                        @error('kategori')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-@foreach ($kategori as $kategories)
-<div class="modal" tabindex="-1" id="editModal{{ $kategories->id }}">
-<div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CATEGORY</h6>
-        </div>
-        <div class="modal-body">
-            <form action="{{ route('kategori.update', $kategories->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-
-                <div class="mb-3">
-                    <label for="kategori" class="form-label">Category</label>
-                    <input type="text" class="form-control @error('kategori') is-invalid @enderror" id="kategori" name="kategori" value="{{ old('kategori', $kategories->kategori) }}">
-                    @error('kategori')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
-            </div>
-        </form>
-    </div>
-</div>
-</div>
-@endforeach
-
 
 
 

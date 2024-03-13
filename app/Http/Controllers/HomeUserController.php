@@ -12,29 +12,14 @@ class HomeUserController extends Controller
     public function index(Request $request)
     {
         if ($request->has('search')) {
-            $searchTerm = $request->input('search');
-            $content = Content::where('judul', 'LIKE', "%$searchTerm%")->get();
-        } else {
-            $content = Content::take(3)->get();
-        }
-
-        $kategori = Kategori::all();
-
-        return view('home', compact('kategori', 'content'));
-    }
-
-    public function indexForUser(Request $request)
-    {
-        if ($request->has('search')) {
             $ccontent = $request->input('search');
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
         } else {
-            $content = Content::all();
+            $content = Content::take(3)->get();
         }
         $kategori = Kategori::all();
-        return view('home', compact('content','kategori'));
+        return view('home', compact('kategori', 'content'));
     }
-    
 
     public function filter(Request $request)
 {
@@ -60,46 +45,4 @@ class HomeUserController extends Controller
     return view('home', compact('content', 'user', 'kategori', 'kategori_ids'));
 }
 
-
-    public function detail(Request $request, $id)
-    {
-        // $totalpesanan = Detailpesanan::where('status', 'keranjang')->get()->count();
-        // $produk = produk::where('id', $id)->get();
-        // $user = auth()->user();
-        // return view('user.produkdetail' , compact('produk', 'id', 'user', 'totalpesanan'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(string $id)
-    {
-        // $showOrder = Content::select()
-        // ->orderByDesc()
-        // ->take(6)
-        // ->get();
-        // return view('home',['showOrder'=>$showOrder]);
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
-    }
 }
