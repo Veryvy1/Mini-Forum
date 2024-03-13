@@ -1,30 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo/profile-page2.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:22:13 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>GetForums | Profile</title>
+<title>Profile | Profile</title>
 <link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
 <link rel="stylesheet" href="socimo/css/responsive.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
 </head>
 <body>
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
-<div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-<div class="name">
-<h4>Danial Cardos</h4>
-<span>Ontario, Canada</span>
-</div>
-</div>
+
 <div class="right-compact">
 <div class="sidemenu">
 <i>
@@ -45,8 +40,8 @@
 <header class>
 <div class="topbar stick">
 <div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
-<div class="searches">
-<form method="post">
+{{-- <div class="searches"> --}}
+{{-- <form method="post">
 <input type="text" placeholder="Search...">
 <button type="submit"><i class="icofont-search"></i></button>
 <span class="cancel-search"><i class="icofont-close"></i></span>
@@ -54,10 +49,6 @@
 <h4 class="recent-searches">Your's Recent Search</h4>
 <ul class="so-history">
 <li>
-<div class="searched-user">
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<span>Danial Carabal</span>
-</div>
 <span class="trash"><i class="icofont-close-circled"></i></span>
 </li>
 <li>
@@ -90,49 +81,14 @@
 </li>
 </ul>
 </div>
-</form>
-</div>
+</form> --}}
+{{-- </div> --}}
 <ul class="web-elements">
-<li>
-<div class="user-dp">
-<a href="profile-page2.html" title>
-<img alt src="images/resources/user.jpg">
-<div class="name">
-<h4>Danial Cardos</h4>
-</div>
-</a>
-</div>
-</li>
-<li class="go-live">
-<a href="live-stream.html" title="Go Live" data-toggle="tooltip">
-<i>
-<svg fill="#f00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18px" height="18px"><path d="M 6.1015625 6.1015625 C 3.5675625 8.6345625 2 12.134 2 16 C 2 19.866 3.5675625 23.365437 6.1015625 25.898438 L 7.5195312 24.480469 C 5.3465312 22.307469 4 19.308 4 16 C 4 12.692 5.3465312 9.6925313 7.5195312 7.5195312 L 6.1015625 6.1015625 z M 25.898438 6.1015625 L 24.480469 7.5195312 C 26.653469 9.6925312 28 12.692 28 16 C 28 19.308 26.653469 22.307469 24.480469 24.480469 L 25.898438 25.898438 C 28.432437 23.365437 30 19.866 30 16 C 30 12.134 28.432437 8.6345625 25.898438 6.1015625 z M 9.6367188 9.6367188 C 8.0077188 11.265719 7 13.515 7 16 C 7 18.485 8.0077187 20.734281 9.6367188 22.363281 L 11.052734 20.947266 C 9.7847344 19.680266 9 17.93 9 16 C 9 14.07 9.7847344 12.319734 11.052734 11.052734 L 9.6367188 9.6367188 z M 22.363281 9.6367188 L 20.947266 11.052734 C 22.215266 12.319734 23 14.07 23 16 C 23 17.93 22.215266 19.680266 20.947266 20.947266 L 22.363281 22.363281 C 23.992281 20.734281 25 18.485 25 16 C 25 13.515 23.992281 11.265719 22.363281 9.6367188 z M 16 12 A 4 4 0 0 0 16 20 A 4 4 0 0 0 16 12 z" /></svg></i>
-</a>
-</li>
+
 <li>
 <a href="index-2.html" title="Home" data-toggle="tooltip">
 <i>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
-</a>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
 </a>
 </li>
 <li>
@@ -142,16 +98,22 @@
 </i>
 </a>
 <ul class="dropdown">
-<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-<li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
-<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
-<li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
-<li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
-<li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
-<li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
-<li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
-<li><a class="dark-mod" href="#" title><i class="icofont-moon"></i> Dark Mode</a></li>
-<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
+    <li>
+        <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+            <i class="icofont-user-alt-3"></i> Your Profile
+        </a>
+    </li>
+<li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
+
+<li class="logout">
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="icofont-power"></i> Logout
+    </a>
+</li>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
 </ul>
 </li>
 </ul>
@@ -171,33 +133,32 @@
 <div class="group-feed">
 <div class="group-avatar">
 <img style="object-fit: cover; width:1000px; height:300px;" src="images/LOGO/bguser.jpg" alt >
-<a href="#" title><i class="icofont-check-circled"></i>Follow</a>
+<a href="#" title><i class="fa-solid fa-ellipsis"></i></a>
 <figure class="group-dp"><img src="images/resources/user.jpg" alt></figure>
 </div>
 <div class="grp-info about">
 <h4>Georg Peeter <span>@Georgofficial</span></h4>
 <ul class="joined-info">
-<li><span>Joined:</span> April 2020</li>
-<li><span>Follow:</span> 55K</li>
-<li><span>Followers:</span> 2.2K</li>
-<li><span>Posts:</span> 932</li>
+<li><span>Joined:</span> XXXX</li>
+<li><span>Posts:</span> XXX</li>
 </ul>
-<ul class="nav nav-tabs about-btn">
+{{-- <ul class="nav nav-tabs about-btn">
 <li class="nav-item"><a class="active" href="#posts" data-toggle="tab">Posts</a></li>
 <li class="nav-item"><a class href="#pictures" data-toggle="tab">Pictures</a></li>
 <li class="nav-item"><a class href="#videos" data-toggle="tab">Videos</a></li>
 <li class="nav-item"><a class href="#friends" data-toggle="tab">Friends</a></li>
 <li class="nav-item"><a class href="#about" data-toggle="tab">About</a></li>
-</ul>
+</ul> --}}
 <ul class="more-grp-info">
-<li>
+{{-- <li>
 <form class="c-form" method="post">
 <input type="text" placeholder="Search...">
 <i class="icofont-search-1"></i>
 </form>
-</li>
+</li> --}}
 <li>
-<div class="more">
+
+{{-- <div class="more">
 <div class="more-post-optns">
 <i class>
 <svg class="feather feather-more-horizontal" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><circle r="1" cy="12" cx="12" /><circle r="1" cy="12" cx="19" /><circle r="1" cy="12" cx="5" /></svg></i>
@@ -220,7 +181,8 @@
 </li>
 </ul>
 </div>
-</div>
+</div> --}}
+
 </li>
 </ul>
 </div>
@@ -258,7 +220,8 @@
 <div class="tab-pane active fade show " id="posts">
 <div class="row merged20">
 <div class="col-lg-8">
-<div class="main-wraper">
+
+{{-- <div class="main-wraper">
 <span class="new-title">Create New Post</span>
 <div class="new-post">
 <form method="post">
@@ -286,7 +249,7 @@
 </li>
 </ul>
 </div>
-</div>
+</div> --}}
 
 <div class="main-wraper">
 <div class="user-post">
@@ -1137,117 +1100,12 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 <h5><i>
 <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i> Send Message</h5>
 </div>
-<div class="send-message">
-<form method="post" class="c-form">
-<input type="text" placeholder="Enter Name..">
-<input type="text" placeholder="Subject">
-<textarea placeholder="Write Message"></textarea>
-<div class="uploadimage">
-<i class="icofont-file-jpg"></i>
-<label class="fileContainer">
-<input type="file">Attach file
-</label>
-</div>
-<button type="submit" class="main-btn">Send</button>
-</form>
 </div>
 </div>
 </div>
-</div>
-<div class="side-slide">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="slide-meta">
-<ul class="nav nav-tabs slide-btns">
-<li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-<li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-</ul>
-<div class="tab-content">
-<div class="tab-pane active fade show" id="messages">
-<h4><i class="icofont-envelope"></i> messages</h4>
-<a href="#" class="send-mesg" title="New Message" data-toggle="tooltip"><i class="icofont-edit"></i></a>
-<ul class="new-messages">
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Ibrahim Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fatima J.</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fawad Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Saim Turan</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-<div class="tab-pane fade" id="notifications">
-<h4><i class="icofont-bell-alt"></i> notifications</h4>
-<ul class="notificationz">
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-</div>
-</div>
-</div>
+
+
+
 <div class="post-new-popup">
 <div class="popup" style="width: 800px;">
 <span class="popup-closed"><i class="icofont-close"></i></span>
@@ -1323,48 +1181,10 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 </div>
 </div>
-<div class="new-question-popup">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-help-circle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></i> Ask Question</h5>
-</div>
-<div class="post-new">
-<form method="post" class="c-form">
-<input type="text" placeholder="Question Title">
-<textarea placeholder="Write Question"></textarea>
-<select>
-<option>Select Your Question Type</option>
-<option>Article</option>
-<option>Book</option>
-<option>Chapter</option>
-<option>Code</option>
-<option>conference Paper</option>
-<option>Cover Page</option>
-<option>Data</option>
-<option>Exprement Finding</option>
-<option>Method</option>
-<option>Poster</option>
-<option>Preprint</option>
-<option>Technicial Report</option>
-<option>Thesis</option>
-<option>Research</option>
-</select>
-<div class="uploadimage">
-<i class="icofont-eye-alt-alt"></i>
-<label class="fileContainer">
-<input type="file">Upload File
-</label>
-</div>
-<button type="submit" class="main-btn">Post</button>
-</form>
-</div>
-</div>
-</div>
-</div>
-<div class="share-wraper">
+
+
+
+{{-- <div class="share-wraper">
 <div class="share-options">
 <span class="close-btn"><i class="icofont-close-circled"></i></span>
 <h5><i>
@@ -1416,16 +1236,9 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 <button type="submit" class="main-btn">Publish</button>
 </div>
-</div>
-<div class="cart-product">
-<a href="product-cart.html" title="View Cart" data-toggle="tooltip"><i class="icofont-cart-alt"></i></a>
-<span>03</span>
-</div>
-<div class="chat-live">
-<a class="chat-btn" href="#" title="Start Live Chat" data-toggle="tooltip"><i class="icofont-facebook-messenger"></i></a>
-<span>07</span>
-</div>
-<div class="chat-box">
+</div> --}}
+
+{{-- <div class="chat-box">
 <div class="chat-head">
 <h4>New Messages</h4>
 <span class="clozed"><i class="icofont-close-circled"></i></span>
@@ -1671,8 +1484,9 @@ Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling 
 </form>
 </div>
 </div>
-</div>
-<div class="createroom-popup">
+</div> --}}
+
+{{-- <div class="createroom-popup">
 <div class="popup">
 <span class="popup-closed"><i class="icofont-close"></i></span>
 <div class="popup-meta">
@@ -1721,16 +1535,17 @@ Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling 
 </div>
 </div>
 </div>
-</div>
+</div> --}}
+
 <div class="modal fade" id="img-comt">
 <div class="modal-dialog">
 <div class="modal-content">
 
-<div class="modal-header">
+{{-- <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal">×</button>
-</div>
+</div> --}}
 
-<div class="modal-body">
+{{-- <div class="modal-body">
 <div class="row merged">
 <div class="col-lg-9">
 <div class="pop-image">
@@ -1970,11 +1785,10 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 </div>
 </div>
-</div>
-</div>
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="dd66549c18016e84d7b048a6-text/javascript"></script>
-<script src="js/script.js" type="dd66549c18016e84d7b048a6-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dd66549c18016e84d7b048a6-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70aca4bd2836b',t:'MTcwOTI3NDAzNy4wNDIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+</div> --}}
 
-<!-- Mirrored from wpkixx.com/html/socimo/profile-page2.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:22:48 GMT -->
+</div>
+<script data-cfasync="true" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dd66549c18016e84d7b048a6-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70aca4bd2836b',t:'MTcwOTI3NDAzNy4wNDIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 </html>
