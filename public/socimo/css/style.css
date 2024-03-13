@@ -165,9 +165,11 @@ section {
     width: 100%;
 }
 .gap {
-    width: 130%;
-    margin: 0 auto;
-    padding: 80px 0; }
+    float: left;
+    padding: 80px 0;
+    position: relative;
+    width: 100%;
+}
 .gap2 {
     padding: 40px 0;
 }

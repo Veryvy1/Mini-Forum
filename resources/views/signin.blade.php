@@ -122,7 +122,11 @@
 
 
 <section>
-<div class="gap">
+<div class="gap" style="
+width: 130%;
+margin: 0 auto;
+padding: 80px 0; 
+">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
