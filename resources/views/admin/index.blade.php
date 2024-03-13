@@ -116,7 +116,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
         <li class="active">
-        <a class href="dashboard" title>
+        <a class href="/" title>
         <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
         </a>
         </li>

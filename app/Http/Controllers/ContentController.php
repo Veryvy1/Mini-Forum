@@ -19,7 +19,7 @@ class ContentController extends Controller
     {
         if ($request->has('search')) {
             $ccontent = $request->input('search');
-            $content = Content::where('isi_contect', 'LIKE', "%$ccontent%");
+            $content = Content::where('judul', 'LIKE', "%$ccontent%");
         } else {
             $content = Content::all();
         }
@@ -105,7 +105,7 @@ class ContentController extends Controller
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
-            'isi_contect' => $request->input('isi_contect'),
+            'judul' => $request->input('judul'),
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
         ];

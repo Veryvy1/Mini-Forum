@@ -22,13 +22,13 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pesan'=>'required',
+            'messages'=>'required',
         ];
     }
     public function messages(): array
     {
         return [
-            'pesan.required'=>'Messages must be filled in.',
+            'messages.required'=>'Messages must be filled in.',
         ];
     }
 }

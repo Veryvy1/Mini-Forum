@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
-use Illuminate\Support\Facades\Storage;
 use DOMDocument;
 
 
@@ -30,25 +29,8 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
-        $messages = $request->input('messages');
-        $dom = new DOMDocument();
-        $dom->loadHTML($messages, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-        $images = $dom->getElementsByTagName('img');
-        foreach ($images as $key => $img) {
-            $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
-            $images_name = "/uploads" . time() . $key . '.png';
-            Storage::put('public' . $images_name, $data);
-
-            $img->removeAttribute('src');
-            $img->setAttribute('src', $images_name);
-        }
-
-        $gambar = $request->file('gambar');
-        $gambar_path = $gambar->store('public/images');
-        
         Contact::create([
-            'messages'=>$dom->saveHTML(),
+            'messages' => $request->input('messages'),
         ]);
         return back()->with('success','Contact added successfully');
     }
@@ -67,7 +49,7 @@ class ContactController extends Controller
     public function update(ContactRequest $request, Contact $contact)
     {
         $contact->update([
-            'pesan'=>$request->input('pesan'),
+            'messages'=>$request->input('messages'),
         ]);
         return back()->with('success','Contact updated successfully');
     }

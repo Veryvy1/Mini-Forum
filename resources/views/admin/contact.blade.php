@@ -17,12 +17,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-    
-         <!-- Script Tambahan -->
-         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
 </head>
 <body>
 {{-- <div class="page-loader" id="page-loader"> --}}
@@ -69,15 +63,17 @@
     </form>
     </div>
     <ul class="web-elements">
-    <li>
-        <a href="#" id="logoutButton" onclick="confirmLogout()">
-            <i class="icofont-power"></i>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
-    </li>
-    </ul>
+        <li>
+            <a title href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                             <i class="icofont-power"></i>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </li>
+        </ul>
     </div>
     </header>
 <div class="top-sub-bar">
@@ -104,7 +100,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
         <li>
-        <a class href="dashboard" title>
+        <a class href="/" title>
         <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
         </a>
         </li>
@@ -157,7 +153,7 @@
         <span><b>{{ $key + 1 }}</b></span>
     </td>
 <td>
-<h5>{!! $contactes->messages !!}</h5>
+<h5>{{ $contactes->messages }}</h5>
 </td>
 <td style="width: 10%">
 <div class="actions-btn">
@@ -214,7 +210,7 @@ function swalpFunction() {
 }
 </script>
 
-<script>
+{{-- <script>
     function showLogoutAlert() {
         Swal.fire({
             title: 'Konfirmasi',
@@ -235,7 +231,7 @@ function swalpFunction() {
     document.getElementById('logoutButton').addEventListener('click', function() {
         showLogoutAlert();
     });
-</script>
+</script> --}}
 
 <script>
     @if (Session::has('success'))

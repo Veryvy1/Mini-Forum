@@ -31,10 +31,6 @@
             word-wrap: break-word;
         }
     </style>
-     <!-- Script Tambahan -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
 <div class="responsive-header">
@@ -117,7 +113,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
         <li>
-        <a class href="dashboard" title>
+        <a class href="/" title>
         <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
         </a>
         </li>
@@ -149,7 +145,6 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
-
 <div class="panel-content">
 <h3 class="main-title">Content to GetForums</h3>
 <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" style="margin-left: 90%; background-color:rgb(40, 144, 204); color:#fff;"><b>add content</b></a>
@@ -206,7 +201,6 @@
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
             </div>
             <div class="modal-body">
-                <div id="searchResultsContainer"></div>
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -219,15 +213,26 @@
                             </span>
                         @enderror
                     </div>
-
-
-                    <div class="col custom-content">
-                        <label for="isi_contect" class="form-label">ISI CONTECT</label>
-                        <textarea name="isi_contect" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('isi_contect') }}</textarea>
-                    </div>
-
                     <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label>
+                        <label for="deskripsi" class="form-label">Description</label>
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        @error('gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">Category</label><br>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                             <option value="" selected>Select Category</option>
                             @foreach ($kategori as $kat)
@@ -276,12 +281,24 @@
                             </span>
                         @enderror
                     </div>
-
-                    <div class="col custom-content">
-                        <label for="isi_contect" class="form-label">ISI CONTECT</label>
-                        <textarea name="isi_contect" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('isi_contect') }}</textarea>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Description</label>
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar', $contents->gambar) }}">
+                        @error('gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                     <div class="mb-3">
                         <label for="kategoris" class="form-label">Category</label>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
@@ -308,31 +325,6 @@
     </div>
 </div>
 @endforeach
-
-{{-- @section('scripts') --}}
-    <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                placeholder: 'Hello stand-alone UI',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-
-            var oldIsiValue = {!! json_encode(old('isi')) !!};
-            $('#summernote').summernote('code', oldIsiValue);
-        });
-    </script>
-{{-- @endsection --}}
-
 
 @if (session('warning'))
     <script>
