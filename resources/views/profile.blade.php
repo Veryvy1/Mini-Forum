@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="socimo/css/responsive.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 <div class="theme-layout">
@@ -125,7 +129,7 @@
 <div class="gap" style="
 width: 130%;
 margin: 0 auto;
-padding: 80px 0; 
+padding: 80px 0;
 ">
 <div class="container">
 <div class="row">
@@ -137,13 +141,13 @@ padding: 80px 0;
 <div class="group-feed">
 <div class="group-avatar">
 <img style="object-fit: cover; width:1000px; height:300px;" src="images/LOGO/bguser.jpg" alt >
-<a href="#" title><i class="fa-solid fa-ellipsis"></i></a>
-<figure class="group-dp"><img src="images/resources/user.jpg" alt></figure>
+<a type="button" class="btn btn-primary" title data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"><i class="fa-solid fa-ellipsis"></i></a>
+<figure class="group-dp"><img src="{{ asset('storage/' . $user->profile) }}" alt></figure>
 </div>
 <div class="grp-info about">
-<h4>Georg Peeter <span>@Georgofficial</span></h4>
+<h4>{{ $user->name }}<span>{{ $user->email }}</span></h4>
 <ul class="joined-info">
-<li><span>Joined:</span> XXXX</li>
+<li><span>Joined:</span> {{ $user->created_at }}</li>
 <li><span>Posts:</span> XXX</li>
 </ul>
 {{-- <ul class="nav nav-tabs about-btn">
@@ -1792,7 +1796,132 @@ i think that some how, we learn who we really are and then live with that decisi
 </div> --}}
 
 </div>
+
+
+
+
+
+    <div class="modal" tabindex="-1" id="tambahModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
+                </div>
+                <div class="modal-body">
+                    {{-- <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                    <div class="container-fluid">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-lg-8">
+                        <h4 class="main-title">User Profile <i class="icofont-pen-alt-1"></i></h4>
+                        <div class="row merged20 mb-4">
+                        <div class="col-lg-4">
+                        <div class="d-widget text-center" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                        <div class="user-avatar-edit">
+                        <figure>
+                        @if ($user->bgprofil)
+                            <img src="{{ asset('storage/' . $user->bgprofil) }}" alt="">
+                        @else
+                            <img id="preview-bgimage" src="{{ asset('images/LOGO/bguser.jpg') }}" alt="Preview Image">
+                        @endif
+                        </figure>
+                        <div class="fileupload">
+                        <span class="btn-text">edit</span>
+                        <input type="file" class="upload" name="bgprofile" id="bgprofile-input">
+                    </div>
+                        </div>
+                        <div class="user-dp-edit">
+                        <figure>
+                        @if ($user->profil)
+                            <img src="{{ asset('storage/' . $user->profil) }}" alt="">
+                        @else
+                            <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
+                        @endif
+                        <div class="fileupload">
+                        <span class="btn-text"><i class="icofont-camera"></i></span>
+                        <input type="file" class="upload" name="profile" id="profile-input">
+                    </div>
+                        </figure>
+                        <div class="users-name">
+                            <h5 style="text-align: center;">
+                                <input type="text" id="name" name="name" value="{{ $user->name }}" style="border: none; text-align: center;  margin-bottom:-20px;">
+                            </h5>
+                        <span style="text-align: center;">
+                            <input type="text" id="email" name="email" value="{{ $user->email }}" style="border: none; text-align: center; margin-bottom:-20px;">
+                        </span>
+                        </div>
+                        </div>
+                        <ul class="folowerss">
+                        <li><span>Posts</span> <i>345</i></li>
+                        </ul>
+                        </div>
+
+                        </div>
+                        <div class="col-lg-8" >
+                            <div class="d-widget mt-6" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
+                                <div class="d-widget-title"><h5>Social Links</h5></div>
+                                <div class="social-links">
+                                <i class="icofont-facebook"></i>
+                                <input type="text" name="link_fb" placeholder="Facebook Profile" value="{{ old('link_fb', $user->link_fb) }}">
+                                <em>Add your Facebook username (e.g. johndoe).</em>
+                                </div>
+                                <div class="social-links">
+                                <i class="icofont-instagram"></i>
+                                <input type="text" name="link_ig" placeholder="Instagram Profile" value="{{ old('link_ig', $user->link_ig) }}">
+                                <em>Add your Facebook username (e.g. johndoe).</em>
+                                </div>
+                                <div class="social-links">
+                                <i class="icofont-twitter"></i>
+                                <input type="text" name="link_twt" placeholder="Twitter Profile" value="{{ old('link_twt', $user->link_twt) }}">
+                                <em>Add your Facebook username (e.g. johndoe).</em>
+                                </div>
+                                </div>
+                                <button type="submit" title class="button primary circle mt-3" style="margin-bottom: -5px; margin-right: auto;">Save Changes</button>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                </form> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{--
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('profile-input').addEventListener('change', function() {
+            const file = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview-image').setAttribute('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('bgprofile-input').addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview-bgimage').setAttribute('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script data-cfasync="true" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dd66549c18016e84d7b048a6-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70aca4bd2836b',t:'MTcwOTI3NDAzNy4wNDIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dd66549c18016e84d7b048a6-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70aca4bd2836b',t:'MTcwOTI3NDAzNy4wNDIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
+</body>
 </html>

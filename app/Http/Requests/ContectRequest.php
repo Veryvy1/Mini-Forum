@@ -28,6 +28,7 @@ class ContectRequest extends FormRequest
             'kategori_id' => 'required'
         ];
     }
+    
     public function messages(): array
     {
         return [

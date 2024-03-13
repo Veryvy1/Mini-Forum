@@ -14,15 +14,21 @@ Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
 {
-
-
     public function index()
     {
         $content = Content::all();
         $kategori = Kategori::all();
         return view('admin.content', compact('content','kategori'));
     }
-    
+
+
+    // public function indexdetail()
+    // {
+    //     $content = Content::find($id);
+    //     $kategori = Kategori::all();
+    //     return view('admin.detailcontent', compact('content','kategori'));
+    // }
+
 
     public function createForAdmin()
     {
@@ -57,6 +63,7 @@ class ContentController extends Controller
 
     public function storeForUser(ContectRequest $request)
     {
+        $user = auth()->user();
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -65,7 +72,7 @@ class ContentController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
-            'dibuat' => 'user'
+            'dibuat' => $user->name,
         ]);
 
     return redirect()->back()->with('success', 'Content added successfully');
@@ -77,6 +84,12 @@ class ContentController extends Controller
         $content = Content::findOrFail($id);
         $comments= $content->comments()->with('user')->get();
         return view('comment', compact('content','comments'));
+    }
+
+    public function detail($id)
+    {
+        $content = Content::find($id);
+        return view('admin.detailcontent', compact('content'));
     }
 
 

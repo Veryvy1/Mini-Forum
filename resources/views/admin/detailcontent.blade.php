@@ -7,21 +7,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>Socimo | Social Media Network Template</title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="css/main.min.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/color.css">
-<link rel="stylesheet" href="css/responsive.css">
+<title>GetForums | Detail Content</title>
+<link rel="icon" href="{{ asset('images/LOGO/logo.png') }}" type="image/png" sizes="16x16">
+<link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
+<link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
+<link rel="stylesheet" href="{{ asset('socimo/css/responsive.css') }}">
 </head>
 <body>
-<div class="page-loader" id="page-loader">
-<div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-</div>
+
 <div class="theme-layout">
 <div class="responsive-header">
-<div class="logo res"><img src="images/logo.png" alt><span>Socimo</span></div>
-<div class="user-avatar mobile">
+    <div class="logo"><img src="{{ asset('images/LOGO/logo.png') }}" alt><span>GetForums</span></div>
+    <div class="user-avatar mobile">
 <a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
 <div class="name">
 <h4>Danial Cardos</h4>
@@ -45,120 +43,24 @@
 </form>
 </div>
 </div>
+
 <header class>
-<div class="topbar stick">
-<div class="logo"><img src="images/logo.png" alt><span>Socimo</span></div>
-<div class="searches">
-<form method="post">
-<input type="text" placeholder="Search...">
-<button type="submit"><i class="icofont-search"></i></button>
-<span class="cancel-search"><i class="icofont-close"></i></span>
-<div class="recent-search">
-<h4 class="recent-searches">Your's Recent Search</h4>
-<ul class="so-history">
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<span>Danial Carabal</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<span>Maria K</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<span>Fawad Khan</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<span>Danial Sandos</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<span>Jack Carter</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-</ul>
-</div>
-</form>
-</div>
-<ul class="web-elements">
-<li>
-<div class="user-dp">
-<a href="profile-page2.html" title>
-<img alt src="images/resources/user.jpg">
-<div class="name">
-<h4>Danial Cardos</h4>
-</div>
-</a>
-</div>
-</li>
-<li class="go-live">
-<a href="live-stream.html" title="Go Live" data-toggle="tooltip">
-<i>
-<svg fill="#f00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18px" height="18px"><path d="M 6.1015625 6.1015625 C 3.5675625 8.6345625 2 12.134 2 16 C 2 19.866 3.5675625 23.365437 6.1015625 25.898438 L 7.5195312 24.480469 C 5.3465312 22.307469 4 19.308 4 16 C 4 12.692 5.3465312 9.6925313 7.5195312 7.5195312 L 6.1015625 6.1015625 z M 25.898438 6.1015625 L 24.480469 7.5195312 C 26.653469 9.6925312 28 12.692 28 16 C 28 19.308 26.653469 22.307469 24.480469 24.480469 L 25.898438 25.898438 C 28.432437 23.365437 30 19.866 30 16 C 30 12.134 28.432437 8.6345625 25.898438 6.1015625 z M 9.6367188 9.6367188 C 8.0077188 11.265719 7 13.515 7 16 C 7 18.485 8.0077187 20.734281 9.6367188 22.363281 L 11.052734 20.947266 C 9.7847344 19.680266 9 17.93 9 16 C 9 14.07 9.7847344 12.319734 11.052734 11.052734 L 9.6367188 9.6367188 z M 22.363281 9.6367188 L 20.947266 11.052734 C 22.215266 12.319734 23 14.07 23 16 C 23 17.93 22.215266 19.680266 20.947266 20.947266 L 22.363281 22.363281 C 23.992281 20.734281 25 18.485 25 16 C 25 13.515 23.992281 11.265719 22.363281 9.6367188 z M 16 12 A 4 4 0 0 0 16 20 A 4 4 0 0 0 16 12 z" /></svg></i>
-</a>
-</li>
-<li>
-<a href="index-2.html" title="Home" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
-</a>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
-</a>
-</li>
-<li>
-<a href="#" title>
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-</i>
-</a>
-<ul class="dropdown">
-<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-<li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
-<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
-<li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
-<li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
-<li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
-<li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
-<li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
-<li><a class="dark-mod" href="#" title><i class="icofont-moon"></i> Dark Mode</a></li>
-<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
-</ul>
-</li>
-</ul>
-</div>
+    <div class="topbar stick">
+    <div class="logo"><img alt src="{{ asset('images/LOGO/logo.png') }}"><span>GetForums</span></div>
+
+    <ul class="web-elements">
+    <li>
+        <a title href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+                         <i class="icofont-power"></i>
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </li>
+    </ul>
+    </div>
 </header>
 <nav class="sidebar">
 <ul class="menu-slide">
@@ -293,66 +195,6 @@
 <svg id="side-menu" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
 </div>
 </div>
-<div class="col-lg-8">
-<div class="page-caro">
-<div class="link-item">
-<a class="active" href="feed.html" title>
-<i class>
-<svg class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-</i>
-<p>Newsfeed</p>
-</a>
-</div>
-<div class="link-item">
-<a href="videos.html" title>
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-</i>
-<p>Videos</p>
-</a>
-</div>
-<div class="link-item">
-<a href="courses.html" title>
-<i class>
-<svg class="feather feather-airplay" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" /><polygon points="12 15 17 21 7 21 12 15" /></svg></i>
-<p>Courses</p>
-</a>
-</div>
-<div class="link-item">
-<a href="books.html" title>
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></i>
-<p>Books</p>
-</a>
-</div>
-<div class="link-item">
-<a href="blog.html" title>
-<i class><svg class="feather feather-layout" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><rect ry="2" rx="2" height="18" width="18" y="3" x="3" /><line y2="9" x2="21" y1="9" x1="3" /><line y2="9" x2="9" y1="21" x1="9" /></svg></i>
-<p>Blog</p>
-</a>
-</div>
-<div class="link-item">
-<a href="groups.html" title>
-<i class>
-<svg class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-</i>
-<p>Groups</p>
-</a>
-</div>
-</div>
-</div>
-<div class="col-lg-2">
-<div class="user-inf">
-<div class="folowerz">Followers: 204</div>
-<ul class="stars">
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -365,55 +207,34 @@
 <div class="offset-lg-1 col-lg-10">
 <div class="blog-detail">
 <div class="blog-title">
-<h2>Compare Prices Find The Best Computer Accessory</h2>
+<h2>{{ $content->judul }}</h2>
 </div>
 <div class="blog-details-meta">
-<figure><img src="images/resources/blog-detail.png" alt></figure>
+<figure><img src="{{ asset('storage/'. $content->gambar) }}" alt></figure>
 <ul>
-<li><i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></i> 907</li>
+<li><i class="icofont-heart" style="color: #64a4d4;"></i> 907</li>
 <li><i class>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i> Jan 20, 2021</li>
 </ul>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur volutpat maximus pellentesque. Integer sem enim, luctus at nibh at, condimentum sagittis sapien. Sed tempus ipsum erat, sit amet efficitur velit interdum eu. Vestibulum hendrerit id dolor eu scelerisque. Phasellus ex dui, consequat nec feugiat eu, dapibus eget ante. Sed sodales interdum dui, at euismod mi feugiat hendrerit. Suspendisse auctor libero in tempor mollis. Nulla et dolor velit. Aliquam sit amet luctus quam.
-</p>
-<h4>Why did you decide to join Socimo?</h4>
-<p>
-Nam a egestas libero, eget eleifend turpis. Sed id ipsum a ipsum aliquam laoreet sit amet sit amet nibh. Proin dapibus, libero sed posuere rhoncus, orci mi cursus enim, at accumsan eros massa lacinia mi. Nunc eget finibus felis, volutpat malesuada sem. Aliquam ac nisl pellentesque, varius neque sit amet, porttitor nunc. Nullam elit tellus, dapibus non eleifend sed, hendrerit eget velit. Aliquam ut felis dictum, tincidunt magna vitae, aliquam massa. In porttitor tristique quam, non dignissim sapien pharetra ultrices. Cras non ante non velit mollis mollis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque et bibendum urna, eget consequat sapien. Integer sed condimentum nibh. Integer id neque tristique, lobortis massa ac, dapibus nibh. Donec nulla odio, porttitor ac rutrum eget, volutpat a velit. Curabitur et enim quis diam congue dictum et vitae dui. Nulla tortor orci, luctus a pretium vel, ultrices porta nisl.
-</p>
-<p>
-Etiam lobortis dictum tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse ultricies efficitur dui, suscipit tempus elit condimentum quis. Duis sed vestibulum tortor, eget cursus odio.
-</p>
-<h4>Did you have any prior on- or offline research experience prior to publishing your course?</h4>
-<p>
-Morbi lectus nunc, lacinia ut consequat a, semper vel erat. Duis ut lacus nec dui sodales mattis. Mauris tellus dolor, pulvinar sit amet pretium a, malesuada sed tellus. Aliquam ultrices elit neque, quis lacinia ex porttitor non. Donec ac iaculis turpis. Nulla lacinia enim quis orci aliquam, non cursus urna pellentesque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus in mi a nisi auctor interdum. Vivamus faucibus magna sed elit interdum consequat. Vestibulum eu tortor vel ante feugiat faucibus quis et urna. Quisque interdum ac enim eu tempus. Fusce viverra, lectus egestas tincidunt cursus, tortor sapien convallis metus, vitae auctor risus metus vel nisi. Aenean dapibus bibendum mauris ut iaculis.
-</p>
-<h4>What are the most rewarding aspects of teaching on Cursus?</h4>
-<p>
-Quisque et bibendum urna, eget consequat sapien. Integer sed condimentum nibh. Integer id neque tristique, lobortis massa ac, dapibus nibh. Donec nulla odio, porttitor ac rutrum eget, volutpat a velit. Curabitur et enim quis diam congue dictum et vitae dui. Nulla tortor orci, luctus a pretium vel, ultrices porta nisl.
+<p>{{ $content->deskripsi }}
 </p>
 <div class="tag-n-cat">
-<div class="tags">
+{{-- <div class="tags">
 <span><i class><span><i class><svg class="feather feather-tag" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line y2="7" x2="7" y1="7" x1="7" /></svg></i></span></i> Post Tags:</span>
 <a title href="#">News</a>
 <a title href="#">ideas</a>
 <a title href="#">collection</a>
 <a title href="#">exclusive</a>
 <a title href="#">features</a>
-</div>
+</div> --}}
 <div class="tags">
 <span><i class>
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span>
-<a title href="#">News</a>
-<a title href="#">ideas</a>
-<a title href="#">collection</a>
-<a title href="#">exclusive</a>
-<a title href="#">features</a>
+<a title href="#">{{ $content->kategori->kategori }}</a>
 </div>
 </div>
 </div>
-<div class="next-prev-posts">
+{{-- <div class="next-prev-posts">
 <div class="prev">
 <a href="#" title>
 <i class="icofont-curved-double-left"></i>
@@ -432,7 +253,8 @@ Quisque et bibendum urna, eget consequat sapien. Integer sed condimentum nibh. I
 </div>
 </a>
 </div>
-</div>
+</div> --}}
+
 </div>
 </div>
 </div>
@@ -1014,9 +836,9 @@ Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling 
 </div>
 </div>
 <script src="js/main.min.js" type="06547fe668c4350f67fc32aa-text/javascript"></script>
-<script src="js/sparkline.js" type="06547fe668c4350f67fc32aa-text/javascript"></script>
-<script src="js/chart.js" type="06547fe668c4350f67fc32aa-text/javascript"></script>
-<script src="js/script.js" type="06547fe668c4350f67fc32aa-text/javascript"></script>
+<script src="js/sparkline.js" type="text/javascript"></script>
+<script src="js/chart.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
 <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="06547fe668c4350f67fc32aa-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70b19ef68836b',t:'MTcwOTI3NDA0OS43NzgwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
 
 <!-- Mirrored from wpkixx.com/html/socimo/blog-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:24:31 GMT -->

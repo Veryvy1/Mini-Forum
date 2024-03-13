@@ -83,10 +83,10 @@ input[type="text"] {
          @if(auth()->check())
         <div class="user-dp">
             <a href="#" title="View Profile">
-                @if(auth()->user()->profil)
-                    <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
+                @if(auth()->user()->profile)
+                    <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }} Profile">
                 @else
-                    <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
+                    <img src="{{ asset('images/LOGO/profile.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
                 @endif
             </a>
             <div class="name">
@@ -130,8 +130,8 @@ input[type="text"] {
             <div class="d-widget text-center" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
             <div class="user-avatar-edit">
             <figure>
-            @if ($user->bgprofil)
-                <img src="{{ asset('storage/' . $user->bgprofil) }}" alt="">
+            @if ($user->bgprofile)
+                <img src="{{ asset('storage/' . $user->bgprofile) }}" alt="">
             @else
                 <img id="preview-bgimage" src="{{ asset('images/LOGO/bguser.jpg') }}" alt="Preview Image">
             @endif
@@ -143,10 +143,10 @@ input[type="text"] {
             </div>
             <div class="user-dp-edit">
             <figure>
-            @if ($user->profil)
-                <img src="{{ asset('storage/' . $user->profil) }}" alt="">
+            @if ($user->profile)
+                <img src="{{ asset('storage/' . $user->profile) }}" alt="">
             @else
-                <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
+                <img id="preview-image" src="{{ asset('images/LOGO/profile.jpeg') }}" alt>
             @endif
             <div class="fileupload">
             <span class="btn-text"><i class="icofont-camera"></i></span>
@@ -271,6 +271,7 @@ input[type="text"] {
         }
     </script>
 
+    
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profile-input').addEventListener('change', function() {
@@ -283,7 +284,6 @@ input[type="text"] {
         });
     });
 </script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -299,3 +299,10 @@ input[type="text"] {
         });
     });
 </script>
+
+@auth
+<script>
+    const userId = {{ auth()->user()->id }};
+    // Gunakan userId dalam JavaScript Anda
+</script>
+@endauth

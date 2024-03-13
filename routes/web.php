@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/content/{content}', [ContentController::class, 'update'])->name('content.update');
         Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
 
+        Route::get('/content/{content}', [ContentController::class, 'detail'])->name('content.detail');
+
         Route::resource('kategori', KategoriController::class);
 
         Route::resource('contact', ContactController::class);
@@ -49,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('reviews', function () {
             return view('admin.reviews');
         });
+
+        Route::get('detailcontent', function () {
+            return view('admin.detailcontent');
+        })->name('detailcontent');
 
         Route::get('usermanage', [ManageUserController::class, 'index'])->name('admin.usermanage');
     });
@@ -94,9 +100,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
-        Route::get('signin', function () {
-            return view('signin');
-        })->name('signin');
+        Route::get('profil', function () {
+            return view('profile');
+        })->name('profil');
 
         Route::get('abc', function () {
             return view('user.abc');

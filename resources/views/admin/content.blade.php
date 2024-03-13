@@ -165,8 +165,8 @@
             <div class="more-opt">
         <span><i class="icofont-dotted-down"></i></span>
         <ul>
-        <li><a href="#" title  style="font-size: 15px; margin-left:7%;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
-        <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
+            <li><a href="{{ route('content.detail', ['content' => $contents->id]) }}" title style="font-size: 15px; margin-left:7%;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
+            <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
             <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
         </button></li>
         <li>
@@ -382,7 +382,7 @@ function swalpFunction(message, type) {
 
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
-<script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
 <script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 </body>

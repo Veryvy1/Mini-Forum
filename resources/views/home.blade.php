@@ -339,7 +339,8 @@
 <img alt src="images/LOGO/logo.png">
 </figure>
 <div class="friend-name">
-    <ins><a title href="time-line.html">Admin</a> Has Posted</ins>
+    <ins><a title href="time-line.html">{{ $contents->dibuat }}</a> Has Posted</ins>
+    <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
 </div>
 <div class="post-meta">
     <figure>
@@ -428,9 +429,8 @@
 
     <ul><li>
         <span title="liked" class="liked">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></i>
-<ins>1.2k</ins>
+           <i class="icofont-heart" style="color: #64a4d4;"></i>
+            <ins>1.2k</ins>
 </span>
 </li></ul>
     </div>
@@ -476,19 +476,24 @@
     <a href="#" title data-ripple>Load More..</a>
     </div>
     </div>
-<div class="col-lg-3">
-
-<div class="main-wraper">
-<span class="new-title">Search Post</span>
-<div class="new-post">
-
+    <div class="col-lg-3">
+        <div class="main-wraper">
+        <span class="new-title">Search Post</span>
         <form id="searchForm" action="{{ route('home.search') }}" method="get">
             @csrf
-                <i class="icofont-search"></i>
-                <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
-        </form>
+        <div class="d-flex justify-content-between align-items-center">
+
+        <div class="new-post">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
 </div>
-</div>
+
+
     <aside class="sidebar static right">
         <div class="widget">
             <form action="{{ route('home.filter') }}" method="GET">
@@ -1494,7 +1499,7 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 
 
-<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+<div class="modal" id="addContactModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -1502,24 +1507,25 @@ i think that some how, we learn who we really are and then live with that decisi
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addContactForm" action="{{ route('contact.store') }}" method="POST">
+                <form action="{{ route('contact.store') }}" method="POST">
                     @csrf
 
                     <div class="mb-3">
-                        <label for="messages" class="form-label">Messages</label>
-                        <input type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" value="{{ old('messages') }}">
-                        @error('messages')
+                        <label for="pesan" class="form-label">Messages</label>
+                        <input type="text" class="form-control @error('pesan') is-invalid @enderror" id="pesan" name="pesan" value="{{ old('pesan') }}">
+                        @error('pesan')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
-            </div>
+
+
         </div>
     </div>
 </div>

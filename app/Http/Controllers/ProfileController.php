@@ -12,9 +12,9 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
-        $user = User::find($id);
+        $user = Auth::user();
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
@@ -45,6 +45,7 @@ class ProfileController extends Controller
             'link_twt' => 'nullable',
         ], [
             'profile.image' => 'Only image files are allowed.',
+            'bgprofile.image' => 'Only image files are allowed.',
             'name.unique' => 'Name is already in use',
             'email.unique' => 'Email is already in use',
         ]);

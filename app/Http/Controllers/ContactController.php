@@ -9,19 +9,20 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contact = Contact::paginate(5);
-        return view('admin.contact', compact('contact'));
-    }
-    public function create()
-    {
         $contact = Contact::all();
         return view('admin.contact', compact('contact'));
     }
 
+    public function create()
+    {
+        return view('home'); // Mengarahkan ke view 'home.blade.php'
+    }
+
+
     public function store(ContactRequest $request)
     {
         Contact::create([
-            'messages'=>$request->input('messages'),
+            'pesan'=>$request->input('pesan'),
         ]);
         return redirect()->route('contact.index')->with('success','Contact added successfully');
     }
@@ -40,7 +41,7 @@ class ContactController extends Controller
     public function update(ContactRequest $request, Contact $contact)
     {
         $contact->update([
-            'messages'=>$request->input('messages'),
+            'pesan'=>$request->input('pesan'),
         ]);
         return redirect()->route('contact.index')->with('success','Contact updated successfully');
     }
