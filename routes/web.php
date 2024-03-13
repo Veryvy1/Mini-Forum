@@ -87,6 +87,12 @@ Route::middleware(['auth'])->group(function () {
             Route::put('edit/{id}',[ProfileController::class,'update'])->name('profile.update');
         });
 
+        // Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
+
+        Route::get('comment', function () {
+            return view('user.comment');
+        })->name('comment');
+
         Route::get('user_profile', function () {
             return view('user.profile');
         })->name('user_profile');
