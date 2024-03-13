@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>GetForums | Admin Content</title>
+    <title>Content | Admin</title>
     <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="socimo/css/main.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -31,6 +31,10 @@
             word-wrap: break-word;
         }
     </style>
+     <!-- Script Tambahan -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
 <div class="responsive-header">
@@ -56,8 +60,9 @@
 </div>
 <div class="restop-search">
 <span class="hide-search"><i class="icofont-close-circled"></i></span>
-<form method="post">
-<input type="text" placeholder="Search...">
+<form id="searchForm" action="{{ route('content.index') }}" method="get">
+    @csrf
+   <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
 </form>
 </div>
 </div>
@@ -101,7 +106,7 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
-<li><a href="home" title>Home</a></li>
+<li><a href="dashboard" title>Dashboard</a></li>
 <li><a href="content" title>Content</a></li>
 </ul>
 </div>
@@ -111,38 +116,33 @@
 
 <nav class="sidebar">
     <ul class="menu-slide">
-    <li class>
-    <a class href="/" title>
-    <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
-    </a>
-    </li>
-    <li class="active">
-    <a class href="#" title>
-    <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
-    </a>
-    </li>
-    <li class>
-    <a class href="usermanage" title>
-    <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
-    </a>
-    </li>
-    <li class>
-    <a class href="kategori" title>
-    <i class>
-    <svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
-    </a>
-    </li>
-    <li class>
-    <a class href="" title><i class>
-    <svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Manage Content
-    </a>
-    </li>
-    <li class>
-    <a class href="contact" title>
-    <i class>
-    <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
-    </a>
-    </li>
+        <li>
+        <a class href="dashboard" title>
+        <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
+        </a>
+        </li>
+        <li class="active">
+        <a class href="content" title>
+        <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
+        </a>
+        </li>
+        <li class>
+        <a class href="usermanage" title>
+        <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
+        </a>
+        </li>
+        <li class>
+        <a class href="kategori" title>
+        <i class>
+        <svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
+        </a>
+        </li>
+        <li class>
+        <a class href="contact" title>
+        <i class>
+        <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
+        </a>
+        </li>
     </ul>
 </nav>
 
@@ -181,13 +181,13 @@
         </div>
         <div class="prod-meta">
         <h4 title>
-        @if(strlen($contents->judul) > 15)
+            @if(strlen($contents->judul) > 15)
             {{ substr($contents->judul, 0, 15) }}...
         @else
             {{ $contents->judul }}
         @endif</h4>
         <p>{{ $contents->deskripsi }}</p>
-        </div>
+            </div>
         </div>
     </div>
     @empty
@@ -206,6 +206,7 @@
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
             </div>
             <div class="modal-body">
+                <div id="searchResultsContainer"></div>
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -218,24 +219,13 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
-                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
-                        @error('deskripsi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+
+
+                    <div class="col custom-content">
+                        <label for="isi_contect" class="form-label">ISI CONTECT</label>
+                        <textarea name="isi_contect" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('isi_contect') }}</textarea>
                     </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
-                        @error('gambar')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+
                     <div class="mb-3">
                         <label for="kategoris" class="form-label">Category</label>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
@@ -286,30 +276,12 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
-                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
-                        @error('deskripsi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
-                        @if ($contents->gambar)
-                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="gambar" width="50" height="50">
-                    @else
-                        No Image
-                    @endif
 
-                    @error('gambar')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                    <div class="col custom-content">
+                        <label for="isi_contect" class="form-label">ISI CONTECT</label>
+                        <textarea name="isi_contect" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('isi_contect') }}</textarea>
                     </div>
+
                     <div class="mb-3">
                         <label for="kategoris" class="form-label">Category</label>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
@@ -336,6 +308,31 @@
     </div>
 </div>
 @endforeach
+
+{{-- @section('scripts') --}}
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Hello stand-alone UI',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+            var oldIsiValue = {!! json_encode(old('isi')) !!};
+            $('#summernote').summernote('code', oldIsiValue);
+        });
+    </script>
+{{-- @endsection --}}
+
 
 @if (session('warning'))
     <script>

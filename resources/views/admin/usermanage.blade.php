@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>GetForums | Dashboard</title>
+<title>Manage user | Dashboard</title>
 <link rel="icon" href="images/fav.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
@@ -53,10 +53,10 @@
     <div class="topbar stick">
     <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
     <div class="searches">
-    <form method="post">
-    <input type="text" placeholder="Search...">
-    <button type="submit"><i class="icofont-search"></i></button>
-    </form>
+        <form id="searchForm" action="{{ route('usermanage.index') }}" method="get">
+            @csrf
+            <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+        </form>
     </div>
     <ul class="web-elements">
     <li>
@@ -81,13 +81,13 @@
 <svg id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
 </div>
 <div class="page-title">
-<h4>All Events</h4>
+<h4>Manage User</h4>
 </div>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-6">
 <ul class="breadcrumb">
-<li><a href="#" title>Home</a></li>
-<li><a href="#" title>Manage User</a></li>
+<li><a href="dashboard" title>Dashboard</a></li>
+<li><a href="usermanage" title>Manage User</a></li>
 </ul>
 </div>
 </div>
@@ -96,38 +96,33 @@
 
 <nav class="sidebar">
     <ul class="menu-slide">
-    <li >
-    <a class href="/" title>
-    <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
-    </a>
-    </li>
-    <li class>
-    <a class href="content" title>
-    <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
-    </a>
-    </li>
-    <li class="active">
-    <a class href="#" title>
-    <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
-    </a>
-    </li>
-    <li class>
-    <a class href="kategori" title>
-    <i class>
-    <svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
-    </a>
-    </li>
-    <li class>
-    <a class href="#" title><i class>
-    <svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Manage Content
-    </a>
-    </li>
-    <li class>
-    <a class href="#" title>
-    <i class>
-    <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
-    </a>
-    </li>
+        <li>
+        <a class href="dashboard" title>
+        <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
+        </a>
+        </li>
+        <li class>
+        <a class href="content" title>
+        <i class><svg id="ab7" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Content
+        </a>
+        </li>
+        <li class="active">
+        <a class href="usermanage" title>
+        <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>Manage User
+        </a>
+        </li>
+        <li class>
+        <a class href="kategori" title>
+        <i class>
+        <svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Category
+        </a>
+        </li>
+        <li class>
+        <a class href="contact" title>
+        <i class>
+        <svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Contact Message
+        </a>
+        </li>
     </ul>
 </nav>
 
@@ -135,14 +130,15 @@
 <div class="row">
 <div class="col-lg-12">
 <div class="panel-content">
-<h4 class="main-title">Users Management</h4>
+<h4 class="main-title">Manage User</h4>
 
 <div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">
 <div class="d-widget-title">
-<h5>All events</h5>
+<h5>Manage User</h5>
 </div>
+<div id="searchResultsContainer"></div>
 <table class="table table-default all-events table-striped table-responsive-lg">
 <thead>
 <tr>
@@ -150,7 +146,7 @@
 <th>Name</th>
 <th>Email</th>
 <th>Date</th>
-<th>Edit</th>
+<th>Delete</th>
 </tr>
 </thead>
 <tbody>
@@ -179,6 +175,7 @@
     @endforeach
 </tbody>
 </table>
+{{ $users->links() }}
 </div>
 </div>
 </div>

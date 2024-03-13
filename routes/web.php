@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeUserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('landingpage', function () {
+    Route::get('/', function () {
         return view('landingpage');
     });
 
@@ -46,17 +47,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('kategori', KategoriController::class);
 
-        Route::resource('contact', ContactController::class);
-
         Route::get('reviews', function () {
             return view('admin.reviews');
         });
 
-        Route::get('detailcontent', function () {
-            return view('admin.detailcontent');
-        })->name('detailcontent');
-
-        Route::get('usermanage', [ManageUserController::class, 'index'])->name('admin.usermanage');
+        Route::get('usermanage', [ManageUserController::class, 'index'])->name('usermanage.index');
     });
 
     Route::middleware('user')->group(function(){
@@ -70,10 +65,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('blog', function () {
             return view('user.blog');
         });
-
-        // Route::get('contact', function () {
-        //     return view('user.contact');
-        // });
 
         Route::get('notifikasi', function () {
             return view('user.notifikasi');
@@ -93,9 +84,6 @@ Route::middleware(['auth'])->group(function () {
             return view('user.comment');
         })->name('comment');
 
-        // Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
-        // Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-        // Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
@@ -108,8 +96,8 @@ Route::middleware(['auth'])->group(function () {
             return view('user.abc');
         })->name('abc');
     });
+    Route::resource('contact', ContactController::class);
 
 });
-
-
-
+Route::post('like',[LikeController::class,'store']);
+Route::delete('unlike/{like}',[LikeController::class,'destroy'])->name('like.destroy');

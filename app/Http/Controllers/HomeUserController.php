@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Kategori;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +19,9 @@ class HomeUserController extends Controller
         } else {
             $content = Content::take(3)->get();
         }
+        $likes = Like::where('user_id' , auth()->user()->id)->first();
         $kategori = Kategori::all();
-        return view('home', compact('kategori', 'content'));
+        return view('home', compact('kategori', 'content' , 'likes'));
     }
 
     public function filter(Request $request)

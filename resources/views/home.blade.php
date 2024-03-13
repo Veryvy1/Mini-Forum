@@ -100,13 +100,17 @@
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
 <li class="logout">
-    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="icofont-power"></i> Logout
-    </a>
+    <form  action="{{ route('logout') }}" method="POST" >
+        @csrf
+        <button class="btn btn-outline-primary w-100" onclick="showLogoutAlert()" >
+            <i class="icofont-power"></i> Logout
+        </button>
+        </script>
+    </form>
 </li>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
+<li>
+
+</li>
 </ul>
 </div>
 </header>
@@ -366,56 +370,42 @@
 <div class="we-video-info">
 <div class="stat-tools">
 <div class="box">
+    <div class="Like">
+        @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
+        <form action="{{ route('like.destroy', $likes->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            @error('like')
+                {{ $message }}
+            @enderror
+            @error('user_id')
+                {{ $message }}
+            @enderror
+            @error('content_id')
+                {{ $message }}
+            @enderror
+            <input type="hidden" name="content_id" value="{{$contents->id}}">
+            <button type="submit" class="Like__link btn btn-danger" ><i class="icofont-like"></i> Unlike</button>
+        </form>
+        @else
+            <form action="/like" method="post">
+                @csrf
+                @method('POST')
+                @error('like')
+                    {{ $message }}
+                @enderror
+                @error('user_id')
+                    {{ $message }}
+                @enderror
+                @error('content_id')
+                    {{ $message }}
+                @enderror
+                <input type="hidden" name="content_id" value="{{$contents->id}}">
+                <button type="submit" class="Like__link btn btn-primary"><i class="icofont-like"></i> Like</button>
+            </form>
+        @endif
+    </div>
 
-<div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
-    <script>
-        let posts = [];
-
-        function submitPost() {
-            const postInput = document.getElementById('postInput').value;
-
-            if (postInput.trim() !== '') {
-                const post = {
-                    content: postInput,
-                    likes: 0,
-                    liked: false
-                };
-
-                posts.push(post);
-                renderPosts();
-                document.getElementById('postInput').value = '';
-            }
-        }
-
-        function toggleLike(index) {
-            posts[index].liked = !posts[index].liked;
-
-            if (posts[index].liked) {
-                posts[index].likes++;
-            } else {
-                posts[index].likes--;
-            }
-
-            renderPosts();
-        }
-
-        function renderPosts() {
-            const postList = document.getElementById('postList');
-            postList.innerHTML = '';
-
-            posts.forEach((post, index) => {
-                const postElement = document.createElement('div');
-                postElement.classList.add('post');
-                postElement.innerHTML = `
-                    <p>${post.content}</p>
-                    <div class="like" onclick="toggleLike(${index})">
-                        <a class="like__link"><i class="icofont-like${post.liked ? ' liked' : ''}"></i> <span>${post.likes}</span> Like</a>
-                    </div>
-                `;
-                postList.appendChild(postElement);
-            });
-        }
-    </script>
 
 </div>
 </div>
@@ -1507,28 +1497,30 @@ i think that some how, we learn who we really are and then live with that decisi
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('contact.store') }}" method="POST">
+                <div id="searchResultsContainer"></div>
+                <form id="addContactForm" action="{{ route('contact.index') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
-                        <label for="pesan" class="form-label">Messages</label>
-                        <input type="text" class="form-control @error('pesan') is-invalid @enderror" id="pesan" name="pesan" value="{{ old('pesan') }}">
-                        @error('pesan')
+                        <label for="messages" class="form-label">Messages</label>
+                        <textarea type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" >{{ old('messages') }}</textarea>
+                        @error('messages')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                        <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
                     </div>
                 </form>
-
-
+            </div>
         </div>
     </div>
 </div>
+
 
 
 <script>
@@ -1544,6 +1536,37 @@ i think that some how, we learn who we really are and then live with that decisi
             document.getElementById('postPopup').style.display = 'block';
         });
     });
+</script>
+
+<script>
+    function showLogoutAlert() {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Anda yakin ingin keluar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Keluar!',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+            Swal.fire(
+                'Logout Berhasil',
+                'Anda telah berhasil logout.',
+                'success'
+            );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+                'Logout Dibatalkan',
+                'Anda membatalkan logout.',
+                'error'
+            );
+        }
+        });
+    }
+
 </script>
 
 

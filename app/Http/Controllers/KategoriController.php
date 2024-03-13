@@ -9,9 +9,17 @@ use App\Models\Kategori;
 class KategoriController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $kategori = Kategori::withCount('Content')->paginate(5);
+        if ($request->has('search')) {
+            $xkategorix = $request->input('search');
+            $kategori = Kategori::withCount('Content')
+                ->where('kategori', 'LIKE', "%$xkategorix%")
+                ->paginate(5);
+        } else {
+            $kategori = Kategori::withCount('Content')->paginate(5);
+        }
+
         return view('admin.kategori', compact('kategori'));
     }
 

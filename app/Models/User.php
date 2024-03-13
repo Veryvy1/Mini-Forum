@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'link_twt',
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *

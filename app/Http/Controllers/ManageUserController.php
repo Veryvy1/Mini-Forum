@@ -10,9 +10,14 @@ class ManageUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if ($request->has('search')) {
+            $xusersx = $request->input('search');
+            $users = User::where('name', 'LIKE', "%$xusersx%")->paginate(5);
+        } else {
+            $users = User::paginate(5);
+        }
         return view('admin.usermanage', compact('users'));
     }
 

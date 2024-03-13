@@ -10,25 +10,22 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
+use DOMDocument;
 Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $content = Content::all();
+        if ($request->has('search')) {
+            $ccontent = $request->input('search');
+            $content = Content::where('isi_contect', 'LIKE', "%$ccontent%");
+        } else {
+            $content = Content::all();
+        }
         $kategori = Kategori::all();
         return view('admin.content', compact('content','kategori'));
     }
-
-
-    // public function indexdetail()
-    // {
-    //     $content = Content::find($id);
-    //     $kategori = Kategori::all();
-    //     return view('admin.detailcontent', compact('content','kategori'));
-    // }
-
 
     public function createForAdmin()
     {
@@ -44,24 +41,7 @@ class ContentController extends Controller
         return view('home', compact('content','kategori'));
     }
 
-
     public function storeForAdmin(ContectRequest $request)
-    {
-        $gambar = $request->file('gambar');
-        $path = Storage::disk('public')->put('content', $gambar);
-
-        Content::create([
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path,
-            'dibuat' => 'admin'
-        ]);
-
-        return redirect()->route('content.index')->with('success', 'content added successfully');
-    }
-
-    public function storeForUser(ContectRequest $request)
     {
         $user = auth()->user();
         $gambar = $request->file('gambar');
@@ -75,8 +55,25 @@ class ContentController extends Controller
             'dibuat' => $user->name,
         ]);
 
-    return redirect()->back()->with('success', 'Content added successfully');
-    }
+    return back()->with('success', 'Content added successfully');
+}
+
+    public function storeForUser(ContectRequest $request)
+    {
+        // $user = auth()->user();
+        $gambar = $request->file('gambar');
+        $path = Storage::disk('public')->put('content', $gambar);
+
+        Content::create([
+            'judul' => $request->input('judul'),
+            'deskripsi' => $request->input('deskripsi'),
+            'kategori_id' => $request->input('kategori_id'),
+            'gambar' => $path,
+            // 'dibuat' => $user->name,
+        ]);
+
+    return back()->with('success', 'Content added successfully');
+}
 
 
     public function show(string $id)
@@ -108,7 +105,7 @@ class ContentController extends Controller
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
-            'judul' => $request->input('judul'),
+            'isi_contect' => $request->input('isi_contect'),
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
         ];
