@@ -93,7 +93,7 @@
 <ul class="dropdown">
 <li><a href="{{ route('user_profile') }}" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
 <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
-<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-brand-slideshare"></i> Messages</a></li>
+<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
