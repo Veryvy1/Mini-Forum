@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['admin', 'user']);
             $table->string('profile')->nullable();
+            $table->string('bgprofile')->nullable();
             $table->string('link_ig')->nullable();
             $table->string('link_fb')->nullable();
             $table->string('link_twt')->nullable();

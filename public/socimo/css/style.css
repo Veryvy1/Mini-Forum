@@ -15,40 +15,40 @@ create date: January-2021
 09- side widget
 10- popup styles
 11- side slide
-12- login page 
-13- page loaders 
-14- ask question widget 
+12- login page
+13- page loaders
+14- ask question widget
 15- signup form
 16- load more
-17- post detail page 
+17- post detail page
 18- post detail tab
 19- comments area
 20- chart sparkline
-21- about section 
+21- about section
 22- messages page
 23- notifications page
 24- university profile page
 25- follow members
 26- QA Page
 27- Pagination
-28- book page 
+28- book page
 29- book detail page
 30- development components
 31- development elements
 32- course page
 33- course detail page
 34- invoice page
-35- forgot password page 
+35- forgot password page
 36- error page
 37- coming soon page
 38- checkout page
-39- thank you page 
+39- thank you page
 40- send feedback page
 41- help page
 42- event detail page
 43- event statics
 44- pricing page
-45- dark theme stylings. 
+45- dark theme stylings.
 */
 /*=============== google fonts ===================*/
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&amp;family=Roboto&amp;display=swap');
@@ -62,7 +62,7 @@ create date: January-2021
     src: url(../fonts/CircularStd-Black.html);
   }
 /*===============
-***General Styling 
+***General Styling
 ===============*/
 html,body{
 	font-family: 'Roboto', sans-serif;
@@ -662,7 +662,7 @@ iframe {
     width: 90%;
 }
 /*======================/
-***** Home page 1 
+***** Home page 1
 ======================*/
 /*-- page loader ----*/
 .se-pre-con {
@@ -691,7 +691,7 @@ iframe {
 }
 #topcontrol:active {
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.62) inset
-}	
+}
 /*-- main title ---*/
 .title {
     display: inline-block;
@@ -2539,10 +2539,10 @@ header.transparent .topbar{
 }
 @-webkit-keyframes animateGradient {
     0%{
-        background-position:left bottom 
+        background-position:left bottom
     }
      50%{
-        background-position:right top 
+        background-position:right top
     }
     100%{
         background-position:left bottom
@@ -2550,7 +2550,7 @@ header.transparent .topbar{
 }
  @keyframes animateGradient {
     0%{
-        background-position:left bottom 
+        background-position:left bottom
     }
     50%{
         background-position:right top
@@ -3934,7 +3934,7 @@ ul.chatting-area li > figure {
     width: 32px;
 }
 ul.chatting-area li > figure img{
-	border-radius: 100%; 
+	border-radius: 100%;
 	border: 1px solid;
 	padding: 2px;
 }
@@ -5304,7 +5304,7 @@ input[type=checkbox]{
 }
 .course:hover .prise > span {
     color: #62626e;
-}  
+}
 .course-title {
     display: inline-block;
     font-size: 18px;
@@ -7500,7 +7500,7 @@ table.table-striped tbody tr td a.button:hover {
 	position: relative !important;
 }
 .tooltip-arrow, .tooltip.bottom{
-	border-bottom-color: #1f273f!important;	
+	border-bottom-color: #1f273f!important;
 }
 /*--- search result page ---*/
 .Search-result > h4 {
@@ -8123,9 +8123,9 @@ aside.sidebar .widget .activity-meta > i{
 .widget .featured-comp > li a img {
     border-radius: 100%;
 }
-.widget .featured-comp > li:nth-last-child(1), 
-.widget .featured-comp > li:nth-last-child(2), 
-.widget .featured-comp > li:nth-last-child(3), 
+.widget .featured-comp > li:nth-last-child(1),
+.widget .featured-comp > li:nth-last-child(2),
+.widget .featured-comp > li:nth-last-child(3),
 .widget .featured-comp > li:nth-last-child(4) {
     margin-bottom: 0;
 }
@@ -8513,7 +8513,7 @@ aside.sidebar .widget .activity-meta > i{
 .box > .Like > a:hover {
     background: #e5e4e9 none repeat scroll 0 0;
     color: #7d7f9a;
-}    
+}
 .Emojis {
 	background: #fff;
   position: absolute;
@@ -11176,13 +11176,13 @@ body.nightview {
 	color: #fff;
 }
 .nightview p{
-	color: #a5adc2; 
+	color: #a5adc2;
 }
-.nightview h1, 
-.nightview h2, 
-.nightview h3, 
-.nightview h4, 
-.nightview h5, 
+.nightview h1,
+.nightview h2,
+.nightview h3,
+.nightview h4,
+.nightview h5,
 .nightview h6{
 	color: #fff;
 }
@@ -11238,7 +11238,7 @@ body.nightview {
 .nightview .post-detail-btn li.nav-item a.active{
 	background: #151a27;
 }
-.nightview .main-wraper, 
+.nightview .main-wraper,
 .nightview aside .widget,
 .nightview .profile-short{
 	background: #1d2333;
@@ -11246,7 +11246,7 @@ body.nightview {
 }
 .nightview .main-title{
 	border-bottom: 1px solid rgba(255,255,255,.08);
-}	
+}
 .nightview .widget-analytics > li > span {
     background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
     border-color: rgba(255, 255, 255, 0.09);
@@ -11259,7 +11259,7 @@ body.nightview {
     border-color: #2e3648;
 }
 .nightview .upload-media > li:hover,
-.nightview .stat-tools > a, 
+.nightview .stat-tools > a,
 .nightview .stat-tools > .box a,
 .nightview .share-options > ul > li a{
     background: #293249;
@@ -11287,9 +11287,9 @@ body.nightview {
 .nightview .menu-slide > li.active > a{
     background: #31384b;
 }
-.nightview .sidemenu > i::before, 
+.nightview .sidemenu > i::before,
 .nightview .res-search > span::before{
-   background: #1d2333; 
+   background: #1d2333;
 }
 .nightview .responsive-header{
     background: #0d1323;
@@ -11359,7 +11359,7 @@ body.nightview {
 .nightview .inquiry-about > label{
 	color: #616a82;
 }
-.nightview .owl-prev::before, 
+.nightview .owl-prev::before,
 .nightview .owl-next::before{
 	background: #21283b;
 }
@@ -11477,7 +11477,7 @@ body.nightview {
 }
 .nightview .list-crumb > li:last-child a{color: #fff;}
 .nightview .quick-all{
-    border-color: transparent; 
+    border-color: transparent;
 }
 .nightview .quick-all .spark-meta > h4{
     color: red;
@@ -11485,7 +11485,7 @@ body.nightview {
 .nightview .table.table-striped th {
     color: #fff;
 }
-.nightview .table td, 
+.nightview .table td,
 .nightview .table th {
     border-color: rgba(255, 255, 255, 0.08);
 }
@@ -11502,7 +11502,7 @@ body.nightview {
     background: #1d2333 none repeat scroll 0 0;
     border: 1px solid rgba(255, 255, 255, 0.04);
 }
-.nightview .cart-table .table td, 
+.nightview .cart-table .table td,
 .nightview .cart-table .table th{
     color: #fff;
 }
@@ -11511,7 +11511,7 @@ body.nightview {
 }
 .nightview footer{
     background: #1d2333 none repeat scroll 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .nightview footer .bg-image {
     opacity: 0.05;
@@ -11586,7 +11586,7 @@ body.nightview {
     background: #21283b;
     border-color: rgba(255, 255, 255, 0.04);
 }
-.nightview .new-messages, 
+.nightview .new-messages,
 .nightview .notificationz{
     border-top-color: rgba(255, 255, 255, 0.04);
 }
@@ -11677,21 +11677,21 @@ body.nightview {
 .nightview .new-comment form input,
 .nightview .new-post > form input,
 .nightview .searches input,
-.nightview .post-new .c-form textarea, 
+.nightview .post-new .c-form textarea,
 .nightview .post-new .c-form input,
 .nightview .post-new .c-form .chosen-container .chosen-single,
 .nightview .share-options > form > textarea,
 .nightview .text-box > textarea,
-.nightview .uk-input, 
-.nightview .uk-select, 
+.nightview .uk-input,
+.nightview .uk-select,
 .nightview .uk-textarea,
 .nightview .uk-margin .chosen-container-single .chosen-single,
-.nightview .add-comment .c-form input, 
+.nightview .add-comment .c-form input,
 .nightview .add-comment .c-form textarea,
 .nightview .more-grp-info form input,
-.nightview .c-form > div input, 
-.nightview .c-form > div textarea, 
-.nightview .c-form > input, 
+.nightview .c-form > div input,
+.nightview .c-form > div textarea,
+.nightview .c-form > input,
 .nightview .c-form > textarea,
 .nightview .newsletter > input,
 .nightview .search-question > form input,
@@ -13372,7 +13372,7 @@ a.classic-btn:hover {
     font-size: 15px;
     width: 87%;
     color: #636175;
-}   
+}
 .barcode {
     display: inline-block;
     margin-top: 50px;
@@ -13890,9 +13890,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', e
 .c-form2 > input {
     margin-bottom: 15px;
 }
-.c-form.old-inputs > div input, 
-.c-form.old-inputs > div textarea, 
-.c-form.old-inputs > input, 
+.c-form.old-inputs > div input,
+.c-form.old-inputs > div textarea,
+.c-form.old-inputs > input,
 .c-form.old-inputs > textarea {
     background: #f8fafa none repeat scroll 0 0;
     border: 1px solid #eaeaea;

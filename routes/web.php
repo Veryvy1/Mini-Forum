@@ -81,21 +81,18 @@ Route::middleware(['auth'])->group(function () {
             return view('user.postdetail');
         });
 
-        Route::prefix('profile')->middleware('auth')->group(function(){
-            Route::get('',[ProfileController::class,'index'])->name('profile');
-            Route::get('edit/{id}',[ProfileController::class,'edit'])->name('profile.edit');
-            Route::put('edit/{id}',[ProfileController::class,'update'])->name('profile.update');
-        });
-
         // Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
 
         Route::get('comment', function () {
             return view('user.comment');
         })->name('comment');
 
-        Route::get('user_profile', function () {
-            return view('user.profile');
-        })->name('user_profile');
+        // Route::get('/profile/{id}', [ProfileController::class, 'index'])->name('profile.index');
+        // Route::get('/profile/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        // Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
         Route::get('signin', function () {
             return view('signin');

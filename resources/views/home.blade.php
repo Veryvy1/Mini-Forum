@@ -71,7 +71,7 @@
 <li>
  @if(auth()->check())
 <div class="user-dp">
-    <a href="{{ route('user_profile') }}" title="View Profile">
+    <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
         @if(auth()->user()->profil)
             <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
         @else
@@ -91,38 +91,14 @@
 </i>
 </a>
 <ul class="dropdown">
-<li><a href="{{ route('user_profile') }}" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
+    <li>
+        <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+            <i class="icofont-user-alt-3"></i> Your Profile
+        </a>
+    </li>
 <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
-<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="addContactForm" action="{{ route('contact.store') }}" method="POST">
-                    @csrf
 
-                    <div class="mb-3">
-                        <label for="messages" class="form-label">Messages</label>
-                        <input type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" value="{{ old('messages') }}">
-                        @error('messages')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
-            </div>
-        </div>
-    </div>
-</div>
 <li class="logout">
     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <i class="icofont-power"></i> Logout
@@ -508,9 +484,8 @@
 
         <form id="searchForm" action="{{ route('home.search') }}" method="get">
             @csrf
-            <div class="input-group">
+                <i class="icofont-search"></i>
                 <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
-            </div>
         </form>
 </div>
 </div>
@@ -1519,6 +1494,37 @@ i think that some how, we learn who we really are and then live with that decisi
 </div>
 
 
+<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addContactForm" action="{{ route('contact.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="messages" class="form-label">Messages</label>
+                        <input type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" value="{{ old('messages') }}">
+                        @error('messages')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     function submitSearch() {
         document.getElementById("searchForm").submit();
@@ -1560,6 +1566,7 @@ i think that some how, we learn who we really are and then live with that decisi
         });
     }
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>

@@ -5,40 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(string $id)
+    public function index($id)
     {
         $user = User::find($id);
-        return view('user.profile',compact('user'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+        return view('user.profile', compact('user'));
     }
 
     /**
@@ -56,31 +36,46 @@ class ProfileController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'profile'=> 'nullable|image'
-        ],[
-            'profile.image'=>'Only image file can input'
+            'name' => 'nullable|unique:users,name,' . $id,
+            'email' => 'nullable|unique:users,email,' . $id,
+            'profile' => 'nullable|image',
+            'bgprofile' => 'nullable|image',
+            'link_fb' => 'nullable',
+            'link_ig' => 'nullable',
+            'link_twt' => 'nullable',
+        ], [
+            'profile.image' => 'Only image files are allowed.',
+            'name.unique' => 'Name is already in use',
+            'email.unique' => 'Email is already in use',
         ]);
+
+        $userData = $request->except(['_token', '_method']);
+
         $user = User::find($id);
-        if(!$user){
-            return redirect('home');
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
         }
-        $userData = [];
-        if($request->file('profile')){
+
+        if ($request->hasFile('profile')) {
             $userData['profile'] = $request->file('profile')->store('profile', 'public');
 
-            if($user->profile){
+            // Hapus gambar lama jika ada
+            if ($user->profile) {
                 Storage::disk('public')->delete($user->profile);
             }
         }
+        if ($request->hasFile('bgprofile')) {
+            $userData['bgprofile'] = $request->file('bgprofile')->store('bgprofile', 'public');
+
+            // Hapus gambar lama jika ada
+            if ($user->bgprofile) {
+                Storage::disk('public')->delete($user->bgprofile);
+            }
+        }
+
         $user->update($userData);
-        return redirect('home');
+
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
