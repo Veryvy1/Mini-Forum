@@ -19,9 +19,14 @@ class HomeUserController extends Controller
         } else {
             $content = Content::take(3)->get();
         }
-        $likes = Like::where('user_id' , auth()->user()->id)->first();
+        $likesCount = [];
+        foreach ($content as $post) {
+            $likesCount[$post->id] = Like::where('content_id', $post->id)->count();
+        }
+
         $kategori = Kategori::all();
-        return view('home', compact('kategori', 'content' , 'likes'));
+        $likes = Like::where('user_id' , auth()->user()->id)->first();
+        return view('home', compact('kategori', 'content' , 'likesCount','likes'));
     }
 
     public function filter(Request $request)

@@ -43,7 +43,6 @@ class ContentController extends Controller
 
     public function storeForAdmin(ContectRequest $request)
     {
-        $user = auth()->user();
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -52,15 +51,14 @@ class ContentController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
-            'dibuat' => $user->name,
+            'dibuat' => 'admin'
         ]);
 
-    return back()->with('success', 'Content added successfully');
-}
+        return redirect()->route('content.index')->with('success', 'content added successfully');
+    }
 
     public function storeForUser(ContectRequest $request)
     {
-        // $user = auth()->user();
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -69,11 +67,11 @@ class ContentController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
-            // 'dibuat' => $user->name,
+            'dibuat' => 'user'
         ]);
 
-    return back()->with('success', 'Content added successfully');
-}
+    return redirect()->back()->with('success', 'Content added successfully');
+    }
 
 
     public function show(string $id)

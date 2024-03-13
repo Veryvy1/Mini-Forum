@@ -140,9 +140,20 @@ padding: 80px 0;
 <div class="col-lg-9">
 <div class="group-feed">
 <div class="group-avatar">
-<img style="object-fit: cover; width:1000px; height:300px;" src="images/LOGO/bguser.jpg" alt >
-<a type="button" class="btn btn-primary" title data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal"><i class="fa-solid fa-ellipsis"></i></a>
-<figure class="group-dp"><img src="{{ asset('storage/' . $user->profile) }}" alt></figure>
+    @if ($user->profile)
+<img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('storage/' . $user->bgprofile) }}" alt >
+@else
+<img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('images/LOGO/bguser.jpg') }}" alt >
+@endif
+{{-- <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-primary"><i class="fa-solid fa-ellipsis"></i></a> --}}
+<a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-primary" style="color: #000; background-color: #fff; border: none;">Edit</a>
+<figure class="group-dp">
+    @if ($user->profile)
+        <img src="{{ asset('storage/' . $user->profile) }}" alt="">
+    @else
+        <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
+    @endif
+</figure>
 </div>
 <div class="grp-info about">
 <h4>{{ $user->name }}<span>{{ $user->email }}</span></h4>

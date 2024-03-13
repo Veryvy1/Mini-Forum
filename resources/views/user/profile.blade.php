@@ -146,7 +146,7 @@ input[type="text"] {
             @if ($user->profile)
                 <img src="{{ asset('storage/' . $user->profile) }}" alt="">
             @else
-                <img id="preview-image" src="{{ asset('images/LOGO/profile.jpeg') }}" alt>
+                <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
             @endif
             <div class="fileupload">
             <span class="btn-text"><i class="icofont-camera"></i></span>
@@ -271,7 +271,7 @@ input[type="text"] {
         }
     </script>
 
-    
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('profile-input').addEventListener('change', function() {
@@ -300,9 +300,4 @@ input[type="text"] {
     });
 </script>
 
-@auth
-<script>
-    const userId = {{ auth()->user()->id }};
-    // Gunakan userId dalam JavaScript Anda
-</script>
-@endauth
+

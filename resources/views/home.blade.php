@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+<<<<<<< Updated upstream
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Deskripsi situs web Anda">
@@ -17,11 +18,56 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <style>
         .large-label {
             font-size: 16px;
+=======
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content />
+<meta name="keywords" content />
+<title>GetForums | Social Media </title>
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
+<link rel="stylesheet" href="socimo/css/main.min.css">
+<link rel="stylesheet" href="socimo/css/style.css">
+<link rel="stylesheet" href="socimo/css/color.css">
+<link rel="stylesheet" href="socimo/css/responsive.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+.stat-tools {
+    display: flex; /* Mengatur tata letak elemen-elemen secara horizontal */
+}
+
+/* Memberikan jarak antara tombol-tombol */
+.Like,
+.Comment {
+    margin-right: 10px;
+}
+
+    .large-label {
+        font-size: 16px;
+    }
+    .emoji-state {
+    position: relative;
+    top: -50px;
+    }
+    .post-new-popup {
+        display: none;
+    }
+    .like {
+            display: inline-block;
+            cursor: pointer;
+>>>>>>> Stashed changes
         }
         .emoji-state {
         position: relative;
         top: -20px;
         }
+<<<<<<< Updated upstream
         .post-new-popup {
             display: none;
         }
@@ -34,6 +80,24 @@
                 color: #000;
             }
     </style>
+=======
+        .stat-tools .box {
+    display: flex;
+    align-items: center; /* Mengatur elemen-elemen secara vertikal tengah */
+}
+
+.stat-tools .box .Like,
+.stat-tools .box .Comment {
+    margin-right: 10px; /* Jarak antara tombol Like dan Comment */
+font-size: 10px;
+}
+
+.we-video-info {
+    font-size: 12px; /* Atur ukuran font */
+}
+
+</style>
+>>>>>>> Stashed changes
 </head>
 
 
@@ -364,50 +428,57 @@
 </p>
 
 <div class="we-video-info">
-<div class="stat-tools">
-<div class="box">
-    <div class="Like">
-        @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
-        <form action="{{ route('like.destroy', $likes->id) }}" method="post">
-            @csrf
-            @method('DELETE')
-            @error('like')
-                {{ $message }}
-            @enderror
-            @error('user_id')
-                {{ $message }}
-            @enderror
-            @error('content_id')
-                {{ $message }}
-            @enderror
-            <input type="hidden" name="content_id" value="{{$contents->id}}">
-            <button type="submit" class="Like__link btn btn-danger" ><i class="icofont-like"></i> Unlike</button>
-        </form>
-        @else
-            <form action="/like" method="post">
-                @csrf
-                @method('POST')
-                @error('like')
-                    {{ $message }}
-                @enderror
-                @error('user_id')
-                    {{ $message }}
-                @enderror
-                @error('content_id')
-                    {{ $message }}
-                @enderror
-                <input type="hidden" name="content_id" value="{{$contents->id}}">
-                <button type="submit" class="Like__link btn btn-primary"><i class="icofont-like"></i> Like</button>
-            </form>
-        @endif
+    <div class="stat-tools">
+        <div class="box">
+            <div class="Like">
+                <!-- Tombol Like -->
+                @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
+                    <form action="{{ route('like.destroy', $likes->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        @error('like')
+                            {{ $message }}
+                        @enderror
+                        @error('user_id')
+                            {{ $message }}
+                        @enderror
+                        @error('content_id')
+                            {{ $message }}
+                        @enderror
+                        <input type="hidden" name="content_id" value="{{$contents->id}}">
+                        <button type="submit" class="Like__link btn" style="background-color: #82b7d1"><i class="icofont-like"></i> Unlike</button>
+                    </form>
+                @else
+                    <form action="/like" method="post">
+                        @csrf
+                        @method('POST')
+                        @error('like')
+                            {{ $message }}
+                        @enderror
+                        @error('user_id')
+                            {{ $message }}
+                        @enderror
+                        @error('content_id')
+                            {{ $message }}
+                        @enderror
+                        <input type="hidden" name="content_id" value="{{$contents->id}}">
+                        <button type="submit" class="Like__link btn" style="background-color: #db8989"><i class="icofont-like"></i> Like</button>
+                    </form>
+                @endif
+            </div>
+            <!-- Tombol Comment -->
+            <div class="Comment">
+                <!-- Ganti bagian ini sesuai dengan kode HTML untuk tombol komentar -->
+                <!-- Saya asumsikan Anda memiliki tombol komentar dengan kelas .Comment__link -->
+                <button class="Comment__link btn"><i class="icofont-comment"></i> Comment</button>
+            </div>
+        </div>
     </div>
 
 
-</div>
-</div>
 
-<a title href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
-{{-- <a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a> --}}
+{{-- <button type="button" title class="comment-to btn" ><i class="icofont-comment"></i> Comment</button> --}}
+
 <div class="emoji-state">
 
 <div class="popover_wrapper">
@@ -416,7 +487,7 @@
     <ul><li>
         <span title="liked" class="liked">
            <i class="icofont-heart" style="color: #64a4d4;"></i>
-            <ins>1.2k</ins>
+            <ins>{{ $likesCount[$contents->id] }}</ins>
 </span>
 </li></ul>
     </div>
@@ -467,49 +538,49 @@
         <span class="new-title">Search Post</span>
         <form id="searchForm" action="{{ route('home.search') }}" method="get">
             @csrf
-        <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
 
-        <div class="new-post">
-            <div class="input-group">
-                <input type="search" name="search" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-
-
-    <aside class="sidebar static right">
-        <div class="widget">
-            <form action="{{ route('home.filter') }}" method="GET">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="widget-title"><b>Category</b></h4>
-                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                <div class="new-post">
+                    <div class="input-group">
+                        <input type="search" name="search" class="form-control" placeholder="Search...">
+                        <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+                    </div>
                 </div>
-                @php
-                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
-                @endphp
-                @foreach ($kategori as $key => $category)
-                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
-                    <label for="category{{ $category->id }}" class="large-label">
-                        {{ $category->kategori }}
-                    </label><br>
-                @endforeach
-            </form>
+            </div>
+        </form>
         </div>
-   </aside>
-</div>
-</div>
-</div>
-</div>
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+
+            <aside class="sidebar static right">
+                <div class="widget">
+                    <form action="{{ route('home.filter') }}" method="GET">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h4 class="widget-title"><b>Category</b></h4>
+                            <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                        </div>
+                        @php
+                          $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                        @endphp
+                        @foreach ($kategori as $key => $category)
+                            <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                            <label for="category{{ $category->id }}" class="large-label">
+                                {{ $category->kategori }}
+                            </label><br>
+                        @endforeach
+                    </form>
+                </div>
+           </aside>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
 <figure class="bottom-mockup"><img src="images/footer.png" alt></figure>
 <div class="bottombar">
 <div class="container">

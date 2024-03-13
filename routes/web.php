@@ -88,9 +88,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/profile/{profile}', [ProfileController::class, 'update'])->name('profile.update');
 
-        Route::get('profil', function () {
-            return view('profile');
-        })->name('profil');
+        Route::get('/profil', [ProfileController::class, 'profil'])->name('profile.profil');
+
 
         Route::get('abc', function () {
             return view('user.abc');
