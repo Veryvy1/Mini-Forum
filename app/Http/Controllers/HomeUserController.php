@@ -37,14 +37,12 @@ class HomeUserController extends Controller
         return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount','oldSearch'));
     }
 
-
     public function filter(Request $request)
     {
         $kategori = Kategori::all();
         $user = auth()->user();
         $kategori_ids = $request->input('kategori_id');
 
-        $query = Content::query()->with('user'); // Memuat relasi 'user'
         $query = Content::query()->with('user');
 
         if (!empty($kategori_ids)) {

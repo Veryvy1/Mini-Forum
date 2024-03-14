@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -266,12 +265,11 @@
         <div class="we-video-info">
 
         <ul><li>
-
             <span title="liked" class="liked">
-               <i class="icofont-heart" style="color: #64a4d4;"></i>
-               <ins>{{ $contents->likes_count }}</ins>
-                </span>
-    </li></ul>
+               <i class="icofont-like" style="color: #64a4d4;"></i>
+                <ins>{{ $likesCount[$contents->id] }}</ins>
+            </span>
+        </li></ul>
         </div>
     </div>
 
@@ -283,7 +281,7 @@
         <span title="Comments" class="Recommend">
             <i>
                 <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-                {{-- <ins>{{ $commentCount [$contents->id]}}</ins> --}}
+                <ins>{{ $commentCount [$contents->id]}}</ins>
             </span>
         </li></ul>
     </div>

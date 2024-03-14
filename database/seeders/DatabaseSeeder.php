@@ -40,6 +40,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'user',
         ]);
+        User::create([
+            'name' => 'paril',
+            'email_verified_at' => now(),
+            'email' => 'parilx003@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'role' => 'user',
+        ]);
         Kategori::create([
             'kategori' => 'Game',
         ]);
