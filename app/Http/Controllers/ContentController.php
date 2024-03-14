@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContectRequest;
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\Comment;
 use App\Models\Kategori;
 use App\Models\Like;
 use Illuminate\Support\Facades\Response;
@@ -16,6 +17,16 @@ Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
 {
+
+    public function contentId(Request $request, $id)
+{
+    $contentGet = Content::with('likes')->where('id', $id)->get();
+    $user = auth()->user();
+    $commentGet = Comment::with('comment')->where('id', $id)->count();
+    $comment = Comment::find($id);
+    $contentA = Content::all();
+    return view('home', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
+}
     public function index(Request $request)
     {
         if ($request->has('search')) {
@@ -32,6 +43,14 @@ class ContentController extends Controller
     }
 
 
+    // public function indexdetail()
+    // {
+    //     $content = Content::find($id);
+    //     $kategori = Kategori::all();
+    //     return view('admin.detailcontent', compact('content','kategori'));
+    // }
+
+
     public function createForAdmin()
     {
         $content = Content::all();
@@ -39,12 +58,14 @@ class ContentController extends Controller
         return view('content', compact('content','kategori'));
     }
 
-    public function createForUser()
+    public function createForUser($id)
     {
         $content = Content::all();
         $kategori = Kategori::all();
-        return view('home', compact('content','kategori'));
+
+        return view('', compact('content','kategori'));
     }
+
 
     public function storeForAdmin(ContectRequest $request)
     {
