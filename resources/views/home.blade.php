@@ -323,7 +323,7 @@
 <div class="stat-tools">
 <div class="box">
     <div class="Like">
-        @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
+        @if(isset($likes) && $likes && $likes->user_id == Auth::id() && $likes->content_id == $contents->id)
         <form action="{{ route('like.destroy', $likes->id) }}" method="post">
             @csrf
             @method('DELETE')
@@ -346,6 +346,7 @@
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
+            border: none;
              }"><i class="icofont-like"></i> Like</button>        </form>
         @else
             <form action="/like" method="post">
@@ -370,6 +371,7 @@
                 padding: 5px 20px;
                 vertical-align: middle;
                 transition: all 0.2s linear 0s;
+                border: none;
                  }"><i class="icofont-like"></i> Like</button>
             </form>
         @endif
@@ -384,10 +386,10 @@
 
         <ul><li>
             <span title="liked" class="liked">
-               <i class="icofont-heart" style="color: #64a4d4;"></i>
+               <i class="icofont-like" style="color: #64a4d4;"></i>
                 <ins>{{ $likesCount[$contents->id] }}</ins>
-    </span>
-    </li></ul>
+            </span>
+        </li></ul>
         </div>
     </div>
 
