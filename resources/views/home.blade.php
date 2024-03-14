@@ -94,7 +94,7 @@
     <li>
         <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
             <i class="icofont-user-alt-3"></i> Your Profile
-        </a>
+        </a>
     </li>
 <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
     <i class="icofont-plus"></i>Latest Content</a></a>
@@ -147,7 +147,7 @@
     <div class="main-wraper">
         <span class="new-title">Create New Post</span>
         <div class="text-center">
-            <a href="#" class="btn btn-primary rounded-circle" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
+            <a href="#" class="btn btn-primary btn-lg rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button" style="background-color: #2ea8dc; width: 200px;">
                 <i class="icofont-plus text-white"></i>
             </a>
         </div>
@@ -175,8 +175,8 @@
     <img alt src="images/LOGO/logo.png">
     </figure>
     <div class="friend-name">
-        {{-- <ins><a title href="time-line.html">{{ $contents->user->name }}</a> Has Posted</ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span> --}}
+        <ins><a title>{{ $contents->user->name }}</a></ins>
+        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
     </div>
     <div class="post-meta">
         <figure>
@@ -227,7 +227,7 @@
             vertical-align: middle;
             transition: all 0.2s linear 0s;
             border: none;
-             }"><i class="icofont-like"></i> Like</button>        </form>
+             }"><i class="icofont-like"></i> Unlike</button>        </form>
         @else
             <form action="/like" method="post">
                 @csrf
