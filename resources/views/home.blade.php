@@ -346,6 +346,7 @@
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
+            border: none;
              }"><i class="icofont-like"></i> Unlike</button>
         </form>
     @else
@@ -371,6 +372,7 @@
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
+            border: none;
              }"><i class="icofont-like"></i> Like</button>
         </form>
     @endif
