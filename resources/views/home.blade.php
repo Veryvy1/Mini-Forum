@@ -21,22 +21,12 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
-.stat-tools {
-    display: flex; /* Mengatur tata letak elemen-elemen secara horizontal */
-}
-
-/* Memberikan jarak antara tombol-tombol */
-.Like,
-.Comment {
-    margin-right: 10px;
-}
-
     .large-label {
         font-size: 16px;
     }
     .emoji-state {
     position: relative;
-    top: -50px;
+    top: -20px;
     }
     .post-new-popup {
         display: none;
@@ -45,29 +35,12 @@
             display: inline-block;
             cursor: pointer;
         }
-        .emoji-state {
-        position: relative;
-        top: -50px;
+
+    .like i {
+            color: #000;
         }
-        .stat-tools .box {
-    display: flex;
-    align-items: center; /* Mengatur elemen-elemen secara vertikal tengah */
-}
-
-.stat-tools .box .Like,
-.stat-tools .box .Comment {
-    margin-right: 10px; /* Jarak antara tombol Like dan Comment */
-font-size: 10px;
-}
-
-.we-video-info {
-    font-size: 12px; /* Atur ukuran font */
-}
-
 </style>
 </head>
-
-
 <body>
 <div class="theme-layout">
 <div class="responsive-header">
@@ -119,7 +92,7 @@ font-size: 10px;
 </a>
 <ul class="dropdown">
     <li>
-        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+        <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
             <i class="icofont-user-alt-3"></i> Your Profile
         </a>
     </li>
@@ -285,71 +258,23 @@ font-size: 10px;
 <span id="date"></span>
 </div>
 </div>
-<div class="widget">
-<h4 class="widget-title">Complete Your Profile</h4>
-<span>Your Profile is missing followings!</span>
-<div data-progress="tip" class="progress__outer" data-value="0.67">
-<div class="progress__inner">82%</div>
-</div>
-<ul class="prof-complete">
-<li><i class="icofont-plus-square"></i> <a href="#" title>Upload Your Picture</a><em>10%</em></li>
-<li><i class="icofont-plus-square"></i> <a href="#" title>Your University?</a><em>20%</em></li>
-<li><i class="icofont-plus-square"></i> <a href="#" title>Add Payment Method</a><em>20%</em></li>
-</ul>
-</div>
-<div class="advertisment-box">
-<h4 class><i class="icofont-info-circle"></i> advertisment</h4>
-<figure>
-<a href="#" title="Advertisment"><img src="images/resources/ad-widget2.gif" alt></a>
-</figure>
-</div>
 
-<div class="widget web-links stick-widget">
-<h4 class="widget-title">Useful Links <a title href="#" class="see-all">See All</a></h4>
-<ul>
-<li><i class="icofont-dotted-right"></i> <a title href="#">about</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">career</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">advertise</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">socimo Apps</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">socimo Blog</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">Help</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">socimo Gifts</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">content policy</a></li>
-<li><i class="icofont-dotted-right"></i> <a title href="#">User Policy</a></li>
-</ul>
-<p>&copy; GetForums 2024. All Rights Reserved.</p>
-</div>
 </aside>
 </div>
+
 <div class="col-lg-6">
 
     <div class="main-wraper">
         <span class="new-title">Create New Post</span>
+        <div class="text-center">
+            <a href="#" class="btn btn-primary rounded-circle" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
+                <i class="icofont-plus text-white"></i>
+            </a>
+        </div>
         <div class="new-post">
         <form method="post">
-        <i class="icofont-pen-alt-1"></i>
-        <input type="text" placeholder="Create New Post" id="createPostInput">
-    </form>
-        <ul class="upload-media">
-        <li>
-        <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" title>
-        <i><img src="images/image.png" alt></i>
-        <span>Photo/Video</span>
-        </a>
-        </li>
-        <li>
-        <a href="#" title>
-        <i><img src="images/activity.png" alt></i>
-        <span>Feeling/Activity</span>
-        </a>
-        </li>
-        <li>
-        <a href="live-stream.html" title>
-        <i><img src="images/live-stream.png" alt></i>
-        <span>Live Stream</span>
-        </a>
-        </li>
-        </ul>
+        </form>
+
         </div>
         </div>
 
@@ -359,7 +284,7 @@ font-size: 10px;
     </center>
 @else
 
-@forelse ($content as $contents)
+@foreach ($content as $contents)
 
 <div class="main-wraper">
     <div class="user-post">
@@ -370,13 +295,13 @@ font-size: 10px;
 <img alt src="images/LOGO/logo.png">
 </figure>
 <div class="friend-name">
-    <ins><a title href="time-line.html">{{ $contents->user->name }}</a> Has Posted</ins>
-    <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+    <h6>{{ $contents->user->name }}</h6>
+    <span><i class="icofont-globe"></i> published: {{ \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
 </div>
 <div class="post-meta">
     <figure>
-        <a data-toggle="modal" data-target="#img-comt" href="#">
-            <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
+        <a data-toggle="#" data-target="#" href="#">
+        <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
 </a>
 </figure>
 <a href="post-detail.html" class="post-title">
@@ -395,70 +320,79 @@ font-size: 10px;
 </p>
 
 <div class="we-video-info">
-    <div class="stat-tools">
-        <div class="box">
-            <div class="Like">
-                <!-- Tombol Like -->
-                @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
-                    <form action="{{ route('like.destroy', $likes->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        @error('like')
-                            {{ $message }}
-                        @enderror
-                        @error('user_id')
-                            {{ $message }}
-                        @enderror
-                        @error('content_id')
-                            {{ $message }}
-                        @enderror
-                        <input type="hidden" name="content_id" value="{{$contents->id}}">
-                        <button type="submit" class="Like__link btn" style="background-color: #82b7d1"><i class="icofont-like"></i> Unlike</button>
-                    </form>
-                @else
-                    <form action="/like" method="post">
-                        @csrf
-                        @method('POST')
-                        @error('like')
-                            {{ $message }}
-                        @enderror
-                        @error('user_id')
-                            {{ $message }}
-                        @enderror
-                        @error('content_id')
-                            {{ $message }}
-                        @enderror
-                        <input type="hidden" name="content_id" value="{{$contents->id}}">
-                        <button type="submit" class="Like__link btn" style="background-color: #db8989"><i class="icofont-like"></i> Like</button>
-                    </form>
-                @endif
-            </div>
-            <!-- Tombol Comment -->
-            <div class="Comment">
-                <!-- Ganti bagian ini sesuai dengan kode HTML untuk tombol komentar -->
-                <!-- Saya asumsikan Anda memiliki tombol komentar dengan kelas .Comment__link -->
-                <button class="Comment__link btn"><i class="icofont-comment"></i> Comment</button>
-            </div>
+<div class="stat-tools">
+<div class="box">
+    <div class="Like">
+        @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
+        <form action="{{ route('like.destroy', $likes->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            @error('like')
+                {{ $message }}
+            @enderror
+            @error('user_id')
+                {{ $message }}
+            @enderror
+            @error('content_id')
+                {{ $message }}
+            @enderror
+            <input type="hidden" name="content_id" value="{{$contents->id}}">
+            <button type="submit" class="" style="
+            background: #eae9ee;
+            border-radius: 4px;
+            color: #82828e;
+            display: inline-block;
+            font-size: 13px;
+            padding: 5px 20px;
+            vertical-align: middle;
+            transition: all 0.2s linear 0s;
+             }"><i class="icofont-like"></i> Like</button>
+        </form>
+    @else
+        <form action="{{ route('like.store') }}" method="post">
+            @csrf
+            @method('POST')
+            @error('like')
+                {{ $message }}
+            @enderror
+            @error('user_id')
+                {{ $message }}
+            @enderror
+            @error('content_id')
+                {{ $message }}
+            @enderror
+            <input type="hidden" name="content_id" value="{{$contents->id}}">
+            <button type="submit" class="" style="
+            background: #eae9ee;
+            border-radius: 4px;
+            color: #82828e;
+            display: inline-block;
+            font-size: 13px;
+            padding: 5px 20px;
+            vertical-align: middle;
+            transition: all 0.2s linear 0s;
+             }"><i class="icofont-like"></i> Like</button>
+        </form>
+    @endif
+        </div>
+</div>
+
+<a title href="{{ route('content.comment', $contents->id) }}" class="comment-to"><i class="icofont-comment"></i> Comment</a>
+<div class="emoji-state">
+
+    <div class="popover_wrapper">
+        <div class="we-video-info">
+
+        <ul><li>
+            <span title="liked" class="liked">
+               <i class="icofont-heart" style="color: #64a4d4;"></i>
+                <ins>{{ $likesCount[$contents->id] }}</ins>
+    </span>
+    </li></ul>
         </div>
     </div>
 
 
-
-{{-- <button type="button" title class="comment-to btn" ><i class="icofont-comment"></i> Comment</button> --}}
-
-<div class="emoji-state">
-
-<div class="popover_wrapper">
-    <div class="we-video-info">
-
-    <ul><li>
-        <span title="liked" class="liked">
-           <i class="icofont-heart" style="color: #64a4d4;"></i>
-            <ins>{{ $likesCount[$contents->id] }}</ins>
-</span>
-</li></ul>
-    </div>
-</div>
 
 <div class="popover_wrapper">
     <div class="we-video-info">
@@ -485,70 +419,69 @@ font-size: 10px;
 </div>
 </div>
 </div>
-@empty
+{{-- @empty
 
 <center>
     <img src="images/LOGO/datakosong.png" alt="" style="width: 60%;">
-</center>
-@endforelse
+</center> --}}
+@endforeach
 @endif
 
 
 
-<div class="loadmore">
+{{-- <div class="loadmore">
     <div class="sp sp-bars"></div>
     <a href="#" title data-ripple>Load More..</a>
+    </div> --}}
     </div>
-    </div>
-
     <div class="col-lg-3">
         <div class="main-wraper">
         <span class="new-title">Search Post</span>
         <form id="searchForm" action="{{ route('home.search') }}" method="get">
             @csrf
-            <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
 
-                <div class="new-post">
-                    <div class="input-group">
-                        <input type="search" name="search" class="form-control" placeholder="Search...">
-                        <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
-                    </div>
-                </div>
+        <div class="new-post">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
             </div>
-        </form>
         </div>
+    </div>
+</form>
+</div>
 
 
-            <aside class="sidebar static right">
-                <div class="widget">
-                    <form action="{{ route('home.filter') }}" method="GET">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="widget-title"><b>Category</b></h4>
-                            <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
-                        </div>
-                        @php
-                          $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
-                        @endphp
-                        @foreach ($kategori as $key => $category)
-                            <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
-                            <label for="category{{ $category->id }}" class="large-label">
-                                {{ $category->kategori }}
-                            </label><br>
-                        @endforeach
-                    </form>
+    <aside class="sidebar static right">
+        <div class="widget">
+            <form action="{{ route('home.filter') }}" method="GET">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="widget-title"><b>Category</b></h4>
+                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
                 </div>
-           </aside>
+                @php
+                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                @endphp
+                @foreach ($kategori as $key => $category)
+                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                    <label for="category{{ $category->id }}" class="large-label">
+                        {{ $category->kategori }}
+                    </label><br>
+                @endforeach
+            </form>
         </div>
-        </div>
-        </div>
-        </div>
+   </aside>
+</div>
+</div>
+</div>
+</div>
 
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <figure class="bottom-mockup"><img src="images/footer.png" alt></figure>
 <div class="bottombar">
 <div class="container">
@@ -741,19 +674,19 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 <div class="select-box">
 <div class="select-box__current" tabindex="1">
-<div class="select-box__value"><input class="select-box__input" type="radio" id="0" value="1" name="Ben" checked="checked" />
+<div class="select-box_value"><input class="select-box_input" type="radio" id="0" value="1" name="Ben" checked="checked" />
 <p class="select-box__input-text"><i class="icofont-globe-alt"></i> Public</p>
 </div>
-<div class="select-box__value"><input class="select-box__input" type="radio" id="1" value="2" name="Ben" checked="checked" />
+<div class="select-box_value"><input class="select-box_input" type="radio" id="1" value="2" name="Ben" checked="checked" />
 <p class="select-box__input-text"><i class="icofont-lock"></i> Private</p>
 </div>
-<div class="select-box__value"><input class="select-box__input" type="radio" id="2" value="3" name="Ben" checked="checked" />
+<div class="select-box_value"><input class="select-box_input" type="radio" id="2" value="3" name="Ben" checked="checked" />
 <p class="select-box__input-text"><i class="icofont-user"></i> Specific Friend</p>
 </div>
-<div class="select-box__value"><input class="select-box__input" type="radio" id="3" value="4" name="Ben" checked="checked" />
+<div class="select-box_value"><input class="select-box_input" type="radio" id="3" value="4" name="Ben" checked="checked" />
 <p class="select-box__input-text"><i class="icofont-star"></i> Only Friends</p>
 </div>
-<div class="select-box__value"><input class="select-box__input" type="radio" id="4" value="5" name="Ben" checked="checked" />
+<div class="select-box_value"><input class="select-box_input" type="radio" id="4" value="5" name="Ben" checked="checked" />
 <p class="select-box__input-text"><i class="icofont-users-alt-3"></i> Joined Groups</p>
 </div>
 <img class="select-box__icon" src="images/arrow-down.svg" alt="Arrow Icon" aria-hidden="true" />
@@ -1538,7 +1471,7 @@ i think that some how, we learn who we really are and then live with that decisi
 
                     <div class="mb-3">
                         <label for="messages" class="form-label">Messages</label>
-                        <textarea type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages">{{ old('messages') }}</textarea>
+                        <textarea type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" >{{ old('messages') }}</textarea>
                         @error('messages')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -1555,7 +1488,6 @@ i think that some how, we learn who we really are and then live with that decisi
         </div>
     </div>
 </div>
-
 
 <script>
     function submitSearch() {
@@ -1603,6 +1535,7 @@ i think that some how, we learn who we really are and then live with that decisi
 
 </script>
 
+
 <script>
     @if (Session::has('success'))
     toastr.success("{{ Session::get('success') }}")
@@ -1636,6 +1569,76 @@ i think that some how, we learn who we really are and then live with that decisi
 <script src="js/date-time.js" type="text/javascript"></script>
 <script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
 
+<script>
+    $(document).ready(function() {
+    $('.btn-like').on('click', function() {
+        var contentId = $(this).closest('.like-button').data('content-id');
+
+        $.ajax({
+            url: '/content/' + contentId + '/like',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                // Update tampilan jika diperlukan
+                console.log('Like berhasil');
+            },
+            error: function(xhr, status, error) {
+                console.error('Gagal melakukan like:', error);
+            }
+        });
+    });
+});
+</script>
+<script>
+    let posts = [];
+
+    function submitPost() {
+        const postInput = document.getElementById('postInput').value;
+
+        if (postInput.trim() !== '') {
+            const post = {
+                content: postInput,
+                likes: 0,
+                liked: false
+            };
+
+            posts.push(post);
+            renderPosts();
+            document.getElementById('postInput').value = '';
+        }
+    }
+
+    function toggleLike(index) {
+        posts[index].liked = !posts[index].liked;
+
+        if (posts[index].liked) {
+            posts[index].likes++;
+        } else {
+            posts[index].likes--;
+        }
+
+        renderPosts();
+    }
+
+    function renderPosts() {
+        const postList = document.getElementById('postList');
+        postList.innerHTML = '';
+
+        posts.forEach((post, index) => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+            postElement.innerHTML = `
+                <p>${post.content}</p>
+                <div class="like" onclick="toggleLike(${index})">
+                    <a class="like__link"><i class="icofont-like${post.liked ? ' liked' : ''}"></i> <span>${post.likes}</span> Like</a>
+                </div>
+            `;
+            postList.appendChild(postElement);
+        });
+    }
+</script>
 </body>
 
 

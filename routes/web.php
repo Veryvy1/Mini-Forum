@@ -107,5 +107,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('contact', ContactController::class);
 
 });
-Route::post('like',[LikeController::class,'store']);
+Route::post('like',[LikeController::class,'store'])->name('like.store');
 Route::delete('unlike/{like}',[LikeController::class,'destroy'])->name('like.destroy');

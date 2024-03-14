@@ -48,8 +48,8 @@
 <div class="restop-search">
 <span class="hide-search"><i class="icofont-close-circled"></i></span>
 <form id="searchForm" action="{{ route('contact.index') }}" method="get">
-@csrf
-<input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+    @csrf
+    <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
 </form>
 </div>
 </div>
@@ -209,29 +209,6 @@ function swalpFunction() {
     });
 }
 </script>
-
-{{-- <script>
-    function showLogoutAlert() {
-        Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Anda yakin ingin keluar?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Keluar!',
-            cancelButtonText: 'Tidak'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "{{ route('logout') }}";
-            }
-        });
-    }
-
-    document.getElementById('logoutButton').addEventListener('click', function() {
-        showLogoutAlert();
-    });
-</script> --}}
 
 <script>
     @if (Session::has('success'))

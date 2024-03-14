@@ -29,8 +29,4 @@ protected $guarded = [];
     {
         return $this->hasMany(Like::class);
     }
-    // public function reply()
-    // {
-    //     return $this->hasMany(Reply::class);
-    // }
 }

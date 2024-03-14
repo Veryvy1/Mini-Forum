@@ -54,14 +54,25 @@ class LikeController extends Controller
      */
     public function store(StoreLikeRequest $request)
     {
-        Like::create([
-            'like'=>'1',
-            'user_id'=>auth()->user()->id,
-            'content_id'=>$request->content_id
-        ]);
-        return back();
-    }
+        $contentId = $request->content_id;
+        $userId = auth()->user()->id;
 
+        $existingLike = Like::where('user_id', $userId)
+                            ->where('content_id', $contentId)
+                            ->first();
+
+        if ($existingLike) {
+            return back()->with('error', 'Anda hanya dapat memberikan suka sekali.');
+        }
+
+        Like::create([
+            'like' => '1',
+            'user_id' => $userId,
+            'content_id' => $contentId
+        ]);
+
+        return back()->with('success', ' Successfully Liking .');
+    }
     /**
      * Display the specified resource.
      */
@@ -93,6 +104,6 @@ class LikeController extends Controller
     {
         $contectId = $like->content_id;
         $like->delete();
-        return back();
+        return back()->with('success','Successfully Undo Like .');
     }
 }

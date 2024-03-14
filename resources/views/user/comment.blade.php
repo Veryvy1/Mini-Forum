@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo/post-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:23:44 GMT -->
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,196 +15,61 @@
 </head>
 
 <body>
-    {{-- <div class="page-loader" id="page-loader"> --}}
-    {{-- <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div> --}}
     </div>
     <div class="theme-layout">
-        <div class="responsive-header">
-            <div class="logo res"><img src="images/logo.png" alt><span>GetForums</span></div>
-            <div class="user-avatar mobile">
-                <a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-                <div class="name">
-                    <h4>Very V</h4>
-                    <span>Ontario, Canada</span>
-                </div>
-            </div>
-            <div class="right-compact">
-                <div class="sidemenu">
-                    <i>
-                        <svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <line x1="3" y1="18" x2="21" y2="18"></line>
-                        </svg></i>
-                </div>
-                <div class="res-search">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="feather feather-search">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg></span>
-                </div>
-            </div>
-            <div class="restop-search">
-                <span class="hide-search"><i class="icofont-close-circled"></i></span>
-                <form method="post">
-                    <input type="text" placeholder="Search...">
-                </form>
-            </div>
-        </div>
+
         <header class>
             <div class="topbar stick">
-                <div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
-                <div class="searches">
-                    <form method="post">
-                        <input type="text" placeholder="Search...">
-                        <button type="submit"><i class="icofont-search"></i></button>
-                        <span class="cancel-search"><i class="icofont-close"></i></span>
-                        <div class="recent-search">
-                            <h4 class="recent-searches">Your's Recent Search</h4>
-                            <ul class="so-history">
-                                <li>
-                                    <div class="searched-user">
-                                        <figure><img src="images/resources/user1.jpg" alt></figure>
-                                        <span>Danial Carabal</span>
-                                    </div>
-                                    <span class="trash"><i class="icofont-close-circled"></i></span>
-                                </li>
-                                <li>
-                                    <div class="searched-user">
-                                        <figure><img src="images/resources/user2.jpg" alt></figure>
-                                        <span>Maria K</span>
-                                    </div>
-                                    <span class="trash"><i class="icofont-close-circled"></i></span>
-                                </li>
-                                <li>
-                                    <div class="searched-user">
-                                        <figure><img src="images/resources/user3.jpg" alt></figure>
-                                        <span>Fawad Khan</span>
-                                    </div>
-                                    <span class="trash"><i class="icofont-close-circled"></i></span>
-                                </li>
-                                <li>
-                                    <div class="searched-user">
-                                        <figure><img src="images/resources/user4.jpg" alt></figure>
-                                        <span>Danial Sandos</span>
-                                    </div>
-                                    <span class="trash"><i class="icofont-close-circled"></i></span>
-                                </li>
-                                <li>
-                                    <div class="searched-user">
-                                        <figure><img src="images/resources/user5.jpg" alt></figure>
-                                        <span>Jack Carter</span>
-                                    </div>
-                                    <span class="trash"><i class="icofont-close-circled"></i></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </form>
+            <div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
+
+            <ul class="web-elements">
+            <li>
+             @if(auth()->check())
+            <div class="user-dp">
+                <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+                    @if(auth()->user()->profil)
+                        <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
+                    @else
+                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
+                    @endif
+                </a>
+                <div class="name">
+                    <h4>{{ auth()->user()->name }}</h4>
                 </div>
-                <ul class="web-elements">
-                    <li>
-                        <div class="user-dp">
-                            <a href="profile-page2.html" title>
-                                <img alt src="images/resources/user.jpg">
-                                <div class="name">
-                                    <h4>Danial Cardos</h4>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li class="go-live">
-                        <a href="live-stream.html" title="Go Live" data-toggle="tooltip">
-                            <i>
-                                <svg fill="#f00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-                                    width="18px" height="18px">
-                                    <path
-                                        d="M 6.1015625 6.1015625 C 3.5675625 8.6345625 2 12.134 2 16 C 2 19.866 3.5675625 23.365437 6.1015625 25.898438 L 7.5195312 24.480469 C 5.3465312 22.307469 4 19.308 4 16 C 4 12.692 5.3465312 9.6925313 7.5195312 7.5195312 L 6.1015625 6.1015625 z M 25.898438 6.1015625 L 24.480469 7.5195312 C 26.653469 9.6925312 28 12.692 28 16 C 28 19.308 26.653469 22.307469 24.480469 24.480469 L 25.898438 25.898438 C 28.432437 23.365437 30 19.866 30 16 C 30 12.134 28.432437 8.6345625 25.898438 6.1015625 z M 9.6367188 9.6367188 C 8.0077188 11.265719 7 13.515 7 16 C 7 18.485 8.0077187 20.734281 9.6367188 22.363281 L 11.052734 20.947266 C 9.7847344 19.680266 9 17.93 9 16 C 9 14.07 9.7847344 12.319734 11.052734 11.052734 L 9.6367188 9.6367188 z M 22.363281 9.6367188 L 20.947266 11.052734 C 22.215266 12.319734 23 14.07 23 16 C 23 17.93 22.215266 19.680266 20.947266 20.947266 L 22.363281 22.363281 C 23.992281 20.734281 25 18.485 25 16 C 25 13.515 23.992281 11.265719 22.363281 9.6367188 z M 16 12 A 4 4 0 0 0 16 20 A 4 4 0 0 0 16 12 z" />
-                                </svg></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index-2.html" title="Home" data-toggle="tooltip">
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round"
-                                    class="feather feather-message-square">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                </svg></i>
-                        </a>
-                        <span></span>
-                    </li>
-                    <li>
-                        <a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
-                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                                </svg></i>
-                        </a>
-                        <span></span>
-                    </li>
-                    <li>
-                        <a class="create" href="#" title="Add New" data-toggle="tooltip">
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus">
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                </svg></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" title>
-                            <i>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
-                                    <rect x="3" y="3" width="7" height="7"></rect>
-                                    <rect x="14" y="3" width="7" height="7"></rect>
-                                    <rect x="14" y="14" width="7" height="7"></rect>
-                                    <rect x="3" y="14" width="7" height="7"></rect>
-                                </svg>
-                            </i>
-                        </a>
-                        <ul class="dropdown">
-                            <li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-                            <li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
-                            <li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i>
-                                    Invite Collegue</a></li>
-                            <li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
-                            <li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
-                            <li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
-                            <li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
-                            <li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
-                            <li><a class="dark-mod" href="#" title><i class="icofont-moon"></i> Dark Mode</a>
-                            </li>
-                            <li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </div>
-        </header>
+            @endif
+            </li>
+            <li>
+            <a href="#" title>
+            <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </i>
+            </a>
+            <ul class="dropdown">
+                <li>
+                    <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+                        <i class="icofont-user-alt-3"></i> Your Profile
+                    </a>
+                </li>
+            <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+            <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
+
+            <li class="logout">
+                <form  action="{{ route('logout') }}" method="POST" >
+                    @csrf
+                    <button class="btn btn-outline-primary w-100" onclick="showLogoutAlert()" >
+                        <i class="icofont-power"></i> Logout
+                    </button>
+                    </script>
+                </form>
+            </li>
+            <li>
+
+            </li>
+            </ul>
+            </div>
+            </header>
+
         <nav class="sidebar">
             <ul class="menu-slide">
                 <li class="active menu-item-has-children">
@@ -379,116 +242,7 @@
 
 
 
-        {{-- <div class="gap no-gap">
-<div class="top-area mate-black low-opacity">
-<div class="bg-image" style="background-image: url(images/resources/top-bg.jpg)"></div>
-<div class="container">
-<div class="row">
-<div class="col-lg-12">
-<div class="post-subject">
-<a class="tagz" href="#" title>thesis</a>
-<h4>The Effect of Problem Based Learning Models on Students' Higher Order Thinking Skills in Mathematics Learning</h4>
-<ul class="sharing-options">
-<li><a href="#" title><i class="icofont-id-card"></i></a> Recommend</li>
-<li><a href="#" title><i class="icofont-star"></i></a> Follow</li>
-<li><a href="#" title><i class="icofont-share-alt"></i></a> Share</li>
-</ul>
-<ul class="nav nav-tabs post-detail-btn">
-<li class="nav-item"><a class="active" href="#overview" data-toggle="tab">Overview</a></li>
-<li class="nav-item"><a class href="#comment" data-toggle="tab">Comments</a></li>
-<li class="nav-item"><a class href="#reference" data-toggle="tab">References</a></li>
-</ul>
-<a class="download-btn" href="#" title data-ripple>Download it</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<section>
-<div class="gap">
-<div class="container">
-<div class="row">
-<div class="col-lg-12">
-<div id="page-contents" class="row merged20">
-<div class="col-lg-8">
-<div class="tab-content">
-<div class="tab-pane fade active show" id="overview">
-<div class="main-wraper">
-<div class="post-detail">
-<figure><img src="images/resources/post-detail.jpg" alt></figure>
-<h4>The purpose of this study?</h4>
-<p>
-The purpose of this study was to determine the effect of Problem Based Learning (PBL) on students' higher-order thinking abilities in mathematics learning. This research is library literature so the data collection method used is documentation, which is tracking written sources that contain various themes and topics discussed. The model used in this study is a synchronous research model. This will be done by looking at and linking the characteristics and indicators of students' high-level thinking skills in mathematics learning with the characteristics of the Problem Based Learning (PBL) model. From the results of data analysis it can be concluded that there is an influence of Problem Based Learning (PBL) on the level of thinking ability student height on learning mathematics.
-</p>
-<div class="pic-gallery">
-<div class="row merged-10">
-<div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-<img src="images/resources/gallery-1.jpg" alt>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-12">
-<div class="row">
-<div class="col-lg-12 col-md-12 col-sm-12">
-<img src="images/resources/gallery-2.jpg" alt>
-</div>
-<div class="col-lg-12 col-md-12 col-sm-12">
-<img src="images/resources/gallery-3.jpg" alt>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>
-<b>INTRODUCTION</b> Mathematics is an important subject, there are many activities related to mathematics. Mathematics is one of the subjects given from basic education to higher education. The objectives of learning mathematics, such as: "(1) understanding mathematical concepts, explaining the relationship between concepts and applying concepts or algorithms flexibly, accurately, efficiently and steadily, (2) using reasoning in patterns and properties, performing mathematical manipulations in making generalizations, proofs compile or explain mathematical ideas and achievements, (3) problem solving which includes the ability to understand problems, design mathematical models, solve models and find solutions (in Astriani, Surya, and Syahputa, 2017). Based on the objectives of mathematics learning above, mathematics learning requires students to be able to improve student problem solving ranging from simple levels to higher problem solving.This shows that the ability of problem solving is a competency that is very important to be developed in students in learning mathematics, this is because also in learning mathematics requires the ability to t is high so students are able to solve mathematical problems and are able to apply them in today's life that is not free from mathematical challenges and problems.
-</p>
-<p>
-In learning with the 2013 curriculum that is based on student-centered learning increasingly requires students to be able to the point of creating. To achieve this requires the ability of teachers to innovate in learning so that they are able to train students to think at a high level to solve problems and find solutions to be able to create something new. Also in the 2013 curriculum, learning uses scientific methods, multi-strategy, multimedia, adequate learning resources and technology, and utilizes the environment as a learning resource. The right learning model used is problem based learning. This model is appropriate for improving mathematical problem solving skills
-</p>
-</div>
-</div>
-<div class="main-wraper">
-<div class="charts">
-<h4 class="mb-4">Post Analytics / Stats</h4>
-<div class="quick-all-report">
-<div class="row">
-<div class="col-md-6">
-<div class="quick-all"> <span id="quick-view" class="sparkline">6,4,7,2,9,8,2,5,4</span>
-<div class="spark-meta">
-<h4>67,456</h4>
-<p>Reads</p>
-</div>
-</div>
-</div>
-<div class="col-md-6">
-<div class="quick-all"> <span id="quick-time" class="sparkline">7,5,2,6,7,8,5,8,7</span>
-<div class="spark-meta">
-<h4>00:02:03</h4>
-<p>Recommend</p>
-</div>
-</div>
-</div>
-<div class="col-md-6">
-<div class="quick-all"> <span id="quick-returning" class="sparkline">4,6,7,8,3,5,8,6,5</span>
-<div class="spark-meta">
-<h4>25%</h4>
-<p>Shares</p>
-</div>
-</div>
-</div>
-<div class="col-md-6">
-<div class="quick-all"> <span id="quick-rate" class="sparkline">2,7,7,11,9,13,12,5,7</span>
-<div class="spark-meta">
-<h4>66.1%</h4>
-<p>References</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div> --}}
-        {{-- <div class="tab-pane fade mb-4" id="comment"> --}}
+
         <div class="container"><br><br>
             <a type="button" href="{{ route('home') }}" class="btn btn-primary">
                 <i class="icofont-arrow-left"></i>
@@ -530,12 +284,12 @@ In learning with the 2013 curriculum that is based on student-centered learning 
                                 <div class="comment-titles">
                                     <h6>{{ $comments->user->name }}</h6>
                                     <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
-                                    
+
                                 </div>
                                 <p style="word-break: break-word;">
                                     {{ $comments->comment }}
                                 </p>
-                                
+
                             </div>
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
 
