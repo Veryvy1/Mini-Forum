@@ -19,28 +19,29 @@ class ContentController extends Controller
 {
 
     public function contentId(Request $request, $id)
-{
-    $contentGet = Content::with('likes')->where('id', $id)->get();
-    $user = auth()->user();
-    $commentGet = Comment::with('comment')->where('id', $id)->count();
-    $comment = Comment::find($id);
-    $contentA = Content::all();
-    return view('home', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
-}
-    public function index(Request $request)
     {
-        if ($request->has('search')) {
-            $ccontent = $request->input('search');
-            $content = Content::where('judul', 'LIKE', "%$ccontent%")->withCount('likes')->get();
-        } else {
-            $content = Content::withCount('likes')->get();
+        $contentGet = Content::with('likes')->where('id', $id)->get();
+        $user = auth()->user();
+        $commentGet = Comment::with('comment')->where('id', $id)->count();
+        $comment = Comment::find($id);
+        $contentA = Content::all();
+        return view('home', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
+    }
+        public function index(Request $request)
+        {
+            if ($request->has('search')) {
+                $ccontent = $request->input('search');
+                $content = Content::where('judul', 'LIKE', "%$ccontent%")->withCount('likes')->get();
+            } else {
+                $content = Content::withCount('likes')->get();
+            }
+
+            $kategori = Kategori::all();
+            $likes = Like::where('user_id', auth()->user()->id)->first();
+
+            return view('admin.content', compact('content', 'kategori', 'likes'));
         }
 
-        $kategori = Kategori::all();
-        $likes = Like::where('user_id', auth()->user()->id)->first();
-
-        return view('admin.content', compact('content', 'kategori', 'likes'));
-    }
 
 
     public function createForAdmin()
@@ -67,7 +68,7 @@ class ContentController extends Controller
         $user_id = auth()->id();
 
         $content = new Content();
-        $content->user_id = auth()->id(); 
+        $content->user_id = auth()->id();
         $content->judul = $request->input('judul');
         $content->deskripsi = $request->input('deskripsi');
         $content->kategori_id = $request->input('kategori_id');

@@ -89,7 +89,7 @@
 <div class="blog-details-meta">
 <figure><img src="{{ asset('storage/'. $content->gambar) }}" alt></figure>
 <ul>
-<li><i class="icofont-heart" style="color: #64a4d4;"></i> 907</li>
+<li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
 <li><i class>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i> Jan 20, 2021</li>
 </ul>
@@ -122,13 +122,13 @@
             <td style="width: 20%">{{ $comment->user->name }}</td>
             <td style="width: 50%;">{{ $comment->comment }}</td>
             <td style="width: 10%;">
-                {{-- <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $comment->id }}"> --}}
-                @csrf
+                <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $comment->id }}">
+                    @csrf
                     @method('DELETE')
-                    <button type="submit" title class="button soft-danger"  onclick="swalpFunction()">
+                    <button type="submit" class="button soft-danger" onclick="return confirm('Are you sure?')">
                         <i class="icofont-trash" style="color: #ff0000;"></i>Delete
                     </button>
-                {{-- </form>     --}}
+                </form>
             </td>
         </tr>
     @endforeach
