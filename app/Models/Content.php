@@ -9,8 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Content extends Model
 {
     use HasFactory;
+protected $guarded = [];
 
-    protected $guarded = ['id'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function kategori()
     {
@@ -21,14 +25,12 @@ class Content extends Model
     {
         return $this->hasMany(Comment::class);
     }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-    
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
+    // public function reply()
+    // {
+    //     return $this->hasMany(Reply::class);
+    // }
 }

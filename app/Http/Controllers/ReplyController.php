@@ -1,28 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Reply;
+use App\Models\Comment;
+use App\Models\Content;
 
 use Illuminate\Http\Request;
-use App\Models\Content;
-use App\Models\User;
-use App\Models\Comment;
 
-class CommentController extends Controller
+class ReplyController extends Controller
 {
-    public function commentId(Request $request, $id)
+    public function replyId(Request $request, $id)
     {
         $commentGet = Comment::where('id', $id)->get();
-        // $user = User::where('id',$id)->get();
         $user = auth()->user();
-        $content = Content::find($id);
-        $comment = Comment::where('content_id', $id)->get();
-        
-        return view('user.comment', compact('commentGet','user','content','comment'));
+        $comment = Comment::findOrFail($id);
+        $reply = Reply::where('comment_id', $id)->get();
+        return view('user.reply', compact('commentGet','user','comment','reply'));
     }
+
     public function index()
     {
-        $comment = Comment::all();
-        return view('user.comment', compact('comment'));
+        //
     }
 
     /**
@@ -30,25 +28,24 @@ class CommentController extends Controller
      */
     public function create()
     {
-        $comment = Comment::all();
-        return view('user.comment', compact('comment'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $contentId)
+    public function store(Request $request, $commentId)
     {
         $request->validate([
-            'comment' => 'required'
+            'reply' => 'required'
         ],[
-            'comment.required'=>'COMMENT'
+            'reply.required'=>'input your reply'
         ]);
-        $comment = new Comment();
-        $comment->content_id = $contentId;
-        $comment->user_id = auth()->id();
-        $comment->comment = $request->comment;
-        $comment->save();
+        $reply = new Reply();
+        $reply->comment_id = $commentId;
+        $reply->user_id = auth()->id();
+        $reply->reply = $request->reply;
+        $reply->save();
 
         return redirect()->back();
     }
