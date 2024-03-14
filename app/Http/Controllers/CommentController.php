@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\User;
 use App\Models\Comment;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CommentController extends Controller
 {
@@ -59,7 +60,7 @@ class CommentController extends Controller
         $comment->comment = $request->comment;
         $comment->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','successfully commented');
     }
 
     /**

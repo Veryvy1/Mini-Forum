@@ -67,7 +67,7 @@ class ContentController extends Controller
         $user_id = auth()->id();
 
         $content = new Content();
-        $content->user_id = auth()->id(); 
+        $content->user_id = auth()->id();
         $content->judul = $request->input('judul');
         $content->deskripsi = $request->input('deskripsi');
         $content->kategori_id = $request->input('kategori_id');
