@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\User;
+use App\Models\Like;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,12 +26,14 @@ class ProfileController extends Controller
 
     public function profil()
     {
-        $content = Content::all();
+        $content = Content::withCount('likes')->get();
         $user = Auth::user();
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
-        return view('profile', compact('user','content'));
+        $likes = Like::where('user_id', auth()->user()->id)->first();
+        $totalPosts = Content::where('user_id', $user->id)->count();
+        return view('profile', compact('user','content','totalPosts'));
     }
 
     /**

@@ -45,6 +45,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
 
         Route::get('/content/{content}', [ContentController::class, 'detail'])->name('content.detail');
+        Route::get('/content/{content}/comments', [ContentController::class, 'detailcomment'])->name('content.comments');
 
         Route::resource('kategori', KategoriController::class);
 

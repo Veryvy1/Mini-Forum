@@ -106,10 +106,20 @@ class ContentController extends Controller
     }
 
     public function detail($id)
-    {
-        $content = Content::find($id);
-        return view('admin.detailcontent', compact('content'));
-    }
+{
+    $content = Content::findOrFail($id);
+    return view('admin.detailcontent', compact('content'));
+}
+
+public function detailcomment($contentId)
+{
+    $content = Content::findOrFail($contentId);
+    $comments = $content->comments; // Pastikan relasi antara Content dan Comment telah didefinisikan
+    return view('admin.detailcontent', compact('comments'));
+}
+
+
+
 
 
     public function edit(string $id)

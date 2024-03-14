@@ -158,8 +158,8 @@ padding: 80px 0;
 <div class="grp-info about">
 <h4>{{ $user->name }}<span>{{ $user->email }}</span></h4>
 <ul class="joined-info">
-<li><span>Joined:</span> {{ $user->created_at }}</li>
-<li><span>Posts:</span> XXX</li>
+<li><span>Joined:</span>{{  \Carbon\Carbon::parse($user->created_at)->isoFormat('D MMMM YYYY') }}</li>
+<li><span>Posts:</span> {{ $totalPosts }}</li>
 </ul>
 {{-- <ul class="nav nav-tabs about-btn">
 <li class="nav-item"><a class="active" href="#posts" data-toggle="tab">Posts</a></li>
@@ -238,7 +238,7 @@ padding: 80px 0;
 <div class="tab-content">
 <div class="tab-pane active fade show " id="posts">
 <div class="row merged20">
-<div class="col-lg-8">
+<div class="col-lg-12">
 
 {{-- <div class="main-wraper">
 <span class="new-title">Create New Post</span>
@@ -271,6 +271,7 @@ padding: 80px 0;
 </div> --}}
 
 @forelse ($content as $contents)
+@if ($contents->user_id == auth()->id())
 
 <div class="main-wraper">
     <div class="user-post">
@@ -310,7 +311,7 @@ padding: 80px 0;
         <div class="box">
             <div class="Like">
                 <!-- Tombol Like -->
-                {{-- @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
+                @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
                     <form action="{{ route('like.destroy', $likes->id) }}" method="post">
                         @csrf
                         @method('DELETE')
@@ -342,7 +343,7 @@ padding: 80px 0;
                         <input type="hidden" name="content_id" value="{{$contents->id}}">
                         <button type="submit" class="Like__link btn" style="background-color: #db8989"><i class="icofont-like"></i> Like</button>
                     </form>
-                @endif --}}
+                @endif
             </div>
             <!-- Tombol Comment -->
             <div class="Comment">
@@ -365,7 +366,7 @@ padding: 80px 0;
     <ul><li>
         <span title="liked" class="liked">
            <i class="icofont-heart" style="color: #64a4d4;"></i>
-            <ins>{{ $likesCount[$contents->id] }}</ins>
+            <ins>{{ $contents->likes_count }}</ins>
 </span>
 </li></ul>
     </div>
@@ -396,6 +397,7 @@ padding: 80px 0;
 </div>
 </div>
 </div>
+@endif
 @empty
 
 <center>
@@ -403,8 +405,6 @@ padding: 80px 0;
 </center>
 @endforelse
 
-<div class="sp sp-bars"></div>
-</div>
 
 </div>
 </div>

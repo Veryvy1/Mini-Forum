@@ -23,11 +23,12 @@ class HomeUserController extends Controller
         $likesCount = [];
         foreach ($content as $post) {
             $likesCount[$post->id] = Like::where('content_id', $post->id)->count();
+            $commentCount[$post->id] = Comment::where('content_id', $post->id)->count();
         }
 
         $kategori = Kategori::all();
         $likes = Like::where('user_id' , auth()->user()->id)->first();
-        return view('home', compact('kategori', 'content' , 'likesCount','likes'));
+        return view('home', compact('kategori', 'content' , 'likesCount','likes','commentCount'));
     }
 
     public function filter(Request $request)

@@ -255,6 +255,38 @@
 </div>
 </div> --}}
 
+
+<table class="table table-default all-events table-striped table-responsive-lg">
+    <thead>
+    <tr>
+    <th style="width:5%;">ID#</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Date</th>
+    <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{-- @foreach ($comments as $comment) --}}
+        {{-- @if ($use->role == 'user') --}}
+                <tr>
+                    {{-- <td style="width: 5%;"><b></b></td>
+                    <td class="user-pic" style=" display: flex; justify-content: flex-start; width:50%;">
+
+                    </td> --}}
+
+                    {{-- <td>{{$comment->comment}}</td> --}}
+                    <td>1</td>
+                    <td>
+
+                    </td>
+                </tr>
+            {{-- @endif --}}
+        {{-- @endforeach --}}
+    </tbody>
+    </table>
+
+
 </div>
 </div>
 </div>
