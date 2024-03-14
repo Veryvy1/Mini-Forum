@@ -88,8 +88,6 @@ Route::middleware(['auth'])->group(function () {
             return view('user.postdetail');
         });
 
-        // Route::post('/comment/{contentId}', 'CommentController@store')->name('comment.store');
-
         Route::get('comment', function () {
             return view('user.comment');
         })->name('comment');
