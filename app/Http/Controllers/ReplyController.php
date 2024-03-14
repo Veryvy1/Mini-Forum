@@ -15,7 +15,8 @@ class ReplyController extends Controller
         $user = auth()->user();
         $comment = Comment::findOrFail($id);
         $reply = Reply::where('comment_id', $id)->get();
-        return view('user.reply', compact('commentGet','user','comment','reply'));
+        $replyAll = Reply::where('comment_id', $id)->count();
+        return view('user.reply', compact('commentGet','user','comment','reply','replyAll'));
     }
 
     public function index()

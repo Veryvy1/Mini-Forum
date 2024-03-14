@@ -995,13 +995,13 @@ padding: 80px 0;
 </div>
 </div>
 </section>
-<figure class="bottom-mockup"><img alt src="images/footer.png"></figure>
+<figure class="bottom-mockup"><img alt src="/images/footer.png"></figure>
 
 <div class="bottombar">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
-<span class>&copy; copyright All rights reserved by socimo 2020</span>
+<span class>&copy; copyright All rights reserved by GetForums 2024</span>
 </div>
 </div>
 </div>

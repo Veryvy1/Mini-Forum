@@ -27,6 +27,7 @@
     .emoji-state {
     position: relative;
     top: -20px;
+    top: -20px;
     }
     .post-new-popup {
         display: none;
@@ -35,6 +36,9 @@
             display: inline-block;
             cursor: pointer;
         }
+
+    .like i {
+            color: #000;
 
     .like i {
             color: #000;
@@ -262,6 +266,7 @@
 </aside>
 </div>
 
+
 <div class="col-lg-6">
 
     <div class="main-wraper">
@@ -271,8 +276,15 @@
                 <i class="icofont-plus text-white"></i>
             </a>
         </div>
+        <div class="text-center">
+            <a href="#" class="btn btn-primary rounded-circle" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
+                <i class="icofont-plus text-white"></i>
+            </a>
+        </div>
         <div class="new-post">
         <form method="post">
+        </form>
+
         </form>
 
         </div>
@@ -284,6 +296,7 @@
     </center>
 @else
 
+@foreach ($content as $contents)
 @foreach ($content as $contents)
 
 <div class="main-wraper">
@@ -297,9 +310,13 @@
 <div class="friend-name">
     <h6>{{ $contents->user->name }}</h6>
     <span><i class="icofont-globe"></i> published: {{ \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+    <h6>{{ $contents->user->name }}</h6>
+    <span><i class="icofont-globe"></i> published: {{ \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
 </div>
 <div class="post-meta">
     <figure>
+        <a data-toggle="#" data-target="#" href="#">
+        <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
         <a data-toggle="#" data-target="#" href="#">
         <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
 </a>
@@ -420,9 +437,12 @@
 </div>
 </div>
 {{-- @empty
+{{-- @empty
 
 <center>
     <img src="images/LOGO/datakosong.png" alt="" style="width: 60%;">
+</center> --}}
+@endforeach
 </center> --}}
 @endforeach
 @endif
@@ -430,8 +450,10 @@
 
 
 {{-- <div class="loadmore">
+{{-- <div class="loadmore">
     <div class="sp sp-bars"></div>
     <a href="#" title data-ripple>Load More..</a>
+    </div> --}}
     </div> --}}
     </div>
     <div class="col-lg-3">
@@ -440,7 +462,17 @@
         <form id="searchForm" action="{{ route('home.search') }}" method="get">
             @csrf
         <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
 
+        <div class="new-post">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
         <div class="new-post">
             <div class="input-group">
                 <input type="search" name="search" class="form-control" placeholder="Search...">
@@ -475,7 +507,36 @@
 </div>
 </div>
 </div>
+    <aside class="sidebar static right">
+        <div class="widget">
+            <form action="{{ route('home.filter') }}" method="GET">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="widget-title"><b>Category</b></h4>
+                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                </div>
+                @php
+                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                @endphp
+                @foreach ($kategori as $key => $category)
+                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                    <label for="category{{ $category->id }}" class="large-label">
+                        {{ $category->kategori }}
+                    </label><br>
+                @endforeach
+            </form>
+        </div>
+   </aside>
+</div>
+</div>
+</div>
+</div>
 
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 </div>
 </div>
 </div>
@@ -1472,6 +1533,7 @@ i think that some how, we learn who we really are and then live with that decisi
                     <div class="mb-3">
                         <label for="messages" class="form-label">Messages</label>
                         <textarea type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" >{{ old('messages') }}</textarea>
+                        <textarea type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" >{{ old('messages') }}</textarea>
                         @error('messages')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -1536,6 +1598,7 @@ i think that some how, we learn who we really are and then live with that decisi
 </script>
 
 
+
 <script>
     @if (Session::has('success'))
     toastr.success("{{ Session::get('success') }}")
@@ -1569,6 +1632,76 @@ i think that some how, we learn who we really are and then live with that decisi
 <script src="js/date-time.js" type="text/javascript"></script>
 <script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
 
+<script>
+    $(document).ready(function() {
+    $('.btn-like').on('click', function() {
+        var contentId = $(this).closest('.like-button').data('content-id');
+
+        $.ajax({
+            url: '/content/' + contentId + '/like',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                // Update tampilan jika diperlukan
+                console.log('Like berhasil');
+            },
+            error: function(xhr, status, error) {
+                console.error('Gagal melakukan like:', error);
+            }
+        });
+    });
+});
+</script>
+<script>
+    let posts = [];
+
+    function submitPost() {
+        const postInput = document.getElementById('postInput').value;
+
+        if (postInput.trim() !== '') {
+            const post = {
+                content: postInput,
+                likes: 0,
+                liked: false
+            };
+
+            posts.push(post);
+            renderPosts();
+            document.getElementById('postInput').value = '';
+        }
+    }
+
+    function toggleLike(index) {
+        posts[index].liked = !posts[index].liked;
+
+        if (posts[index].liked) {
+            posts[index].likes++;
+        } else {
+            posts[index].likes--;
+        }
+
+        renderPosts();
+    }
+
+    function renderPosts() {
+        const postList = document.getElementById('postList');
+        postList.innerHTML = '';
+
+        posts.forEach((post, index) => {
+            const postElement = document.createElement('div');
+            postElement.classList.add('post');
+            postElement.innerHTML = `
+                <p>${post.content}</p>
+                <div class="like" onclick="toggleLike(${index})">
+                    <a class="like__link"><i class="icofont-like${post.liked ? ' liked' : ''}"></i> <span>${post.likes}</span> Like</a>
+                </div>
+            `;
+            postList.appendChild(postElement);
+        });
+    }
+</script>
 <script>
     $(document).ready(function() {
     $('.btn-like').on('click', function() {

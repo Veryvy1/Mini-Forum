@@ -881,12 +881,12 @@ Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, s
 </div>
 </div>
 </section>
-<figure class="bottom-mockup"><img src="images/footer.png" alt></figure>
+<figure class="bottom-mockup"><img src="/images/footer.png" alt></figure>
 <div class="bottombar">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
-<span class>&copy; copyright All rights reserved by Socimo 2020</span>
+<span class>&copy; copyright All rights reserved by GetForums 2024</span>
 </div>
 </div>
 </div>
