@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Reply;
 use App\Models\Comment;
 use App\Models\Content;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 use Illuminate\Http\Request;
 
@@ -48,7 +50,7 @@ class ReplyController extends Controller
         $reply->reply = $request->reply;
         $reply->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Successful reply');
     }
 
     /**
