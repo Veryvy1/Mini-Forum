@@ -48,7 +48,7 @@
 <div class="restop-search">
 <span class="hide-search"><i class="icofont-close-circled"></i></span>
 <form method="post">
-<input type="text" placeholder="Search...">
+<input type="text" value="{{ $oldSearch }}" placeholder="Search...">
 </form>
 </div>
 </div>
