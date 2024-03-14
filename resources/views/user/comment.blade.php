@@ -497,7 +497,7 @@ In learning with the 2013 curriculum that is based on student-centered learning 
             <form action="{{ route('comment.store', ['contentId' => $content->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-                <textarea name="comment" id="comment" placeholder="comment..." cols="120" rows="3"
+                <textarea name="comment" id="comment" placeholder="...." cols="120" rows="3"
                     style="border-radius: 10px; border: 1px solid #ccc; padding: 5px;">{{ old('comment') }}</textarea>
                 <button type="submit" class="btn btn-primary rounded-circle"
                     style="background-color:  rgb(40, 144, 204); width:60px; height:60px; font-size:28px; margin-top:-6%;"><i
@@ -507,7 +507,7 @@ In learning with the 2013 curriculum that is based on student-centered learning 
             <br><br>
 
             <div class="comment-area">
-                <h4 class="comment-title">03 comments</h4>
+                <h4 class="comment-title">{{ $commentAll }} comments</h4>
                 <ul class="comments">
                     @foreach ($comment as $comments)
                     <li>

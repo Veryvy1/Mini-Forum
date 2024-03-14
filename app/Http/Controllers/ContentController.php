@@ -74,13 +74,14 @@ class ContentController extends Controller
 
         $user_id = auth()->id(); // Get the ID of the authenticated user
 
-        Content::create([
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path,
-            'user_id' => $user_id, // Assign the user ID to the user_id field
-        ]);
+        $content = new Content();
+        $content->user_id = auth()->id(); // Simpan ID pengguna
+        $content->judul = $request->input('judul');
+        $content->deskripsi = $request->input('deskripsi');
+        $content->kategori_id = $request->input('kategori_id');
+        $content->gambar = $path;
+        $content->save();
+
 
         return redirect()->route('content.index')->with('success', 'Content added successfully');
     }
@@ -92,13 +93,13 @@ class ContentController extends Controller
 
         $user_id = auth()->id(); // Get the ID of the authenticated user
 
-        Content::create([
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path,
-            'user_id' => $user_id, // Assign the user ID to the user_id field
-        ]);
+        $content = new Content();
+        $content->user_id = auth()->id(); // Simpan ID pengguna
+        $content->judul = $request->input('judul');
+        $content->deskripsi = $request->input('deskripsi');
+        $content->kategori_id = $request->input('kategori_id');
+        $content->gambar = $path;
+        $content->save();
 
         return redirect()->back()->with('success', 'Content added successfully');
     }
