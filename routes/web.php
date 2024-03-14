@@ -26,16 +26,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('landingpage');
+});
 Auth::routes(['verify' => true]);
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
-        return view('landingpage');
-    });
+
 
     Route::middleware('admin')->group(function(){
 
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
         Route::get('/content', [ContentController::class, 'index'])->name('content.index');
         Route::get('/content/create', [ContentController::class, 'createForAdmin'])->name('content.create');
