@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Kategori;
+use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,7 @@ class HomeUserController extends Controller
             $ccontent = $request->input('search');
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
         } else {
-            $content = Content::take(3)->get();
+            $content = Content::take(99)->get();
         }
         $likesCount = [];
         foreach ($content as $post) {

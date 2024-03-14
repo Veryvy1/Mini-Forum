@@ -493,11 +493,11 @@ In learning with the 2013 curriculum that is based on student-centered learning 
             <a type="button" href="{{ route('home') }}" class="btn btn-primary">
                 <i class="icofont-arrow-left"></i>
             </a>
-            <h3>Input your comment</h3>
-            <form action="{{ route('comment.store', ['contentId' => $content->id]) }}" method="post" enctype="multipart/form-data">
+            <h3>Input your reply comment</h3>
+            <form action="{{ route('reply.store', ['commentId' => $comment->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-                <textarea name="comment" id="comment" placeholder="comment..." cols="120" rows="3"
+                <textarea name="reply" id="reply" placeholder="input your reply..." cols="120" rows="3"
                     style="border-radius: 10px; border: 1px solid #ccc; padding: 5px;">{{ old('comment') }}</textarea>
                 <button type="submit" class="btn btn-primary rounded-circle"
                     style="background-color:  rgb(40, 144, 204); width:60px; height:60px; font-size:28px; margin-top:-6%;"><i
@@ -509,7 +509,7 @@ In learning with the 2013 curriculum that is based on student-centered learning 
             <div class="comment-area">
                 <h4 class="comment-title">03 comments</h4>
                 <ul class="comments">
-                    @foreach ($comment as $comments)
+                    @foreach ($reply as $replies)
                     <li>
                         <style>
                             .commenter-photo img {
@@ -528,16 +528,16 @@ In learning with the 2013 curriculum that is based on student-centered learning 
                             @endif
                             <div class="commenter-meta">
                                 <div class="comment-titles">
-                                    <h6>{{ $comments->user->name }}</h6>
-                                    <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                                    <h6>{{ $replies->user->name }}</h6>
+                                    <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}</span>
                                     
                                 </div>
                                 <p style="word-break: break-word;">
-                                    {{ $comments->comment }}
+                                    {{ $replies->reply }}
                                 </p>
                                 
                             </div>
-                            <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
+                            
 
                         </div>
                         <hr>

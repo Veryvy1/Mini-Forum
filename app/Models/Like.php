@@ -14,6 +14,10 @@ class Like extends Model
         'user_id'
     ];
 
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
     public function content()
     {
         return $this->belongsTo(Content::class);

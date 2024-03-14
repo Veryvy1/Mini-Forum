@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,10 +58,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('user')->group(function(){
         Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
-        Route::get('/home/create', [ContentController::class, 'createForUser'])->name('user.content.create');
+        Route::get('/home/create/{$id}', [ContentController::class, 'createForUser'])->name('user.content.create');
         Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
         Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
         Route::get('/homesearch', [HomeUserController::class, 'index'])->name('home.search');
+        Route::get('/content/{id}', [ContentController::class, 'contentId'])->name('contentid');
+        Route::get('/comment/{id}', [CommentController::class, 'commentId'])->name('content.comment');
+        Route::post('/comment/{contentId}', [CommentController::class, 'store'])->name('comment.store');
+        Route::get('/reply/{id}', [ReplyController::class, 'replyId'])->name('comment.reply');
+        Route::post('/reply/{commentId}', [ReplyController::class, 'store'])->name('reply.store');
+        Route::post('/content/{id}/like', [LikeController::class, 'like'])->name('content.like');
+
 
 
         Route::get('blog', function () {

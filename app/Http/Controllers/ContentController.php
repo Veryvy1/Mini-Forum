@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContectRequest;
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\Comment;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
@@ -15,6 +16,16 @@ Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
 {
+
+    public function contentId(Request $request, $id)
+{
+    $contentGet = Content::with('likes')->where('id', $id)->get();
+    $user = auth()->user();
+    $commentGet = Comment::with('comment')->where('id', $id)->count();
+    $comment = Comment::find($id);
+    $contentA = Content::all();
+    return view('home', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
+}
     public function index(Request $request)
     {
         if ($request->has('search')) {
@@ -27,6 +38,15 @@ class ContentController extends Controller
         return view('admin.content', compact('content','kategori'));
     }
 
+
+    // public function indexdetail()
+    // {
+    //     $content = Content::find($id);
+    //     $kategori = Kategori::all();
+    //     return view('admin.detailcontent', compact('content','kategori'));
+    // }
+
+
     public function createForAdmin()
     {
         $content = Content::all();
@@ -34,11 +54,12 @@ class ContentController extends Controller
         return view('content', compact('content','kategori'));
     }
 
-    public function createForUser()
+    public function createForUser($id)
     {
         $content = Content::all();
         $kategori = Kategori::all();
-        return view('home', compact('content','kategori'));
+        
+        return view('', compact('content','kategori'));
     }
 
     public function storeForAdmin(ContectRequest $request)
@@ -48,13 +69,15 @@ class ContentController extends Controller
 
         $user_id = auth()->id(); // Get the ID of the authenticated user
 
-        Content::create([
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path,
-            'user_id' => $user_id, // Assign the user ID to the user_id field
-        ]);
+        $content = new Content();
+        $content->user_id = auth()->id(); // Simpan ID pengguna
+        $content->judul = $request->input('judul');
+        $content->deskripsi = $request->input('deskripsi');
+        $content->kategori_id = $request->input('kategori_id');
+        $content->gambar = $path;
+        $content->dibuat = 'admin';
+        $content->save();
+
 
         return redirect()->route('content.index')->with('success', 'Content added successfully');
     }
@@ -66,13 +89,14 @@ class ContentController extends Controller
 
         $user_id = auth()->id(); // Get the ID of the authenticated user
 
-        Content::create([
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path,
-            'user_id' => $user_id, // Assign the user ID to the user_id field
-        ]);
+        $content = new Content();
+        $content->user_id = auth()->id(); // Simpan ID pengguna
+        $content->judul = $request->input('judul');
+        $content->deskripsi = $request->input('deskripsi');
+        $content->kategori_id = $request->input('kategori_id');
+        $content->gambar = $path;
+        $content->dibuat = 'user';
+        $content->save();
 
         return redirect()->back()->with('success', 'Content added successfully');
     }
