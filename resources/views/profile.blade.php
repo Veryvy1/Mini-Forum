@@ -210,17 +210,17 @@ padding: 80px 0;
 <div class="row">
 <div class="col-lg-8 col-md-6">
 <h4>About Me!</h4>
-<p>Hi! My name is Georg Peeter but some people may know me as peeter! I have a Twitch channel where I stream, play and review all the newest games.</p>
-<ul class="badges">
+<p>{{ $user->bio }}</p>
+{{-- <ul class="badges">
 <li><img src="images/badges/badge2.png" alt></li>
 <li><img src="images/badges/badge3.png" alt></li>
 <li><img src="images/badges/badge4.png" alt></li>
 <li><img src="images/badges/badge5.png" alt></li>
 <li><img src="images/badges/badge7.png" alt></li>
 <li><img src="images/badges/badge8.png" alt></li>
-</ul>
+</ul> --}}
 </div>
-<div class="col-lg-4 col-md-6">
+{{-- <div class="col-lg-4 col-md-6">
 <div class="share-article">
 <span>Share Profile</span>
 <a href="#" title class="facebook"><i class="icofont-facebook"></i></a>
@@ -229,7 +229,7 @@ padding: 80px 0;
 <a href="#" title class="twitter"><i class="icofont-twitter"></i></a>
 <a href="#" title class="google"><i class="icofont-google-plus"></i></a>
 </div>
-</div>
+</div> --}}
 </div>
 </div>
 </div>

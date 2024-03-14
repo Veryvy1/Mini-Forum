@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
         Route::get('usermanage', [ManageUserController::class, 'index'])->name('usermanage.index');
+        Route::delete('/usermanage/{usermanage}', [ManageUserController::class, 'destroy'])->name('usermanage.destroy');
     });
 
     Route::middleware('user')->group(function(){

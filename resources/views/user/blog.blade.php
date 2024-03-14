@@ -1,33 +1,52 @@
+@ -1,1565 +1,1571 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:24:26 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>Socimo | Social Media Network Template</title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<title>GetForums | Social Media </title>
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
 <link rel="stylesheet" href="socimo/css/responsive.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .large-label {
+        font-size: 16px;
+    }
+    .emoji-state {
+    position: relative;
+    top: -20px;
+    }
+    .post-new-popup {
+        display: none;
+    }
+    .like {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+    .like i {
+            color: #000;
+        }
+</style>
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader">
-<div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-</div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
-<div class="logo res"><img src="images/logo.png" alt><span>Socimo</span></div>
-<div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-<div class="name">
-<h4>Danial Cardos</h4>
-<span>Ontario, Canada</span>
-</div>
-</div>
+<div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
+
 <div class="right-compact">
 <div class="sidemenu">
 <i>
@@ -47,96 +66,24 @@
 </div>
 <header class>
 <div class="topbar stick">
-<div class="logo"><img src="images/logo.png" alt><span>Socimo</span></div>
-<div class="searches">
-<form method="post">
-<input type="text" placeholder="Search...">
-<button type="submit"><i class="icofont-search"></i></button>
-<span class="cancel-search"><i class="icofont-close"></i></span>
-<div class="recent-search">
-<h4 class="recent-searches">Your's Recent Search</h4>
-<ul class="so-history">
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<span>Danial Carabal</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<span>Maria K</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<span>Fawad Khan</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<span>Danial Sandos</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-<li>
-<div class="searched-user">
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<span>Jack Carter</span>
-</div>
-<span class="trash"><i class="icofont-close-circled"></i></span>
-</li>
-</ul>
-</div>
-</form>
-</div>
+<div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
+
 <ul class="web-elements">
 <li>
+ @if(auth()->check())
 <div class="user-dp">
-<a href="profile-page2.html" title>
-<img alt src="images/resources/user.jpg">
-<div class="name">
-<h4>Danial Cardos</h4>
+    <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+        @if(auth()->user()->profil)
+            <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
+        @else
+            <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
+        @endif
+    </a>
+    <div class="name">
+        <h4>{{ auth()->user()->name }}</h4>
+    </div>
 </div>
-</a>
-</div>
-</li>
-<li class="go-live">
-<a href="live-stream.html" title="Go Live" data-toggle="tooltip">
-<i>
-<svg fill="#f00" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18px" height="18px"><path d="M 6.1015625 6.1015625 C 3.5675625 8.6345625 2 12.134 2 16 C 2 19.866 3.5675625 23.365437 6.1015625 25.898438 L 7.5195312 24.480469 C 5.3465312 22.307469 4 19.308 4 16 C 4 12.692 5.3465312 9.6925313 7.5195312 7.5195312 L 6.1015625 6.1015625 z M 25.898438 6.1015625 L 24.480469 7.5195312 C 26.653469 9.6925312 28 12.692 28 16 C 28 19.308 26.653469 22.307469 24.480469 24.480469 L 25.898438 25.898438 C 28.432437 23.365437 30 19.866 30 16 C 30 12.134 28.432437 8.6345625 25.898438 6.1015625 z M 9.6367188 9.6367188 C 8.0077188 11.265719 7 13.515 7 16 C 7 18.485 8.0077187 20.734281 9.6367188 22.363281 L 11.052734 20.947266 C 9.7847344 19.680266 9 17.93 9 16 C 9 14.07 9.7847344 12.319734 11.052734 11.052734 L 9.6367188 9.6367188 z M 22.363281 9.6367188 L 20.947266 11.052734 C 22.215266 12.319734 23 14.07 23 16 C 23 17.93 22.215266 19.680266 20.947266 20.947266 L 22.363281 22.363281 C 23.992281 20.734281 25 18.485 25 16 C 25 13.515 23.992281 11.265719 22.363281 9.6367188 z M 16 12 A 4 4 0 0 0 16 20 A 4 4 0 0 0 16 12 z" /></svg></i>
-</a>
-</li>
-<li>
-<a href="index-2.html" title="Home" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
-</a>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
-</a>
+@endif
 </li>
 <li>
 <a href="#" title>
@@ -145,21 +92,26 @@
 </i>
 </a>
 <ul class="dropdown">
-<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-<li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
-<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
-<li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
-<li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
-<li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
-<li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
-<li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
-<li><a class="dark-mod" href="#" title><i class="icofont-moon"></i> Dark Mode</a></li>
-<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
-</ul>
+    <li>
+        <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+            <i class="icofont-user-alt-3"></i> Your Profile
+        </a>
+    </li>
+<li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
+
+<li class="logout">
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="icofont-power"></i> Logout
+    </a>
 </li>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
 </ul>
 </div>
 </header>
+
 <nav class="sidebar">
 <ul class="menu-slide">
 <li class="active menu-item-has-children">
@@ -282,288 +234,305 @@
 </li>
 </ul>
 </nav>
-<section>
-<div class="white-bg">
-<div class="container-fluid">
-<div class="menu-caro">
-<div class="row">
-<div class="col-lg-2">
-<div class="sidemenu">
-<i>
-<svg id="side-menu" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
-</div>
-</div>
-<div class="col-lg-8">
-<div class="page-caro">
-<div class="link-item">
-<a class="active" href="feed.html" title>
-<i class>
-<svg class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>
-</i>
-<p>Newsfeed</p>
-</a>
-</div>
-<div class="link-item">
-<a href="videos.html" title>
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-youtube"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
-</i>
-<p>Videos</p>
-</a>
-</div>
-<div class="link-item">
-<a href="courses.html" title>
-<i class>
-<svg class="feather feather-airplay" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1" /><polygon points="12 15 17 21 7 21 12 15" /></svg></i>
-<p>Courses</p>
-</a>
-</div>
-<div class="link-item">
-<a href="books.html" title>
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></i>
-<p>Books</p>
-</a>
-</div>
-<div class="link-item">
-<a href="blog.html" title>
-<i class><svg class="feather feather-layout" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><rect ry="2" rx="2" height="18" width="18" y="3" x="3" /><line y2="9" x2="21" y1="9" x1="3" /><line y2="9" x2="9" y1="21" x1="9" /></svg></i>
-<p>Blog</p>
-</a>
-</div>
-<div class="link-item">
-<a href="groups.html" title>
-<i class>
-<svg class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-</i>
-<p>Groups</p>
-</a>
-</div>
-</div>
-</div>
-<div class="col-lg-2">
-<div class="user-inf">
-<div class="folowerz">Followers: 204</div>
-<ul class="stars">
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-<li><i class="icofont-star"></i></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+
 <section>
 <div class="gap">
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
 <div id="page-contents" class="row merged20">
-<div class="col-lg-9">
-<div class="main-wraper">
-<div class="main-title">Blog Posts</div>
-<div class="blog-posts">
-<figure><img src="images/resources/blog-list-1.jpg" alt></figure>
-<div class="blog-post-meta">
-<ul>
-<li><i class="icofont-read-book"></i><a title="Reads" href="#">93k</a></li>
-<li><i class="icofont-comment"></i><a title="comments" href="#">33</a></li>
-</ul>
-<h4>Love is always the happiness of a heart.</h4>
-<p>
-Our online class is an affordable alternative to private therapy and coaching, and teaches day Lorem ipsum dolor sit amet.
-</p>
-<span><i class="icofont-clock-time"></i> january 23, 2021</span>
-<a href="blog-detail.html" title class="button primary circle">read more</a>
-</div>
-</div>
-<div class="blog-posts">
-<figure><img src="images/resources/blog-list-2.jpg" alt></figure>
-<div class="blog-post-meta">
-<ul>
-<li><i class="icofont-read-book"></i><a title="Reads" href="#">93k</a></li>
-<li><i class="icofont-comment"></i><a title="comments" href="#">33</a></li>
-</ul>
-<h4>Love is always the happiness of a heart.</h4>
-<p>
-Our online class is an affordable alternative to private therapy and coaching, and teaches day Lorem ipsum dolor sit amet.
-</p>
-<span><i class="icofont-clock-time"></i> january 23, 2021</span>
-<a href="blog-detail.html" title class="button primary circle">read more</a>
-</div>
-</div>
-<div class="blog-posts">
-<figure><img src="images/resources/blog-list-3.jpg" alt></figure>
-<div class="blog-post-meta">
-<ul>
-<li><i class="icofont-read-book"></i><a title="Reads" href="#">93k</a></li>
-<li><i class="icofont-comment"></i><a title="comments" href="#">33</a></li>
-</ul>
-<h4>Compare Prices Find The Best Computer Accessory</h4>
-<p>
-Our online class is an affordable alternative to private therapy and coaching, and teaches day Lorem ipsum dolor sit amet.
-</p>
-<span><i class="icofont-clock-time"></i> january 23, 2021</span>
-<a href="blog-detail.html" title class="button primary circle">read more</a>
-</div>
-</div>
-<div class="blog-posts">
-<figure><img src="images/resources/blog-list-4.jpg" alt></figure>
-<div class="blog-post-meta">
-<ul>
-<li><i class="icofont-read-book"></i><a title="Reads" href="#">93k</a></li>
-<li><i class="icofont-comment"></i><a title="comments" href="#">33</a></li>
-</ul>
-<h4>Will The Democrats Be Able To Reverse The Online Gambling Ban</h4>
-<p>
-Our online class is an affordable alternative to private therapy and coaching, and teaches day Lorem ipsum dolor sit amet.
-</p>
-<span><i class="icofont-clock-time"></i> january 23, 2021</span>
-<a href="blog-detail.html" title class="button primary circle">read more</a>
-</div>
-</div>
-<div class="blog-posts">
-<figure><img src="images/resources/blog-list-5.jpg" alt></figure>
-<div class="blog-post-meta">
-<ul>
-<li><i class="icofont-read-book"></i><a title="Reads" href="#">93k</a></li>
-<li><i class="icofont-comment"></i><a title="comments" href="#">33</a></li>
-</ul>
-<h4>Love is always the happiness of a heart.</h4>
-<p>
-Our online class is an affordable alternative to private therapy and coaching, and teaches day Lorem ipsum dolor sit amet.
-</p>
-<span><i class="icofont-clock-time"></i> january 23, 2021</span>
-<a href="blog-detail.html" title class="button primary circle">read more</a>
-</div>
-</div>
-<div class="load mt-5 mb-4">
-<ul class="pagination">
-<li><a href="#" title><i class="icofont-arrow-left"></i></a></li>
-<li><a class="active" href="#" title>1</a></li>
-<li><a href="#" title>2</a></li>
-<li><a href="#" title>3</a></li>
-<li><a href="#" title>4</a></li>
-<li><a href="#" title>5</a></li>
-<li>....</li>
-<li><a href="#" title>10</a></li>
-<li><a href="#" title><i class="icofont-arrow-right"></i></a></li>
-</ul>
-</div>
-</div>
-</div>
 <div class="col-lg-3">
-<aside class="sidebar static right">
-<div class="widget">
-<h4 class="widget-title">Popular Books</h4>
-<div class="popular-book">
-<figure><img src="images/resources/book10.jpg" alt></figure>
-<div class="book-about">
-<h6><a href="#" title>Vu.js 2 Basics</a></h6>
-<span>Richard Ali</span>
-<a href="#" title><i class="icofont-book-mark"></i></a>
+<aside class="sidebar static left">
+<div class="widget whitish low-opacity">
+<img src="images/time-clock.png" alt>
+<div class="bg-image" style="background-image: url(images/resources/time-bg.jpg)"></div>
+<div class="date-time">
+<div class="realtime">
+<span id="hours">00</span>
+<span id="point">:</span>
+<span id="min">00</span>
 </div>
-</div>
-<div class="popular-book">
-<figure><img src="images/resources/book9.jpg" alt></figure>
-<div class="book-about">
-<h6><a href="#" title>Css3 for Bigners</a></h6>
-<span>Richard Ali</span>
-<a href="#" title><i class="icofont-book-mark"></i></a>
-</div>
-</div>
-<div class="popular-book">
-<figure><img src="images/resources/book5.jpg" alt></figure>
-<div class="book-about">
-<h6><a href="#" title>Technology Wants 2020</a></h6>
-<span>Richard Ali</span>
-<a href="#" title><i class="icofont-book-mark"></i></a>
-</div>
+<span id="date"></span>
 </div>
 </div>
 <div class="widget">
-<h4 class="widget-title">Ask Research Question?</h4>
-<div class="ask-question">
-<i class="icofont-question-circle"></i>
-<h6>Ask questions in Q&A to get help from experts in your field.</h6>
-<a class="ask-qst" href="#" title>Ask a question</a>
+<h4 class="widget-title">Complete Your Profile</h4>
+<span>Your Profile is missing followings!</span>
+<div data-progress="tip" class="progress__outer" data-value="0.67">
+<div class="progress__inner">82%</div>
 </div>
-</div>
-<div class="widget">
-<h4 class="widget-title">Explor Events <a class="see-all" href="#" title>See All</a></h4>
-<div class="rec-events bg-purple">
-<i class="icofont-gift"></i>
-<h6><a title href>BZ University good night event in columbia</a></h6>
-<img alt src="images/clock.png">
-</div>
-<div class="rec-events bg-blue">
-<i class="icofont-microphone"></i>
-<h6><a title href>The 3rd International Conference 2020</a></h6>
-<img alt src="images/clock.png">
-</div>
-</div>
-<div class="widget stick-widget">
-<h4 class="widget-title">Who's follownig</h4>
-<ul class="followers">
-<li>
-<figure><img alt src="images/resources/friend-avatar.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Kelly Bill</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar2.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Issabel</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar3.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Andrew</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar4.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Sophia</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
-<li>
-<figure><img alt src="images/resources/friend-avatar5.jpg"></figure>
-<div class="friend-meta">
-<h4>
-<a title href="time-line.html">Allen</a>
-<span>Dept colleague</span>
-</h4>
-<a class="underline" title href="#">Follow</a>
-</div>
-</li>
+<ul class="prof-complete">
+<li><i class="icofont-plus-square"></i> <a href="#" title>Upload Your Picture</a><em>10%</em></li>
+<li><i class="icofont-plus-square"></i> <a href="#" title>Your University?</a><em>20%</em></li>
+<li><i class="icofont-plus-square"></i> <a href="#" title>Add Payment Method</a><em>20%</em></li>
 </ul>
+</div>
+<div class="advertisment-box">
+<h4 class><i class="icofont-info-circle"></i> advertisment</h4>
+<figure>
+<a href="#" title="Advertisment"><img src="images/resources/ad-widget2.gif" alt></a>
+</figure>
+</div>
+
+<div class="widget web-links stick-widget">
+<h4 class="widget-title">Useful Links <a title href="#" class="see-all">See All</a></h4>
+<ul>
+<li><i class="icofont-dotted-right"></i> <a title href="#">about</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">career</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">advertise</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">socimo Apps</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">socimo Blog</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">Help</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">socimo Gifts</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">content policy</a></li>
+<li><i class="icofont-dotted-right"></i> <a title href="#">User Policy</a></li>
+</ul>
+<p>&copy; GetForums 2024. All Rights Reserved.</p>
 </div>
 </aside>
 </div>
+<div class="col-lg-6">
+
+    <div class="main-wraper">
+        <span class="new-title">Create New Post</span>
+        <div class="new-post">
+        <form method="post">
+        <i class="icofont-pen-alt-1"></i>
+        <input type="text" placeholder="Create New Post" id="createPostInput">
+    </form>
+        <ul class="upload-media">
+        <li>
+        <a type="button" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" title>
+        <i><img src="images/image.png" alt></i>
+        <span>Photo/Video</span>
+        </a>
+        </li>
+        <li>
+        <a href="#" title>
+        <i><img src="images/activity.png" alt></i>
+        <span>Feeling/Activity</span>
+        </a>
+        </li>
+        <li>
+        <a href="live-stream.html" title>
+        <i><img src="images/live-stream.png" alt></i>
+        <span>Live Stream</span>
+        </a>
+        </li>
+        </ul>
+        </div>
+        </div>
+
+@if ($content->isEmpty())
+    <center>
+        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
+    </center>
+@else
+
+@forelse ($content as $contents)
+
+<div class="main-wraper">
+    <div class="user-post">
+        <div class="friend-info">
+            <figure>
+                <em>
+                    <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
+<img alt src="images/LOGO/logo.png">
+</figure>
+<div class="friend-name">
+    <ins><a title href="time-line.html">Admin</a> Has Posted</ins>
+    <ins><a title href="time-line.html">{{ $contents->dibuat }}</a> Has Posted</ins>
+    <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+</div>
+<div class="post-meta">
+    <figure>
+        <a data-toggle="modal" data-target="#img-comt" href="#">
+            <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
+</a>
+</figure>
+<a href="post-detail.html" class="post-title">
+    @if(strlen($contents->judul) > 45)
+    {{ substr($contents->judul, 0, 45) }}...
+@else
+    {{ $contents->judul }}
+@endif</a>
+<p>
+
+    @if(strlen($contents->deskripsi) > 70)
+    {{ substr($contents->deskripsi, 0, 70) }}...
+@else
+    {{ $contents->deskripsi }}
+@endif
+</p>
+
+<div class="we-video-info">
+<div class="stat-tools">
+<div class="box">
+
+<div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
+    <script>
+        let posts = [];
+
+        function submitPost() {
+            const postInput = document.getElementById('postInput').value;
+
+            if (postInput.trim() !== '') {
+                const post = {
+                    content: postInput,
+                    likes: 0,
+                    liked: false
+                };
+
+                posts.push(post);
+                renderPosts();
+                document.getElementById('postInput').value = '';
+            }
+        }
+
+        function toggleLike(index) {
+            posts[index].liked = !posts[index].liked;
+
+            if (posts[index].liked) {
+                posts[index].likes++;
+            } else {
+                posts[index].likes--;
+            }
+
+            renderPosts();
+        }
+
+        function renderPosts() {
+            const postList = document.getElementById('postList');
+            postList.innerHTML = '';
+
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
+                    <p>${post.content}</p>
+                    <div class="like" onclick="toggleLike(${index})">
+                        <a class="like__link"><i class="icofont-like${post.liked ? ' liked' : ''}"></i> <span>${post.likes}</span> Like</a>
+                    </div>
+                `;
+                postList.appendChild(postElement);
+            });
+        }
+    </script>
+
+</div>
+</div>
+
+<a title href="#" class="comment-to"><i class="icofont-comment"></i> Comment</a>
+{{-- <a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a> --}}
+<div class="emoji-state">
+
+<div class="popover_wrapper">
+    <div class="we-video-info">
+
+    <ul><li>
+        <span title="liked" class="liked">
+<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></i>
+<ins>1.2k</ins>
+           <i class="icofont-heart" style="color: #64a4d4;"></i>
+            <ins>1.2k</ins>
+</span>
+</li></ul>
+    </div>
+</div>
+
+<div class="popover_wrapper">
+    <div class="we-video-info">
+    <ul><li>
+        <span title="Comments" class="Recommend">
+            <i>
+                <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
+                <ins>54</ins>
+            </span>
+        </li></ul>
+    </div>
+</div>
+
+</div>
+</div>
+<div class="new-comment" style="display: none;">
+    <form method="post">
+        <input type="text" placeholder="write comment">
+        <button type="submit"><i class="icofont-paper-plane"></i></button>
+    </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+@empty
+
+<center>
+    <img src="images/LOGO/datakosong.png" alt="" style="width: 60%;">
+</center>
+@endforelse
+@endif
+
+
+
+<div class="loadmore">
+    <div class="sp sp-bars"></div>
+    <a href="#" title data-ripple>Load More..</a>
+    </div>
+    </div>
+<div class="col-lg-3">
+
+<div class="main-wraper">
+<span class="new-title">Search Post</span>
+<div class="new-post">
+
+    <div class="col-lg-3">
+        <div class="main-wraper">
+        <span class="new-title">Search Post</span>
+        <form id="searchForm" action="{{ route('home.search') }}" method="get">
+            @csrf
+                <i class="icofont-search"></i>
+                <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+        </form>
+</div>
+        <div class="d-flex justify-content-between align-items-center">
+
+        <div class="new-post">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control" placeholder="Search...">
+                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+
+
+    <aside class="sidebar static right">
+        <div class="widget">
+            <form action="{{ route('home.filter') }}" method="GET">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="widget-title"><b>Category</b></h4>
+                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                </div>
+                @php
+                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                @endphp
+                @foreach ($kategori as $key => $category)
+                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                    <label for="category{{ $category->id }}" class="large-label">
+                        {{ $category->kategori }}
+                    </label><br>
+                @endforeach
+            </form>
+        </div>
+   </aside>
+</div>
+</div>
+</div>
+</div>
+
 </div>
 </div>
 </div>
@@ -575,7 +544,7 @@ Our online class is an affordable alternative to private therapy and coaching, a
 <div class="container">
 <div class="row">
 <div class="col-lg-12">
-<span class>&copy; copyright All rights reserved by Socimo 2020</span>
+<span class>&copy; copyright All rights reserved by GetForums 2024</span>
 </div>
 </div>
 </div>
@@ -719,7 +688,8 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 </div>
 </div>
-<div class="post-new-popup">
+
+<div class="post-new-popup"  id="postPopup">
 <div class="popup" style="width: 800px;">
 <span class="popup-closed"><i class="icofont-close"></i></span>
 <div class="popup-meta">
@@ -794,6 +764,24 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 </div>
 </div>
+
+
+<style>
+    .post-new-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+    }
+</style>
+
+
+
 <div class="new-question-popup">
 <div class="popup">
 <span class="popup-closed"><i class="icofont-close"></i></span>
@@ -832,6 +820,29 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 <button type="submit" class="main-btn">Post</button>
 </form>
 </div>
+</div>
+</div>
+</div>
+<div class="auto-popup">
+<div class="popup-innner">
+<div class="popup-head">
+<h4>We want to hear from you!</h4>
+</div>
+<div class="popup-meta">
+<span>What are you struggling with right now? what we can help you with?</span>
+<form method="post" class="inquiry-about">
+<input type="text" placeholder="Your Answer">
+<h5>How did you hear about us?</h5>
+<label><input type="radio" name="hear"> Facebook</label>
+<label><input type="radio" name="hear"> instagram</label>
+<label><input type="radio" name="hear"> Google Search</label>
+<label><input type="radio" name="hear"> Twitter</label>
+<label><input type="radio" name="hear"> Whatsapp</label>
+<label><input type="radio" name="hear"> Other</label>
+<input type="text" placeholder="Writh Other">
+<button type="submit" class="primary button">Submit</button>
+<button class="canceled button outline-primary" type="button">Cancel</button>
+</form>
 </div>
 </div>
 </div>
@@ -887,14 +898,6 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 <button type="submit" class="main-btn">Publish</button>
 </div>
-</div>
-<div class="cart-product">
-<a href="product-cart.html" title="View Cart" data-toggle="tooltip"><i class="icofont-cart-alt"></i></a>
-<span>03</span>
-</div>
-<div class="chat-live">
-<a class="chat-btn" href="#" title="Start Live Chat" data-toggle="tooltip"><i class="icofont-facebook-messenger"></i></a>
-<span>07</span>
 </div>
 <div class="chat-box">
 <div class="chat-head">
@@ -1143,10 +1146,428 @@ Hi James! Please remember to buy the food for tomorrow! I’m gonna be handling 
 </div>
 </div>
 </div>
+<div class="createroom-popup">
+<div class="popup">
+<span class="popup-closed"><i class="icofont-close"></i></span>
+<div class="popup-meta">
+<div class="popup-head text-center">
+<h5 class="only-icon"><i class="icofont-video-cam"></i></h5>
 </div>
-<script src="js/main.min.js" type="df9917e60bbe58c84a66e080-text/javascript"></script>
-<script src="js/script.js" type="df9917e60bbe58c84a66e080-text/javascript"></script>
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="df9917e60bbe58c84a66e080-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70b180fcf18ca',t:'MTcwOTI3NDA0OS40NjMwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+<div class="room-meta">
+<h4>Create Your Room</h4>
+<ul>
+<li>
+<i class="icofont-hand"></i>
+<div>
+<h6>Room Activity</h6>
+<span>Jack's Room</span>
+</div>
+<div class="checkbox">
+<input type="checkbox" id="checkbox3">
+<label for="checkbox3"></label>
+</div>
+</li>
+<li>
+<i class="icofont-clock-time"></i>
+<div>
+<h6>Start Time</h6>
+<span>Now</span>
+</div>
+<div class="checkbox">
+<input type="checkbox" id="checkbox4">
+<label for="checkbox4"></label>
+</div>
+</li>
+<li>
+<i class="icofont-users-alt-4"></i>
+<div>
+<h6>Invite to All Friends</h6>
+<span>Allow All friends to see this room</span>
+</div>
+<div class="checkbox">
+<input type="checkbox" id="checkbox5">
+<label for="checkbox5"></label>
+</div>
+</li>
+</ul>
+<span>Your room isn't visible until you invite people after you've created it.</span>
+<a href="#" title class="main-btn full-width">Create Room</a>
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="img-comt">
+<div class="modal-dialog">
+<div class="modal-content">
 
-<!-- Mirrored from wpkixx.com/html/socimo/blog.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:24:30 GMT -->
-</html>
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+</div>
+
+<div class="modal-body">
+<div class="row merged">
+<div class="col-lg-9">
+<div class="pop-image">
+<div class="pop-item">
+<div class="action-block">
+<a class="action-button">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" /><line x1="7" y1="7" x2="7.01" y2="7" /></svg>
+</a>
+<a class="action-button">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+</a>
+<a class="action-button">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down"><line x1="12" y1="5" x2="12" y2="19" /><polyline points="19 12 12 19 5 12" /></svg>
+</a>
+<a class="action-button">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1" /><circle cx="12" cy="5" r="1" /><circle cx="12" cy="19" r="1" /></svg>
+</a>
+</div>
+<figure><img src="images/resources/blog-detail.jpg" alt></figure>
+<div class="stat-tools">
+<div class="box">
+<div class="Like"><a class="Like__link"><i class="icofont-like"></i> Like</a>
+<div class="Emojis">
+<div class="Emoji Emoji--like">
+<div class="icon icon--like"></div>
+</div>
+<div class="Emoji Emoji--love">
+<div class="icon icon--heart"></div>
+</div>
+<div class="Emoji Emoji--haha">
+<div class="icon icon--haha"></div>
+</div>
+<div class="Emoji Emoji--wow">
+<div class="icon icon--wow"></div>
+</div>
+<div class="Emoji Emoji--sad">
+<div class="icon icon--sad"></div>
+</div>
+<div class="Emoji Emoji--angry">
+<div class="icon icon--angry"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="box">
+<div class="Emojis">
+<div class="Emoji Emoji--like">
+<div class="icon icon--like"></div>
+</div>
+<div class="Emoji Emoji--love">
+<div class="icon icon--heart"></div>
+</div>
+<div class="Emoji Emoji--haha">
+<div class="icon icon--haha"></div>
+</div>
+<div class="Emoji Emoji--wow">
+<div class="icon icon--wow"></div>
+</div>
+<div class="Emoji Emoji--sad">
+<div class="icon icon--sad"></div>
+</div>
+<div class="Emoji Emoji--angry">
+<div class="icon icon--angry"></div>
+</div>
+</div>
+</div>
+<a title href="#" class="share-to"><i class="icofont-share-alt"></i> Share</a>
+<div class="emoji-state">
+<div class="popover_wrapper">
+<a class="popover_title" href="#" title><img alt src="images/smiles/thumb.png"></a>
+<div class="popover_content">
+<span><img alt src="images/smiles/thumb.png"> Likes</span>
+<ul class="namelist">
+<li>Jhon Doe</li>
+<li>Amara Sin</li>
+<li>Sarah K.</li>
+<li><span>20+ more</span></li>
+</ul>
+</div>
+</div>
+<div class="popover_wrapper">
+<a class="popover_title" href="#" title><img alt src="images/smiles/heart.png"></a>
+<div class="popover_content">
+<span><img alt src="images/smiles/heart.png"> Love</span>
+<ul class="namelist">
+<li>Amara Sin</li>
+<li>Jhon Doe</li>
+<li><span>10+ more</span></li>
+</ul>
+</div>
+</div>
+<div class="popover_wrapper">
+<a class="popover_title" href="#" title><img alt src="images/smiles/smile.png"></a>
+<div class="popover_content">
+<span><img alt src="images/smiles/smile.png"> Happy</span>
+<ul class="namelist">
+<li>Sarah K.</li>
+<li>Jhon Doe</li>
+<li>Amara Sin</li>
+<li><span>100+ more</span></li>
+</ul>
+</div>
+</div>
+<div class="popover_wrapper">
+<a class="popover_title" href="#" title><img alt src="images/smiles/weep.png"></a>
+<div class="popover_content">
+<span><img alt src="images/smiles/weep.png"> Dislike</span>
+<ul class="namelist">
+<li>Danial Carbal</li>
+<li>Amara Sin</li>
+<li>Sarah K.</li>
+<li><span>15+ more</span></li>
+</ul>
+</div>
+</div>
+<p>10+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3">
+<div class="commentbar">
+<div class="user">
+<figure><img src="images/resources/user1.jpg" alt></figure>
+<div class="user-information">
+<h4><a href="#" title>Danile Walker</a></h4>
+<span>2 hours ago</span>
+</div>
+<a href="#" title="Follow" data-ripple>Follow</a>
+</div>
+<div class="we-video-info">
+<ul>
+<li>
+<span title="Comments" class="liked">
+<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-thumbs-up"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg></i>
+<ins>52</ins>
+</span>
+</li>
+<li>
+<span title="Comments" class="comment">
+<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
+<ins>52</ins>
+</span>
+</li>
+<li>
+<span>
+<a title="Share" href="#" class>
+<i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></i>
+</a>
+<ins>20</ins>
+</span>
+</li>
+</ul>
+<div class="users-thumb-list">
+<a href="#" title data-toggle="tooltip" data-original-title="Anderw">
+<img src="images/resources/userlist-1.jpg" alt>
+</a>
+<a href="#" title data-toggle="tooltip" data-original-title="frank">
+<img src="images/resources/userlist-2.jpg" alt>
+</a>
+<a href="#" title data-toggle="tooltip" data-original-title="Sara">
+<img src="images/resources/userlist-1.jpg" alt>
+</a>
+<a href="#" title data-toggle="tooltip" data-original-title="Amy">
+<img src="images/resources/userlist-2.jpg" alt>
+</a>
+<span><strong>You</strong>, <b>Sarah</b> and <a title href="#">24+ more</a> liked</span>
+</div>
+</div>
+<div class="new-comment" style="display: block;">
+<form method="post">
+<input type="text" placeholder="write comment">
+<button type="submit"><i class="icofont-paper-plane"></i></button>
+</form>
+<div class="comments-area">
+<ul>
+<li>
+<figure><img alt src="images/resources/user1.jpg"></figure>
+<div class="commenter">
+<h5><a title href="#">Jack Carter</a></h5>
+<span>2 hours ago</span>
+<p>
+i think that some how, we learn who we really are and then live with that decision, great post!
+</p>
+<span>you can view the more detail via link</span>
+<a title href="#">https://www.youtube.com/watch?v=HpZgwHU1GcI</a>
+</div>
+<a title="Like" href="#"><i class="icofont-heart"></i></a>
+<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
+</li>
+<li>
+<figure><img alt src="images/resources/user2.jpg"></figure>
+<div class="commenter">
+<h5><a title href="#">Ching xang</a></h5>
+<span>2 hours ago</span>
+<p>
+i think that some how, we learn who we really are and then live with that decision, great post!
+</p>
+</div>
+<a title="Like" href="#"><i class="icofont-heart"></i></a>
+<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
+</li>
+<li>
+<figure><img alt src="images/resources/user3.jpg"></figure>
+<div class="commenter">
+<h5><a title href="#">Danial Comb</a></h5>
+<span>2 hours ago</span>
+<p>
+i think that some how, we learn who we really are and then live with that decision, great post!
+</p>
+</div>
+<a title="Like" href="#"><i class="icofont-heart"></i></a>
+<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
+</li>
+<li>
+<figure><img alt src="images/resources/user4.jpg"></figure>
+<div class="commenter">
+<h5><a title href="#">Jack Carter</a></h5>
+<span>2 hours ago</span>
+<p>
+i think that some how, we learn who we really are and then live with that decision, great post!
+</p>
+</div>
+<a title="Like" href="#"><i class="icofont-heart"></i></a>
+<a title="Reply" href="#" class="reply-coment"><i class="icofont-reply"></i></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="modal" tabindex="-1" id="tambahModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
+            </div>
+            <div class="modal-body">
+                <div id="searchResultsContainer"></div>
+                <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Title</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
+                        @error('judul')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Description</label>
+                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        @error('gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">Category</label><br>
+                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                            <option value="" selected>Select Category</option>
+                            @foreach ($kategori as $kat)
+                                <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
+                                    {{ $kat->kategori }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+<div class="modal" id="addContactModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addContactForm" action="{{ route('contact.store') }}" method="POST">
+                <form action="{{ route('contact.store') }}" method="POST">
+                    @csrf
+
+                    <div class="mb-3">
+                        <label for="messages" class="form-label">Messages</label>
+                        <input type="text" class="form-control @error('messages') is-invalid @enderror" id="messages" name="messages" value="{{ old('messages') }}">
+                        @error('messages')
+                        <label for="pesan" class="form-label">Messages</label>
+                        <input type="text" class="form-control @error('pesan') is-invalid @enderror" id="pesan" name="pesan" value="{{ old('pesan') }}">
+                        @error('pesan')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Script is executing!");
+        document.getElementById('createPostInput').addEventListener('click', function() {
+            console.log("Input clicked!");
+            document.getElementById('postPopup').style.display = 'block';
+        });
+    });
+</script>
+

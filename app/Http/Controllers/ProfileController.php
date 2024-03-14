@@ -12,13 +12,22 @@ class ProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+        return view('user.profile', compact('user'));
+    }
+
+    public function profil()
     {
         $user = Auth::user();
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
-        return view('user.profile', compact('user'));
+        return view('profile', compact('user'));
     }
 
     /**
@@ -43,6 +52,7 @@ class ProfileController extends Controller
             'link_fb' => 'nullable',
             'link_ig' => 'nullable',
             'link_twt' => 'nullable',
+            'bio' => 'nullable',
         ], [
             'profile.image' => 'Only image files are allowed.',
             'bgprofile.image' => 'Only image files are allowed.',

@@ -46,15 +46,17 @@ class ContentController extends Controller
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
+        $user_id = auth()->id(); // Get the ID of the authenticated user
+
         Content::create([
             'judul' => $request->input('judul'),
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
-            'dibuat' => 'admin'
+            'user_id' => $user_id, // Assign the user ID to the user_id field
         ]);
 
-        return redirect()->route('content.index')->with('success', 'content added successfully');
+        return redirect()->route('content.index')->with('success', 'Content added successfully');
     }
 
     public function storeForUser(ContectRequest $request)
@@ -62,16 +64,19 @@ class ContentController extends Controller
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
+        $user_id = auth()->id(); // Get the ID of the authenticated user
+
         Content::create([
             'judul' => $request->input('judul'),
             'deskripsi' => $request->input('deskripsi'),
             'kategori_id' => $request->input('kategori_id'),
             'gambar' => $path,
-            'dibuat' => 'user'
+            'user_id' => $user_id, // Assign the user ID to the user_id field
         ]);
 
-    return redirect()->back()->with('success', 'Content added successfully');
+        return redirect()->back()->with('success', 'Content added successfully');
     }
+
 
 
     public function show(string $id)

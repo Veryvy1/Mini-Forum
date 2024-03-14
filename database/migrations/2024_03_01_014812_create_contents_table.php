@@ -17,7 +17,8 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('gambar');
             $table->foreignId('kategori_id')->constrained();
-            $table->enum('dibuat', ['admin','user']);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            // $table->enum('dibuat', ['admin','user']);
             $table->timestamps();
         });
     }

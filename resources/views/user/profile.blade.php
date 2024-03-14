@@ -176,21 +176,22 @@ input[type="text"] {
                 <div class="d-widget mt-6" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
                     <div class="d-widget-title"><h5>Social Links</h5></div>
                     <div class="social-links">
-                    <i class="icofont-facebook"></i>
-                    <input type="text" name="link_fb" placeholder="Facebook Profile" value="{{ old('link_fb', $user->link_fb) }}">
-                    <em>Add your Facebook username (e.g. johndoe).</em>
+                        <i class="icofont-facebook"></i>
+                        <input type="text" name="link_fb" placeholder="Facebook Profile" value="{{ old('link_fb', $user->link_fb) }}">
+                        <em>Add your Facebook username (e.g. johndoe).</em>
                     </div>
                     <div class="social-links">
-                    <i class="icofont-instagram"></i>
-                    <input type="text" name="link_ig" placeholder="Instagram Profile" value="{{ old('link_ig', $user->link_ig) }}">
-                    <em>Add your Facebook username (e.g. johndoe).</em>
+                        <i class="icofont-instagram"></i>
+                        <input type="text" name="link_ig" placeholder="Instagram Profile" value="{{ old('link_ig', $user->link_ig) }}">
+                        <em>Add your Instagram username (e.g. johndoe).</em>
                     </div>
                     <div class="social-links">
-                    <i class="icofont-twitter"></i>
-                    <input type="text" name="link_twt" placeholder="Twitter Profile" value="{{ old('link_twt', $user->link_twt) }}">
-                    <em>Add your Facebook username (e.g. johndoe).</em>
+                        <i class="icofont-twitter"></i>
+                        <input type="text" name="link_twt" placeholder="Twitter Profile" value="{{ old('link_twt', $user->link_twt) }}">
+                        <em>Add your Twitter username (e.g. johndoe).</em>
                     </div>
-                    </div>
+                </div>
+
                     <button type="submit" title class="button primary circle mt-3" style="margin-bottom: -5px; margin-right: auto;">Save Changes</button>
                 </div>
             </div>

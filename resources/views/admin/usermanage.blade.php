@@ -168,7 +168,13 @@
                 <td>{{ $use->email }}</td>
                 <td>{{ \Carbon\Carbon::parse($use->created_at)->isoFormat('D MMMM YYYY') }}</td>
                 <td>
-                    <div class="button soft-danger"><i class="icofont-trash"></i></div>
+                    <form action="{{ route('usermanage.destroy', ['usermanage' => $use->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $use->id }}">
+                        @csrf
+                            @method('DELETE')
+                            <button type="submit" title class="button soft-danger"  onclick="swalpFunction()">
+                                <i class="icofont-trash"></i>Delete
+                            </button>
+                        </form>
                 </td>
             </tr>
         @endif
@@ -214,6 +220,56 @@
 </div>
 </div>
 </div>
+
+
+{{-- <script>
+    function confirmDelete(userId) {
+        if (confirm("Are you sure you want to delete this user?")) {
+            document.getElementById('deleteForm_' + userId).submit();
+        }
+        return false;
+    }
+</script> --}}
+
+@if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
+@if (Session::has('success'))
+    <script>
+        toastr.success("{{ Session::get('success') }}");
+    </script>
+@endif
+
+<script>
+function swalpFunction(message, type) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: type,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Data dihapus");
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
+
+@if (Session::has('success'))
+    swalpFunction("{{ Session::get('success') }}", "success");
+@endif
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>

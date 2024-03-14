@@ -21,7 +21,7 @@ class DashboardController extends Controller
 
         $totalUsers = User::where('role', 'user')->count();
 
-        return view('admin.index', compact('content','kategori','jcontent','jkategori','totalUsers'));
+        return view('admin.index', compact('content', 'kategori', 'jcontent', 'jkategori', 'totalUsers'));
     }
 
     /**

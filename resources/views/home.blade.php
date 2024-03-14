@@ -2,23 +2,6 @@
 <html lang="en">
 
 <head>
-<<<<<<< Updated upstream
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Deskripsi situs web Anda">
-    <meta name="keywords" content="Kata kunci situs web Anda">
-    <title>GetForums | Social Media</title>
-    <link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="socimo/css/main.min.css">
-    <link rel="stylesheet" href="socimo/css/style.css">
-    <link rel="stylesheet" href="socimo/css/color.css">
-    <link rel="stylesheet" href="socimo/css/responsive.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    <style>
-        .large-label {
-            font-size: 16px;
-=======
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
@@ -61,26 +44,11 @@
     .like {
             display: inline-block;
             cursor: pointer;
->>>>>>> Stashed changes
         }
         .emoji-state {
         position: relative;
-        top: -20px;
+        top: -50px;
         }
-<<<<<<< Updated upstream
-        .post-new-popup {
-            display: none;
-        }
-        .like {
-                display: inline-block;
-                cursor: pointer;
-            }
-
-        .like i {
-                color: #000;
-            }
-    </style>
-=======
         .stat-tools .box {
     display: flex;
     align-items: center; /* Mengatur elemen-elemen secara vertikal tengah */
@@ -97,7 +65,6 @@ font-size: 10px;
 }
 
 </style>
->>>>>>> Stashed changes
 </head>
 
 
@@ -403,7 +370,7 @@ font-size: 10px;
 <img alt src="images/LOGO/logo.png">
 </figure>
 <div class="friend-name">
-    <ins><a title href="time-line.html">{{ $contents->dibuat }}</a> Has Posted</ins>
+    <ins><a title href="time-line.html">{{ $contents->user->name }}</a> Has Posted</ins>
     <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
 </div>
 <div class="post-meta">
@@ -533,6 +500,7 @@ font-size: 10px;
     <a href="#" title data-ripple>Load More..</a>
     </div>
     </div>
+
     <div class="col-lg-3">
         <div class="main-wraper">
         <span class="new-title">Search Post</span>

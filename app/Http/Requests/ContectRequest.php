@@ -25,10 +25,11 @@ class ContectRequest extends FormRequest
             'judul'=>'required',
             'deskripsi'=>'required',
             'gambar'=>'required|image',
-            'kategori_id' => 'required'
+            'kategori_id' => 'required',
+            'dibuat' => 'nullable',
         ];
     }
-    
+
     public function messages(): array
     {
         return [

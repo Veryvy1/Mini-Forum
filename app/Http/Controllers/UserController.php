@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Kategori;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -24,4 +25,7 @@ class UserController extends Controller
 
             'kategori' => $kategori,
         ]);
-    }}
+    }
+
+
+}
