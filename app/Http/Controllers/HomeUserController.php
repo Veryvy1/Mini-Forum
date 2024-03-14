@@ -20,14 +20,21 @@ class HomeUserController extends Controller
             $ccontent = $request->input('search');
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
         } else {
-            $content = Content::get();
+            $content = Content::take(99)->get();
         }
 
-        $content->loadCount('likes');
+        $likesCount = [];
+        $commentCount = [];
+
+        foreach ($content as $post) {
+            $likesCount[$post->id] = Like::where('content_id', $post->id)->count();
+            $commentCount[$post->id] = Comment::where('content_id', $post->id)->count();
+        }
 
         $kategori = Kategori::all();
-        $likes = Like::where('user_id' , auth()->user()->id)->first();
-        return view('home', compact('kategori', 'content','likes'));
+        $likes = Like::where('user_id', Auth::id())->first();
+
+        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount','oldSearch'));
     }
 
 
@@ -37,6 +44,7 @@ class HomeUserController extends Controller
         $user = auth()->user();
         $kategori_ids = $request->input('kategori_id');
 
+        $query = Content::query()->with('user'); // Memuat relasi 'user'
         $query = Content::query()->with('user');
 
         if (!empty($kategori_ids)) {

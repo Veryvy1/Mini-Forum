@@ -259,30 +259,36 @@
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
     <tr>
-    <th style="width:5%;">ID#</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Date</th>
-    <th>Delete</th>
+    <th style="width: 10%;">No</th>
+    <th style="width: 20%;">Name</th>
+    <th style="width: %;">Comment</th>
+    <th style="width: 10%;">Delete</th>
     </tr>
     </thead>
     <tbody>
-        {{-- @foreach ($comments as $comment) --}}
-        {{-- @if ($use->role == 'user') --}}
-                <tr>
-                    {{-- <td style="width: 5%;"><b></b></td>
-                    <td class="user-pic" style=" display: flex; justify-content: flex-start; width:50%;">
+        {{-- @if ($comments) --}}
+        @foreach ($comments ?? [] as $key => $comment)
+        <tr>
+            <td style="width: 10%;">{{ $key + 1}}</td>
+            <td style="width: 20%">{{ $comment->user->name }}</td>
+            <td style="width: 50%;">{{ $comment->comment }}</td>
+            <td style="width: 10%;">
+                {{-- <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $comment->id }}"> --}}
+                @csrf
+                    @method('DELETE')
+                    <button type="submit" title class="button soft-danger"  onclick="swalpFunction()">
+                        <i class="icofont-trash" style="color: #ff0000;"></i>Delete
+                    </button>
+                {{-- </form>     --}}
+            </td>
+        </tr>
+    @endforeach
 
-                    </td> --}}
-
-                    {{-- <td>{{$comment->comment}}</td> --}}
-                    <td>1</td>
-                    <td>
-
-                    </td>
-                </tr>
-            {{-- @endif --}}
-        {{-- @endforeach --}}
+{{-- @else
+    <tr>
+        <td colspan="3">No comments found.</td>
+    </tr>
+@endif --}}
     </tbody>
     </table>
 

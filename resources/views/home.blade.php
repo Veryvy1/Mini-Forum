@@ -93,7 +93,7 @@
 </a>
 <ul class="dropdown">
     <li>
-        <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
             <i class="icofont-user-alt-3"></i> Your Profile
         </a>
     </li>
@@ -159,46 +159,46 @@
         </div>
         </div>
 
-@if ($content->isEmpty())
-    <center>
-        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
-    </center>
-@else
+        @if ($content->isEmpty())
+        <center>
+            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
+        </center>
+    @else
 
-@foreach ($content as $contents)
+    @forelse ($content as $contents)
 
-<div class="main-wraper">
-    <div class="user-post">
-        <div class="friend-info">
-            <figure>
-                <em>
-                    <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
-<img alt src="images/LOGO/logo.png">
-</figure>
-<div class="friend-name">
-    <h6>{{ $contents->user->name }}</h6>
-    <span><i class="icofont-globe"></i> published: {{ \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
-</div>
-<div class="post-meta">
-    <figure>
-        <a data-toggle="#" data-target="#" href="#">
-        <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
-</a>
-</figure>
-<a href="post-detail.html" class="post-title">
-    @if(strlen($contents->judul) > 45)
-    {{ substr($contents->judul, 0, 45) }}...
-@else
-    {{ $contents->judul }}
-@endif</a>
-<p>
+    <div class="main-wraper">
+        <div class="user-post">
+            <div class="friend-info">
+                <figure>
+                    <em>
+                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
+    <img alt src="images/LOGO/logo.png">
+    </figure>
+    <div class="friend-name">
+        {{-- <ins><a title href="time-line.html">{{ $contents->user->name }}</a> Has Posted</ins>
+        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span> --}}
+    </div>
+    <div class="post-meta">
+        <figure>
+            <a data-toggle="modal" data-target="#img-comt" href="#">
+                <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
+    </a>
+    </figure>
+    <a href="post-detail.html" class="post-title">
+        @if(strlen($contents->judul) > 45)
+        {{ substr($contents->judul, 0, 45) }}...
+    @else
+        {{ $contents->judul }}
+    @endif</a>
+    <p>
 
-    @if(strlen($contents->deskripsi) > 70)
-    {{ substr($contents->deskripsi, 0, 70) }}...
-@else
-    {{ $contents->deskripsi }}
-@endif
-</p>
+        @if(strlen($contents->deskripsi) > 70)
+        {{ substr($contents->deskripsi, 0, 70) }}...
+    @else
+        {{ $contents->deskripsi }}
+    @endif
+    </p>
 
 <div class="we-video-info">
 <div class="stat-tools">
@@ -331,25 +331,25 @@
 </div>
 
 
-    <aside class="sidebar static right">
-        <div class="widget">
-            <form action="{{ route('home.filter') }}" method="GET">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="widget-title"><b>Category</b></h4>
-                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
-                </div>
-                @php
-                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
-                @endphp
-                @foreach ($kategori as $key => $category)
-                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
-                    <label for="category{{ $category->id }}" class="large-label">
-                        {{ $category->kategori }}
-                    </label><br>
-                @endforeach
-            </form>
-        </div>
-   </aside>
+<aside class="sidebar static right">
+    <div class="widget">
+        <form action="{{ route('home.filter') }}" method="GET">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="widget-title"><b>Category</b></h4>
+                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+            </div>
+            @php
+              $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+            @endphp
+            @foreach ($kategori as $key => $category)
+                <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                <label for="category{{ $category->id }}" class="large-label">
+                    {{ $category->kategori }}
+                </label><br>
+            @endforeach
+        </form>
+    </div>
+</aside>
 </div>
 </div>
 </div>

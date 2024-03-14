@@ -91,6 +91,11 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+            // $comment = Comment::findOrFail($id);
+
+            // $comment->delete();
+
+            // return redirect()->route('detailcontent.index')->with('success', 'Content successfully deleted');
+
     }
 }
