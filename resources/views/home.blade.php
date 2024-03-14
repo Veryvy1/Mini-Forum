@@ -346,35 +346,34 @@
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
-             }"><i class="icofont-like"></i> Unlike</button>
-        </form>
-    @else
-        <form action="{{ route('like.store') }}" method="post"> 
-            @csrf
-            @method('POST')
-            @error('like')
-                {{ $message }}
-            @enderror
-            @error('user_id')
-                {{ $message }}
-            @enderror
-            @error('content_id')
-                {{ $message }}
-            @enderror
-            <input type="hidden" name="content_id" value="{{$contents->id}}">
-            <button type="submit" class="" style="
-            background: #eae9ee;
-            border-radius: 4px;
-            color: #82828e;
-            display: inline-block;
-            font-size: 13px;
-            padding: 5px 20px;
-            vertical-align: middle;
-            transition: all 0.2s linear 0s;
-             }"><i class="icofont-like"></i> Like</button>
-        </form>
-    @endif
-        </div>
+             }"><i class="icofont-like"></i> Like</button>        </form>
+        @else
+            <form action="/like" method="post">
+                @csrf
+                @method('POST')
+                @error('like')
+                    {{ $message }}
+                @enderror
+                @error('user_id')
+                    {{ $message }}
+                @enderror
+                @error('content_id')
+                    {{ $message }}
+                @enderror
+                <input type="hidden" name="content_id" value="{{$contents->id}}">
+                <button type="submit" class="" style="
+                background: #eae9ee;
+                border-radius: 4px;
+                color: #82828e;
+                display: inline-block;
+                font-size: 13px;
+                padding: 5px 20px;
+                vertical-align: middle;
+                transition: all 0.2s linear 0s;
+                 }"><i class="icofont-like"></i> Like</button>
+            </form>
+        @endif
+    </div>
 </div>
 
 <a title href="{{ route('content.comment', $contents->id) }}" class="comment-to"><i class="icofont-comment"></i> Comment</a>

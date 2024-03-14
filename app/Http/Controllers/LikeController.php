@@ -65,13 +65,23 @@ class LikeController extends Controller
             return back()->with('error', 'Anda hanya dapat memberikan suka sekali.');
         }
 
+        $contentId = $request->content_id;
+        $userId = auth()->user()->id;
+
+        $existingLike = Like::where('user_id', $userId)
+                            ->where('content_id', $contentId)
+                            ->first();
+
+        if ($existingLike) {
+            return back()->with('error', 'Anda hanya dapat memberikan suka sekali.');
+        }
+
         Like::create([
             'like' => '1',
             'user_id' => $userId,
             'content_id' => $contentId
         ]);
-
-        return back()->with('success', ' Successfully Liking .');
+        return back();
     }
     /**
      * Display the specified resource.

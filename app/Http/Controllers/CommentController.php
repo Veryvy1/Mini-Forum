@@ -12,12 +12,11 @@ class CommentController extends Controller
     public function commentId(Request $request, $id)
     {
         $commentGet = Comment::where('id', $id)->get();
-        // $user = User::where('id',$id)->get();
         $user = auth()->user();
         $content = Content::find($id);
         $comment = Comment::where('content_id', $id)->get();
         $commentAll = Comment::where('content_id', $id)->count();
-        
+
         return view('user.comment', compact('commentGet','user','content','comment','commentAll'));
     }
     public function index()

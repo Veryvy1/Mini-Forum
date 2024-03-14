@@ -43,14 +43,6 @@ class ContentController extends Controller
     }
 
 
-    // public function indexdetail()
-    // {
-    //     $content = Content::find($id);
-    //     $kategori = Kategori::all();
-    //     return view('admin.detailcontent', compact('content','kategori'));
-    // }
-
-
     public function createForAdmin()
     {
         $content = Content::all();
@@ -72,10 +64,10 @@ class ContentController extends Controller
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
-        $user_id = auth()->id(); // Get the ID of the authenticated user
+        $user_id = auth()->id();
 
         $content = new Content();
-        $content->user_id = auth()->id(); // Simpan ID pengguna
+        $content->user_id = auth()->id(); 
         $content->judul = $request->input('judul');
         $content->deskripsi = $request->input('deskripsi');
         $content->kategori_id = $request->input('kategori_id');
@@ -94,7 +86,7 @@ class ContentController extends Controller
         $user_id = auth()->id();
 
         $content = new Content();
-        $content->user_id = auth()->id(); // Simpan ID pengguna
+        $content->user_id = auth()->id();
         $content->judul = $request->input('judul');
         $content->deskripsi = $request->input('deskripsi');
         $content->kategori_id = $request->input('kategori_id');
