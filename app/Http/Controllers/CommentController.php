@@ -17,9 +17,18 @@ class CommentController extends Controller
         $content = Content::find($id);
         $comment = Comment::where('content_id', $id)->get();
         $commentAll = Comment::where('content_id', $id)->count();
-        
+
         return view('user.comment', compact('commentGet','user','content','comment','commentAll'));
+
     }
+    // public function detailcomment($id)
+    // {
+    //     $content = Content::findOrFail($id);
+    //     $comments = $content->comments;
+
+    //     return view('admin.detailcontent', compact('content', 'comments'));
+    // }
+
     public function index()
     {
         $comment = Comment::all();
