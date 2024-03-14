@@ -33,12 +33,12 @@
 .align-items-center {
     align-items: center;
 }
-input[type="text"] {
+/* input[type="text"] {
     align-items: center;
         width: 75%;
         padding: 10px;
         box-sizing: border-box;
-}
+} */
 </style>
     </head>
     <body>
@@ -84,9 +84,9 @@ input[type="text"] {
         <div class="user-dp">
             <a href="#" title="View Profile">
                 @if(auth()->user()->profile)
-                    <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }} Profile">
+                    <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="">
                 @else
-                    <img src="{{ asset('images/LOGO/profile.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
+                    <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="">
                 @endif
             </a>
             <div class="name">
@@ -175,21 +175,34 @@ input[type="text"] {
             <div class="col-lg-8" >
                 <div class="d-widget mt-6" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
                     <div class="d-widget-title"><h5>Social Links</h5></div>
-                    <div class="social-links">
-                        <i class="icofont-facebook"></i>
-                        <input type="text" name="link_fb" placeholder="Facebook Profile" value="{{ old('link_fb', $user->link_fb) }}">
-                        <em>Add your Facebook username (e.g. johndoe).</em>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="social-links">
+                                <i class="icofont-facebook"></i>
+                                <input type="text" name="link_fb" placeholder="Facebook Profile" value="{{ old('link_fb', $user->link_fb) }}">
+                                {{-- <em>Add your Facebook username (e.g. johndoe).</em> --}}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="social-links">
+                                <i class="icofont-instagram"></i>
+                                <input type="text" name="link_ig" placeholder="Instagram Profile" value="{{ old('link_ig', $user->link_ig) }}">
+                                {{-- <em>Add your Instagram username (e.g. johndoe).</em> --}}
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="social-links">
+                                <i class="icofont-twitter"></i>
+                                <input type="text" name="link_twt" placeholder="Twitter Profile" value="{{ old('link_twt', $user->link_twt) }}">
+                                {{-- <em>Add your Twitter username (e.g. johndoe).</em> --}}
+                            </div>
+                        </div>
                     </div>
                     <div class="social-links">
-                        <i class="icofont-instagram"></i>
-                        <input type="text" name="link_ig" placeholder="Instagram Profile" value="{{ old('link_ig', $user->link_ig) }}">
-                        <em>Add your Instagram username (e.g. johndoe).</em>
+                        <label for="bio">About me</label>
+                        <textarea name="bio" id="bio" class="form-control" placeholder="About me.." rows="5">{{ old('bio', $user->bio) }}</textarea>
                     </div>
-                    <div class="social-links">
-                        <i class="icofont-twitter"></i>
-                        <input type="text" name="link_twt" placeholder="Twitter Profile" value="{{ old('link_twt', $user->link_twt) }}">
-                        <em>Add your Twitter username (e.g. johndoe).</em>
-                    </div>
+
                 </div>
 
                     <button type="submit" title class="button primary circle mt-3" style="margin-bottom: -5px; margin-right: auto;">Save Changes</button>

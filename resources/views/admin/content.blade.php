@@ -183,6 +183,10 @@
         @endif</h4>
         <p>{{ $contents->deskripsi }}</p>
             </div>
+                <span title="liked" class="liked">
+                    <i class="icofont-heart" style="color: #64a4d4;"></i>
+                    <ins>{{ $contents->likes_count }}</ins>
+        </span>
         </div>
     </div>
     @empty

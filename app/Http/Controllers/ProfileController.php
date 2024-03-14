@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -14,20 +15,22 @@ class ProfileController extends Controller
      */
     public function index($id)
     {
+        $content = Content::all();
         $user = User::find($id);
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
-        return view('user.profile', compact('user'));
+        return view('user.profile', compact('user','content'));
     }
 
     public function profil()
     {
+        $content = Content::all();
         $user = Auth::user();
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
-        return view('profile', compact('user'));
+        return view('profile', compact('user','content'));
     }
 
     /**

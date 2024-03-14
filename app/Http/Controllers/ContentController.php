@@ -6,6 +6,7 @@ use App\Http\Requests\ContectRequest;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Kategori;
+use App\Models\Like;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,13 +20,17 @@ class ContentController extends Controller
     {
         if ($request->has('search')) {
             $ccontent = $request->input('search');
-            $content = Content::where('judul', 'LIKE', "%$ccontent%");
+            $content = Content::where('judul', 'LIKE', "%$ccontent%")->withCount('likes')->get();
         } else {
-            $content = Content::all();
+            $content = Content::withCount('likes')->get();
         }
+
         $kategori = Kategori::all();
-        return view('admin.content', compact('content','kategori'));
+        $likes = Like::where('user_id', auth()->user()->id)->first();
+
+        return view('admin.content', compact('content', 'kategori', 'likes'));
     }
+
 
     public function createForAdmin()
     {

@@ -119,7 +119,7 @@ font-size: 10px;
 </a>
 <ul class="dropdown">
     <li>
-        <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
             <i class="icofont-user-alt-3"></i> Your Profile
         </a>
     </li>

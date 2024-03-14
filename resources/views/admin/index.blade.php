@@ -231,7 +231,7 @@
         {{ $contents->deskripsi }}
     @endif
 <td style="width: 10%">
-<center><span>1</span></center>
+<center><span>{{ $contents->likes_count }}</span></center>
 </td>
 </tr>
 @endforeach

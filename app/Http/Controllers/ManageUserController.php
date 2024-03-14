@@ -61,27 +61,28 @@ class ManageUserController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
-    {
-        // Dapatkan pengguna berdasarkan ID
-        $user = User::findOrFail($id);
+{
+    // Get the user by ID
+    $user = User::findOrFail($id);
 
-        // Dapatkan semua konten yang dimiliki oleh pengguna
-        $contents = $user->contents;
+    // Get all contents owned by the user
+    $contents = $user->contents;
 
-        // Hapus setiap konten yang dimiliki pengguna
+    // Check if contents exist and is not null
+    if ($contents !== null) {
+        // Delete each content
         foreach ($contents as $content) {
             $content->delete();
         }
-
-        // Hapus pengguna
-        $user->delete();
-
-        // Redirect dengan pesan sukses
-        return redirect()->route('usermanage.index')->with('success', 'manage user successfully deleted');
     }
+
+    // Delete the user
+    $user->delete();
+
+    // Redirect with a success message
+    return redirect()->route('usermanage.index')->with('success', 'User and associated contents deleted successfully');
+}
+
 
 }

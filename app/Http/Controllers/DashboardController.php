@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\Kategori;
 use App\Models\User;
+use App\Models\Like;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -19,9 +20,12 @@ class DashboardController extends Controller
         $jcontent = Content::count();
         $content = Content::all();
 
+        $content = Content::withCount('likes')->get();
+        $likes = Like::where('user_id', auth()->user()->id)->first();
+
         $totalUsers = User::where('role', 'user')->count();
 
-        return view('admin.index', compact('content', 'kategori', 'jcontent', 'jkategori', 'totalUsers'));
+        return view('admin.index', compact('content', 'kategori', 'jcontent', 'jkategori', 'totalUsers','likes'));
     }
 
     /**
