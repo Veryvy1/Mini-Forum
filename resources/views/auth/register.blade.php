@@ -1,6 +1,4 @@
 @extends('layouts.app')
-
-<!-- Mirrored from wpkixx.com/html/socimo/signup.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 06:24:49 GMT -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +12,7 @@
 <link rel="stylesheet" href="socimo/css/responsive.css">
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
 <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-{{-- </div> --}}
 <div class="theme-layout">
 <div class="authtication bluesh high-opacity">
 <div class="verticle-center">
@@ -37,7 +33,6 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus iste, ad
 <form method="post" class="c-form" action="{{ route('register') }}">
         @csrf
 <div class="row merged-10">
-{{-- <div class="col-lg-12"><h4>What type of researcher are you?</h4></div> --}}
 <div class="col-lg-6 col-sm-6 col-md-6">
 <div class="fileds">
 <label class="input-icon">
@@ -48,13 +43,6 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus iste, ad
     @enderror
 </div>
 </div>
-{{-- <div class="col-lg-6 col-sm-6 col-md-6">
-<div class="fileds">
-<label class="input-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></label>
-<input type="text" placeholder="Last Name">
-</div>
-</div> --}}
 <div class="col-lg-6 col-sm-6 col-md-6">
 <div class="fileds">
 <label class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg></label>
@@ -79,62 +67,13 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus iste, ad
 <input type="password" name="password_confirmation" placeholder="Confirm Password">
 </div>
 </div>
-{{--<div class="col-lg-6 col-sm-6 col-md-6">
-<input type="radio" id="student" name="acdamic" value="student">
-<label for="student">Academic Or Student</label>
-</div>
- <div class="col-lg-6 col-sm-6 col-md-6">
-<input type="radio" id="ngo" name="acdamic" value="ngo">
-<label for="ngo">Corporate, Govt, Or NGO Person</label>
-</div>
-<div class="col-lg-6 col-sm-6 col-md-6">
-<input type="radio" id="medical" name="acdamic" value="medical">
-<label for="medical">Medical</label>
-</div>
-<div class="col-lg-6 col-sm-6 col-md-6">
-<input type="radio" id="other" name="acdamic" value="other">
-<label for="other">Not a Rsearcher</label>
-</div>
-<div class="col-lg-6 col-sm-6 col-md-6">
-<div class="fileds">
-<label class="input-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></label>
-<input type="text" placeholder="Institute, Company">
-</div>
-</div>
-<div class="col-lg-6 col-sm-6 col-md-6">
-<div class="fileds">
-<label class="input-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></label>
-<input type="text" placeholder="Department">
-</div>
-</div>
-<div class="col-lg-12 col-sm-6 col-md-6">
-<div class="fileds">
-<label class="input-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></label>
-<input type="text" placeholder="Your Position">
-</div>
-</div>
-<div class="col-lg-12">
-<div class="gender">
-<input type="radio" id="male" name="gender" value="male">
-<label for="male">Male</label>
-<input type="radio" id="female" name="gender" value="female">
-<label for="female">Female</label>
-</div>
-</div>--}}
+
 <div style="margin-bottom:3%;">
     <span>Already have an account? <a href="{{ Route('login') }}">Sign In</a></span>
 </div>
 <div class="col-lg-12">
-{{-- <div class="checkbox">
-<input type="checkbox" id="checkbox" checked>
-<label for="checkbox"><span>I agree the terms of Services and acknowledge the privacy policy</span></label>
-</div> --}}
 
 <button class="main-btn" type="submit"><i class="icofont-key"></i> Signup</button>
-{{-- <button class="main-btn" style="background-color: #fff; color: #218acb;" type="button"><i class="icofont-key"></i> Already have an account? Sign In</button> --}}
 </div>
 </div>
 </form>
