@@ -267,7 +267,7 @@
     <div class="main-wraper">
         <span class="new-title">Create New Post</span>
         <div class="text-center">
-            <a href="#" class="btn btn-primary rounded-circle" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
+            <a href="#" class="btn btn-primary btn-lg rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button" style="width: 200px; background-color: #2ea8dc;">
                 <i class="icofont-plus text-white"></i>
             </a>
         </div>
@@ -347,7 +347,7 @@
             vertical-align: middle;
             transition: all 0.2s linear 0s;
             border: none;
-             }"><i class="icofont-like"></i> Like</button>        </form>
+             }"><i class="icofont-like"></i> Unlike</button>        </form>
         @else
             <form action="/like" method="post">
                 @csrf
