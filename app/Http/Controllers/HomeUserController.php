@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeUserController extends Controller
 {
+
     public function index(Request $request)
     {
         if ($request->has('search')) {

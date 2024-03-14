@@ -268,7 +268,7 @@
     <div class="main-wraper">
         <span class="new-title">Create New Post</span>
         <div class="text-center">
-            <a href="#" class="btn btn-primary rounded-circle" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
+            <a href="#" class="btn btn-primary btn-lg rounded-pill" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button" style="width: 200px; background-color: #2ea8dc;">
                 <i class="icofont-plus text-white"></i>
             </a>
         </div>
@@ -347,7 +347,8 @@
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
-             }"><i class="icofont-like"></i> Like</button>        </form>
+            border: none;
+             }"><i class="icofont-like"></i> Unlike</button>        </form>
         @else
             <form action="/like" method="post">
                 @csrf
@@ -371,6 +372,7 @@
                 padding: 5px 20px;
                 vertical-align: middle;
                 transition: all 0.2s linear 0s;
+                border: none;
                  }"><i class="icofont-like"></i> Like</button>
             </form>
         @endif
@@ -384,7 +386,7 @@
         <div class="we-video-info">
 
         <ul><li>
-          
+
             <span title="liked" class="liked">
                <i class="icofont-heart" style="color: #64a4d4;"></i>
                <ins>{{ $contents->likes_count }}</ins>
