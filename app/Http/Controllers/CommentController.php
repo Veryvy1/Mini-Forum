@@ -97,13 +97,11 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy($commentId)
     {
-        $id = $request->comment;
-        $comment = Comment::findOrFail($id);
+        $comment = Comment::findOrFail($commentId);
         $comment->delete();
 
         return redirect()->back()->with('success', 'Comment successfully deleted');
     }
-
 }

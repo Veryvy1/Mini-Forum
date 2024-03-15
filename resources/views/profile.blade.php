@@ -14,10 +14,54 @@
 <link rel="stylesheet" href="socimo/css/responsive.css">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .more-opt {
+        position: relative;
+        display: inline-block;
+    }
 
+    .more-opt ul {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .more-opt ul li {
+        list-style-type: none;
+    }
+
+    .more-opt:hover ul {
+        display: block;
+    }
+
+    .large-label {
+        font-size: 16px;
+    }
+    .emoji-state {
+    position: relative;
+    top: -20px;
+    }
+    .post-new-popup {
+        display: none;
+    }
+    .like {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+    .like i {
+            color: #000;
+        }
+</style>
 </head>
 <body>
 <div class="theme-layout">
@@ -218,16 +262,16 @@ padding: 80px 0;
 <li><img src="images/badges/badge8.png" alt></li>
 </ul> --}}
 </div>
-{{-- <div class="col-lg-4 col-md-6">
+<div class="col-lg-4 col-md-6">
 <div class="share-article">
-<span>Share Profile</span>
-<a href="#" title class="facebook"><i class="icofont-facebook"></i></a>
-<a href="#" title class="pinterest"><i class="icofont-pinterest"></i></a>
-<a href="#" title class="instagram"><i class="icofont-instagram"></i></a>
-<a href="#" title class="twitter"><i class="icofont-twitter"></i></a>
-<a href="#" title class="google"><i class="icofont-google-plus"></i></a>
+<span>Social Media</span>
+<a href="{{ $user->link_fb }}" title class="facebook"><i class="icofont-facebook"></i></a>
+{{-- <a href="#" title class="pinterest"><i class="icofont-pinterest"></i></a> --}}
+<a href="{{ $user->link_ig }}" title class="instagram"><i class="icofont-instagram"></i></a>
+<a href="{{ $user->link_twt }}" title class="twitter"><i class="icofont-twitter"></i></a>
+{{-- <a href="#" title class="google"><i class="icofont-google-plus"></i></a> --}}
 </div>
-</div> --}}
+</div>
 </div>
 </div>
 </div>
@@ -277,11 +321,32 @@ padding: 80px 0;
             <figure>
                 <em>
                     <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
-<img alt src="images/LOGO/logo.png">
-</figure>
+
+                    @if($contents->user->profile)
+                        <img src="{{ asset('storage/' .  $contents->user->profile) }}">
+                    @else
+                        <img alt src="images/LOGO/profil.jpeg">
+                    @endif
+            </figure>
 <div class="friend-name">
     <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
     <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+
+    <div class="more-opt" style="float:right; margin-top: -10px;">
+        <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
+        <ul id="dropdown-{{ $contents->id }}" style="display: none;">
+            <li>
+                <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete-{{ $contents->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="swalpFunction()">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
 </div>
 <div class="post-meta">
     <figure>
@@ -309,7 +374,7 @@ padding: 80px 0;
         <div class="box">
             <div class="Like">
                 <!-- Tombol Like -->
-                @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
+                 @if($likes && $likes->user_id == Auth::user()->id && $likes->content_id == $contents->id)
                     <form action="{{ route('like.destroy', $likes->id) }}" method="post">
                         @csrf
                         @method('DELETE')
@@ -381,7 +446,7 @@ padding: 80px 0;
 
     <ul><li>
         <span title="liked" class="liked">
-           <i class="icofont-heart" style="color: #64a4d4;"></i>
+           <i class="icofont-like" style="color: #64a4d4;"></i>
             <ins>{{ $contents->likes_count }}</ins>
 </span>
 </li></ul>
@@ -390,13 +455,16 @@ padding: 80px 0;
 
 <div class="popover_wrapper">
     <div class="we-video-info">
-    <ul><li>
+    <ul>
+        <li>
         <span title="Comments" class="Recommend">
             <i>
                 <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-                <ins>54</ins>
+
+                <ins>{{ $contents->commentCount }}</ins>
             </span>
-        </li></ul>
+        </li>
+    </ul>
     </div>
 </div>
 
@@ -1158,6 +1226,7 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 <li><a title href="#" class="behance"><i class="icofont-behance-original"></i></a></li>
 </ul>
 </div>
+
 <div style="display: none;" class="friends-to">
 <div class="follow-men">
 <figure><img class="mCS_img_loaded" src="images/resources/user1.jpg" alt></figure>
@@ -1801,6 +1870,7 @@ i think that some how, we learn who we really are and then live with that decisi
                         </div>
 
                         </div>
+
                         <div class="col-lg-8" >
                             <div class="d-widget mt-6" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
                                 <div class="d-widget-title"><h5>Social Links</h5></div>
@@ -1860,7 +1930,59 @@ i think that some how, we learn who we really are and then live with that decisi
     });
 </script> --}}
 
+@if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
+@if (Session::has('success'))
+    <script>
+        toastr.success("{{ Session::get('success') }}");
+    </script>
+@endif
+
+<script>
+function swalpFunction(message, type) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: type,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Data dihapus");
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
+
+@if (Session::has('success'))
+    swalpFunction("{{ Session::get('success') }}", "success");
+@endif
+</script>
+<script>
+    function toggleDropdown(contentId) {
+        var dropdown = document.getElementById("dropdown-" + contentId);
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/vivus.min.js" type="text/javascript"></script>
 
 <script data-cfasync="true" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>

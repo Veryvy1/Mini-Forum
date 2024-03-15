@@ -94,11 +94,11 @@
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}</textarea>
                         <input type="file" name="picture" id="fileInput" style="display: none;">
                     <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
                     </button>
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 260px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -132,7 +132,7 @@
                             <p style="word-break: break-word;">
                                 {{ $replies->reply }}
                             </p>
-                            
+
                             @if ($replies->user_id == Auth::user()->id)
                             <a href="" class="text-danger">Delete</a>
                             @endif

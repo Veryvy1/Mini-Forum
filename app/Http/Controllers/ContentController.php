@@ -8,6 +8,7 @@ use App\Models\Content;
 use App\Models\Comment;
 use App\Models\Kategori;
 use App\Models\Like;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -27,7 +28,17 @@ class ContentController extends Controller
         $contentA = Content::all();
         return view('home', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
     }
-        public function index(Request $request)
+    public function contentruser(Request $request, $id)
+    {
+        $contentGet = Content::with('likes')->where('id', $id)->get();
+        $user = auth()->user();
+        $commentGet = Comment::with('comment')->where('id', $id)->count();
+        $comment = Comment::find($id);
+        $contentA = Content::all();
+        return view('profile', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
+    }
+
+    public function index(Request $request)
         {
             if ($request->has('search')) {
                 $ccontent = $request->input('search');
@@ -109,8 +120,17 @@ class ContentController extends Controller
     public function detail($id)
     {
         $content = Content::findOrFail($id);
-        $comments = Comment::where('content_id', $id)->get(); // Mengambil komentar berdasarkan ID konten
-        return view('admin.detailcontent', compact('content','comments'));
+        $comments = Comment::where('content_id', $id)->get();
+
+        // Mengambil jumlah 'likes' untuk konten ini
+        $content->loadCount('likes');
+
+       // Memeriksa apakah pengguna saat ini menyukai konten ini
+        $likes = Like::where('user_id', auth()->user()->id)
+                        ->where('content_id', $id)
+                        ->first();
+
+        return view('admin.detailcontent', compact('content', 'comments', 'likes'));
     }
 
 
@@ -165,25 +185,38 @@ class ContentController extends Controller
     }
 
 
-    public function destroy(string $id)
+    public function destroy($contentId)
     {
-        try {
-            $content = Content::findOrFail($id);
+        DB::transaction(function () use ($contentId) {
+            // Hapus semua data terkait dari tabel 'likes'
+            DB::table('likes')->where('content_id', $contentId)->delete();
 
-            if (Storage::disk('public')->exists($content->gambar)) {
-                Storage::disk('public')->delete($content->gambar);
-            }
+            // Hapus baris dari tabel 'contents'
+            DB::table('contents')->where('id', $contentId)->delete();
+        });
 
-            $localFilePath = public_path('storage/' . $content->gambar);
-            if (File::exists($localFilePath)) {
-                File::delete($localFilePath);
-            }
-
-            $content->delete();
-
-            return redirect()->route('content.index')->with('success', 'Content successfully deleted');
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('content.index')->with('error', 'Content not found');
-        }
+        return redirect()->back()->with('success', 'Content deleted successfully.');
     }
+
+        // public function destroy(string $id)
+        // {
+        //     try {
+        //         $content = Content::findOrFail($id);
+
+        //         if (Storage::disk('public')->exists($content->gambar)) {
+        //             Storage::disk('public')->delete($content->gambar);
+        //         }
+
+        //         $localFilePath = public_path('storage/' . $content->gambar);
+        //         if (File::exists($localFilePath)) {
+        //             File::delete($localFilePath);
+        //         }
+
+        //         $content->delete();
+
+        //         return redirect()->route('content.index')->with('success', 'Content successfully deleted');
+        //     } catch (ModelNotFoundException $e) {
+        //         return redirect()->route('content.index')->with('error', 'Content not found');
+        //     }
+        // }
 }

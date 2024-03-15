@@ -43,7 +43,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/content', [ContentController::class, 'storeForAdmin'])->name('content.store');
         Route::put('/content/{content}/edit', [ContentController::class, 'edit'])->name('content.edit');
         Route::put('/content/{content}', [ContentController::class, 'update'])->name('content.update');
-        Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
 
         Route::get('/content/{content}', [ContentController::class, 'detail'])->name('content.detail');
         Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
@@ -106,6 +105,8 @@ Route::middleware(['auth'])->group(function () {
         })->name('abc');
     });
     Route::resource('contact', ContactController::class);
+    Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
+
 
 });
 Route::post('like',[LikeController::class,'store'])->name('like.store');

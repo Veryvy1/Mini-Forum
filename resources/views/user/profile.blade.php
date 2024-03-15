@@ -155,18 +155,18 @@
             </figure>
             <div class="users-name">
                 <h5 style="text-align: center;">
-                    <input type="text" id="name" name="name" value="{{ $user->name }}" style="border: none; text-align: center;  margin-bottom:-20px;">
+                    <input type="text" id="name" name="name" value="{{ $user->name }}" style="border: none; text-align: center;  margin-top:30px;">
                 </h5>
             <span style="text-align: center;">
-                <input type="text" id="email" name="email" value="{{ $user->email }}" style="border: none; text-align: center; margin-bottom:-20px;">
+                <input type="text" id="email" name="email" value="{{ $user->email }}" style="border: none; text-align: center; margin-top:15px;">
             </span>
             </div>
             </div>
-            <ul class="folowerss">
-            <li><span>Posts</span> <i>345</i></li>
+            {{-- <ul class="folowerss"> --}}
+            {{-- <li><span>Posts</span> <i>345</i></li> --}}
             {{-- <li><span>Followers</span> <i>256</i></li>
             <li><span>Follow</span> <i>123</i></li> --}}
-            </ul>
+            {{-- </ul> --}}
             {{-- <a class="button primary circle" href="#" title><i class="icofont-pen-alt-1"></i> Edit</a>
             <a class="button primary circle	danger" href="#" title><i class="icofont-ban"></i> Block</a> --}}
             </div>
@@ -179,21 +179,21 @@
                         <div class="col-lg-4">
                             <div class="social-links">
                                 <i class="icofont-facebook"></i>
-                                <input type="text" name="link_fb" placeholder="Facebook Profile" value="{{ old('link_fb', $user->link_fb) }}">
+                                <input type="text" name="link_fb" placeholder="Link Facebook" value="{{ old('link_fb', $user->link_fb) }}">
                                 {{-- <em>Add your Facebook username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="social-links">
                                 <i class="icofont-instagram"></i>
-                                <input type="text" name="link_ig" placeholder="Instagram Profile" value="{{ old('link_ig', $user->link_ig) }}">
+                                <input type="text" name="link_ig" placeholder="Link Instagram" value="{{ old('link_ig', $user->link_ig) }}">
                                 {{-- <em>Add your Instagram username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="social-links">
                                 <i class="icofont-twitter"></i>
-                                <input type="text" name="link_twt" placeholder="Twitter Profile" value="{{ old('link_twt', $user->link_twt) }}">
+                                <input type="text" name="link_twt" placeholder="Link Twitter" value="{{ old('link_twt', $user->link_twt) }}">
                                 {{-- <em>Add your Twitter username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
