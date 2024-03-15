@@ -53,7 +53,7 @@
             </a>
             <ul class="dropdown">
                 <li>
-                    <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+                    <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
                         <i class="icofont-user-alt-3"></i> Your Profile
                     </a>
                 </li>
@@ -117,8 +117,8 @@
                             }
                         </style>
                         <div class="commenter-photo">
-                            @if ($replies->user->profile)
-                                <img src="{{ asset('storage/'. $replies->user->profile) }}">
+                            @if ($comments->user->profile)
+                                <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
                                 <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
@@ -154,8 +154,8 @@
                             }
                         </style>
                         <div class="commenter-photo">
-                            @if ($profil)
-                                <img src="{{ asset('storage/'. $profil->id) }}">
+                            @if ($comments->user->profile)
+                                <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
                                 <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif

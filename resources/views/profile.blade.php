@@ -148,15 +148,33 @@ padding: 80px 0;
 </ul>
 </div>
 <div class="main-wraper">
-<div class="grp-about">
-<div class="row">
-<div class="col-lg-8 col-md-6">
-<h4>About Me!</h4>
-<p>{{ $user->bio }}</p>
-</div>
-</div>
-</div>
-</div>
+    <div class="grp-about">
+    <div class="row">
+    <div class="col-lg-8 col-md-6">
+    <h4>About Me!</h4>
+    <p>{{ $user->bio }}</p>
+    </div>
+    <div class="col-lg-4 col-md-6">
+    <div class="share-article">
+    <span>Social Media</span>
+    @if ($user->link_fb)
+    <a href="{{ $user->link_fb }}" title class="facebook"><i class="icofont-facebook"></i></a>
+    @endif
+    {{-- <a href="#" title class="pinterest"><i class="icofont-pinterest"></i></a> --}}
+    @if ($user->link_ig)
+
+    <a href="{{ $user->link_ig }}" title class="instagram"><i class="icofont-instagram"></i></a>
+    @endif
+    @if ($user->link_twt )
+
+    <a href="{{ $user->link_twt }}" title class="twitter"><i class="icofont-twitter"></i></a>
+    @endif
+    {{-- <a href="#" title class="google"><i class="icofont-google-plus"></i></a> --}}
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 <div class="row">
 <div class="col-lg-12">
 <div class="tab-content">
@@ -289,7 +307,7 @@ padding: 80px 0;
                 <span title="Comments" class="Recommend">
                     <i>
                         <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-                        <ins>{{ $contents->comment_Count }}</ins>
+                        <ins>{{ $contents->comment_count }}</ins>
                     </span>
                 </li></ul>
             </div>
@@ -329,11 +347,11 @@ padding: 80px 0;
                     <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
                 </div>
                 <div class="modal-body">
-
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         @if (Session::has('success'))

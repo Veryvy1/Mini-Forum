@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
-use DOMDocument;
 Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
@@ -53,8 +52,6 @@ class ContentController extends Controller
             return view('admin.content', compact('content', 'kategori', 'likes'));
         }
 
-
-
     public function createForAdmin()
     {
         $content = Content::all();
@@ -69,7 +66,6 @@ class ContentController extends Controller
 
         return view('', compact('content','kategori'));
     }
-
 
     public function storeForAdmin(ContectRequest $request)
     {
@@ -108,8 +104,6 @@ class ContentController extends Controller
         return redirect()->back()->with('success', 'Content added successfully');
     }
 
-
-
     public function show(string $id)
     {
         $content = Content::findOrFail($id);
@@ -122,15 +116,15 @@ class ContentController extends Controller
         $content = Content::findOrFail($id);
         $comments = Comment::where('content_id', $id)->get();
 
-        // Mengambil jumlah 'likes' untuk konten ini
+        $commentsCount = $comments->count();
+
         $content->loadCount('likes');
 
-       // Memeriksa apakah pengguna saat ini menyukai konten ini
         $likes = Like::where('user_id', auth()->user()->id)
                         ->where('content_id', $id)
                         ->first();
 
-        return view('admin.detailcontent', compact('content', 'comments', 'likes'));
+        return view('admin.detailcontent', compact('content', 'comments', 'commentsCount', 'likes'));
     }
 
     public function edit(string $id)
@@ -172,38 +166,26 @@ class ContentController extends Controller
     }
 
 
-    public function destroy($contentId)
-    {
-        DB::transaction(function () use ($contentId) {
-            // Hapus semua data terkait dari tabel 'likes'
-            DB::table('likes')->where('content_id', $contentId)->delete();
 
-            // Hapus baris dari tabel 'contents'
-            DB::table('contents')->where('id', $contentId)->delete();
-        });
+        public function destroy(string $id)
+        {
+            try {
+                $content = Content::findOrFail($id);
 
-        return redirect()->back()->with('success', 'Content deleted successfully.');
-    }
+                if (Storage::disk('public')->exists($content->gambar)) {
+                    Storage::disk('public')->delete($content->gambar);
+                }
 
-        // public function destroy(string $id)
-        // {
-        //     try {
-        //         $content = Content::findOrFail($id);
+                $localFilePath = public_path('storage/' . $content->gambar);
+                if (File::exists($localFilePath)) {
+                    File::delete($localFilePath);
+                }
 
-        //         if (Storage::disk('public')->exists($content->gambar)) {
-        //             Storage::disk('public')->delete($content->gambar);
-        //         }
+                $content->delete();
 
-        //         $localFilePath = public_path('storage/' . $content->gambar);
-        //         if (File::exists($localFilePath)) {
-        //             File::delete($localFilePath);
-        //         }
-
-        //         $content->delete();
-
-        //         return redirect()->route('content.index')->with('success', 'Content successfully deleted');
-        //     } catch (ModelNotFoundException $e) {
-        //         return redirect()->route('content.index')->with('error', 'Content not found');
-        //     }
-        // }
+                return redirect()->route('content.index')->with('success', 'Content successfully deleted');
+            } catch (ModelNotFoundException $e) {
+                return redirect()->route('content.index')->with('error', 'Content not found');
+            }
+        }
 }

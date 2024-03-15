@@ -5,6 +5,7 @@ use App\Models\Reply;
 use App\Models\Comment;
 use App\Models\Content;
 use App\Models\User;
+use App\Http\Requests\ReplyRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -39,15 +40,8 @@ class ReplyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $commentId)
+    public function store(ReplyRequest $request, $commentId)
     {
-        $request->validate([
-            'reply' => 'required|max:500',
-            'picture' => 'nullable|image'
-        ],[
-            'reply.required'=>'input your reply',
-            'picture.image'=>'please input image file'
-        ]);
         $reply = new Reply();
         $maxLength = 255;
         $reply->reply = substr($request->reply, 0, $maxLength);
@@ -93,10 +87,10 @@ class ReplyController extends Controller
     public function destroy(Request $request)
     {
         $commentId = $request->comment_id;
-    $replies = Reply::where('comment_id', $commentId)->get();
+        $replies = Reply::where('comment_id', $commentId)->get();
 
-    foreach ($replies as $reply) {
-        $reply->delete();
-    }
+        foreach ($replies as $reply) {
+            $reply->delete();
+        }
     }
 }

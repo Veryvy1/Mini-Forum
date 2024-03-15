@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Http\Requests\KategoriRequest;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 
@@ -25,23 +26,14 @@ class KategoriController extends Controller
         return view('admin.kategori', compact('kategori', 'oldSearch'));
     }
 
-
     public function create()
     {
         $kategori = Kategori::all();
         return view('kategori', compact('kategori'));
     }
 
-
-    public function store(Request $request)
+    public function store(KategoriRequest $request)
     {
-        $request->validate([
-            'kategori' => 'required|unique:kategoris,kategori',
-        ], [
-            'kategori.required' => 'Category must be filled in.',
-            'kategori.unique' => 'This category already exists.',
-        ]);
-
         Kategori::create([
             'kategori' => $request->kategori,
             'totalPost' => 0,
@@ -49,12 +41,10 @@ class KategoriController extends Controller
         return redirect()->route('kategori.index')->with('success','Category added successfully');
     }
 
-
     public function show(string $id)
     {
         //
     }
-
 
     public function edit(string $id)
     {
@@ -62,16 +52,8 @@ class KategoriController extends Controller
         return view('kategori',compact('kategori'));
     }
 
-
-    public function update(Request $request, string $id)
+    public function update(KategoriRequest $request, string $id)
     {
-        $request->validate([
-            'kategori' => 'required|unique:kategoris,kategori',
-        ], [
-            'kategori.required' => 'Category must be filled in.',
-            'kategori.unique' => 'This category already exists.',
-        ]);
-
         $kategori = Kategori::findOrFail($id);
 
         if (!$kategori) {
@@ -86,7 +68,6 @@ class KategoriController extends Controller
 
         return redirect()->route('kategori.index')->with('success','Categories updated successfully');
     }
-
 
     public function destroy(string $id)
     {

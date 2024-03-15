@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
-use DOMDocument;
 
 
 class ContactController extends Controller
@@ -26,7 +25,6 @@ class ContactController extends Controller
     {
         return view('home');
     }
-
 
     public function store(ContactRequest $request)
     {

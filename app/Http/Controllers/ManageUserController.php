@@ -64,24 +64,18 @@ class ManageUserController extends Controller
 
     public function destroy(string $id)
 {
-    // Get the user by ID
     $user = User::findOrFail($id);
 
-    // Get all contents owned by the user
     $contents = $user->contents;
 
-    // Check if contents exist and is not null
     if ($contents !== null) {
-        // Delete each content
         foreach ($contents as $content) {
             $content->delete();
         }
     }
 
-    // Delete the user
     $user->delete();
 
-    // Redirect with a success message
     return redirect()->route('usermanage.index')->with('success', 'User and associated contents deleted successfully');
 }
 
