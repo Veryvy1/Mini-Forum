@@ -45,7 +45,6 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/content/{content}', [ContentController::class, 'update'])->name('content.update');
         Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
 
-        Route::get('/content/{content}', [ContentController::class, 'detail'])->name('content.detail');
         Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
         // Route::get('/content/{content}/comments', [ContentController::class, 'detailcomment'])->name('content.comments');
 
@@ -65,7 +64,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
         Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
         Route::get('/homesearch', [HomeUserController::class, 'index'])->name('home.search');
-        Route::get('/content/{id}', [ContentController::class, 'contentId'])->name('contentid');
         Route::get('/comment/{id}', [CommentController::class, 'commentId'])->name('content.comment');
         Route::post('/comment/{contentId}', [CommentController::class, 'store'])->name('comment.store');
         Route::get('/reply/{id}', [ReplyController::class, 'replyId'])->name('comment.reply');
@@ -86,9 +84,6 @@ Route::middleware(['auth'])->group(function () {
             return view('user.videos');
         });
 
-        Route::get('post-detail', function () {
-            return view('user.postdetail');
-        });
 
         Route::get('comment', function () {
             return view('user.comment');
@@ -110,3 +105,4 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::post('like',[LikeController::class,'store'])->name('like.store');
 Route::delete('unlike/{like}',[LikeController::class,'destroy'])->name('like.destroy');
+Route::get('/content/{content}', [ContentController::class, 'detail'])->name('content.detail');

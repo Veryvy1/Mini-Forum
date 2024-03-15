@@ -18,7 +18,7 @@ Use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ContentController extends Controller
 {
 
-    public function contentId(Request $request, $id)
+    public function content(Request $request, $id)
     {
         $contentGet = Content::with('likes')->where('id', $id)->get();
         $user = auth()->user();
@@ -109,21 +109,9 @@ class ContentController extends Controller
     public function detail($id)
     {
         $content = Content::findOrFail($id);
-        $comments = Comment::where('content_id', $id)->get(); // Mengambil komentar berdasarkan ID konten
+        $comments = Comment::where('content_id', $id)->get();
         return view('admin.detailcontent', compact('content','comments'));
     }
-
-
-// public function detailcomment($contentId)
-// {
-//     $content = Content::findOrFail($contentId);
-//     $comments = $content->comments; // Pastikan relasi antara Content dan Comment telah didefinisikan
-//     return view('admin.detailcontent', compact('comments'));
-// }
-
-
-
-
 
     public function edit(string $id)
     {
@@ -131,7 +119,6 @@ class ContentController extends Controller
         $kategori = Kategori::all();
         return view('content',compact('content','kategori'));
     }
-
 
     public function update(ContectRequest $request, string $id)
     {

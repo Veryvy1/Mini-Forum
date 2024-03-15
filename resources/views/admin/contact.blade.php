@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <title>Contact Message | Dashboard</title>
-    <link rel="icon" href="images/fav.ico" type="image/x-icon">
+    <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/color.css">
@@ -47,9 +47,9 @@
 </div>
 <div class="restop-search">
 <span class="hide-search"><i class="icofont-close-circled"></i></span>
-<form id="searchForm" action="{{ route('contact.index') }}" method="get">
-    @csrf
-    <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+<form method="post">
+    <input type="text" placeholder="Search...">
+    <button type="submit"><i class="icofont-search"></i></button>
 </form>
 </div>
 </div>
@@ -57,9 +57,9 @@
     <div class="topbar stick">
     <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
     <div class="searches">
-    <form method="post">
-    <input type="text" placeholder="Search...">
-    <button type="submit"><i class="icofont-search"></i></button>
+    <form id="searchForm" action="{{ route('contact.index') }}" method="get">
+        @csrf
+        <input type="search" name="search" value="{{ $oldSearch }}" class="form-control" placeholder="Search..." oninput="submitSearch()">
     </form>
     </div>
     <ul class="web-elements">
@@ -100,7 +100,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
         <li>
-        <a class href="/" title>
+        <a class href="/dashboard" title>
         <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
         </a>
         </li>
@@ -179,8 +179,6 @@
 </div>
 </div>
 </div>
-
-
 
     @if (session('warning'))
     <script>

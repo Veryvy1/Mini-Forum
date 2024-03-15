@@ -12,13 +12,14 @@ class ManageUserController extends Controller
      */
     public function index(Request $request)
     {
+        $oldSearch = $request->input('search');
         if ($request->has('search')) {
             $xusersx = $request->input('search');
             $users = User::where('name', 'LIKE', "%$xusersx%")->paginate(5);
         } else {
             $users = User::paginate(5);
         }
-        return view('admin.usermanage', compact('users'));
+        return view('admin.usermanage', compact('users','oldSearch'));
     }
 
     /**

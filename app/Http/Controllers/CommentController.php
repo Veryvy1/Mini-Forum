@@ -7,7 +7,7 @@ use App\Models\Content;
 use App\Models\User;
 use App\Models\Comment;
 use RealRashid\SweetAlert\Facades\Alert;
-
+    
 class CommentController extends Controller
 {
     public function commentId(Request $request, $id)
@@ -21,35 +21,18 @@ class CommentController extends Controller
         return view('user.comment', compact('commentGet','user','content','comment','commentAll','profil'));
 
     }
-    // public function detailcomment($id)
-    // {
-    //     $content = Content::findOrFail($id);
-    //     $comments = $content->comments;
-
-    //     return view('admin.detailcontent', compact('content', 'comments'));
-    // }
-
     public function index()
     {
         $comment = Comment::all();
         return view('user.comment', compact('comment'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $comment = Comment::all();
         return view('user.comment', compact('comment'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, $contentId)
     {
-        // dd($request);
         $request->validate([
             'comment' => 'required',
             'picture' => 'nullable|image'
@@ -69,34 +52,6 @@ class CommentController extends Controller
 
         return redirect()->back()->with('success','successfully commented');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request)
     {
         $id = $request->comment;

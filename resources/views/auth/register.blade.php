@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>GetForums </title>
+<title>GetForums | Register</title>
 <link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
