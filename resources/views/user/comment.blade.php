@@ -7,7 +7,7 @@
     <meta name="description" content />
     <meta name="keywords" content />
     <title>GetForums | Comment</title>
-<link rel="icon" href="/images/LOGO/logo.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
@@ -26,17 +26,17 @@
 
         <header class>
             <div class="topbar stick">
-                <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
+                <div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
 
             <ul class="web-elements">
             <li>
              @if(auth()->check())
             <div class="user-dp">
-                <a  title="Edit Profile">
-                    @if(auth()->user()->profil)
-                        <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
+                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                    @if(auth()->user()->profile)
+                        <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}">
                     @else
-                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }} Profile">
+                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}">
                     @endif
                 </a>
                 <div class="name">
@@ -57,7 +57,7 @@
                         <i class="icofont-user-alt-3"></i> Your Profile
                     </a>
                 </li>
-            <li><a href="" title><i class="icofont-plus"></i>Latest Content</a></li>
+            <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
             <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
             <li class="logout">
@@ -77,11 +77,12 @@
         </header>
 
         <div class="container"><br><br>
-            <a type="button" href="{{ route('home') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
+            <a type="button" href="{{ route('home') }}" class="btn btn-primary">
                 <i class="icofont-arrow-left"></i>
             </a>
             <h3>Input your comment</h3>
             <br>
+        </br>
             <form action="{{ route('comment.store', ['contentId' => $content->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -90,7 +91,7 @@
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;"></textarea>
                         <input type="file" name="picture" id="fileInput" style="display: none;">
                     <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 325px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
                     </button>
                     <button type="submit" class="btn btn-primary rounded-circle"
@@ -116,8 +117,8 @@
                             }
                         </style>
                         <div class="commenter-photo">
-                            @if ($comments->user->profile)
-                                <img src="{{ asset('storage/' . $comments->user->profile) }}">
+                            @if ($replies->user->profile)
+                                <img src="{{ asset('storage/'. $replies->user->profile) }}">
                             @else
                                 <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
@@ -137,7 +138,7 @@
 
                                 <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                                 @if ($comments->user_id == Auth::user()->id)
-                                {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
+                                <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
                                 @endif
 
                             </p>
@@ -153,12 +154,12 @@
                             }
                         </style>
                         <div class="commenter-photo">
-                            @if ($comments->user->profile)
-                                <img src="{{ asset('storage/' . $comments->user->profile) }}">
+                            @if ($profil)
+                                <img src="{{ asset('storage/'. $profil->id) }}">
                             @else
                                 <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
-                        </div>
+                        </div>
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
@@ -169,7 +170,7 @@
                             </p>
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                             @if ($comments->user_id == Auth::user()->id)
-                            {{-- <button onclick="deleteComment({{ $comments->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
+                            <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
                             @endif
 
                         </div>

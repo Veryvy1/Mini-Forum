@@ -22,13 +22,6 @@ class CommentController extends Controller
         return view('user.comment', compact('commentGet','user','content','comment','commentAll','profil'));
 
     }
-    // public function detailcomment($id)
-    // {
-    //     $content = Content::findOrFail($id);
-    //     $comments = $content->comments;
-
-    //     return view('admin.detailcontent', compact('content', 'comments'));
-    // }
 
     public function index()
     {
@@ -36,21 +29,14 @@ class CommentController extends Controller
         return view('user.comment', compact('comment'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $comment = Comment::all();
         return view('user.comment', compact('comment'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, $contentId)
     {
-        // dd($request);
         $request->validate([
             'comment' => 'required',
             'picture' => 'nullable|image'

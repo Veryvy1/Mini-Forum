@@ -267,7 +267,6 @@
 
     <div class="popover_wrapper">
         <div class="we-video-info">
-
         <ul><li>
             <span title="liked" class="liked">
                <i class="icofont-like" style="color: #64a4d4;"></i>
@@ -276,8 +275,6 @@
         </li></ul>
         </div>
     </div>
-
-
 
 <div class="popover_wrapper">
     <div class="we-video-info">
