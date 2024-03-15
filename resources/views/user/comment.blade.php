@@ -7,7 +7,7 @@
     <meta name="description" content />
     <meta name="keywords" content />
     <title>GetForums | Comment</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<link rel="icon" href="/images/LOGO/logo.png" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
@@ -32,7 +32,7 @@
             <li>
              @if(auth()->check())
             <div class="user-dp">
-                <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+                <a  title="Edit Profile">
                     @if(auth()->user()->profil)
                         <img src="{{ asset('storage/' . auth()->user()->profil) }}" alt="{{ auth()->user()->name }} Profile">
                     @else
@@ -57,7 +57,7 @@
                         <i class="icofont-user-alt-3"></i> Your Profile
                     </a>
                 </li>
-            <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+            <li><a href="" title><i class="icofont-plus"></i>Latest Content</a></li>
             <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
             <li class="logout">
@@ -77,12 +77,11 @@
         </header>
 
         <div class="container"><br><br>
-            <a type="button" href="{{ route('home') }}" class="btn btn-primary">
+            <a type="button" href="{{ route('home') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
             <h3>Input your comment</h3>
             <br>
-        </br>
             <form action="{{ route('comment.store', ['contentId' => $content->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -138,7 +137,7 @@
 
                                 <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                                 @if ($comments->user_id == Auth::user()->id)
-                                <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+                                {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                                 @endif
 
                             </p>
@@ -170,7 +169,7 @@
                             </p>
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                             @if ($comments->user_id == Auth::user()->id)
-                            <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+                            {{-- <button onclick="deleteComment({{ $comments->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
 
                         </div>

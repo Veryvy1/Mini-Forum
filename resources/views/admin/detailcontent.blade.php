@@ -64,7 +64,8 @@
 {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
 
 </ul>
-<p>{{ $content->deskripsi }}</p>
+<p>{{ $content->deskripsi }}
+</p>
 <div class="tag-n-cat">
 <div class="tags">
 <span><i>
@@ -124,6 +125,5 @@
 <script src="{{ asset('js/chart.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 
-</body>
 </html>
 R

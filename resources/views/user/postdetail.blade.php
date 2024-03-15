@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content />
 <meta name="keywords" content />
-<title>Socimo | Social Media Network Template</title>
-<link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<title> GetForums | Detail post</title>
+<link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="socimo/css/main.min.css">
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
@@ -483,8 +483,7 @@ In learning with the 2013 curriculum that is based on student-centered learning 
 <a title href="#" class="reply">reply</a>
 </div>
 <p>
-Quis autem velum iure reprehe nderit. Lorem ipsum dolor sit amet adipiscing egetmassa
-pulvinar eu aliquet nibh dapibus.
+
 </p>
 </div>
 </div>

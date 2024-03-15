@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\User;
@@ -73,6 +74,7 @@ class CommentController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->comment;
+        Reply::where('comment_id', $id)->delete();
         $comment = Comment::findOrFail($id);
         $comment->delete();
 

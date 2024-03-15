@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Reply;
 use App\Models\Comment;
 use App\Models\Content;
+use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -16,9 +17,10 @@ class ReplyController extends Controller
         $commentGet = Comment::where('id', $id)->get();
         $user = auth()->user();
         $comment = Comment::findOrFail($id);
-        $reply = Reply::where('comment_id', $id)->get();
+        $reply = Reply::where('comment_id', $id)->orderBy('created_at', 'desc')->get();
         $replyAll = Reply::where('comment_id', $id)->count();
-        return view('user.reply', compact('commentGet','user','comment','reply','replyAll'));
+        $profil = User::find($user->id)->profil;
+        return view('user.reply', compact('commentGet','user','comment','reply','replyAll','profil'));
     }
 
     public function index()
@@ -40,16 +42,21 @@ class ReplyController extends Controller
     public function store(Request $request, $commentId)
     {
         $request->validate([
-            'reply' => 'required'
+            'reply' => 'required|max:500',
+            'picture' => 'nullable|image'
         ],[
-            'reply.required'=>'input your reply'
+            'reply.required'=>'input your reply',
+            'picture.image'=>'please input image file'
         ]);
         $reply = new Reply();
+        $maxLength = 255;
+        $reply->reply = substr($request->reply, 0, $maxLength);
         $reply->comment_id = $commentId;
         $reply->user_id = auth()->id();
         $reply->reply = $request->reply;
         if ($request->hasFile('picture')) {
-            $request->file('picture')->store('picture', 'public');
+            $path = $request->file('picture')->store('reply', 'public');
+            $reply->picture = $path;
         }
         $reply->save();
 
@@ -83,8 +90,13 @@ class ReplyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $commentId = $request->comment_id;
+    $replies = Reply::where('comment_id', $commentId)->get();
+
+    foreach ($replies as $reply) {
+        $reply->delete();
+    }
     }
 }

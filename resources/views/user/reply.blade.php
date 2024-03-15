@@ -7,7 +7,7 @@
     <meta name="description" content />
     <meta name="keywords" content />
     <title>GetForums | Reply</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+<link rel="icon" href="/images/LOGO/logo.png" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
@@ -81,7 +81,7 @@
 
 
         <div class="container"><br><br>
-            <a onclick="window.history.go(-1);" class="btn btn-primary">
+            <a onclick="window.history.go(-1);" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
             <h3>Input your reply comment</h3>
@@ -110,6 +110,39 @@
                 <h4 class="comment-title">{{ $replyAll }} replies</h4>
                 <ul class="comments">
                     @foreach ($reply as $replies)
+                    @if ($replies->picture)
+                    <li>
+                        <style>
+                            .commenter-photo img {
+                                width: 40px;
+                                height: 40px;
+                            }
+                        </style>
+                        <div class="commenter-photo">
+                            @if ($replies->user->profile)
+                                <img src="{{ asset('storage/'. $replies->user->profile) }}">
+                            @else
+                                <img src="{{ asset('images/LOGO/logo.png') }}">
+                            @endif
+                        </div>
+                        <div class="commenter-meta">
+                            <div class="comment-titles">
+                                <h6>{{ $replies->user->name }}</h6>
+                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                            </div>
+                            <img src="{{ asset('storage/' . $replies->picture) }}" style="height: 250px;">
+
+                            <p style="word-break: break-word;">
+                                {{ $replies->reply }}
+                            </p>
+
+                            @if ($replies->user_id == Auth::user()->id)
+                            {{-- <a href="" class="text-danger">Delete</a> --}}
+                            @endif
+                        </div>
+                    </li>
+                    <hr>
+                    @else
                     <li>
                         <style>
                             .commenter-photo img {
@@ -134,11 +167,12 @@
                             </p>
 
                             @if ($replies->user_id == Auth::user()->id)
-                            <a href="" class="text-danger">Delete</a>
+                            {{-- <button onclick="deleteComment({{ $comments->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
                         </div>
                     </li>
                     <hr>
+                    @endif
                     @endforeach
                 </ul>
             </div>
