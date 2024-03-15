@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\User;
 use App\Models\Like;
+use App\Models\Comment;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -24,15 +25,17 @@ class ProfileController extends Controller
 
     public function profil()
     {
-        $content = Content::withCount('likes')->get();
+        $content = Content::withCount('likes','comment')->get();
         $user = Auth::user();
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
         $likes = Like::where('user_id', auth()->user()->id)->first();
+        $comment = Comment::where('user_id', auth()->user()->id)->first();
         $totalPosts = Content::where('user_id', $user->id)->count();
-        return view('profile', compact('user','content','totalPosts','likes'));
+        return view('profile', compact('user','content','totalPosts','likes','comment'));
     }
+
 
     public function edit(string $id)
     {
@@ -72,6 +75,7 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->profile);
             }
         }
+
         if ($request->hasFile('bgprofile')) {
             $userData['bgprofile'] = $request->file('bgprofile')->store('bgprofile', 'public');
 

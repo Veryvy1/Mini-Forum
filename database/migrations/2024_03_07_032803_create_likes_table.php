@@ -14,9 +14,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('content_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-
-            // $table->foreign('content_id')->references('id')->on('contents')->onDelete('cascade');
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
     }

@@ -125,7 +125,6 @@
             </div>
             </div>
             </div>
-
             </div>
             <div class="col-lg-8" >
                 <div class="d-widget mt-6" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
@@ -157,15 +156,13 @@
                         <label for="bio">About me</label>
                         <textarea name="bio" id="bio" class="form-control" placeholder="About me.." rows="5">{{ old('bio', $user->bio) }}</textarea>
                     </div>
-
                 </div>
-
                     <button type="submit" title class="button primary circle mt-3" style="margin-bottom: -5px; margin-right: auto;">Save Changes</button>
-                </div>
             </div>
-            </div>
-            </div>
-            </div>
+        </div>
+    </div>
+</div>
+</div>
     </form>
 
     <script>
