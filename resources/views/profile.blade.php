@@ -25,6 +25,13 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+
+.group-dp img {
+    width: 100%; /* Agar gambar mengisi lingkaran secara penuh */
+    height: 100%; /* Agar gambar mengisi lingkaran secara penuh */
+    object-fit: cover; /* Membuat gambar sesuai dengan ukuran lingkaran */
+}
+
     .more-opt {
         position: relative;
         display: inline-block;
@@ -149,7 +156,7 @@ padding: 80px 0;
 <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('images/LOGO/bguser.jpg') }}" alt >
 @endif
 <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-primary" style="color: #000; background-color: #fff; border: none;">Edit</a>
-<figure class="group-dp">
+<figure class="group-dp" style="width: 200px; height: 200px;">
     @if ($user->profile)
         <img src="{{ asset('storage/' . $user->profile) }}" style="object-fit: cover;">
     @else

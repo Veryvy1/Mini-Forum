@@ -94,7 +94,7 @@
                         <i class="icofont-newspaper"></i>
                     </button>
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 270px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -119,7 +119,7 @@
                             @if ($comments->user->profile)
                                 <img src="{{ asset('storage/' . $comments->user->profile) }}">
                             @else
-                                <img src="{{ asset('images/LOGO/profile.jpeg') }}">
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
                         <div class="commenter-meta">
@@ -156,7 +156,7 @@
                             @if ($comments->user->profile)
                                 <img src="{{ asset('storage/' . $comments->user->profile) }}">
                             @else
-                                <img src="{{ asset('images/LOGO/profile.jpeg') }}">
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
                         <div class="commenter-meta">
