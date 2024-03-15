@@ -90,7 +90,7 @@
 <ul class="web-elements">
 
 <li>
-<a href="index-2.html" title="Home" data-toggle="tooltip">
+<a href="{{ route('home') }}" title="Home" data-toggle="tooltip">
 <i>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
 </a>
@@ -135,8 +135,6 @@ padding: 80px 0;
 <div class="row">
 <div class="col-lg-12">
 <div id="page-contents" class="row merged20">
-
-
 <div class="col-lg-9">
 <div class="group-feed">
 <div class="group-avatar">
@@ -149,7 +147,7 @@ padding: 80px 0;
 <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-primary" style="color: #000; background-color: #fff; border: none;">Edit</a>
 <figure class="group-dp">
     @if ($user->profile)
-        <img src="{{ asset('storage/' . $user->profile) }}" alt="">
+        <img src="{{ asset('storage/' . $user->profile) }}" style="object-fit: cover;">
     @else
         <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
     @endif
@@ -282,7 +280,7 @@ padding: 80px 0;
 <img alt src="images/LOGO/logo.png">
 </figure>
 <div class="friend-name">
-    <ins><a title href="time-line.html">{{ $contents->user->name }}</a> Has Posted</ins>
+    <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
     <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
 </div>
 <div class="post-meta">
@@ -325,8 +323,17 @@ padding: 80px 0;
                             {{ $message }}
                         @enderror
                         <input type="hidden" name="content_id" value="{{$contents->id}}">
-                        <button type="submit" class="Like__link btn" style="background-color: #82b7d1"><i class="icofont-like"></i> Unlike</button>
-                    </form>
+                        <button type="submit" class="" style="
+                        background: #eae9ee;
+                        border-radius: 4px;
+                        color: #82828e;
+                        display: inline-block;
+                        font-size: 13px;
+                        padding: 5px 20px;
+                        vertical-align: middle;
+                        transition: all 0.2s linear 0s;
+                        border: none;
+                         }"><i class="icofont-like"></i> Unlike</button>                    </form>
                 @else
                     <form action="/like" method="post">
                         @csrf
@@ -341,15 +348,24 @@ padding: 80px 0;
                             {{ $message }}
                         @enderror
                         <input type="hidden" name="content_id" value="{{$contents->id}}">
-                        <button type="submit" class="Like__link btn" style="background-color: #db8989"><i class="icofont-like"></i> Like</button>
-                    </form>
+                        <button type="submit" class="" style="
+                        background: #eae9ee;
+                        border-radius: 4px;
+                        color: #82828e;
+                        display: inline-block;
+                        font-size: 13px;
+                        padding: 5px 20px;
+                        vertical-align: middle;
+                        transition: all 0.2s linear 0s;
+                        border: none;
+                         }"><i class="icofont-like"></i> Like</button>                    </form>
                 @endif
             </div>
             <!-- Tombol Comment -->
             <div class="Comment">
                 <!-- Ganti bagian ini sesuai dengan kode HTML untuk tombol komentar -->
                 <!-- Saya asumsikan Anda memiliki tombol komentar dengan kelas .Comment__link -->
-                <button class="Comment__link btn"><i class="icofont-comment"></i> Comment</button>
+                <a title href="{{ route('content.comment', $contents->id) }}" class="comment-to"><i class="icofont-comment"></i> Comment</a>
             </div>
         </div>
     </div>

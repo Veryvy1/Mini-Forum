@@ -60,7 +60,6 @@
     </ul>
     </div>
 </header>
-
 <section>
 <div class="white-bg">
 <div class="container-fluid">
@@ -68,8 +67,7 @@
 <div class="row">
 <div class="col-lg-2">
 <div class="sidemenu">
-<i>
-<svg id="side-menu" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+<button onclick="goBack()" class="btn btn-primary" style="background-color: #2ea8dc;"><i class="icofont-arrow-left text-white"></i>Back</button>
 </div>
 </div>
 </div>

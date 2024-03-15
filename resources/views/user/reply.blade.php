@@ -85,14 +85,23 @@
                 <i class="icofont-arrow-left"></i>
             </a>
             <h3>Input your reply comment</h3>
+            <br>
             <form action="{{ route('reply.store', ['commentId' => $comment->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-                <textarea name="reply" id="reply" placeholder="...." cols="120" rows="3"
-                    style="border-radius: 10px; border: 1px solid #ccc; padding: 5px;">{{ old('comment') }}</textarea>
-                <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color:  rgb(40, 144, 204); width:60px; height:60px; font-size:28px; margin-top:-6%;"><i
-                        class="icofont-paper-plane"></i></button>
+                <div style="position: relative;">
+                    <textarea name="reply" id="comment" placeholder="Input your reply........" cols="120" rows="2"
+                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}</textarea>
+                        <input type="file" name="picture" id="fileInput" style="display: none;">
+                    <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
+                        <i class="icofont-newspaper"></i>
+                    </button>
+                    <button type="submit" class="btn btn-primary rounded-circle"
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 260px; transform: translateY(-50%);">
+                    <i class="icofont-paper-plane"></i>
+                </button>
+                </div>
             </form>
 
             <br><br>
@@ -123,6 +132,10 @@
                             <p style="word-break: break-word;">
                                 {{ $replies->reply }}
                             </p>
+                            
+                            @if ($replies->user_id == Auth::user()->id)
+                            <a href="" class="text-danger">Delete</a>
+                            @endif
                         </div>
                     </li>
                     <hr>

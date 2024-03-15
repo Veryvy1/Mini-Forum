@@ -33,7 +33,7 @@ class ProfileController extends Controller
         }
         $likes = Like::where('user_id', auth()->user()->id)->first();
         $totalPosts = Content::where('user_id', $user->id)->count();
-        return view('profile', compact('user','content','totalPosts'));
+        return view('profile', compact('user','content','totalPosts','likes'));
     }
 
     /**

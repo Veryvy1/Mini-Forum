@@ -48,6 +48,9 @@ class ReplyController extends Controller
         $reply->comment_id = $commentId;
         $reply->user_id = auth()->id();
         $reply->reply = $request->reply;
+        if ($request->hasFile('picture')) {
+            $request->file('picture')->store('picture', 'public');
+        }
         $reply->save();
 
         return redirect()->back()->with('success','Successful reply');
