@@ -12,16 +12,17 @@ class KategoriController extends Controller
     public function index(Request $request)
     {
         $oldSearch = $request->input('search');
+
         if ($request->has('search')) {
             $xkategorix = $request->input('search');
             $kategori = Kategori::withCount('Content')
-                 ->where('kategori', 'LIKE', "%$xkategorix%")
+                ->where('kategori', $xkategorix)
                 ->paginate(5);
         } else {
             $kategori = Kategori::withCount('Content')->paginate(5);
         }
 
-        return view('admin.kategori', compact('kategori','oldSearch'));
+        return view('admin.kategori', compact('kategori', 'oldSearch'));
     }
 
 

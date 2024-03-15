@@ -1180,7 +1180,7 @@ header.transparent .topbar{
 	padding: 10px 15px;
 }
 .transparent  .topbar > .logo img {
-    max-width: 100px;
+    max-width: 60px;
 }
 .transparent  .topbar > .logo span {
     color: #fff;
@@ -1197,6 +1197,7 @@ header.transparent .topbar{
     max-width: 40px;
 	vertical-align: middle;
 	display: inline-block;
+    /* margin-bottom: -1rem; */
 }
 .logo > span {
     color: #1d3554;

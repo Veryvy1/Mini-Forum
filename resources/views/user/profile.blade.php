@@ -1,79 +1,41 @@
     <!DOCTYPE html>
     <html lang="en">
-
-    <!-- Mirrored from wpkixx.com/html/socimo-panel/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:02 GMT -->
     <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content />
-    <meta name="keywords" content />
-    <title>Getforums | Profile</title>
-    <link rel="icon" href="images/LOGO/logo.html" type="image/png" sizes="16x16">
-    <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/color.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <title>Getforums | Profile</title>
+        <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
+        <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/color.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;700&family=Roboto&display=swap" rel="stylesheet">
+        <style>
+            .container-fluid {
+                height: 100vh;
+                margin-top: 8%;
+            }
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-<style>
-    .container-fluid {
-    height: 100vh;
-    margin-top: 8%;
-}
+            .row {
+                display: flex;
+            }
 
-.row {
-    display: flex;
-}
+            .justify-content-center {
+                justify-content: center;
+            }
 
-.justify-content-center {
-    justify-content: center;
-}
-
-.align-items-center {
-    align-items: center;
-}
-/* input[type="text"] {
-    align-items: center;
-        width: 75%;
-        padding: 10px;
-        box-sizing: border-box;
-} */
-</style>
+            .align-items-center {
+                align-items: center;
+            }
+        </style>
     </head>
     <body>
-    {{-- <div class="theme-layout">
-    <div class="responsive-header">
-    <div class="res-logo"><img src="images/logo.png" alt></div>
-    <div class="user-avatar mobile">
-    <a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-    <div class="name">
-    <h4>Saim Turan</h4>
-    <span>Antalaya, Turky</span>
-    </div>
-    </div>
-    <div class="right-compact">
-    <div class="menu-area">
-    <div id="nav-icon3">
-    <i>
-    <svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
-    </i>
-    </div>
-    <ul class="drop-menu">
-    <li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-    <li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-    <li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-    <li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-    <li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
-    </ul>
-    </div>
-    <div class="res-search">
-    <span><i>
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></i></span>
-    </div>
-    </div>
 
-    </div> --}}
     <header class>
         <div class="topbar stick">
         <div class="logo"><img src="{{ asset('images/LOGO/logo.png') }}" alt><span>GetForums</span></div>
@@ -162,13 +124,6 @@
             </span>
             </div>
             </div>
-            {{-- <ul class="folowerss"> --}}
-            {{-- <li><span>Posts</span> <i>345</i></li> --}}
-            {{-- <li><span>Followers</span> <i>256</i></li>
-            <li><span>Follow</span> <i>123</i></li> --}}
-            {{-- </ul> --}}
-            {{-- <a class="button primary circle" href="#" title><i class="icofont-pen-alt-1"></i> Edit</a>
-            <a class="button primary circle	danger" href="#" title><i class="icofont-ban"></i> Block</a> --}}
             </div>
 
             </div>
@@ -212,51 +167,39 @@
             </div>
             </div>
     </form>
-    <div class="popup-wraper">
-        <div class="popup">
-            <span class="popup-closed"><i class="icofont-close"></i></span>
-            <div class="popup-meta">
-                <div class="popup-head">
-                    <h5><i class="icofont-envelope"></i> Send Message</h5>
-                </div>
-                <div class="send-message">
-                    <form method="post" class="c-form">
-                        <input type="text" placeholder="Enter Name..">
-                        <input type="text" placeholder="Subject">
-                        <textarea placeholder="Write Message"></textarea>
-                        <div class="uploadimage">
-                            <i class="icofont-file-jpg"></i>
-                            <label class="fileContainer">
-                                <input type="file">Attach file
-                            </label>
-                        </div>
-                        <button type="submit" class="main-btn">Send</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="side-slide">
-        <span class="popup-closed"><i class="icofont-close"></i></span>
-        <div class="slide-meta">
-            <ul class="nav nav-tabs slide-btns">
-                <li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-                <li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-            </ul>
-        </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
 
-    <script src="js/main.min.js" type="text/javascript"></script>
-    <script src="js/vivus.min.js" type="text/javascript"></script>
-    <script src="js/script.js" type="fd0c1240374019ed17673e95-text/javascript"></script>
+    <script>
+        @if (Session::has('success'))
+        toastr.success("{{ Session::get('success') }}")
+        @endif
+        function swalpFunction() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log("Data dihapus");
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="fd0c1240374019ed17673e95-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d591f259b79e29',t:'MTcwOTI1ODYwMS41MzIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Mirrored from wpkixx.com/html/socimo-panel/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:31 GMT -->
     </html>
     <script>
         function previewImage(){
@@ -285,33 +228,32 @@
         }
     </script>
 
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('profile-input').addEventListener('change', function() {
-            const file = this.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('preview-image').setAttribute('src', e.target.result);
-            }
-            reader.readAsDataURL(file);
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('bgprofile-input').addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('profile-input').addEventListener('change', function() {
+                const file = this.files[0];
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    document.getElementById('preview-bgimage').setAttribute('src', e.target.result);
+                    document.getElementById('preview-image').setAttribute('src', e.target.result);
                 }
                 reader.readAsDataURL(file);
-            }
+            });
         });
-    });
-</script>
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('bgprofile-input').addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('preview-bgimage').setAttribute('src', e.target.result);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
 
 

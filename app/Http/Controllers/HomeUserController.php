@@ -39,8 +39,9 @@ class HomeUserController extends Controller
 
     public function filter(Request $request)
     {
+        $oldSearch = $request->input('search');
         $kategori = Kategori::all();
-        $user = auth()->user();
+        $user = Auth::user();
         $kategori_ids = $request->input('kategori_id');
 
         $query = Content::query()->with('user');
@@ -51,6 +52,16 @@ class HomeUserController extends Controller
 
         $content = $query->get();
 
-        return view('home', compact('content', 'user', 'kategori', 'kategori_ids'));
+        $likesCount = [];
+        $commentCount = [];
+
+        foreach ($content as $post) {
+            $likesCount[$post->id] = Like::where('content_id', $post->id)->count();
+            $commentCount[$post->id] = Comment::where('content_id', $post->id)->count();
+        }
+
+        $likes = Like::where('user_id', Auth::id())->first();
+
+        return view('home', compact('content', 'user', 'kategori', 'kategori_ids', 'oldSearch', 'likesCount', 'likes', 'commentCount'));
     }
 }

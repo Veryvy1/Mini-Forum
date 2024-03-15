@@ -13,8 +13,16 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $oldSearch = $request->input('search');
+        if ($request->has('search')) {
+            $xxx = $request->input('search');
+            $contact = Content::where('judul', 'LIKE', "%$xxx%")->paginate(5);
+        } else {
+            $content = Content::paginate(5);
+        }
+
         $jkategori = Kategori::count();
         $kategori = Kategori::all();
         $jcontent = Content::count();
@@ -25,7 +33,7 @@ class DashboardController extends Controller
 
         $totalUsers = User::where('role', 'user')->count();
 
-        return view('admin.index', compact('content', 'kategori', 'jcontent', 'jkategori', 'totalUsers','likes'));
+        return view('admin.index', compact('content', 'kategori', 'jcontent', 'jkategori', 'totalUsers','likes','oldSearch'));
     }
 
     /**

@@ -12,13 +12,14 @@ class ContactController extends Controller
 {
     public function index(Request $request)
     {
+        $oldSearch = $request->input('search');
         if ($request->has('search')) {
             $xcontactx = $request->input('search');
             $contact = Contact::where('messages', 'LIKE', "%$xcontactx%")->paginate(5);
         } else {
             $contact = Contact::paginate(5);
         }
-        return view('admin.contact', compact('contact'));
+        return view('admin.contact', compact('contact','oldSearch'));
     }
 
     public function create()

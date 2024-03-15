@@ -70,38 +70,13 @@ class CommentController extends Controller
         return redirect()->back()->with('success','successfully commented');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($commentId)
-    {
-        $comment = Comment::findOrFail($commentId);
+        $id = $request->comment;
+        $comment = Comment::findOrFail($id);
         $comment->delete();
 
         return redirect()->back()->with('success', 'Comment successfully deleted');
     }
+
 }

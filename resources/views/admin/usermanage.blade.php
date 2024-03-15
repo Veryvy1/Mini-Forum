@@ -7,7 +7,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>Manage user | Dashboard</title>
-<link rel="icon" href="images/fav.ico" type="image/x-icon">
+<link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
@@ -55,7 +55,7 @@
     <div class="searches">
         <form id="searchForm" action="{{ route('usermanage.index') }}" method="get">
             @csrf
-            <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+            <input type="search" name="search" value="{{ $oldSearch }}" class="form-control" placeholder="Search..." oninput="submitSearch()">
         </form>
     </div>
     <ul class="web-elements">
@@ -97,7 +97,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
         <li>
-        <a class href="/" title>
+        <a class href="/dashboard" title>
         <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
         </a>
         </li>

@@ -184,11 +184,11 @@
     </div>
     <div class="post-meta">
         <figure>
-            <a data-toggle="modal" data-target="#img-comt" href="#">
-                <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
-    </a>
-    </figure>
-    <a href="post-detail.html" class="post-title">
+            <a href="{{ route('content.detail', ['content' => $contents->id]) }}">
+                <img src="{{ asset('storage/' . $contents->gambar) }}" style="" alt>
+            </a>
+        </figure>
+    <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
         @if(strlen($contents->judul) > 45)
         {{ substr($contents->judul, 0, 45) }}...
     @else
@@ -1462,7 +1462,6 @@ i think that some how, we learn who we really are and then live with that decisi
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
-                // Update tampilan jika diperlukan
                 console.log('Like berhasil');
             },
             error: function(xhr, status, error) {
@@ -1521,6 +1520,4 @@ i think that some how, we learn who we really are and then live with that decisi
     }
 </script>
 </body>
-
-
 </html>

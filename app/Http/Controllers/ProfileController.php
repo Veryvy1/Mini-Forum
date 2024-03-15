@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\User;
 use App\Models\Like;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index($id)
     {
         $content = Content::all();
@@ -36,18 +34,12 @@ class ProfileController extends Controller
         return view('profile', compact('user','content','totalPosts','likes'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $user = User::find($id);
         return view('user.profile', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $request->validate([
@@ -76,7 +68,6 @@ class ProfileController extends Controller
         if ($request->hasFile('profile')) {
             $userData['profile'] = $request->file('profile')->store('profile', 'public');
 
-            // Hapus gambar lama jika ada
             if ($user->profile) {
                 Storage::disk('public')->delete($user->profile);
             }
@@ -84,7 +75,6 @@ class ProfileController extends Controller
         if ($request->hasFile('bgprofile')) {
             $userData['bgprofile'] = $request->file('bgprofile')->store('bgprofile', 'public');
 
-            // Hapus gambar lama jika ada
             if ($user->bgprofile) {
                 Storage::disk('public')->delete($user->bgprofile);
             }
