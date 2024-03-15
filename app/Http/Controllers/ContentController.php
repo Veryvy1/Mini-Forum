@@ -69,6 +69,7 @@ class ContentController extends Controller
 
     public function storeForAdmin(ContectRequest $request)
     {
+        try{
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -82,12 +83,15 @@ class ContentController extends Controller
         $content->gambar = $path;
         $content->save();
 
-
-        return redirect()->route('content.index')->with('success', 'Content added successfully');
+            return redirect()->route('content.index')->with('success', 'Content added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function storeForUser(ContectRequest $request)
     {
+        try {
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -100,8 +104,10 @@ class ContentController extends Controller
         $content->kategori_id = $request->input('kategori_id');
         $content->gambar = $path;
         $content->save();
-
-        return redirect()->back()->with('success', 'Content added successfully');
+            return redirect()->back()->with('success', 'Content added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function show(string $id)
@@ -124,6 +130,7 @@ class ContentController extends Controller
                         ->where('content_id', $id)
                         ->first();
 
+
         return view('admin.detailcontent', compact('content', 'comments', 'commentsCount', 'likes'));
     }
 
@@ -136,6 +143,8 @@ class ContentController extends Controller
 
     public function update(ContectRequest $request, string $id)
     {
+        try {
+
         $content = Content::findOrFail($id);
 
         $oldPhotoPath = $content->gambar;
@@ -161,8 +170,10 @@ class ContentController extends Controller
                 File::delete($localFilePath);
             }
         }
-
-        return redirect()->route('content.index')->with('success', 'content updated successfully');
+            return redirect()->route('content.index')->with('success', 'content updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 

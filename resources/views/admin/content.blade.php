@@ -330,46 +330,48 @@
 </div>
 @endforeach
 
-@if (session('warning'))
+<?php if ($errors->any()): ?>
     <script>
-        toastr.warning("{{ session('warning') }}");
+        toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
     </script>
-@endif
+<?php endif; ?>
 
-@if (Session::has('success'))
+<?php if (session('warning')): ?>
     <script>
-        toastr.success("{{ Session::get('success') }}");
+        toastr.warning("<?php echo session('warning'); ?>");
     </script>
-@endif
-
-<script>
-function swalpFunction(message, type) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: type,
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            console.log("Data dihapus");
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-            });
-        }
-    });
-}
-
-@if (Session::has('success'))
-    swalpFunction("{{ Session::get('success') }}", "success");
-@endif
-</script>
+<?php endif; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function swalpFunction() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Data dihapus");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
+</script>
+
+<?php if (Session::has('success')): ?>
+<script>
+    toastr.success("<?php echo Session::get('success'); ?>");
+</script>
+<?php endif; ?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 

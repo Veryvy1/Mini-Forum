@@ -231,50 +231,21 @@
         </div>
     </div>
 
-        @if (session('warning'))
-        <script>
-            toastr.warning("{{ session('warning') }}");
-        </script>
-        @endif
-    <script>
-    function swalpFunction() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log("Data dihapus");
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
-    }
-    </script>
- <script>
-    function deleteComment(commentId) {
-        if (confirm('Are you sure you want to delete this comment?')) {
-            window.location.href = '{{ route("comment.destroy", ["comment" => ":comment"]) }}'.replace(':comment', commentId);
-        }
-    }
-</script>
 
+    <?php if ($errors->any()): ?>
     <script>
-        function handleFileUpload() {
-            document.getElementById('fileInput').click();
-        }
+        toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
     </script>
+    <?php endif; ?>
+
+    <?php if (session('warning')): ?>
+        <script>
+            toastr.warning("<?php echo session('warning'); ?>");
+        </script>
+    <?php endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        @if (Session::has('success'))
-        toastr.success("{{ Session::get('success') }}")
-        @endif
         function swalpFunction() {
             Swal.fire({
                 title: "Are you sure?",
@@ -296,7 +267,26 @@
             });
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <?php if (Session::has('success')): ?>
+    <script>
+        toastr.success("<?php echo Session::get('success'); ?>");
+    </script>
+    <?php endif; ?>
+
+    <script>
+        function deleteComment(commentId) {
+            if (confirm('Are you sure you want to delete this comment?')) {
+                window.location.href = '{{ route("comment.destroy", ["comment" => ":comment"]) }}'.replace(':comment', commentId);
+            }
+        }
+    </script>
+
+    <script>
+        function handleFileUpload() {
+            document.getElementById('fileInput').click();
+        }
+    </script>
 
     <script src="{{ asset('js/main.min.js') }}"></script>
     <script src="{{ asset('js/sparkline.js') }}"></script>

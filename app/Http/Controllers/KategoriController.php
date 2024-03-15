@@ -34,11 +34,16 @@ class KategoriController extends Controller
 
     public function store(KategoriRequest $request)
     {
-        Kategori::create([
-            'kategori' => $request->kategori,
-            'totalPost' => 0,
-        ]);
-        return redirect()->route('kategori.index')->with('success','Category added successfully');
+        try {
+            Kategori::create([
+                'kategori' => $request->kategori,
+                'totalPost' => 0,
+            ]);
+
+            return redirect()->route('kategori.index')->with('success', 'Category added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function show(string $id)
@@ -54,6 +59,8 @@ class KategoriController extends Controller
 
     public function update(KategoriRequest $request, string $id)
     {
+        try {
+
         $kategori = Kategori::findOrFail($id);
 
         if (!$kategori) {
@@ -65,8 +72,10 @@ class KategoriController extends Controller
         ];
 
         $kategori->update($dataToUpdate);
-
         return redirect()->route('kategori.index')->with('success','Categories updated successfully');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+    }
     }
 
     public function destroy(string $id)

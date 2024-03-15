@@ -28,10 +28,16 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request)
     {
+        try {
+
         Contact::create([
             'messages' => $request->input('messages'),
         ]);
         return back()->with('success','Contact added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
+
     }
 
     public function show(Contact $contact)
@@ -47,10 +53,15 @@ class ContactController extends Controller
 
     public function update(ContactRequest $request, Contact $contact)
     {
+        try {
+
         $contact->update([
             'messages'=>$request->input('messages'),
         ]);
         return back()->with('success','Contact updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy(Contact $contact)

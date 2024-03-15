@@ -260,41 +260,20 @@
 </div>
 @endforeach
 
-
-
-
-    @if (session('warning'))
+<?php if ($errors->any()): ?>
     <script>
-        toastr.warning("{{ session('warning') }}");
+        toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
     </script>
-    @endif
-<script>
-function swalpFunction() {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            console.log("Data dihapus");
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-            });
-        }
-    });
-}
-</script>
+<?php endif; ?>
 
+<?php if (session('warning')): ?>
+    <script>
+        toastr.warning("<?php echo session('warning'); ?>");
+    </script>
+<?php endif; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    @if (Session::has('success'))
-    toastr.success("{{ Session::get('success') }}")
-    @endif
     function swalpFunction() {
         Swal.fire({
             title: "Are you sure?",
@@ -316,7 +295,12 @@ function swalpFunction() {
         });
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if (Session::has('success')): ?>
+<script>
+    toastr.success("<?php echo Session::get('success'); ?>");
+</script>
+<?php endif; ?>
 
 <script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
