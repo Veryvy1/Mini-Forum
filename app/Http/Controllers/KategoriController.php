@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Http\Requests\KategoriRequest;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 
@@ -25,36 +26,30 @@ class KategoriController extends Controller
         return view('admin.kategori', compact('kategori', 'oldSearch'));
     }
 
-
     public function create()
     {
         $kategori = Kategori::all();
         return view('kategori', compact('kategori'));
     }
 
-
-    public function store(Request $request)
+    public function store(KategoriRequest $request)
     {
-        $request->validate([
-            'kategori' => 'required|unique:kategoris,kategori',
-        ], [
-            'kategori.required' => 'Category must be filled in.',
-            'kategori.unique' => 'This category already exists.',
-        ]);
+        try {
+            Kategori::create([
+                'kategori' => $request->kategori,
+                'totalPost' => 0,
+            ]);
 
-        Kategori::create([
-            'kategori' => $request->kategori,
-            'totalPost' => 0,
-        ]);
-        return redirect()->route('kategori.index')->with('success','Category added successfully');
+            return redirect()->route('kategori.index')->with('success', 'Category added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
-
 
     public function show(string $id)
     {
         //
     }
-
 
     public function edit(string $id)
     {
@@ -62,15 +57,9 @@ class KategoriController extends Controller
         return view('kategori',compact('kategori'));
     }
 
-
-    public function update(Request $request, string $id)
+    public function update(KategoriRequest $request, string $id)
     {
-        $request->validate([
-            'kategori' => 'required|unique:kategoris,kategori',
-        ], [
-            'kategori.required' => 'Category must be filled in.',
-            'kategori.unique' => 'This category already exists.',
-        ]);
+        try {
 
         $kategori = Kategori::findOrFail($id);
 
@@ -83,10 +72,11 @@ class KategoriController extends Controller
         ];
 
         $kategori->update($dataToUpdate);
-
         return redirect()->route('kategori.index')->with('success','Categories updated successfully');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
-
+    }
 
     public function destroy(string $id)
     {

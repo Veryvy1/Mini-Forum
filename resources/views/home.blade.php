@@ -1382,42 +1382,20 @@ i think that some how, we learn who we really are and then live with that decisi
     });
 </script>
 
+<?php if ($errors->any()): ?>
+    <script>
+        toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
+    </script>
+<?php endif; ?>
+
+<?php if (session('warning')): ?>
+    <script>
+        toastr.warning("<?php echo session('warning'); ?>");
+    </script>
+<?php endif; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function showLogoutAlert() {
-        Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Anda yakin ingin keluar?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Keluar!',
-            cancelButtonText: 'Tidak'
-        }).then((result) => {
-            if (result.isConfirmed) {
-
-            Swal.fire(
-                'Logout Berhasil',
-                'Anda telah berhasil logout.',
-                'success'
-            );
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire(
-                'Logout Dibatalkan',
-                'Anda membatalkan logout.',
-                'error'
-            );
-        }
-        });
-    }
-
-</script>
-
-
-<script>
-    @if (Session::has('success'))
-    toastr.success("{{ Session::get('success') }}")
-    @endif
     function swalpFunction() {
         Swal.fire({
             title: "Are you sure?",
@@ -1440,7 +1418,12 @@ i think that some how, we learn who we really are and then live with that decisi
     }
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<?php if (Session::has('success')): ?>
+<script>
+    toastr.success("<?php echo Session::get('success'); ?>");
+</script>
+<?php endif; ?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/main.min.js" type="text/javascript"></script>

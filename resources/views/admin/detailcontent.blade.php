@@ -11,9 +11,17 @@
 <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
 <link rel="stylesheet" href="{{ asset('socimo/css/responsive.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
+    @php
+    $userRole = auth()->user()->role ?? null;
+    @endphp
 <div class="theme-layout">
 <section>
 <div class="white-bg">
@@ -30,11 +38,18 @@
 
     <div class="row">
         <div class="col-lg-2">
-            <div class="sidemenu" onclick="goBack()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+            <div class="sidemenu">
+                @if($userRole == 'admin')
+                <a href="{{ route('content.index') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
+                </svg></a>
+                @else
+                <a href="{{ route('home') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg></a>
+                @endif
             </div>
         </div>
     </div>
@@ -58,7 +73,7 @@
 <figure><img src="{{ asset('storage/'. $content->gambar) }}" alt="Image"></figure>
 <ul>
 <li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
-<li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $content->comment_count}}</li>
+<li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
 <li><i class>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i>
 {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
@@ -74,7 +89,7 @@
 </div>
 </div>
 </div>
-
+@if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
     <tr>
@@ -82,6 +97,7 @@
     <th style="width: 20%;">Name</th>
     <th style="width: 50%;">Comment</th>
     <th style="width: 10%;">Delete</th>
+
     </tr>
     </thead>
     <tbody>
@@ -103,6 +119,7 @@
     @endforeach
     </tbody>
     </table>
+@endif
 </div>
 </div>
 </div>
@@ -120,10 +137,65 @@
 </div>
 </div>
 </div>
+@if (session('warning'))
+<script>
+    toastr.warning("{{ session('warning') }}");
+</script>
+@endif
+<script>
+function swalpFunction() {
+Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+    if (result.isConfirmed) {
+        console.log("Data dihapus");
+        Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+        });
+    }
+});
+}
+</script>
+
+<script>
+@if (Session::has('success'))
+toastr.success("{{ Session::get('success') }}")
+@endif
+function swalpFunction() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Data dihapus");
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="{{ asset('js/main.min.js') }}"></script>
 <script src="{{ asset('js/sparkline.js') }}"></script>
 <script src="{{ asset('js/chart.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 
 </html>
-R
+

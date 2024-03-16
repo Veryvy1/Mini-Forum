@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
-use DOMDocument;
 Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ContentController extends Controller
@@ -53,8 +52,6 @@ class ContentController extends Controller
             return view('admin.content', compact('content', 'kategori', 'likes'));
         }
 
-
-
     public function createForAdmin()
     {
         $content = Content::all();
@@ -70,9 +67,9 @@ class ContentController extends Controller
         return view('', compact('content','kategori'));
     }
 
-
     public function storeForAdmin(ContectRequest $request)
     {
+        try{
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -86,12 +83,15 @@ class ContentController extends Controller
         $content->gambar = $path;
         $content->save();
 
-
-        return redirect()->route('content.index')->with('success', 'Content added successfully');
+            return redirect()->route('content.index')->with('success', 'Content added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function storeForUser(ContectRequest $request)
     {
+        try {
         $gambar = $request->file('gambar');
         $path = Storage::disk('public')->put('content', $gambar);
 
@@ -104,11 +104,11 @@ class ContentController extends Controller
         $content->kategori_id = $request->input('kategori_id');
         $content->gambar = $path;
         $content->save();
-
-        return redirect()->back()->with('success', 'Content added successfully');
+            return redirect()->back()->with('success', 'Content added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
-
-
 
     public function show(string $id)
     {
@@ -122,15 +122,16 @@ class ContentController extends Controller
         $content = Content::findOrFail($id);
         $comments = Comment::where('content_id', $id)->get();
 
-        // Mengambil jumlah 'likes' untuk konten ini
+        $commentsCount = $comments->count();
+
         $content->loadCount('likes');
 
-       // Memeriksa apakah pengguna saat ini menyukai konten ini
         $likes = Like::where('user_id', auth()->user()->id)
                         ->where('content_id', $id)
                         ->first();
 
-        return view('admin.detailcontent', compact('content', 'comments', 'likes'));
+
+        return view('admin.detailcontent', compact('content', 'comments', 'commentsCount', 'likes'));
     }
 
     public function edit(string $id)
@@ -142,6 +143,8 @@ class ContentController extends Controller
 
     public function update(ContectRequest $request, string $id)
     {
+        try {
+
         $content = Content::findOrFail($id);
 
         $oldPhotoPath = $content->gambar;
@@ -167,23 +170,13 @@ class ContentController extends Controller
                 File::delete($localFilePath);
             }
         }
-
-        return redirect()->route('content.index')->with('success', 'content updated successfully');
+            return redirect()->route('content.index')->with('success', 'content updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 
-        // public function destroy($contentId)
-        // {
-        //     DB::transaction(function () use ($contentId) {
-        //         // Hapus semua data terkait dari tabel 'likes'
-        //         DB::table('likes')->where('content_id', $contentId)->delete();
-
-        //         // Hapus baris dari tabel 'contents'
-        //         DB::table('contents')->where('id', $contentId)->delete();
-        //     });
-
-        //     return redirect()->back()->with('success', 'Content deleted successfully.');
-        // }
 
         public function destroy(string $id)
         {

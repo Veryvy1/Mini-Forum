@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reply;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\Models\Content;
 use App\Models\User;
 use App\Models\Comment;
@@ -35,15 +36,10 @@ class CommentController extends Controller
         return view('user.comment', compact('comment'));
     }
 
-    public function store(Request $request, $contentId)
+    public function store(CommentRequest $request, $contentId)
     {
-        $request->validate([
-            'comment' => 'required',
-            'picture' => 'nullable|image'
-        ],[
-            'comment.required'=>'input your comment!',
-            'picture.image'=>'please input image file!'
-        ]);
+        try{
+
         $comment = new Comment();
         $comment->content_id = $contentId;
         $comment->user_id = auth()->id();
@@ -55,6 +51,9 @@ class CommentController extends Controller
         $comment->save();
 
         return redirect()->back()->with('success','successfully commented');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy(Request $request)

@@ -347,36 +347,17 @@ padding: 80px 0;
         </div>
     </div>
 
-
-
-{{-- <button type="button" title class="comment-to btn" ><i class="icofont-comment"></i> Comment</button> --}}
-
-<div class="emoji-state">
-
-<div class="popover_wrapper">
-    <div class="we-video-info">
-
-    <ul><li>
-        <span title="liked" class="liked">
-           <i class="icofont-like" style="color: #64a4d4;"></i>
-            <ins>{{ $contents->likes_count }}</ins>
-</span>
-</li></ul>
-    </div>
-</div>
-
-<div class="popover_wrapper">
-    <div class="we-video-info">
-    <ul>
-        <li>
-        <span title="Comments" class="Recommend">
-            <i>
-                {{-- <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-                <ins>{{ $commentCount [$contents->id]}}</ins> --}}
-        </span>
-        </li></ul>
-    </div>
-</div>
+        <div class="popover_wrapper">
+            <div class="we-video-info">
+            <ul><li>
+                <span title="Comments" class="Recommend">
+                    <i>
+                        <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
+                        <ins>{{ $contents->comment_count }}</ins>
+                    </span>
+                </li></ul>
+            </div>
+        </div>
 </div>
 </div>
 <div class="new-comment" style="display: none;">
@@ -412,11 +393,11 @@ padding: 80px 0;
                     <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
                 </div>
                 <div class="modal-body">
-
                 </div>
             </div>
         </div>
     </div>
+
 
     <script>
         @if (Session::has('success'))
