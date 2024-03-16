@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
             return view('user.blog');
         });
 
-        Route::get('notifikasi', function () {
+        Route::get('notifikasi', function () { 
             return view('user.notifikasi');
         });
 

@@ -172,38 +172,38 @@ class ContentController extends Controller
     }
 
 
-    public function destroy($contentId)
-    {
-        DB::transaction(function () use ($contentId) {
-            // Hapus semua data terkait dari tabel 'likes'
-            DB::table('likes')->where('content_id', $contentId)->delete();
-
-            // Hapus baris dari tabel 'contents'
-            DB::table('contents')->where('id', $contentId)->delete();
-        });
-
-        return redirect()->back()->with('success', 'Content deleted successfully.');
-    }
-
-        // public function destroy(string $id)
+        // public function destroy($contentId)
         // {
-        //     try {
-        //         $content = Content::findOrFail($id);
+        //     DB::transaction(function () use ($contentId) {
+        //         // Hapus semua data terkait dari tabel 'likes'
+        //         DB::table('likes')->where('content_id', $contentId)->delete();
 
-        //         if (Storage::disk('public')->exists($content->gambar)) {
-        //             Storage::disk('public')->delete($content->gambar);
-        //         }
+        //         // Hapus baris dari tabel 'contents'
+        //         DB::table('contents')->where('id', $contentId)->delete();
+        //     });
 
-        //         $localFilePath = public_path('storage/' . $content->gambar);
-        //         if (File::exists($localFilePath)) {
-        //             File::delete($localFilePath);
-        //         }
-
-        //         $content->delete();
-
-        //         return redirect()->route('content.index')->with('success', 'Content successfully deleted');
-        //     } catch (ModelNotFoundException $e) {
-        //         return redirect()->route('content.index')->with('error', 'Content not found');
-        //     }
+        //     return redirect()->back()->with('success', 'Content deleted successfully.');
         // }
+
+        public function destroy(string $id)
+        {
+            try {
+                $content = Content::findOrFail($id);
+
+                if (Storage::disk('public')->exists($content->gambar)) {
+                    Storage::disk('public')->delete($content->gambar);
+                }
+
+                $localFilePath = public_path('storage/' . $content->gambar);
+                if (File::exists($localFilePath)) {
+                    File::delete($localFilePath);
+                }
+
+                $content->delete();
+
+                return redirect()->route('content.index')->with('success', 'Content successfully deleted');
+            } catch (ModelNotFoundException $e) {
+                return redirect()->route('content.index')->with('error', 'Content not found');
+            }
+        }
 }

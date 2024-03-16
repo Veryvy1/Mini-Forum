@@ -13,20 +13,48 @@
 <link rel="stylesheet" href="socimo/css/color.css">
 <link rel="stylesheet" href="socimo/css/responsive.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+
+.group-dp img {
+    width: 100%; /* Agar gambar mengisi lingkaran secara penuh */
+    height: 100%; /* Agar gambar mengisi lingkaran secara penuh */
+    object-fit: cover; /* Membuat gambar sesuai dengan ukuran lingkaran */
+}
+
+    .more-opt {
+        position: relative;
+        display: inline-block;
+    }
+
+    .more-opt ul {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .more-opt ul li {
+        list-style-type: none;
+    }
+
+    .more-opt:hover ul {
+        display: block;
+    }
+
     .large-label {
         font-size: 16px;
     }
@@ -128,7 +156,7 @@ padding: 80px 0;
 <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('images/LOGO/bguser.jpg') }}" alt >
 @endif
 <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-primary" style="color: #000; background-color: #fff; border: none;">Edit</a>
-<figure class="group-dp" style="width: 200px; height: 200px;">
+<figure class="group-dp">
     @if ($user->profile)
         <img src="{{ asset('storage/' . $user->profile) }}" style="object-fit: cover;">
     @else
@@ -154,6 +182,24 @@ padding: 80px 0;
 <h4>About Me!</h4>
 <p>{{ $user->bio }}</p>
 </div>
+<div class="col-lg-4 col-md-6">
+<div class="share-article">
+<span>Social Media</span>
+@if ($user->link_fb)
+<a href="{{ $user->link_fb }}" title class="facebook"><i class="icofont-facebook"></i></a>
+@endif
+{{-- <a href="#" title class="pinterest"><i class="icofont-pinterest"></i></a> --}}
+@if ($user->link_ig)
+
+<a href="{{ $user->link_ig }}" title class="instagram"><i class="icofont-instagram"></i></a>
+@endif
+@if ($user->link_twt )
+
+<a href="{{ $user->link_twt }}" title class="twitter"><i class="icofont-twitter"></i></a>
+@endif
+{{-- <a href="#" title class="google"><i class="icofont-google-plus"></i></a> --}}
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -172,29 +218,46 @@ padding: 80px 0;
             <figure>
                 <em>
                     <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
+
                     @if($contents->user->profile)
-                    <img src="{{ asset('storage/' .  $contents->user->profile) }}">
+                        <img src="{{ asset('storage/' .  $contents->user->profile) }}">
                     @else
                         <img alt src="images/LOGO/profil.jpeg">
                     @endif
-                  </figure>
-                    <div class="friend-name">
-                        <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
-                        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
-                    </div>
-                    <div class="post-meta">
-                        <figure>
-                            <a data-toggle="modal" data-target="#img-comt" href="#">
-                                <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
-                    </a>
-                    </figure>
-                    <a href="post-detail.html" class="post-title">
-                        @if(strlen($contents->judul) > 45)
-                        {{ substr($contents->judul, 0, 45) }}...
-                    @else
-                        {{ $contents->judul }}
-                    @endif</a>
-                    <p>
+            </figure>
+<div class="friend-name">
+    <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
+    <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+
+    <div class="more-opt" style="float:right; margin-top: -10px;">
+        <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
+        <ul id="dropdown-{{ $contents->id }}" style="display: none;">
+            <li>
+                <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete-{{ $contents->id }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="swalpFunction()">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<div class="post-meta">
+    <figure>
+        <a data-toggle="modal" data-target="#img-comt" href="#">
+            <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
+</a>
+</figure>
+<a href="post-detail.html" class="post-title">
+    @if(strlen($contents->judul) > 45)
+    {{ substr($contents->judul, 0, 45) }}...
+@else
+    {{ $contents->judul }}
+@endif</a>
+<p>
 
                         @if(strlen($contents->deskripsi) > 70)
                         {{ substr($contents->deskripsi, 0, 70) }}...
@@ -204,37 +267,12 @@ padding: 80px 0;
                     </p>
 
 <div class="we-video-info">
-    <div class="box">
-        <div class="Like">
-            @if(isset($likes) && $likes && $likes->user_id == Auth::id() && $likes->content_id == $contents->id)
-            <form action="{{ route('like.destroy', $likes->id) }}" method="post">
-                @csrf
-                @method('DELETE')
-                @error('like')
-                    {{ $message }}
-                @enderror
-                @error('user_id')
-                    {{ $message }}
-                @enderror
-                @error('content_id')
-                    {{ $message }}
-                @enderror
-                <input type="hidden" name="content_id" value="{{$contents->id}}">
-                <button type="submit" class="" style="
-                background: #eae9ee;
-                border-radius: 4px;
-                color: #82828e;
-                display: inline-block;
-                font-size: 13px;
-                padding: 5px 20px;
-                vertical-align: middle;
-                transition: all 0.2s linear 0s;
-                border: none;
-                 }"><i class="icofont-like"></i> Unlike</button>        </form>
-            @else
-                <form action="/like" method="post">
+        <div class="box">
+            <div class="Like">
+                @if(isset($likes) && $likes && $likes->user_id == Auth::id() && $likes->content_id == $contents->id)
+                <form action="{{ route('like.destroy', $likes->id) }}" method="post">
                     @csrf
-                    @method('POST')
+                    @method('DELETE')
                     @error('like')
                         {{ $message }}
                     @enderror
@@ -255,11 +293,36 @@ padding: 80px 0;
                     vertical-align: middle;
                     transition: all 0.2s linear 0s;
                     border: none;
-                     }"><i class="icofont-like"></i> Like</button>
-                </form>
-            @endif
-        </div>
-            <a title href="{{ route('content.comment', $contents->id) }}" style="                        background: #eae9ee;
+                     }"><i class="icofont-like"></i> Unlike</button>        </form>
+                @else
+                    <form action="/like" method="post">
+                        @csrf
+                        @method('POST')
+                        @error('like')
+                            {{ $message }}
+                        @enderror
+                        @error('user_id')
+                            {{ $message }}
+                        @enderror
+                        @error('content_id')
+                            {{ $message }}
+                        @enderror
+                        <input type="hidden" name="content_id" value="{{$contents->id}}">
+                        <button type="submit" class="" style="
+                        background: #eae9ee;
+                        border-radius: 4px;
+                        color: #82828e;
+                        display: inline-block;
+                        font-size: 13px;
+                        padding: 5px 20px;
+                        vertical-align: middle;
+                        transition: all 0.2s linear 0s;
+                        border: none;
+                         }"><i class="icofont-like"></i> Like</button>
+                    </form>
+                @endif
+            </div>
+            <a title href="{{ route('content.comment', $contents->id) }}" class="comment-to" style="  background: #eae9ee;
                 border-radius: 4px;
                 color: #82828e;
                 display: inline-block;
@@ -267,33 +330,53 @@ padding: 80px 0;
                 padding: 5px 20px;
                 vertical-align: middle;
                 transition: all 0.2s linear 0s;
-                border: none;
-            "><i class="icofont-comment"></i> Comment</a>
+                border: none;"><i class="icofont-comment"></i> Comment</a>
         </div>
     <div class="emoji-state">
 
         <div class="popover_wrapper">
             <div class="we-video-info">
+
             <ul><li>
                 <span title="liked" class="liked">
-                   <i class="icofont-like" style="color: #64a4d4;"></i>
+                   <i class="icofont-heart" style="color: #64a4d4;"></i>
                     <ins>{{ $contents->likes_count }}</ins>
-                </span>
-            </li></ul>
+        </span>
+        </li></ul>
             </div>
         </div>
+    </div>
 
-        <div class="popover_wrapper">
-            <div class="we-video-info">
-            <ul><li>
-                <span title="Comments" class="Recommend">
-                    <i>
-                        <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
-                        <ins>{{ $contents->comment_Count }}</ins>
-                    </span>
-                </li></ul>
-            </div>
-        </div>
+
+
+{{-- <button type="button" title class="comment-to btn" ><i class="icofont-comment"></i> Comment</button> --}}
+
+<div class="emoji-state">
+
+<div class="popover_wrapper">
+    <div class="we-video-info">
+
+    <ul><li>
+        <span title="liked" class="liked">
+           <i class="icofont-like" style="color: #64a4d4;"></i>
+            <ins>{{ $contents->likes_count }}</ins>
+</span>
+</li></ul>
+    </div>
+</div>
+
+<div class="popover_wrapper">
+    <div class="we-video-info">
+    <ul>
+        <li>
+        <span title="Comments" class="Recommend">
+            <i>
+                {{-- <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
+                <ins>{{ $commentCount [$contents->id]}}</ins> --}}
+        </span>
+        </li></ul>
+    </div>
+</div>
 </div>
 </div>
 <div class="new-comment" style="display: none;">
@@ -362,7 +445,59 @@ padding: 80px 0;
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if (session('warning'))
+    <script>
+        toastr.warning("{{ session('warning') }}");
+    </script>
+@endif
+
+@if (Session::has('success'))
+    <script>
+        toastr.success("{{ Session::get('success') }}");
+    </script>
+@endif
+
+<script>
+function swalpFunction(message, type) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: type,
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Data dihapus");
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
+        }
+    });
+}
+
+@if (Session::has('success'))
+    swalpFunction("{{ Session::get('success') }}", "success");
+@endif
+</script>
+<script>
+    function toggleDropdown(contentId) {
+        var dropdown = document.getElementById("dropdown-" + contentId);
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/vivus.min.js" type="text/javascript"></script>
 
 <script data-cfasync="true" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
