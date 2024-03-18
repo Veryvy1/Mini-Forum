@@ -25,11 +25,27 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+    .friend-info em {
+        position: absolute;
+    bottom: 11rem;
+    left: 38px;
+    transform: translateX(-50%);
+    /* position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); */
+    }
+    .friend-info em svg {
+    vertical-align: middle;
+  }
+.group-dp {
+    width: 137px;
+    height: 137px;
+    border-radius: 50%; /* Menggunakan 50% untuk membuat lingkaran */
+    overflow: hidden; /* Memastikan gambar tidak keluar dari batas lingkaran */
+}
 
 .group-dp img {
-    width: 100%; /* Agar gambar mengisi lingkaran secara penuh */
-    height: 100%; /* Agar gambar mengisi lingkaran secara penuh */
-    object-fit: cover; /* Membuat gambar sesuai dengan ukuran lingkaran */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Menyesuaikan gambar dengan ukuran lingkaran */
 }
 
     .more-opt {
@@ -150,18 +166,19 @@ padding: 80px 0;
 <div class="col-lg-9">
 <div class="group-feed">
 <div class="group-avatar">
-    @if ($user->profile)
-<img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('storage/' . $user->bgprofile) }}" alt >
+    @if ($user->bgprofile)
+<img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('storage/' . $user->bgprofile) }}">
 @else
 <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('images/LOGO/bguser.jpg') }}" alt >
 @endif
 <a href="{{ route('profile.edit', auth()->user()->id) }}" class="btn btn-primary" style="color: #000; background-color: #fff; border: none;">Edit</a>
 <figure class="group-dp">
     @if ($user->profile)
-        <img src="{{ asset('storage/' . $user->profile) }}" style="object-fit: cover;">
-    @else
-        <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
-    @endif
+    <img src="{{ asset('storage/' . $user->profile) }}"  alt="Profile Image">
+@else
+    <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt="Default Profile Image">
+@endif
+
 </figure>
 </div>
 <div class="grp-info about">
@@ -215,16 +232,21 @@ padding: 80px 0;
 <div class="main-wraper">
     <div class="user-post">
         <div class="friend-info">
-            <figure>
-                <em>
-                    <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
-
-                    @if($contents->user->profile)
-                        <img src="{{ asset('storage/' .  $contents->user->profile) }}">
-                    @else
-                        <img alt src="images/LOGO/profil.jpeg">
-                    @endif
+            <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
+                @if($contents->user->profile)
+                <img src="{{ asset('storage/' .  $contents->user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                @else
+                <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
+                @endif
             </figure>
+                <em>
+                    {{-- style="position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); --}}
+                    <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                        <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
+                    </svg>
+                </em>
+
+
 <div class="friend-name">
     <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
     <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
@@ -345,8 +367,6 @@ padding: 80px 0;
         </li></ul>
             </div>
         </div>
-    </div>
-
         <div class="popover_wrapper">
             <div class="we-video-info">
             <ul><li>
@@ -358,6 +378,8 @@ padding: 80px 0;
                 </li></ul>
             </div>
         </div>
+    </div>
+
 </div>
 </div>
 <div class="new-comment" style="display: none;">

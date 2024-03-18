@@ -14,13 +14,68 @@
 <link rel="stylesheet" href="socimo/css/responsive.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!-- Pastikan jQuery telah dimasukkan sebelumnya -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+{{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> --}}
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
+    /* CSS for the search form */
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 300px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    .search-button {
+        background-color: #2ea8dc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    /* CSS for the modal */
+    /* .modal {
+        position: absolute;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        display: none;
+    } */
+
+    /* .modal-content {
+        max-width: 300px;
+        margin-top: 10px;
+    } */
+
+
+     .friend-info em {
+        position: absolute;
+    bottom: 11rem;
+    left: 38px;
+    transform: translateX(-50%);
+    /* position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); */
+    }
     .large-label {
         font-size: 16px;
     }
@@ -71,16 +126,21 @@
 <li>
  @if(auth()->check())
 <div class="user-dp">
-    <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-        @if(auth()->user()->profile)
-            <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}">
-        @else
-            <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}">
-        @endif
-    </a>
+   <div style="display: flex; align-items: center;">
+    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+            @if(auth()->user()->profile)
+                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+            @else
+                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+            @endif
+        </a>
+    </div>
     <div class="name">
         <h4>{{ auth()->user()->name }}</h4>
     </div>
+</div>
+
 </div>
 @endif
 </li>
@@ -169,15 +229,19 @@
     <div class="main-wraper">
         <div class="user-post">
             <div class="friend-info">
-                <figure>
-                    <em>
-                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
-@if($contents->user->profile)
-<img src="{{ asset('storage/' .  $contents->user->profile) }}">
-@else
-<img alt src="images/LOGO/profil.jpeg">
-@endif
-    </figure>
+                <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
+                    @if($contents->user->profile)
+                    <img src="{{ asset('storage/' .  $contents->user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    @else
+                    <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
+                    @endif
+                </figure>
+                    <em  style="position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%);">
+                        {{-- style="position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); --}}
+                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                            <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
+                        </svg>
+                    </em>
     <div class="friend-name">
         <ins><a title>{{ $contents->user->name }}</a></ins>
         <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
@@ -231,7 +295,9 @@
             vertical-align: middle;
             transition: all 0.2s linear 0s;
             border: none;
-             }"><i class="icofont-like"></i> Unlike</button>        </form>
+             }"><i class="icofont-like"></i> Unlike</button>
+
+            </form>
         @else
             <form action="/like" method="post">
                 @csrf
@@ -315,9 +381,9 @@
 
 
     </div>
-    <div class="col-lg-3">
+    {{-- <div class="col-lg-3">
         <div class="main-wraper">
-        <span class="new-title">Search Post</span>
+         <span class="new-title">Search Post</span>
         <form id="searchForm"  action="{{ route('home.search') }}" method="get">
             @csrf
         <div class="d-flex justify-content-between align-items-center">
@@ -325,12 +391,143 @@
         <div class="new-post">
             <div class="input-group">
                 <input type="search" name="search" class="form-control" value="{{ $oldSearch }}" placeholder="Search...">
-                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+                 <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
             </div>
         </div>
     </div>
 </form>
 </div>
+
+<span class="new-title">Search Post</span>
+<div class="new-post">
+    <form id="searchForm"  action="{{ route('home.search') }}" method="get">
+
+        @csrf
+        <i class="icofont-search"></i>
+        <input type="search" name="search" id="searchInput" class="form-control cari" placeholder="Search...">
+
+    </form>
+     <form id="searchForm" action="{{ route('home.search') }}" method="POST">
+
+        {{ csrf_field() }}
+    <div class="d-flex justify-content-between align-items-center">
+
+    <div class="new-post">
+        <div class="input-group">
+            <input type="search" name="search" id="search" class="form-control"  placeholder="Search...">
+            <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+</div>
+<style>
+    .modal {
+        position: absolute;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 1000; /* Menempatkan modal di atas elemen lain */
+        max-height: 400px; /* Menyesuaikan ketinggian modal */
+        overflow-y: auto; /* Membuat modal dapat di-scroll jika terlalu besar */
+    }
+
+    .modal-content {
+        max-width: 300px;
+        margin-top: 10px;
+    }
+
+    /* Tambahkan style untuk posisi modal */
+    .modal.show {
+        top: calc(100% + 10px); /* Jarak dari input search ke bawah modal */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
+<div id="result" class="modal">
+    <div class="modal-content">
+        <ul class="list-group">
+            @if(count($content) > 0)
+                @foreach ($content as $post)
+                    <li class="list-group-item">{{ $post->judul }}</li>
+                @endforeach
+            @else
+                <li class="list-group-item">No Results Found</li>
+            @endif
+        </ul>
+    </div>
+</div>
+
+</div> --}}
+<div class="col-lg-3">
+    <div class="main-wraper">
+    {{-- <span class="new-title">Search Post</span>
+    <form id="searchForm"  action="{{ route('home.search') }}" method="get">
+        @csrf
+    <div class="d-flex justify-content-between align-items-center">
+
+    <div class="new-post">
+        <div class="input-group">
+            <input type="search" name="search" class="form-control" value="{{ $oldSearch }}" placeholder="Search...">
+             <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+        </div>
+    </div>
+</div>
+</form>
+</div> --}}
+
+<span class="new-title">Search Post</span>
+<div class="new-post">
+{{--<form id="searchForm"  action="{{ route('home.search') }}" method="get">
+
+    @csrf
+    <i class="icofont-search"></i>
+    <input type="search" name="search" id="searchInput" class="form-control cari" placeholder="Search...">
+
+</form> --}}
+ <form id="searchForm" action="{{ route('home.search') }}" method="get">
+
+    {{-- {{ csrf_field() }} --}}
+    @csrf
+{{-- <div class="d-flex justify-content-between align-items-center"> --}}
+
+{{-- <div class="new-post"> --}}
+    {{-- <div class="input-group"> --}}
+        <i class="icofont-search"></i>
+        <input type="search" name="search" id="search" class="form-control"  placeholder="Search...">
+        {{-- <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button> --}}
+    {{-- </div> --}}
+{{-- </div> --}}
+{{-- </div> --}}
+</form>
+
+
+
+</div>
+
+
+<div id="result" class="panel panel-default" style="display: none;">
+{{-- <div class="modal-content"> --}}
+    <ul class="list-group">
+        @if(count($content) > 0)
+            @foreach ($content as $post)
+                <li class="list-group-item">{{ $post->judul }}</li>
+            @endforeach
+        @else
+            <li class="list-group-item">No Results Found</li>
+        @endif
+    </ul>
+    {{-- </div> --}}
+</div>
+
+    </div>
 
 
 <aside class="sidebar static right">
@@ -1370,11 +1567,96 @@ i think that some how, we learn who we really are and then live with that decisi
     </div>
 </div>
 
-<script>
+{{-- <script>
     function submitSearch() {
         document.getElementById("searchForm").submit();
     }
+</script> --}}
+
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+    let oldValue = '';
+
+    function submitSearch() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        // Jika nilai kosong, kembalikan ke halaman utama
+        if (query === '') {
+            window.location.href = "{{ route('home') }}";
+            return;
+        }
+
+        if (query === oldValue) {
+            return; // Jika nilai tidak berubah, jangan lakukan pencarian lagi
+        }
+
+        oldValue = query; // Simpan nilai baru untuk old value
+
+        // Lakukan pencarian
+        searchResults.innerHTML = `<p>Mencari "${query}"...</p>`;
+        // Lakukan proses pencarian asynchronous di sini (misalnya, dengan menggunakan AJAX)
+        // Setelah mendapatkan hasil, update tampilan searchResults
+    }
 </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#search').keyup(function(e){
+            var search = $(this).val();
+            if(search == ""){
+                $("#result .list-group").html(""); // Empty the modal content if search is empty
+                $('#result').hide();
+            } else {
+                $.get("{{ route('home.search') }}", { search: search }, function(data){
+                    $('#result .list-group').empty(); // Empty the modal content before populating with new search results
+
+                    if(data.length > 0){ // Check if there are search results before displaying
+                        data.forEach(function(post, index) {
+                            $('#result .list-group').append('<li class="list-group-item" data-index="' + index + '">' + post.judul + '</li>');
+                        });
+                    } else {
+                        $('#result .list-group').append('<li class="list-group-item">No Results Found</li>');
+                    }
+
+                    $('#result').show(); // Show the modal with search results
+
+                    // Handle keyboard shortcuts
+                    $('#result .list-group-item').on('keydown', function(e) {
+                        var currentIndex = $(this).data('index');
+                        var nextIndex = currentIndex + 1;
+                        var prevIndex = currentIndex - 1;
+
+                        switch(e.which) {
+                            case 13: // Enter key
+                                var selectedTitle = $(this).text();
+                                $('#search').val(selectedTitle); // Set the input field value to the selected title
+                                $('#result').hide(); // Hide the modal
+                                // Perform search or any other action here
+                                break;
+                            case 38: // Up arrow key
+                                if (prevIndex >= 0) {
+                                    $('#result .list-group-item[data-index="' + prevIndex + '"]').focus();
+                                }
+                                break;
+                            case 40: // Down arrow key
+                                if (nextIndex < $('#result .list-group-item').length) {
+                                    $('#result .list-group-item[data-index="' + nextIndex + '"]').focus();
+                                }
+                                break;
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         console.log("Script is executing!");
@@ -1502,5 +1784,49 @@ i think that some how, we learn who we really are and then live with that decisi
         });
     }
 </script>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script>
+    $('.cari').select2({
+        placeholder: 'Cari...',
+        ajax: {
+            url: '/cari',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results:  $.map(data, function (item) {
+                        return {
+                            text: item.email,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    let oldValue = '';
+
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (query === oldValue) {
+            return; // Jika nilai tidak berubah, jangan lakukan pencarian lagi
+        }
+
+        oldValue = query; // Simpan nilai baru untuk old value
+
+        // Lakukan pencarian
+        const searchForm = document.getElementById('searchForm');
+        searchForm.submit();
+    });
+</script>
+
 </body>
 </html>

@@ -32,16 +32,21 @@
             <li>
              @if(auth()->check())
             <div class="user-dp">
-                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-                    @if(auth()->user()->profile)
-                        <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}">
-                    @else
-                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}">
-                    @endif
-                </a>
-                <div class="name">
-                    <h4>{{ auth()->user()->name }}</h4>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                            @if(auth()->user()->profile)
+                                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @endif
+                        </a>
+                    </div>
+                    <div class="name">
+                        <h4>{{ auth()->user()->name }}</h4>
+                    </div>
                 </div>
+
             </div>
             @endif
             </li>
