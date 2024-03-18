@@ -309,6 +309,9 @@
 @endforeach
 @endif
 
+<div class="pagination">
+    {{ $content->links('vendor.sweetalert.pagination') }}
+</div>
 
 
     </div>

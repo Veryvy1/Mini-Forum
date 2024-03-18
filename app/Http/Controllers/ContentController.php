@@ -18,6 +18,15 @@ Use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ContentController extends Controller
 {
 
+    public function contentMore(Request $request, $id)
+    {
+        $contentGet = Content::with('likes')->where('id', $id)->get();
+        $user = auth()->user();
+        $commentGet = Comment::with('comment')->where('id', $id)->count();
+        $comment = Comment::find($id);
+        $contentA = Content::all();
+        return view('allcontent', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
+    }
     public function content(Request $request, $id)
     {
         $contentGet = Content::with('likes')->where('id', $id)->get();
@@ -178,12 +187,12 @@ class ContentController extends Controller
 
 
 
-        public function destroy(string $id)
-        {
-            try {
-                $content = Content::findOrFail($id);
+    public function destroy(string $id)
+    {
+        try {
+            $content = Content::findOrFail($id);
 
-                if (Storage::disk('public')->exists($content->gambar)) {
+            if (Storage::disk('public')->exists($content->gambar)) {
                     Storage::disk('public')->delete($content->gambar);
                 }
 
@@ -195,8 +204,9 @@ class ContentController extends Controller
                 $content->delete();
 
                 return redirect()->route('content.index')->with('success', 'Content successfully deleted');
-            } catch (ModelNotFoundException $e) {
+        } catch (ModelNotFoundException $e) {
                 return redirect()->route('content.index')->with('error', 'Content not found');
-            }
         }
+    }
 }
+

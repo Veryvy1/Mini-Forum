@@ -94,11 +94,11 @@
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}</textarea>
                         <input type="file" name="picture" id="fileInput" style="display: none;">
                     <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
                     </button>
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 265px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -135,9 +135,17 @@
                             <p style="word-break: break-word;">
                                 {{ $replies->reply }}
                             </p>
+                            <p>
 
                             @if ($replies->user_id == Auth::user()->id)
-                            {{-- <a href="" class="text-danger">Delete</a> --}}
+                            {{-- <button onclick="deleteComment({{ $replies->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
+                            <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+
+                            </form>
+                        </p>
                             @endif
                         </div>
                     </li>
@@ -167,7 +175,13 @@
                             </p>
 
                             @if ($replies->user_id == Auth::user()->id)
-                            {{-- <button onclick="deleteComment({{ $comments->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
+                            <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+
+                            </form>
+                            {{-- <button onclick="deleteComment({{ $replies->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
                         </div>
                     </li>
@@ -286,6 +300,13 @@ function swalpFunction() {
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="path/to/vivus.js"></script>
+    <script>
+        function deleteReply(replyId) {
+            if (confirm('Are you sure you want to delete this comment?')) {
+                window.location.href = '{{ route("reply.destroy", ["reply" => ":reply"]) }}'.replace(':reply', replyId);
+            }
+        }
+    </script>
     <script>
         (function() {
             var js =

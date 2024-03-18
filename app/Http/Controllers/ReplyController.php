@@ -86,11 +86,14 @@ class ReplyController extends Controller
      */
     public function destroy(Request $request)
     {
-        $commentId = $request->comment_id;
-        $replies = Reply::where('comment_id', $commentId)->get();
-
-        foreach ($replies as $reply) {
-            $reply->delete();
-        }
+        // $commentId = $request->comment_id;
+        // $replies = Reply::where('comment_id', $commentId)->get();
+        // foreach ($replies as $reply) {
+        //     $reply->delete();
+        // }
+        $id = $request->reply;
+        $reply = Reply::findOrFail($id);
+        $reply->delete();
+        return back();
     }
 }

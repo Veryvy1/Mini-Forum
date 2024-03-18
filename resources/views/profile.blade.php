@@ -351,7 +351,7 @@ padding: 80px 0;
             <div class="we-video-info">
             <ul><li>
                 <span title="Comments" class="Recommend">
-                    <i>
+
                         <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
                         <ins>{{ $contents->comment_count }}</ins>
                     </span>
@@ -365,6 +365,11 @@ padding: 80px 0;
         <input type="text" placeholder="write comment">
         <button type="submit"><i class="icofont-paper-plane"></i></button>
     </form>
+    {{-- <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="post">
+        @csrf
+        @method('delete')
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form> --}}
 </div>
 </div>
 </div>

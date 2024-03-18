@@ -77,7 +77,7 @@
         </header>
 
         <div class="container"><br><br>
-            <a type="button" href="{{ route('home') }}" class="btn btn-primary">
+            <a type="button" href="{{ route('home') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
             <h3>Input your comment</h3>
@@ -91,11 +91,11 @@
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;"></textarea>
                         <input type="file" name="picture" id="fileInput" style="display: none;">
                     <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
                     </button>
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 265px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -138,6 +138,11 @@
 
                                 <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                                 @if ($comments->user_id == Auth::user()->id)
+                                <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+                                </form>
                                 {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                                 @endif
 
@@ -170,6 +175,11 @@
                             </p>
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                             @if ($comments->user_id == Auth::user()->id)
+                            <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+                                </form>
                             {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
 

@@ -22,7 +22,7 @@
     <span>GetForums</span></div>
 <h1>Welcome to GetForums</h1>
 <p>
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus iste, ad excepturi cum ipsam odit doloremque velit sunt temporibus ea! Laboriosam?</div>
+    Embark on a journey of knowledge and connection. Join our forum and ignite your passion for learning.</div>
 <div class="bg-image" style="background-image: url(images/resources/login-bg.png)"></div>
 </div>
 </div>

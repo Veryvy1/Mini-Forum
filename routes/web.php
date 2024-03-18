@@ -65,17 +65,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reply/{id}', [ReplyController::class, 'replyId'])->name('comment.reply');
         Route::post('/reply/{commentId}', [ReplyController::class, 'store'])->name('reply.store');
         Route::post('/content/{id}/like', [LikeController::class, 'like'])->name('content.like');
+        Route::get('/morecontent', [ContentController::class, 'contentMore'])->name('more.home');
+
 
         Route::get('blog', function () {
             return view('user.blog');
         });
 
-        Route::get('notifikasi', function () { 
+        Route::get('notifikasi', function () {
             return view('user.notifikasi');
         });
 
         Route::get('videos', function () {
             return view('user.videos');
+        });
+        Route::get('dt', function () {
+            return view('user.allcontent');
         });
 
         Route::get('comment', function () {
@@ -95,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])->name('comment.destroy');
     Route::resource('contact', ContactController::class);
     Route::delete('/content/{content}', [ContentController::class, 'destroy'])->name('content.destroy');
+    Route::delete('/reply/{reply}', [ReplyController::class, 'destroy'])->name('reply.destroy');
 });
 Route::post('like',[LikeController::class,'store'])->name('like.store');
 Route::delete('unlike/{like}',[LikeController::class,'destroy'])->name('like.destroy');
