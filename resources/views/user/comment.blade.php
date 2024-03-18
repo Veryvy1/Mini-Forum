@@ -18,6 +18,71 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .comment-area {
+            margin-top: 20px;
+        }
+        .comment-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .comments {
+            list-style-type: none;
+            padding: 0;
+        }
+        .comment {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        .commenter-photo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .comment-content {
+            margin-left: 50px;
+            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+        }
+        .comment-content1 {
+            margin-left: 30px;
+            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+        }
+        .comment-options {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+}
+.comment-options1 {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.comment-options a,
+.comment-options button {
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.comment-options a {
+    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+    margin-left: 50px; /* Geser tombol Reply ke kanan */
+}
+
+.comment-options1 a,
+.comment-options1 button {
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.comment-options1 a {
+    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+    margin-left: 20px; /* Geser tombol Reply ke kanan */
+}
+        </style>
 </head>
 
 <body>
@@ -109,47 +174,39 @@
                 <ul class="comments">
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
-                    <li>
-                        <style>
-                            .commenter-photo img {
-                                width: 40px;
-                                height: 40px;
-                            }
-                        </style>
+                    <li class="comment">
                         <div class="commenter-photo">
                             @if ($comments->user->profile)
-                                <img src="{{ asset('storage/'. $comments->user->profile) }}">
+                            <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
-                                <img src="{{ asset('images/LOGO/profil.jpeg') }}">
+                            <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
-                        <div class="commenter-meta">
+                        <div class="comment-content">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
-
                             <img src="{{ asset('storage/' . $comments->picture) }}" style="height: 250px;">
-
                             <p style="word-break: break-word;">
                                 {{ $comments->comment }}
                             </p>
-                            <p>
-
-                                <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
-                                @if ($comments->user_id == Auth::user()->id)
-                                <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
-                                </form>
+                        </div>
+                        <div class="comment-options">
+                            <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
+                            @if ($comments->user_id == Auth::user()->id)
+                            <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="text-danger" >Delete</button>
+                            </form>
                                 {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                                 @endif
-
-                            </p>
+                            </div>
+                            
                         </div>
                     </li>
-                    <hr>
+
                     @else
                     <li>
                         <style>
@@ -165,6 +222,7 @@
                                 <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
+                    <div class="comment-content1">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
@@ -173,6 +231,8 @@
                             <p style="word-break: break-word;">
                                 {{ $comments->comment }}
                             </p>
+                        </div>
+                        <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
                             @if ($comments->user_id == Auth::user()->id)
                             <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
@@ -303,6 +363,11 @@
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
+    <script>
+            function submitForm(button) {
+                form.submit();
+            }
+    </script>
     <script>
         (function() {
             var js =

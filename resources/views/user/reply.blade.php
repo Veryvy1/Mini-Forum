@@ -18,6 +18,71 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .comment-area {
+            margin-top: 20px;
+        }
+        .comment-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .comments {
+            list-style-type: none;
+            padding: 0;
+        }
+        .comment {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+        .commenter-photo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .comment-content {
+            margin-left: 50px;
+            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+        }
+        .comment-content1 {
+            margin-left: 30px;
+            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+        }
+        .comment-options {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+}
+.comment-options1 {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+.comment-options a,
+.comment-options button {
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.comment-options a {
+    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+    margin-left: 50px; /* Geser tombol Reply ke kanan */
+}
+
+.comment-options1 a,
+.comment-options1 button {
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.comment-options1 a {
+    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+    margin-left: 20px; /* Geser tombol Reply ke kanan */
+}
+        </style>
 </head>
 
 <body>
@@ -125,6 +190,7 @@
                                 <img src="{{ asset('images/LOGO/logo.png') }}">
                             @endif
                         </div>
+                        <div class="comment-content">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $replies->user->name }}</h6>
@@ -135,7 +201,8 @@
                             <p style="word-break: break-word;">
                                 {{ $replies->reply }}
                             </p>
-                            <p>
+                        </div>
+                            <div class="comment-options">
 
                             @if ($replies->user_id == Auth::user()->id)
                             {{-- <button onclick="deleteComment({{ $replies->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
@@ -145,7 +212,8 @@
                                 <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
 
                             </form>
-                        </p>
+                        </div>
+                        </div>
                             @endif
                         </div>
                     </li>

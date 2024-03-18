@@ -20,7 +20,7 @@ class HomeUserController extends Controller
             $ccontent = $request->input('search');
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
         } else {
-            $content = Content::take(99)->paginate(2);
+            $content = Content::take(99)->paginate(6);
         }
 
         $likesCount = [];
