@@ -15,10 +15,13 @@ class HomeUserController extends Controller
 
     public function index(Request $request)
     {
-        // $oldSearch = $request->input('search');
-
-        $content = Content::paginate(2);
-
+        $oldSearch = $request->input('search');
+        if ($request->has('search')) {
+            $ccontent = $request->input('search');
+            $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
+        } else {
+            $content = Content::take(99)->paginate(6);
+        }
 
         $likesCount = [];
         $commentCount = [];
