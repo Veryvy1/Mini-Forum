@@ -150,38 +150,39 @@
 <div class="panel-content">
 <h4 class="main-title">Data Management</h4>
 <div class="row merged20 mb-4">
+    <div class="col-lg-4 col-md-4 col-sm-4">
+        <a href="{{ route('usermanage.index') }}" class="d-widget soft-red">
+            <div class="d-widget-title">
+                <h5>Total Users</h5>
+            </div>
+            <div class="d-widget-content">
+                <h5>{{ $totalUsers }}</h5>
+                <i class="icofont-users-alt-3"></i>
+            </div>
+        </a>
+    </div>
 <div class="col-lg-4 col-md-4 col-sm-4">
-<div class="d-widget soft-red">
-<div class="d-widget-title">
-<h5>Total Users</h5>
+    <a href="{{ route('kategori.index') }}" class="d-widget soft-blue">
+        <div class="d-widget-title">
+            <h5>Total Category</h5>
+        </div>
+        <div class="d-widget-content">
+            <h5>{{ $jkategori }}</h5>
+            <i class="icofont-optic"></i>
+        </div>
+    </a>
 </div>
-<div class="d-widget-content">
-<h5>{{ $totalUsers }}</h5>
-<i class="icofont-users-alt-3"></i>
-</div>
-</div>
-</div>
+
 <div class="col-lg-4 col-md-4 col-sm-4">
-<div class="d-widget soft-blue">
-<div class="d-widget-title">
-<h5>Total Category</h5>
-</div>
-<div class="d-widget-content">
-<h5>{{ $jkategori }}</h5>
-<i class="icofont-optic"></i>
-</div>
-</div>
-</div>
-<div class="col-lg-4 col-md-4 col-sm-4">
-<div class="d-widget soft-green">
-<div class="d-widget-title">
-<h5>Total Content</h5>
-</div>
-<div class="d-widget-content">
-<h5>{{ $jcontent }}</h5>
-<i class="icofont-computer"></i>
-</div>
-</div>
+    <a href="{{ route('content.index') }}" class="d-widget soft-green">
+        <div class="d-widget-title">
+            <h5>Total Content</h5>
+        </div>
+        <div class="d-widget-content">
+            <h5>{{ $jcontent }}</h5>
+            <i class="icofont-computer"></i>
+        </div>
+    </a>
 </div>
 </div>
 <div class="row merged20 mb-4">

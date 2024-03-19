@@ -64,8 +64,12 @@
         </i>
         </a>
         <ul class="dropdown">
-        <li><a href="#" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-        <li><a href="# title><i class="icofont-plus"></i>Add Content</a></li>
+        <li>
+            <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Profile">
+            <i class="icofont-user-alt-3"></i> Your Profile
+            </a>
+        </li>
+        <li><a href="#" title><i class="icofont-plus"></i>Latest Content</a></li>
         <li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i>Sugestion</a></li>
         <li class="logout">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

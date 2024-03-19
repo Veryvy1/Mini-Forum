@@ -41,46 +41,52 @@ class CommentController extends Controller
 
     public function store(Request $request, $contentId)
     {
-    try {
-        $comment = $request->validate([
-            'comment' => 'required|string', // Sesuaikan dengan aturan validasi yang Anda butuhkan
-            'picture' => 'nullable|image', // Validasi untuk file gambar
-        ]);
+        try {
+            $request->validate([
+                'comment' => 'required|string',
+                'picture' => 'nullable|image',
+            ]);
 
-        // Parsing teks dari Summernote (jika Anda menggunakan Summernote)
-        // Tidak perlu mengubah ini jika Anda tidak menggunakan Summernote
-        $dom = new DOMDocument();
-        $dom->loadHTML($comment['comment'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $comment = $request->input('comment');
 
-        $pictures = $dom->getElementsByTagName('img');
+            $dom = new DOMDocument();
+            $dom->loadHTML($comment, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-        foreach ($pictures as $key => $img) {
-            $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
-            $picture_name = "/uploads/" . time() . $key . '.png';
-            Storage::put('public' . $picture_name, $data);
+            $images = $dom->getElementsByTagName('img');
 
-            $img->removeAttribute('src');
-            $img->setAttribute('src', $picture_name);
-        }
+            foreach ($images as $key => $img) {
+                if ($img->hasAttribute('src')) {
+                    $src = $img->getAttribute('src');
+                    $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $src));
+                    if ($data !== false) {
+                        $image_name = "/uploads" . time() . $key . '.png';
+                        Storage::put('public' . $image_name, $data);
 
-        // Simpan gambar dari formulir jika ada
-        if ($request->hasFile('picture')) {
+                        $img->removeAttribute('src');
+                        $img->setAttribute('src', $image_name);
+                    }
+                }
+            }
+
             $picture = $request->file('picture');
-            $picture_path = $picture->store('public/images'); // Simpan gambar ke dalam folder "public/images"
+
+            if ($picture) {
+                $path = $picture->store('public/images');
+            } else {
+                $path = null;
+            }
+
+            $commentModel = new Comment();
+            $commentModel->content_id = $contentId;
+            $commentModel->user_id = auth()->id();
+            $commentModel->comment = $dom->saveHTML();
+            $commentModel->picture = $path;
+            $commentModel->save();
+
+            return redirect()->back()->with('success', 'Successfully commented');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
-
-        // Simpan komentar ke database
-        $commentModel = new Comment();
-        $commentModel->content_id = $contentId;
-        $commentModel->user_id = auth()->id();
-        $commentModel->comment = $dom->saveHTML(); // Menggunakan teks yang telah dimodifikasi
-        $commentModel->picture = isset($picture_path) ? $picture_path : null; // Simpan path gambar jika ada
-        $commentModel->save();
-
-        return redirect()->back()->with('success', 'successfully commented');
-    } catch (\Exception $e) {
-        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
-    }
     }
 
 
@@ -92,14 +98,8 @@ class CommentController extends Controller
         if (Storage::disk('public')->exists($comment->picture)) {
             Storage::disk('public')->delete($comment->picture);
         }
-
-        $localFilePath = public_path('storage/' . $comment->picture);
-        if (File::exists($localFilePath)) {
-            File::delete($localFilePath);
-        }
         $comment->delete();
 
-        return redirect()->back()->with('success', 'Comment successfully deleted');
-
+        return redirect()->route('berita.index')->with('success', 'BERITA BERHASIL DIHAPUS');
     }
 }

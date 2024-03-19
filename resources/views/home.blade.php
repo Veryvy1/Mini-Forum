@@ -325,7 +325,7 @@
         <div class="main-wraper">
             <span class="new-title">Search Post</span>
             <div class="new-post">
-                <form id="searchForm" action="{{ route('home.search') }}" method="get">
+                <form id="searchForm" value="{{ $oldSearch }}" action="{{ route('home.search') }}" method="get">
                     @csrf
                     <i class="icofont-search"></i>
                     <input  type="search" name="search" value="{{ $oldSearch }}" class="form-control" placeholder="Search..." oninput="submitSearch()">

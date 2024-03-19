@@ -72,18 +72,18 @@
             margin-left: 50px; /* Geser tombol Reply ke kanan */
         }
 
-.comment-options1 a,
-.comment-options1 button {
-    text-decoration: underline;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.comment-options1 a {
-    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-    margin-left: 20px; /* Geser tombol Reply ke kanan */
-}
-        </style>
+        .comment-options1 a,
+        .comment-options1 button {
+            text-decoration: underline;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .comment-options1 a {
+            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+            margin-left: 20px; /* Geser tombol Reply ke kanan */
+        }
+    </style>
 </head>
 
 <body>
@@ -189,16 +189,12 @@
                     <textarea name="comment" id="summernote" placeholder="Input your comment........" cols="120" rows="2"
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">
                     </textarea>
-                    {{-- <input type="file" name="picture" id="fileInput" style="display: none;"> --}}
-                    {{-- <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
-                        <i class="icofont-newspaper"></i>
-                    </button> --}}
-                    <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
-                    <i class="icofont-paper-plane"></i>
                 </button>
+                <button type="submit" id="submitBtn" class="btn btn-primary rounded-circle"
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; transform: translateY(-50%);">
+                    <i class="icofont-paper-plane"></i>
                 </div>
+
 
             </form>
 
@@ -210,17 +206,13 @@
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
                     <li class="comment">
-                    <li class="comment">
                         <div class="commenter-photo">
                             @if ($comments->user->profile)
                             <img src="{{ asset('storage/'. $comments->user->profile) }}">
-                            <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
-                            <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
-                        <div class="comment-content">
                         <div class="comment-content">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
@@ -245,7 +237,6 @@
                         </div>
                     </li>
 
-
                     @else
                     <li>
                         <style>
@@ -262,7 +253,6 @@
                             @endif
                         </div>
                     <div class="comment-content1">
-                    <div class="comment-content1">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
@@ -271,8 +261,6 @@
                             <p style="word-break: break-word;">
                                 {!! $comments->comment !!}
                             </p>
-                        </div>
-                        <div class="comment-options1">
                         </div>
                         <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
@@ -347,6 +335,7 @@
     @section('scripts')
     <script>
         $(document).ready(function() {
+            // Initialize Summernote
             $('#summernote').summernote({
                 placeholder: 'Hello stand-alone UI',
                 tabsize: 2,
@@ -362,12 +351,37 @@
                 ]
             });
 
+            // Set old value
             var oldIsiValue = {!! json_encode(old('isi')) !!};
             $('#summernote').summernote('code', oldIsiValue);
+
+            // Function to handle form submission
+            function submitForm() {
+                var content = $('#summernote').summernote('code');
+                // Perform any actions needed with the content, like form submission
+                // Example: sending content via AJAX
+                $.ajax({
+                    url: '/submit-url',
+                    method: 'POST',
+                    data: { content: content },
+                    success: function(response) {
+                        // Handle success response
+                        console.log('Content submitted successfully');
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error response
+                        console.error('Error submitting content:', error);
+                    }
+                });
+            }
+
+            // Attach submitForm function to the submit button click event
+            $('#submitBtn').click(function() {
+                submitForm();
+            });
         });
     </script>
-    @endsection
-
+@endsection
 
     <?php if ($errors->any()): ?>
     <script>
@@ -430,11 +444,6 @@
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
-    <script>
-            function submitForm(button) {
-                form.submit();
-            }
-    </script>
     <script>
             function submitForm(button) {
                 form.submit();

@@ -133,7 +133,7 @@
     <ul class="dropdown">
         <li>
             <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
-                <i class="icofont-user-alt-3"></i> Your Profile
+                <i class="icofont-user-alt-3"></i> Edit Profile
             </a>
         </li>
     <li><a href="#" title><i class="icofont-plus"></i>Latest Content</a></li>
