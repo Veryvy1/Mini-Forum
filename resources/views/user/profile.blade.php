@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -65,7 +65,7 @@
         </a>
         <ul class="dropdown">
         <li><a href="#" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-        <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+        <li><a href="# title><i class="icofont-plus"></i>Latest Content</a></li>
         <li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i>Sugestion</a></li>
         <li class="logout">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -93,7 +93,7 @@
             <div class="user-avatar-edit">
             <figure>
             @if ($user->bgprofile)
-                <img src="{{ asset('storage/' . $user->bgprofile) }}" alt="">
+                <img id="preview-bgimage" src="{{ asset('storage/' . $user->bgprofile) }}" alt="">
             @else
                 <img id="preview-bgimage" src="{{ asset('images/LOGO/bguser.jpg') }}" alt="Preview Image">
             @endif
@@ -103,12 +103,14 @@
             <input type="file" class="upload" name="bgprofile" id="bgprofile-input">
         </div>
             </div>
+
             <div class="user-dp-edit">
-            <figure>
+            <figure style="width: 105px; height: 105px; border-radius: 50%; overflow: hidden;">
+            {{-- <figure> --}}
             @if ($user->profile)
-                <img src="{{ asset('storage/' . $user->profile) }}" alt="">
+                <img id="preview-image" src="{{ asset('storage/' . $user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
             @else
-                <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" alt>
+                <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" style="width: 100%; height: 100%; object-fit: cover;" alt>
             @endif
             <div class="fileupload">
             <span class="btn-text"><i class="icofont-camera"></i></span>
@@ -165,31 +167,55 @@
 </div>
     </form>
 
+    @if (session('warning'))
+        <script>
+            toastr.warning("{{ session('warning') }}");
+        </script>
+    @endif
+
+    @if (Session::has('success'))
+        <script>
+            toastr.success("{{ Session::get('success') }}");
+        </script>
+    @endif
+
     <script>
-        @if (Session::has('success'))
-        toastr.success("{{ Session::get('success') }}")
-        @endif
-        function swalpFunction() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Data dihapus");
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            });
+    function swalpFunction(message, type) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: type,
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Data dihapus");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
+
+    @if (Session::has('success'))
+        swalpFunction("{{ Session::get('success') }}", "success");
+    @endif
+    </script>
+    <script>
+        function toggleDropdown(contentId) {
+            var dropdown = document.getElementById("dropdown-" + contentId);
+            if (dropdown.style.display === "none") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
         }
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -198,59 +224,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
     </html>
-    <script>
-        function previewImage(){
-            var input = document.getElementById('avatarFile');
-            var preview = document.getElementById('avatarPreview');
 
-            if (input,files.length > 0){
-                var file = input.files[0];
-                var reader = new FileReader();
-
-                reader.onloadend = function(){
-                    preview.src = reader.result;
-                    preview.style.borderRadius = '50%';
-                    preview.style.width = '100%';
-                    preview.style.height = '100%';
-                }
-                reader.readAsDataURL(file);
-
-            }else{
-                preview.src = '{{ asset('images/LOGO/logo.png') }}';
-                preview.style.borderRadius = '50%';
-                preview.style.width = '100%';
-                preview.style.height = '100%';
-            }
-
-        }
-    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('profile-input').addEventListener('change', function() {
+            // Menampilkan pratinjau gambar profile
+            const profileInput = document.getElementById('profile-input');
+            const previewImage = document.getElementById('preview-image');
+
+            profileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 const reader = new FileReader();
+
                 reader.onload = function(e) {
-                    document.getElementById('preview-image').setAttribute('src', e.target.result);
+                    previewImage.setAttribute('src', e.target.result);
                 }
-                reader.readAsDataURL(file);
-            });
-        });
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('bgprofile-input').addEventListener('change', function() {
-                const file = this.files[0];
                 if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById('preview-bgimage').setAttribute('src', e.target.result);
-                    }
                     reader.readAsDataURL(file);
+                } else {
+                    // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
+                    previewImage.setAttribute('src', '{{ asset('images/LOGO/profil.jpeg') }}');
+                }
+            });
+
+            // Menampilkan pratinjau gambar background profile
+            const bgProfileInput = document.getElementById('bgprofile-input');
+            const previewBgImage = document.getElementById('preview-bgimage');
+
+            bgProfileInput.addEventListener('change', function() {
+                const file = this.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewBgImage.setAttribute('src', e.target.result);
+                }
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
+                    previewBgImage.setAttribute('src', '{{ asset('images/LOGO/background.jpeg') }}');
                 }
             });
         });
-    </script>
-
-
+    </script>

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Reply;
+use App\Models\User;
+use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
-use App\Models\Content;
-use App\Models\User;
-use App\Models\Comment;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
+use DOMDocument;
 
 class CommentController extends Controller
 {
@@ -36,34 +39,67 @@ class CommentController extends Controller
         return view('user.comment', compact('comment'));
     }
 
-    public function store(CommentRequest $request, $contentId)
+    public function store(Request $request, $contentId)
     {
-        try{
+    try {
+        $comment = $request->validate([
+            'comment' => 'required|string', // Sesuaikan dengan aturan validasi yang Anda butuhkan
+            'picture' => 'nullable|image', // Validasi untuk file gambar
+        ]);
 
-        $comment = new Comment();
-        $comment->content_id = $contentId;
-        $comment->user_id = auth()->id();
-        $comment->comment = $request->comment;
+        // Parsing teks dari Summernote (jika Anda menggunakan Summernote)
+        // Tidak perlu mengubah ini jika Anda tidak menggunakan Summernote
+        $dom = new DOMDocument();
+        $dom->loadHTML($comment['comment'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        $pictures = $dom->getElementsByTagName('img');
+
+        foreach ($pictures as $key => $img) {
+            $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
+            $picture_name = "/uploads/" . time() . $key . '.png';
+            Storage::put('public' . $picture_name, $data);
+
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $picture_name);
+        }
+
+        // Simpan gambar dari formulir jika ada
         if ($request->hasFile('picture')) {
-            $path = $request->file('picture')->store('picture', 'public');
-            $comment->picture = $path;
+            $picture = $request->file('picture');
+            $picture_path = $picture->store('public/images'); // Simpan gambar ke dalam folder "public/images"
         }
-        $comment->save();
 
-        return redirect()->back()->with('success','successfully commented');
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
-        }
+        // Simpan komentar ke database
+        $commentModel = new Comment();
+        $commentModel->content_id = $contentId;
+        $commentModel->user_id = auth()->id();
+        $commentModel->comment = $dom->saveHTML(); // Menggunakan teks yang telah dimodifikasi
+        $commentModel->picture = isset($picture_path) ? $picture_path : null; // Simpan path gambar jika ada
+        $commentModel->save();
+
+        return redirect()->back()->with('success', 'successfully commented');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+    }
+
 
     public function destroy(Request $request)
     {
         $id = $request->comment;
         Reply::where('comment_id', $id)->delete();
         $comment = Comment::findOrFail($id);
+        if (Storage::disk('public')->exists($comment->picture)) {
+            Storage::disk('public')->delete($comment->picture);
+        }
+
+        $localFilePath = public_path('storage/' . $comment->picture);
+        if (File::exists($localFilePath)) {
+            File::delete($localFilePath);
+        }
         $comment->delete();
 
         return redirect()->back()->with('success', 'Comment successfully deleted');
-    }
 
+    }
 }

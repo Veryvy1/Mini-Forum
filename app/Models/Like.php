@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'like',
-        'content_id',
-        'user_id'
-    ];
+    protected $guarded = ['id'];
 
     public function likes()
     {

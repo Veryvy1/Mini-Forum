@@ -55,15 +55,16 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ], [
-            'name.required' => 'Username harus diisi.',
-            'email.required' => 'Alamat email harus diisi.',
-            'email.email' => 'Format alamat email tidak valid.',
-            'email.unique' => 'Alamat email sudah terdaftar.',
-            'password.required' => 'Kata sandi harus diisi.',
-            'password.min' => 'Kata sandi minimal harus 8 karakter.',
-            'password.confirmed' => 'Konfirmasi kata sandi tidak sesuai.',
+            'name.required' => 'Username must be filled.',
+            'email.required' => 'Email address must be filled.',
+            'email.email' => 'Invalid email address format.',
+            'email.unique' => 'Email address is already registered.',
+            'password.required' => 'Password must be filled..',
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.confirmed' => 'Password confirmation does not match.',
         ]);
     }
+
 
     /**
      * Create a new user instance after a valid registration.

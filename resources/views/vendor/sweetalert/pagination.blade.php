@@ -4,16 +4,18 @@
         justify-content: center;
         align-items: center; /* Memastikan elemen-elemen di tengah */
         margin-top: 20px;
+        text-align: center;
     }
-
+x
     .pagination .page-item {
         margin: 0 5px;
     }
 
     .pagination .page-link {
         padding: 8px 12px;
+        text-color: #2ea8dc;
         border: 1px solid #dee2e6;
-        color: #007bff;
+        color: ##2ea8dc;
         background-color: #fff;
         border-radius: 4px;
         transition: all 0.3s ease;
@@ -25,9 +27,9 @@
     }
 
     .pagination .page-item.active .page-link {
-        background-color: #007bff;
+        background-color: #2ea8dc;
         color: #fff;
-        border-color: #007bff;
+        border-color: ##2ea8dc;
     }
 
     .pagination .page-item.disabled .page-link {
@@ -83,6 +85,5 @@
                 <span class="page-link" aria-hidden="true">&raquo;</span>
             </li>
         @endif
-    </ul>
+    </ul>
 @endif
-

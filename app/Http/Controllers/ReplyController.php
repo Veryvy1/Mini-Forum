@@ -5,8 +5,12 @@ use App\Models\Reply;
 use App\Models\Comment;
 use App\Models\Content;
 use App\Models\User;
-use App\Http\Requests\ReplyRequest;
+use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ReplyRequest;
+use DOMDocument;
+
 
 
 use Illuminate\Http\Request;
@@ -42,57 +46,73 @@ class ReplyController extends Controller
      */
     public function store(ReplyRequest $request, $commentId)
     {
-        $reply = new Reply();
-        $maxLength = 255;
-        $reply->reply = substr($request->reply, 0, $maxLength);
-        $reply->comment_id = $commentId;
-        $reply->user_id = auth()->id();
-        $reply->reply = $request->reply;
-        if ($request->hasFile('picture')) {
-            $path = $request->file('picture')->store('reply', 'public');
-            $reply->picture = $path;
-        }
-        $reply->save();
+        try {
+            $data = $request->validate([
+                'reply' => 'required|string',
+                'picture' => 'nullable|image',
+            ]);
 
-        return redirect()->back()->with('success','Successful reply');
+            $dom = new DOMDocument();
+            $dom->loadHTML($data['reply'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+            $pictures = $dom->getElementsByTagName('img');
+
+            foreach ($pictures as $key => $img) {
+                $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
+                $picture_name = "/uploads/" . time() . $key . '.png';
+                Storage::put('public' . $picture_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $picture_name);
+            }
+
+            if ($request->hasFile('picture')) {
+                $picture = $request->file('picture');
+                $picture_path = $picture->store('public/images');
+            }
+
+            $reply = new Reply();
+            $reply->reply = $dom->saveHTML();
+            $reply->comment_id = $commentId;
+            $reply->user_id = auth()->id();
+            if ($request->hasFile('picture')) {
+                $reply->picture = $picture_path;
+            }
+            $reply->save();
+
+            return redirect()->back()->with('success', 'Successful reply');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request)
     {
-        // $commentId = $request->comment_id;
-        // $replies = Reply::where('comment_id', $commentId)->get();
-        // foreach ($replies as $reply) {
-        //     $reply->delete();
-        // }
         $id = $request->reply;
         $reply = Reply::findOrFail($id);
+        if (Storage::disk('public')->exists($reply->picture)) {
+            Storage::disk('public')->delete($reply->picture);
+        }
+
+        $localFilePath = public_path('storage/' . $reply->picture);
+        if (File::exists($localFilePath)) {
+            File::delete($localFilePath);
+        }
         $reply->delete();
         return back();
     }

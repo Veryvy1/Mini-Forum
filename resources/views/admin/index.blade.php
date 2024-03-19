@@ -156,8 +156,6 @@
 <h5>Total Users</h5>
 </div>
 <div class="d-widget-content">
-<span class="realtime-ico pulse"></span>
-<h6>Updating</h6>
 <h5>{{ $totalUsers }}</h5>
 <i class="icofont-users-alt-3"></i>
 </div>
@@ -169,8 +167,6 @@
 <h5>Total Category</h5>
 </div>
 <div class="d-widget-content">
-<span class="realtime-ico pulse"></span>
-<h6>Updating </h6>
 <h5>{{ $jkategori }}</h5>
 <i class="icofont-optic"></i>
 </div>
@@ -182,8 +178,6 @@
 <h5>Total Content</h5>
 </div>
 <div class="d-widget-content">
-<span class="realtime-ico pulse"></span>
-<h6>Updating </h6>
 <h5>{{ $jcontent }}</h5>
 <i class="icofont-computer"></i>
 </div>
