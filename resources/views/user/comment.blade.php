@@ -190,9 +190,10 @@
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">
                     </textarea>
                 </button>
-                <button type="submit" id="submitBtn" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; transform: translateY(-50%);">
-                    <i class="icofont-paper-plane"></i>
+                <button type="submit" class="btn btn-primary"
+                        style="background-color: rgb(40, 144, 204); width: 100px; height: 50px; font-size: 25px; position: absolute; bottom: -58px; right: 1px;">
+                        <i class="icofont-paper-plane"></i>
+                    </button>
                 </div>
 
 
