@@ -51,7 +51,7 @@
                                 <i class="icofont-checked"></i>
                                 <div>
                                     <h6>Learn from experts</h6>
-                                    <p>Share your experiences, collaborate with your peers, and get the support you need to advance your career.</p>
+                                    <p>Find the support you need to overcome challenges and achieve your goals. GetForums is more than just a platform for discussion—it's a community where members uplift and empower each other to reach new heights in their careers and personal pursuits.</p>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                 <i class="icofont-macbook"></i>
                                 <div>
                                     <h6>Find Forum any topic</h6>
-                                    <p>Share your experiences, collaborate with your peers, and get the support you need to advance your career.</p>
+                                    <p>Our forum is a hub of knowledge and information, with discussions covering a wide range of topics relevant to career advancement. From industry trends and best practices to skill development and professional growth strategies, GetForums keeps you informed and empowered to stay ahead in your career.</p>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                 <i class="icofont-clock-time"></i>
                                 <div>
                                     <h6>Go at your own pace</h6>
-                                    <p>Share your experiences, collaborate with your peers, and get the support you need to advance your career.</p>
+                                    <p>Go at Your Own Pace, we believe that every individual's career journey is unique. That's why we provide a platform where you can set your own pace, define your goals, and chart your path to success on your terms.</p>
                                 </div>
                             </div>
                         </div>
@@ -88,13 +88,13 @@
                                 <div class="measure">
                                     <i class="icofont-light-bulb"></i>
                                     <h2>Find Your Favorite <br>Forums</h2>
-                                    <p>Get in-depth stats on who's been reading your work and keep track of your citations.</p>
+                                    <p>Discover Your Passion: Dive into Your Favorite Forums and Unleash Your Potential</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-5">
                             <figure class="side-image">
-                                <img src="images/resources/research-avatar.jpg" alt="">
+                                <img src="/images/LOGO/ico.png" alt="">
                             </figure>
                         </div>
                     </div>
@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
                             <figure class="side-image">
-                                <img src="images/resources/research-avatar2.jpg" alt="">
+                                <img src="/images/LOGO/t1.jpeg" alt="">
                             </figure>
                         </div>
                         <div class="col-lg-7 col-md-7">
@@ -121,7 +121,7 @@
                                         <a href="#" title>Desain</a>
                                         <a href="#" title>Climate</a>
                                         <a href="#" title>Medicine</a>
-                                       
+                                        <a href="#" title>Programing</a>
                                     </p>
                                 </div>
                             </div>
