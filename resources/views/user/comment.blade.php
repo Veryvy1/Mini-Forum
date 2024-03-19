@@ -179,7 +179,7 @@
         </div>
         </div>
         </div>
-            <h3>Input your comment</h3>
+        <h3><i class="icofont-comment"></i> Input your comment</h3>
             <br>
         </br>
             <form action="{{ route('comment.store', ['contentId' => $content->id]) }}" method="post" enctype="multipart/form-data">
@@ -194,9 +194,10 @@
                         style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
                     </button> --}}
-                    <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
-                    <i class="icofont-paper-plane"></i>
+                    <button type="submit" class="btn btn-primary"
+                        style="background-color: rgb(40, 144, 204); width: 100px; height: 50px; font-size: 25px; position: absolute; bottom: -58px; right: 1px;">
+                        <i class="icofont-paper-plane"></i>
+                    </button>
                 </button>
                 </div>
 
@@ -205,7 +206,7 @@
             <br><br>
 
             <div class="comment-area">
-                <h4 class="comment-title">{{ $commentAll }} comments</h4>
+                <h4 class="comment-title">{{ $commentAll }} <i class="icofont-duotone icofont-comment"></i> comments</h4>
                 <ul class="comments">
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
