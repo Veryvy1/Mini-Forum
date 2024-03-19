@@ -1,3 +1,4 @@
+@extends('summernote')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,40 +50,40 @@
             margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
         }
         .comment-options {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        }
 
-}
-.comment-options1 {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-}
-.comment-options a,
-.comment-options button {
-    text-decoration: underline;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.comment-options a {
-    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-    margin-left: 50px; /* Geser tombol Reply ke kanan */
-}
+        .comment-options1 {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .comment-options a,
+        .comment-options button {
+            text-decoration: underline;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .comment-options a {
+            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+            margin-left: 50px; /* Geser tombol Reply ke kanan */
+        }
 
-.comment-options1 a,
-.comment-options1 button {
-    text-decoration: underline;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.comment-options1 a {
-    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-    margin-left: 20px; /* Geser tombol Reply ke kanan */
-}
-        </style>
+        .comment-options1 a,
+        .comment-options1 button {
+            text-decoration: underline;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .comment-options1 a {
+            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+            margin-left: 20px; /* Geser tombol Reply ke kanan */
+        }
+    </style>
 </head>
 
 <body>
@@ -154,13 +155,14 @@
                 @csrf
                 @method('POST')
                 <div style="position: relative;">
-                    <textarea name="comment" id="comment" placeholder="Input your comment........" cols="120" rows="2"
-                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;"></textarea>
-                        <input type="file" name="picture" id="fileInput" style="display: none;">
-                    <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
+                    <textarea name="comment" id="summernote" placeholder="Input your comment........" cols="120" rows="2"
+                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">
+                    </textarea>
+                    {{-- <input type="file" name="picture" id="fileInput" style="display: none;"> --}}
+                    {{-- <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
                         style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
-                    </button>
+                    </button> --}}
                     <button type="submit" class="btn btn-primary rounded-circle"
                     style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
@@ -177,21 +179,24 @@
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
                     <li class="comment">
+                    <li class="comment">
                         <div class="commenter-photo">
                             @if ($comments->user->profile)
                             <img src="{{ asset('storage/'. $comments->user->profile) }}">
+                            <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
+                            <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
+                        <div class="comment-content">
                         <div class="comment-content">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
-                            <img src="{{ asset('storage/' . $comments->picture) }}" style="height: 250px;">
                             <p style="word-break: break-word;">
-                                {{ $comments->comment }}
+                                {!! $comments->comment !!}
                             </p>
                         </div>
                         <div class="comment-options">
@@ -207,6 +212,7 @@
                             </div>
                         </div>
                     </li>
+
 
                     @else
                     <li>
@@ -224,14 +230,17 @@
                             @endif
                         </div>
                     <div class="comment-content1">
+                    <div class="comment-content1">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
                             <p style="word-break: break-word;">
-                                {{ $comments->comment }}
+                                {!! $comments->comment !!}
                             </p>
+                        </div>
+                        <div class="comment-options1">
                         </div>
                         <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
@@ -243,7 +252,6 @@
                                 </form>
                             {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
-
                         </div>
                     </li>
                     <hr>
@@ -301,6 +309,30 @@
             </div>
         </div>
     </div>
+
+    @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Hello stand-alone UI',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+            var oldIsiValue = {!! json_encode(old('isi')) !!};
+            $('#summernote').summernote('code', oldIsiValue);
+        });
+    </script>
+    @endsection
 
 
     <?php if ($errors->any()): ?>
@@ -364,6 +396,11 @@
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
+    <script>
+            function submitForm(button) {
+                form.submit();
+            }
+    </script>
     <script>
             function submitForm(button) {
                 form.submit();

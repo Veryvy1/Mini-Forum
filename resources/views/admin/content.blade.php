@@ -284,7 +284,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CONTENT</h6>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body">
                 <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
@@ -428,7 +427,6 @@
     toastr.success("<?php echo Session::get('success'); ?>");
 </script>
 <?php endif; ?>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

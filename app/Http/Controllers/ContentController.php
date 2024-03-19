@@ -214,21 +214,25 @@ class ContentController extends Controller
         try {
             $content = Content::findOrFail($id);
 
+            Comment::where('content_id', $content->id)->delete();
+            Like::where('content_id', $content->id)->delete();
+
             if (Storage::disk('public')->exists($content->gambar)) {
-                    Storage::disk('public')->delete($content->gambar);
-                }
+                Storage::disk('public')->delete($content->gambar);
+            }
 
-                $localFilePath = public_path('storage/' . $content->gambar);
-                if (File::exists($localFilePath)) {
-                    File::delete($localFilePath);
-                }
+            $localFilePath = public_path('storage/' . $content->gambar);
+            if (File::exists($localFilePath)) {
+                File::delete($localFilePath);
+            }
 
-                $content->delete();
+            $content->delete();
 
-                return redirect()->route('content.index')->with('success', 'Content successfully deleted');
+            return redirect()->route('content.index')->with('success', 'Content successfully deleted');
         } catch (ModelNotFoundException $e) {
-                return redirect()->route('content.index')->with('error', 'Content not found');
+            return redirect()->route('content.index')->with('error', 'Content not found');
         }
     }
+
 }
 

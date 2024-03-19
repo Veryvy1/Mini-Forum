@@ -69,23 +69,23 @@
 
 <ul class="web-elements">
 <li>
- @if(auth()->check())
-<div class="user-dp">
-    <div style="display: flex; align-items: center;">
-        <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
-            <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-                @if(auth()->user()->profile)
-                    <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-                @else
-                    <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-                @endif
-            </a>
+    @if(auth()->check())
+    <div class="user-dp">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                    @if(auth()->user()->profile)
+                        <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    @endif
+                </a>
+            </div>
+        <div class="name">
+            <h4>{{ auth()->user()->name }}</h4>
         </div>
-    <div class="name">
-        <h4>{{ auth()->user()->name }}</h4>
     </div>
-</div>
-@endif
+    @endif
 </li>
 <li>
 <a href="#" title>
@@ -174,21 +174,17 @@
             <div class="friend-info">
                     <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
                     @if($contents->user->profile)
-                    <img src="{{ asset('storage/' .  $contents->user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="{{ asset('storage/' .  $contents->user->profile) }}">
                     @else
-                    <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
+                    <img alt src="images/LOGO/profil.jpeg">
                     @endif
-                </figure>
-                    <em  style="position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%);">
-                        {{-- style="position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); --}}
-                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
-                            <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
-                        </svg>
-                    </em>
-    <div class="friend-name">
-        <ins><a title>{{ $contents->user->name }}</a></ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
-    </div>
+                    </figure>
+                    <div class="friend-name">
+                        <ins><a title>{{ $contents->user->name }}</a></ins>
+                        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span> --}}
+                        <p style="">Categories: {{ optional($contents->kategori)->kategori }},</p>
+                    </div>
     <div class="post-meta">
         <figure>
             <a href="{{ route('content.detail', ['content' => $contents->id]) }}">
@@ -267,16 +263,16 @@
             @enderror
             <input type="hidden" name="content_id" value="{{$contents->id}}">
             <button type="submit" class="" style="
-            background: #eae9ee;
+            background: #ff0000;
             border-radius: 4px;
-            color: #82828e;
+            color: #ffffff;
             display: inline-block;
             font-size: 13px;
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
             border: none;
-             }"><i class="icofont-like"></i> Like</button>
+             }"><i class="icofont-like"></i> Unlike</button>
              </form>
         @else
             <form action="/like" method="post">
@@ -293,9 +289,9 @@
                 @enderror
                 <input type="hidden" name="content_id" value="{{$contents->id}}">
                 <button type="submit" class="" style="
-                background: #eae9ee;
+                background: #0099ff;
                 border-radius: 4px;
-                color: #82828e;
+                color: #ffffff;
                 display: inline-block;
                 font-size: 13px;
                 padding: 5px 20px;

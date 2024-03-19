@@ -94,6 +94,7 @@
             <figure>
             @if ($user->bgprofile)
                 <img id="preview-bgimage" src="{{ asset('storage/' . $user->bgprofile) }}" alt="">
+                <img id="preview-bgimage" src="{{ asset('storage/' . $user->bgprofile) }}" alt="">
             @else
                 <img id="preview-bgimage" src="{{ asset('images/LOGO/bguser.jpg') }}" alt="Preview Image">
             @endif
@@ -104,12 +105,17 @@
         </div>
             </div>
 
+
             <div class="user-dp-edit">
+            <figure style="width: 105px; height: 105px; border-radius: 50%; overflow: hidden;">
+            {{-- <figure> --}}
             <figure style="width: 105px; height: 105px; border-radius: 50%; overflow: hidden;">
             {{-- <figure> --}}
             @if ($user->profile)
                 <img id="preview-image" src="{{ asset('storage/' . $user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
+                <img id="preview-image" src="{{ asset('storage/' . $user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
             @else
+                <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" style="width: 100%; height: 100%; object-fit: cover;" alt>
                 <img id="preview-image" src="{{ asset('images/LOGO/profil.jpeg') }}" style="width: 100%; height: 100%; object-fit: cover;" alt>
             @endif
             <div class="fileupload">
@@ -217,32 +223,6 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{-- <script>
-        @if (Session::has('success'))
-        toastr.success("{{ Session::get('success') }}")
-        @endif
-        function swalpFunction() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Data dihapus");
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            });
-        }
-    </script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -259,12 +239,33 @@
             const previewImage = document.getElementById('preview-image');
 
             profileInput.addEventListener('change', function() {
+            // Menampilkan pratinjau gambar profile
+            const profileInput = document.getElementById('profile-input');
+            const previewImage = document.getElementById('preview-image');
+
+            profileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 const reader = new FileReader();
 
+
                 reader.onload = function(e) {
                     previewImage.setAttribute('src', e.target.result);
+                    previewImage.setAttribute('src', e.target.result);
                 }
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
+                    previewImage.setAttribute('src', '{{ asset('images/LOGO/profil.jpeg') }}');
+                }
+            });
+
+            // Menampilkan pratinjau gambar background profile
+            const bgProfileInput = document.getElementById('bgprofile-input');
+            const previewBgImage = document.getElementById('preview-bgimage');
+
+            bgProfileInput.addEventListener('change', function() {
 
                 if (file) {
                     reader.readAsDataURL(file);
@@ -286,8 +287,17 @@
                     previewBgImage.setAttribute('src', e.target.result);
                 }
 
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewBgImage.setAttribute('src', e.target.result);
+                }
+
                 if (file) {
                     reader.readAsDataURL(file);
+                } else {
+                    // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
+                    previewBgImage.setAttribute('src', '{{ asset('images/LOGO/background.jpeg') }}');
                 } else {
                     // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
                     previewBgImage.setAttribute('src', '{{ asset('images/LOGO/background.jpeg') }}');
