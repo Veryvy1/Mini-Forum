@@ -98,21 +98,19 @@
             <li>
              @if(auth()->check())
             <div class="user-dp">
-               <div style="display: flex; align-items: center;">
-    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
-        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-            @if(auth()->user()->profile)
-                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-            @else
-                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-            @endif
-        </a>
-    </div>
-    <div class="name">
-        <h4>{{ auth()->user()->name }}</h4>
-    </div>
-</div>
-
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                            @if(auth()->user()->profile)
+                                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @endif
+                        </a>
+                    </div>
+                <div class="name">
+                    <h4>{{ auth()->user()->name }}</h4>
+                </div>
             </div>
             @endif
             </li>
@@ -128,7 +126,6 @@
                         <i class="icofont-user-alt-3"></i> Your Profile
                     </a>
                 </li>
-            <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
             <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
             <li class="logout">
@@ -164,11 +161,11 @@
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}</textarea>
                         <input type="file" name="picture" id="fileInput" style="display: none;">
                     <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
                     </button>
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 265px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>

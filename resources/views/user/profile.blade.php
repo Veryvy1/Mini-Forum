@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -65,7 +65,7 @@
         </a>
         <ul class="dropdown">
         <li><a href="#" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-        <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+        <li><a href="# title><i class="icofont-plus"></i>Add Content</a></li>
         <li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i>Sugestion</a></li>
         <li class="logout">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -167,7 +167,57 @@
 </div>
     </form>
 
+    @if (session('warning'))
+        <script>
+            toastr.warning("{{ session('warning') }}");
+        </script>
+    @endif
+
+    @if (Session::has('success'))
+        <script>
+            toastr.success("{{ Session::get('success') }}");
+        </script>
+    @endif
+
     <script>
+    function swalpFunction(message, type) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: type,
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log("Data dihapus");
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+    }
+
+    @if (Session::has('success'))
+        swalpFunction("{{ Session::get('success') }}", "success");
+    @endif
+    </script>
+    <script>
+        function toggleDropdown(contentId) {
+            var dropdown = document.getElementById("dropdown-" + contentId);
+            if (dropdown.style.display === "none") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- <script>
         @if (Session::has('success'))
         toastr.success("{{ Session::get('success') }}")
         @endif
@@ -191,7 +241,7 @@
                 }
             });
         }
-    </script>
+    </script> --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -200,32 +250,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 
     </html>
-    {{-- <script>
-        function previewImage(){
-            var input = document.getElementById('avatarFile');
-            var preview = document.getElementById('avatarPreview');
 
-            if (input,files.length > 0){
-                var file = input.files[0];
-                var reader = new FileReader();
-
-                reader.onloadend = function(){
-                    preview.src = reader.result;
-                    preview.style.borderRadius = '50%';
-                    preview.style.width = '100%';
-                    preview.style.height = '100%';
-                }
-                reader.readAsDataURL(file);
-
-            }else{
-                preview.src = '{{ asset('images/LOGO/logo.png') }}';
-                preview.style.borderRadius = '50%';
-                preview.style.width = '100%';
-                preview.style.height = '100%';
-            }
-
-        }
-    </script> --}}
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -269,6 +294,4 @@
                 }
             });
         });
-    </script>
-
-
+    </script>

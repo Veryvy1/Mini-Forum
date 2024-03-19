@@ -212,9 +212,9 @@
     <td>{{ $key + 1 }}</td>
 <td style="width: 25%">
 <div class="d-flex align-items-center">
-<div class="avatar avatar-xs">
+<div class="avatar avatar-xs" style="border-radius: 50%; width: 30px; height: 30px; overflow: hidden;">
     <span class="avatar-initial rounded-circle bg-secondary">
-        <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="border-radius: 50%;">
+        <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
     </span>
 </div>
 {{-- <span class="tx-medium mg-l-10">{{ $contents->judul }}</span> --}}

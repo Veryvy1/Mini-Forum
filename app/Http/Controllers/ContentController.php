@@ -8,6 +8,7 @@ use App\Models\Content;
 use App\Models\Comment;
 use App\Models\Kategori;
 use App\Models\Like;
+use DOMDocument;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
@@ -78,25 +79,46 @@ class ContentController extends Controller
 
     public function storeForAdmin(ContectRequest $request)
     {
-        try{
-        $gambar = $request->file('gambar');
-        $path = Storage::disk('public')->put('content', $gambar);
+        try {
+            // $gambar = $request->file('gambar');
+            // $path = Storage::disk('public')->put('content', $gambar);
 
-        $user_id = auth()->id();
+            $user_id = auth()->id();
 
-        $content = new Content();
-        $content->user_id = auth()->id();
-        $content->judul = $request->input('judul');
-        $content->deskripsi = $request->input('deskripsi');
-        $content->kategori_id = $request->input('kategori_id');
-        $content->gambar = $path;
-        $content->save();
+            $deskripsi = $request->input('deskripsi');
+
+            $dom = new DOMDocument();
+            $dom->loadHTML($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+            $images = $dom->getElementsByTagName('im');
+
+            foreach ($images as $key => $img) {
+                $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
+                $images_name = "/uploads" . time() . $key . '.png';
+                Storage::put('public' . $images_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $images_name);
+            }
+
+            $gambar = $request->file('gambar');
+            $path = Storage::disk('public')->put('content', $gambar);
+
+            Content::create([
+                'judul' => $request->input('judul'),
+                'deskripsi' => $dom->saveHTML(),
+                'kategori_id' => $request->input('kategori_id'),
+                'gambar' => $path,
+                'user_id' => auth()->id(),
+            ]);
+
 
             return redirect()->route('content.index')->with('success', 'Content added successfully');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
+
 
     public function storeForUser(ContectRequest $request)
     {

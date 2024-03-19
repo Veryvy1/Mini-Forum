@@ -58,7 +58,8 @@ Route::middleware(['auth'])->group(function () {
         Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
         Route::get('/home/create/{$id}', [ContentController::class, 'createForUser'])->name('user.content.create');
         Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
-        Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
+        // Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
+        Route::get('/homesearch', [HomeUserController::class, 'index'])->name('home.search');
         Route::get('/homesearch', [HomeUserController::class, 'search'])->name('home.search');
         Route::get('/comment/{id}', [CommentController::class, 'commentId'])->name('content.comment');
         Route::post('/comment/{contentId}', [CommentController::class, 'store'])->name('comment.store');

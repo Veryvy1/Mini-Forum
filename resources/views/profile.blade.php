@@ -136,7 +136,7 @@
             <i class="icofont-user-alt-3"></i> Your Profile
         </a>
     </li>
-<li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
+<li><a href="#" title><i class="icofont-plus"></i>Add Content</a></li>
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
 <li class="logout">
@@ -315,7 +315,8 @@ padding: 80px 0;
                     vertical-align: middle;
                     transition: all 0.2s linear 0s;
                     border: none;
-                     }"><i class="icofont-like"></i> Unlike</button>        </form>
+                     }"><i class="icofont-like"></i> Like</button>
+                     </form>
                 @else
                     <form action="/like" method="post">
                         @csrf
@@ -426,34 +427,7 @@ padding: 80px 0;
     </div>
 
 
-    <script>
-        @if (Session::has('success'))
-        toastr.success("{{ Session::get('success') }}")
-        @endif
-        function swalpFunction() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Data dihapus");
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            });
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-@if (session('warning'))
+    @if (session('warning'))
     <script>
         toastr.warning("{{ session('warning') }}");
     </script>
@@ -491,6 +465,18 @@ function swalpFunction(message, type) {
     swalpFunction("{{ Session::get('success') }}", "success");
 @endif
 </script>
+<script>
+    function toggleDropdown(contentId) {
+        var dropdown = document.getElementById("dropdown-" + contentId);
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function toggleDropdown(contentId) {
         var dropdown = document.getElementById("dropdown-" + contentId);

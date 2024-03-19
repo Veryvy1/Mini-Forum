@@ -18,9 +18,10 @@ class HomeUserController extends Controller
         $oldSearch = $request->input('search');
         if ($request->has('search')) {
             $ccontent = $request->input('search');
-            $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
+            $content = Content::where('judul', 'LIKE', "%$ccontent%")->take(99)->paginate(6);
         } else {
             $content = Content::take(99)->paginate(6);
+            // a
         }
 
         $likesCount = [];
@@ -34,14 +35,7 @@ class HomeUserController extends Controller
         $kategori = Kategori::all();
         $likes = Like::where('user_id', Auth::id())->first();
 
-        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount'));
-    }
-
-    public function search(Request $request){
-        $ccontent = $request->input('search');
-        $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
-
-        return response()->json($content);
+        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount','oldSearch'));
     }
 
     public function filter(Request $request)
@@ -57,7 +51,7 @@ class HomeUserController extends Controller
             $query->whereIn('kategori_id', $kategori_ids);
         }
 
-        $content = $query->get();
+        $content = $query->paginate(6);
 
         $likesCount = [];
         $commentCount = [];

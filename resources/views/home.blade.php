@@ -14,68 +14,13 @@
 <link rel="stylesheet" href="socimo/css/responsive.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Pastikan jQuery telah dimasukkan sebelumnya -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-{{-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-
 <style>
-    /* CSS for the search form */
-    .search-form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .search-input {
-        width: 300px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-    }
-
-    .search-button {
-        background-color: #2ea8dc;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 15px;
-        margin-left: 10px;
-        cursor: pointer;
-    }
-
-    /* CSS for the modal */
-    /* .modal {
-        position: absolute;
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        display: none;
-    } */
-
-    /* .modal-content {
-        max-width: 300px;
-        margin-top: 10px;
-    } */
-
-
-     .friend-info em {
-        position: absolute;
-    bottom: 11rem;
-    left: 38px;
-    transform: translateX(-50%);
-    /* position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); */
-    }
     .large-label {
         font-size: 16px;
     }
@@ -126,21 +71,19 @@
 <li>
  @if(auth()->check())
 <div class="user-dp">
-   <div style="display: flex; align-items: center;">
-    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
-        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-            @if(auth()->user()->profile)
-                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-            @else
-                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
-            @endif
-        </a>
-    </div>
+    <div style="display: flex; align-items: center;">
+        <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+            <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                @if(auth()->user()->profile)
+                    <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                @else
+                    <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                @endif
+            </a>
+        </div>
     <div class="name">
         <h4>{{ auth()->user()->name }}</h4>
     </div>
-</div>
-
 </div>
 @endif
 </li>
@@ -152,12 +95,12 @@
 </a>
 <ul class="dropdown">
     <li>
-        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Profile">
             <i class="icofont-user-alt-3"></i> Your Profile
         </a>
     </li>
 <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
-    <i class="icofont-plus"></i>Latest Content</a></a>
+    <i class="icofont-plus"></i>Add Content</a></a>
 </li>
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
@@ -229,7 +172,7 @@
     <div class="main-wraper">
         <div class="user-post">
             <div class="friend-info">
-                <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
+                    <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
                     @if($contents->user->profile)
                     <img src="{{ asset('storage/' .  $contents->user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;">
                     @else
@@ -270,6 +213,44 @@
 <div class="we-video-info">
 <div class="stat-tools">
 <div class="box">
+    {{-- <button id="like-btn" data-like="1" data-user="{{ Auth::id() }}" data-content="{{ auth()->user()->id }}">
+        Like
+    </button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#like-btn').click(function() {
+                var likeBtn = $(this);
+                var likeStatus = likeBtn.data('like');
+                var userId = likeBtn.data('user');
+                var contentId = likeBtn.data('content');
+
+                $.ajax({
+                    url: '{{ route('like.toggle', '') }}/' + contentId,
+                    type: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        like: likeStatus,
+                        user: userId,
+                        content: contentId
+                    },
+                    success: function(response) {
+                        if (response.message === 'Like berhasil') {
+                            likeBtn.text('Unlike');
+                            likeBtn.data('like', 0);
+                        } else if (response.message === 'Unlike berhasil') {
+                            likeBtn.text('Like');
+                            likeBtn.data('like', 1);
+                        }
+                    },
+                    error: function() {
+                        console.log('Terjadi kesalahan saat melakukan permintaan AJAX.');
+                    }
+                });
+            });
+        });
+    </script> --}}
+
     <div class="Like">
         @if(isset($likes) && $likes && $likes->user_id == Auth::id() && $likes->content_id == $contents->id)
         <form action="{{ route('like.destroy', $likes->id) }}" method="post">
@@ -295,9 +276,8 @@
             vertical-align: middle;
             transition: all 0.2s linear 0s;
             border: none;
-             }"><i class="icofont-like"></i> Unlike</button>
-
-            </form>
+             }"><i class="icofont-like"></i> Like</button>
+             </form>
         @else
             <form action="/like" method="post">
                 @csrf
@@ -379,155 +359,21 @@
     {{ $content->links('vendor.sweetalert.pagination') }}
 </div>
 
-
     </div>
-    {{-- <div class="col-lg-3">
+    <div class="col-lg-3">
         <div class="main-wraper">
-         <span class="new-title">Search Post</span>
-        <form id="searchForm"  action="{{ route('home.search') }}" method="get">
-            @csrf
-        <div class="d-flex justify-content-between align-items-center">
-
-        <div class="new-post">
-            <div class="input-group">
-                <input type="search" name="search" class="form-control" value="{{ $oldSearch }}" placeholder="Search...">
-                 <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+            <span class="new-title">Search Post</span>
+            <div class="new-post">
+                <form id="searchForm" action="{{ route('home.search') }}" method="get">
+                    @csrf
+                    <i class="icofont-search"></i>
+                    <input value="{{ $oldSearch }}" type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+                </form>
             </div>
         </div>
-    </div>
-</form>
-</div>
-
-<span class="new-title">Search Post</span>
-<div class="new-post">
-    <form id="searchForm"  action="{{ route('home.search') }}" method="get">
-
-        @csrf
-        <i class="icofont-search"></i>
-        <input type="search" name="search" id="searchInput" class="form-control cari" placeholder="Search...">
-
-    </form>
-     <form id="searchForm" action="{{ route('home.search') }}" method="POST">
-
-        {{ csrf_field() }}
-    <div class="d-flex justify-content-between align-items-center">
-
-    <div class="new-post">
-        <div class="input-group">
-            <input type="search" name="search" id="search" class="form-control"  placeholder="Search...">
-            <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
-        </div>
-    </div>
-</div>
-</form>
 
 
 
-</div>
-<style>
-    .modal {
-        position: absolute;
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 10px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-        display: none;
-        z-index: 1000; /* Menempatkan modal di atas elemen lain */
-        max-height: 400px; /* Menyesuaikan ketinggian modal */
-        overflow-y: auto; /* Membuat modal dapat di-scroll jika terlalu besar */
-    }
-
-    .modal-content {
-        max-width: 300px;
-        margin-top: 10px;
-    }
-
-    /* Tambahkan style untuk posisi modal */
-    .modal.show {
-        top: calc(100% + 10px); /* Jarak dari input search ke bawah modal */
-        left: 50%;
-        transform: translateX(-50%);
-    }
-</style>
-
-<div id="result" class="modal">
-    <div class="modal-content">
-        <ul class="list-group">
-            @if(count($content) > 0)
-                @foreach ($content as $post)
-                    <li class="list-group-item">{{ $post->judul }}</li>
-                @endforeach
-            @else
-                <li class="list-group-item">No Results Found</li>
-            @endif
-        </ul>
-    </div>
-</div>
-
-</div> --}}
-<div class="col-lg-3">
-    <div class="main-wraper">
-    {{-- <span class="new-title">Search Post</span>
-    <form id="searchForm"  action="{{ route('home.search') }}" method="get">
-        @csrf
-    <div class="d-flex justify-content-between align-items-center">
-
-    <div class="new-post">
-        <div class="input-group">
-            <input type="search" name="search" class="form-control" value="{{ $oldSearch }}" placeholder="Search...">
-             <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
-        </div>
-    </div>
-</div>
-</form>
-</div> --}}
-
-<span class="new-title">Search Post</span>
-<div class="new-post">
-{{--<form id="searchForm"  action="{{ route('home.search') }}" method="get">
-
-    @csrf
-    <i class="icofont-search"></i>
-    <input type="search" name="search" id="searchInput" class="form-control cari" placeholder="Search...">
-
-</form> --}}
- <form id="searchForm" action="{{ route('home.search') }}" method="get">
-
-    {{-- {{ csrf_field() }} --}}
-    @csrf
-{{-- <div class="d-flex justify-content-between align-items-center"> --}}
-
-{{-- <div class="new-post"> --}}
-    {{-- <div class="input-group"> --}}
-        <i class="icofont-search"></i>
-        <input type="search" name="search" id="search" class="form-control"  placeholder="Search...">
-        {{-- <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button> --}}
-    {{-- </div> --}}
-{{-- </div> --}}
-{{-- </div> --}}
-</form>
-
-
-
-</div>
-
-
-<div id="result" class="panel panel-default" style="display: none;">
-{{-- <div class="modal-content"> --}}
-    <ul class="list-group">
-        @if(count($content) > 0)
-            @foreach ($content as $post)
-                <li class="list-group-item">{{ $post->judul }}</li>
-            @endforeach
-        @else
-            <li class="list-group-item">No Results Found</li>
-        @endif
-    </ul>
-    {{-- </div> --}}
-</div>
-
-    </div>
 
 
 <aside class="sidebar static right">
@@ -1567,106 +1413,6 @@ i think that some how, we learn who we really are and then live with that decisi
     </div>
 </div>
 
-{{-- <script>
-    function submitSearch() {
-        document.getElementById("searchForm").submit();
-    }
-</script> --}}
-
-
-<script>
-    const searchInput = document.getElementById('searchInput');
-    const searchResults = document.getElementById('searchResults');
-    let oldValue = '';
-
-    function submitSearch() {
-        const query = searchInput.value.trim().toLowerCase();
-
-        // Jika nilai kosong, kembalikan ke halaman utama
-        if (query === '') {
-            window.location.href = "{{ route('home') }}";
-            return;
-        }
-
-        if (query === oldValue) {
-            return; // Jika nilai tidak berubah, jangan lakukan pencarian lagi
-        }
-
-        oldValue = query; // Simpan nilai baru untuk old value
-
-        // Lakukan pencarian
-        searchResults.innerHTML = `<p>Mencari "${query}"...</p>`;
-        // Lakukan proses pencarian asynchronous di sini (misalnya, dengan menggunakan AJAX)
-        // Setelah mendapatkan hasil, update tampilan searchResults
-    }
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#search').keyup(function(e){
-            var search = $(this).val();
-            if(search == ""){
-                $("#result .list-group").html(""); // Empty the modal content if search is empty
-                $('#result').hide();
-            } else {
-                $.get("{{ route('home.search') }}", { search: search }, function(data){
-                    $('#result .list-group').empty(); // Empty the modal content before populating with new search results
-
-                    if(data.length > 0){ // Check if there are search results before displaying
-                        data.forEach(function(post, index) {
-                            $('#result .list-group').append('<li class="list-group-item" data-index="' + index + '">' + post.judul + '</li>');
-                        });
-                    } else {
-                        $('#result .list-group').append('<li class="list-group-item">No Results Found</li>');
-                    }
-
-                    $('#result').show(); // Show the modal with search results
-
-                    // Handle keyboard shortcuts
-                    $('#result .list-group-item').on('keydown', function(e) {
-                        var currentIndex = $(this).data('index');
-                        var nextIndex = currentIndex + 1;
-                        var prevIndex = currentIndex - 1;
-
-                        switch(e.which) {
-                            case 13: // Enter key
-                                var selectedTitle = $(this).text();
-                                $('#search').val(selectedTitle); // Set the input field value to the selected title
-                                $('#result').hide(); // Hide the modal
-                                // Perform search or any other action here
-                                break;
-                            case 38: // Up arrow key
-                                if (prevIndex >= 0) {
-                                    $('#result .list-group-item[data-index="' + prevIndex + '"]').focus();
-                                }
-                                break;
-                            case 40: // Down arrow key
-                                if (nextIndex < $('#result .list-group-item').length) {
-                                    $('#result .list-group-item[data-index="' + nextIndex + '"]').focus();
-                                }
-                                break;
-                        }
-                    });
-                });
-            }
-        });
-    });
-</script>
-
-
-
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log("Script is executing!");
-        document.getElementById('createPostInput').addEventListener('click', function() {
-            console.log("Input clicked!");
-            document.getElementById('postPopup').style.display = 'block';
-        });
-    });
-</script>
-
 <?php if ($errors->any()): ?>
     <script>
         toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
@@ -1708,6 +1454,58 @@ i think that some how, we learn who we really are and then live with that decisi
     toastr.success("<?php echo Session::get('success'); ?>");
 </script>
 <?php endif; ?>
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Script is executing!");
+        document.getElementById('createPostInput').addEventListener('click', function() {
+            console.log("Input clicked!");
+            document.getElementById('postPopup').style.display = 'block';
+        });
+    });
+</script>
+
+<script>
+    function showLogoutAlert() {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Anda yakin ingin keluar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Keluar!',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+            Swal.fire(
+                'Logout Berhasil',
+                'Anda telah berhasil logout.',
+                'success'
+            );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+                'Logout Dibatalkan',
+                'Anda membatalkan logout.',
+                'error'
+            );
+        }
+        });
+    }
+
+</script>
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1784,49 +1582,5 @@ i think that some how, we learn who we really are and then live with that decisi
         });
     }
 </script>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
-<script>
-    $('.cari').select2({
-        placeholder: 'Cari...',
-        ajax: {
-            url: '/cari',
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results:  $.map(data, function (item) {
-                        return {
-                            text: item.email,
-                            id: item.id
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
-
-    const searchInput = document.getElementById('searchInput');
-    let oldValue = '';
-
-    searchInput.addEventListener('input', function() {
-        const query = searchInput.value.trim().toLowerCase();
-
-        if (query === oldValue) {
-            return; // Jika nilai tidak berubah, jangan lakukan pencarian lagi
-        }
-
-        oldValue = query; // Simpan nilai baru untuk old value
-
-        // Lakukan pencarian
-        const searchForm = document.getElementById('searchForm');
-        searchForm.submit();
-    });
-</script>
-
 </body>
 </html>
