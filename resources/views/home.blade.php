@@ -14,13 +14,65 @@
 <link rel="stylesheet" href="socimo/css/responsive.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
+    /* CSS for the search form */
+    .search-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 300px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    .search-button {
+        background-color: #2ea8dc;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    /* CSS for the modal */
+    /* .modal {
+        position: absolute;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        display: none;
+    } */
+
+    /* .modal-content {
+        max-width: 300px;
+        margin-top: 10px;
+    } */
+
+
+     .friend-info em {
+        position: absolute;
+    bottom: 11rem;
+    left: 38px;
+    transform: translateX(-50%);
+    /* position: absolute; bottom: 11rem; left: 38px;   transform: translateX(-50%); */
+    }
     .large-label {
         font-size: 16px;
     }
@@ -358,7 +410,7 @@
 </div>
 
     </div>
-    <div class="col-lg-3">
+    {{-- <div class="col-lg-3">
         <div class="main-wraper">
             <span class="new-title">Search Post</span>
             <div class="new-post">
@@ -1580,5 +1632,49 @@ i think that some how, we learn who we really are and then live with that decisi
         });
     }
 </script>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+<script>
+    $('.cari').select2({
+        placeholder: 'Cari...',
+        ajax: {
+            url: '/cari',
+            dataType: 'json',
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results:  $.map(data, function (item) {
+                        return {
+                            text: item.email,
+                            id: item.id
+                        }
+                    })
+                };
+            },
+            cache: true
+        }
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    let oldValue = '';
+
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value.trim().toLowerCase();
+
+        if (query === oldValue) {
+            return; // Jika nilai tidak berubah, jangan lakukan pencarian lagi
+        }
+
+        oldValue = query; // Simpan nilai baru untuk old value
+
+        // Lakukan pencarian
+        const searchForm = document.getElementById('searchForm');
+        searchForm.submit();
+    });
+</script>
+
 </body>
 </html>

@@ -111,6 +111,7 @@
                 <div class="name">
                     <h4>{{ auth()->user()->name }}</h4>
                 </div>
+
             </div>
             @endif
             </li>
@@ -179,13 +180,17 @@
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
                     <li class="comment">
+                    <li class="comment">
                         <div class="commenter-photo">
                             @if ($comments->user->profile)
                             <img src="{{ asset('storage/'. $comments->user->profile) }}">
+                            <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
+                            <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
+                        <div class="comment-content">
                         <div class="comment-content">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
@@ -208,6 +213,7 @@
                         </div>
                     </li>
 
+
                     @else
                     <li>
                         <style>
@@ -224,6 +230,7 @@
                             @endif
                         </div>
                     <div class="comment-content1">
+                    <div class="comment-content1">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
@@ -232,6 +239,8 @@
                             <p style="word-break: break-word;">
                                 {!! $comments->comment !!}
                             </p>
+                        </div>
+                        <div class="comment-options1">
                         </div>
                         <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
@@ -387,6 +396,11 @@
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
+    <script>
+            function submitForm(button) {
+                form.submit();
+            }
+    </script>
     <script>
             function submitForm(button) {
                 form.submit();

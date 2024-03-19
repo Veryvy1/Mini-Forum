@@ -53,14 +53,19 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc">
                                     {{ __('Send Password Reset Link') }}
-                                </button>
+                                </button> <span>Go back to <a href="{{ route('login') }}"><span style="color: #2ea8dc;">Sign In</span></a></span>
+
                             </div>
                         </div>
+
                     </form>
+
                 </div>
+
             </div>
+
         </div>
     </div>
     </div>

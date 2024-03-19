@@ -21,7 +21,6 @@ class HomeUserController extends Controller
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->take(99)->paginate(6);
         } else {
             $content = Content::take(99)->paginate(6);
-            // a
         }
 
         $likesCount = [];
@@ -35,7 +34,14 @@ class HomeUserController extends Controller
         $kategori = Kategori::all();
         $likes = Like::where('user_id', Auth::id())->first();
 
-        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount','oldSearch'));
+        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount'));
+    }
+
+    public function search(Request $request){
+        $ccontent = $request->input('search');
+        $content = Content::where('judul', 'LIKE', "%$ccontent%")->get();
+
+        return response()->json($content);
     }
 
     public function filter(Request $request)

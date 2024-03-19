@@ -50,16 +50,16 @@
                             <div class="info-sec">
                                 <i class="icofont-checked"></i>
                                 <div>
-                                    <h6>Learn from industry experts</h6>
+                                    <h6>Learn from experts</h6>
                                     <p>Share your experiences, collaborate with your peers, and get the support you need to advance your career.</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="info-sec">
-                                <i class="icofont-play-alt-1"></i>
+                                <i class="icofont-macbook"></i>
                                 <div>
-                                    <h6>Find video Courses on any topic</h6>
+                                    <h6>Find Forum any topic</h6>
                                     <p>Share your experiences, collaborate with your peers, and get the support you need to advance your career.</p>
                                 </div>
                             </div>
@@ -116,15 +116,12 @@
                                     <h2>Enter the Discussion: Dive into Your Favorite Topic In The Forums</h2>
                                     <p>
                                         <a href="#" title>Engineering</a>
-                                        <a href="#" title>Mathematics</a>
-                                        <a href="#" title>Biology</a>
-                                        <a href="#" title>Computer Science</a>
+                                        <a href="#" title>Gaming</a>
+                                        <a href="#" title>Meme</a>
+                                        <a href="#" title>Desain</a>
                                         <a href="#" title>Climate</a>
                                         <a href="#" title>Medicine</a>
-                                        <a href="#" title>Physics</a>
-                                        <a href="#" title>Sociology</a>
-                                        <a href="#" title>Chemistry</a>
-                                        <a href="#" title>Astrophysics</a>
+                                       
                                     </p>
                                 </div>
                             </div>
