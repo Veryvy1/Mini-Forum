@@ -220,11 +220,12 @@
 </div>
 </td>
 <td>
-    @if(strlen($contents->deskripsi) > 70)
-        {{ substr($contents->deskripsi, 0, 70) }}...
-    @else
-        {{ $contents->deskripsi }}
-    @endif
+    @if (strlen(strip_tags($contents->deskripsi)) > 60)
+    {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
+@else
+    {!! $contents->deskripsi !!}
+@endif
+
 <td style="width: 10%">
 <center><span>{{ $contents->likes_count }}</span></center>
 </td>

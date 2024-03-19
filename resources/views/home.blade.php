@@ -100,7 +100,7 @@
         </a>
     </li>
 <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
-    <i class="icofont-plus"></i>Add Content</a></a>
+    <i class="icofont-plus"></i>Latest Content</a></a>
 </li>
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
@@ -172,7 +172,9 @@
     <div class="main-wraper">
         <div class="user-post">
             <div class="friend-info">
-                    <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
+                <figure>
+                    <em>
+                    <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
                     @if($contents->user->profile)
                     <img src="{{ asset('storage/' .  $contents->user->profile) }}">
                     @else
@@ -182,8 +184,6 @@
                     <div class="friend-name">
                         <ins><a title>{{ $contents->user->name }}</a></ins>
                         <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
-                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span> --}}
-                        <p style="">Categories: {{ optional($contents->kategori)->kategori }},</p>
                     </div>
     <div class="post-meta">
         <figure>
@@ -199,54 +199,19 @@
     @endif</a>
     <p>
 
-        @if(strlen($contents->deskripsi) > 70)
-        {{ substr($contents->deskripsi, 0, 70) }}...
-    @else
-        {{ $contents->deskripsi }}
-    @endif
+        @if (strlen(strip_tags($contents->deskripsi)) > 60)
+    {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
+@else
+    {!! $contents->deskripsi !!}
+@endif
     </p>
+
+    <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
+
 
 <div class="we-video-info">
 <div class="stat-tools">
 <div class="box">
-    {{-- <button id="like-btn" data-like="1" data-user="{{ Auth::id() }}" data-content="{{ auth()->user()->id }}">
-        Like
-    </button>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#like-btn').click(function() {
-                var likeBtn = $(this);
-                var likeStatus = likeBtn.data('like');
-                var userId = likeBtn.data('user');
-                var contentId = likeBtn.data('content');
-
-                $.ajax({
-                    url: '{{ route('like.toggle', '') }}/' + contentId,
-                    type: 'POST',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        like: likeStatus,
-                        user: userId,
-                        content: contentId
-                    },
-                    success: function(response) {
-                        if (response.message === 'Like berhasil') {
-                            likeBtn.text('Unlike');
-                            likeBtn.data('like', 0);
-                        } else if (response.message === 'Unlike berhasil') {
-                            likeBtn.text('Like');
-                            likeBtn.data('like', 1);
-                        }
-                    },
-                    error: function() {
-                        console.log('Terjadi kesalahan saat melakukan permintaan AJAX.');
-                    }
-                });
-            });
-        });
-    </script> --}}
-
     <div class="Like">
         @if(isset($likes) && $likes && $likes->user_id == Auth::id() && $likes->content_id == $contents->id)
         <form action="{{ route('like.destroy', $likes->id) }}" method="post">
@@ -363,14 +328,10 @@
                 <form id="searchForm" action="{{ route('home.search') }}" method="get">
                     @csrf
                     <i class="icofont-search"></i>
-                    <input value="{{ $oldSearch }}" type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+                    <input  type="search" name="search" value="{{ $oldSearch }}" class="form-control" placeholder="Search..." oninput="submitSearch()">
                 </form>
             </div>
         </div>
-
-
-
-
 
 <aside class="sidebar static right">
     <div class="widget">
@@ -453,100 +414,6 @@ Enter an email address to invite a colleague or co-author to join you on socimo.
 </div>
 <button type="submit" class="main-btn">Send</button>
 </form>
-</div>
-</div>
-</div>
-</div>
-<div class="side-slide">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="slide-meta">
-<ul class="nav nav-tabs slide-btns">
-<li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-<li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-</ul>
-<div class="tab-content">
-<div class="tab-pane active fade show" id="messages">
-<h4><i class="icofont-envelope"></i> messages</h4>
-<a href="#" class="send-mesg" title="New Message" data-toggle="tooltip"><i class="icofont-edit"></i></a>
-<ul class="new-messages">
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Ibrahim Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fatima J.</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fawad Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Saim Turan</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-<div class="tab-pane fade" id="notifications">
-<h4><i class="icofont-bell-alt"></i> notifications</h4>
-<ul class="notificationz">
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
 </div>
 </div>
 </div>
