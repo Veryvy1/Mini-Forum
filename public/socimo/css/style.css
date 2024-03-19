@@ -6608,11 +6608,13 @@ input:checked + .switch:active::before {
 .blog-details-meta > figure {
     display: inline-block;
     width: 100%;
+    text-align: center;
 }
 .blog-details-meta > figure img {
     border-radius: 7px;
     display: inline-block;
-    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 .blog-details-meta > ul {
     display: inline-block;

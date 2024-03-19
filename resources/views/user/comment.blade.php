@@ -7,7 +7,7 @@
     <meta name="description" content />
     <meta name="keywords" content />
     <title>GetForums | Comment</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
@@ -82,7 +82,9 @@
     margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
     margin-left: 20px; /* Geser tombol Reply ke kanan */
 }
-        </style>
+
+</style>
+
 </head>
 
 <body>
@@ -91,7 +93,7 @@
 
         <header class>
             <div class="topbar stick">
-                <div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
+                <div class="logo res"><img src="/images/LOGO/logo.png" alt><span>GetForums</span></div>
 
             <ul class="web-elements">
             <li>
@@ -145,6 +147,37 @@
             <a type="button" href="{{ route('home') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
+            <section>
+                <div class="gap">
+                <div class="container">
+                <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                <div class="blog-detail">
+                <div class="blog-title">
+                <h2>{{ $content->judul }}</h2>
+                </div>
+                <div class="blog-details-meta">
+                <figure><img src="{{ asset('storage/'. $content->gambar) }}" alt="Image"></figure>
+                <ul>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i>
+                {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
+
+                </ul>
+                <p>{{ $content->deskripsi }}
+                </p>
+                <div class="tag-n-cat">
+                <div class="tags">
+                <span><i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span>
+                <a href="#">{{ $content->kategori->kategori }}</a>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
             <h3>Input your comment</h3>
             <br>
         </br>
@@ -203,7 +236,7 @@
                                 {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                                 @endif
                             </div>
-                            
+
                         </div>
                     </li>
 
@@ -244,9 +277,11 @@
                             @endif
 
                         </div>
+
                     </li>
                     <hr>
                     @endif
+
                     @endforeach
                 </ul>
             </div>
