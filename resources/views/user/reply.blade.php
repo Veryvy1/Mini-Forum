@@ -1,3 +1,4 @@
+@extends('summernote')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +8,7 @@
     <meta name="description" content />
     <meta name="keywords" content />
     <title>GetForums | Reply</title>
-<link rel="icon" href="/images/LOGO/logo.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="/images/LOGO/logo.png" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">
@@ -49,40 +50,39 @@
             margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
         }
         .comment-options {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        }
+        .comment-options1 {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .comment-options a,
+        .comment-options button {
+            text-decoration: underline;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .comment-options a {
+            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+            margin-left: 50px; /* Geser tombol Reply ke kanan */
+        }
 
-}
-.comment-options1 {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-}
-.comment-options a,
-.comment-options button {
-    text-decoration: underline;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.comment-options a {
-    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-    margin-left: 50px; /* Geser tombol Reply ke kanan */
-}
-
-.comment-options1 a,
-.comment-options1 button {
-    text-decoration: underline;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.comment-options1 a {
-    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-    margin-left: 20px; /* Geser tombol Reply ke kanan */
-}
-        </style>
+        .comment-options1 a,
+        .comment-options1 button {
+            text-decoration: underline;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .comment-options1 a {
+            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+            margin-left: 20px; /* Geser tombol Reply ke kanan */
+        }
+    </style>
 </head>
 
 <body>
@@ -98,13 +98,16 @@
             <li>
              @if(auth()->check())
             <div class="user-dp">
-                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-                    @if(auth()->user()->profile)
-                        <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}">
-                    @else
-                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}">
-                    @endif
-                </a>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                            @if(auth()->user()->profile)
+                                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @endif
+                        </a>
+                    </div>
                 <div class="name">
                     <h4>{{ auth()->user()->name }}</h4>
                 </div>
@@ -119,11 +122,10 @@
             </a>
             <ul class="dropdown">
                 <li>
-                    <a href="{{ route('profile.edit', auth()->user()->id) }}" title="Edit Profile">
+                    <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Profile">
                         <i class="icofont-user-alt-3"></i> Your Profile
-                    </a>
+                    </a>
                 </li>
-            <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
             <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
             <li class="logout">
@@ -142,9 +144,6 @@
             </div>
             </header>
 
-
-
-
         <div class="container"><br><br>
             <a onclick="window.history.go(-1);" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
@@ -155,15 +154,11 @@
                 @csrf
                 @method('POST')
                 <div style="position: relative;">
-                    <textarea name="reply" id="comment" placeholder="Input your reply........" cols="120" rows="2"
-                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}</textarea>
-                        <input type="file" name="picture" id="fileInput" style="display: none;">
-                    <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
-                        <i class="icofont-newspaper"></i>
-                    </button>
+                    <textarea name="reply" id="summernote" placeholder="Input your reply........" cols="120" rows="2"
+                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}
+                    </textarea>
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 265px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 255px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -187,20 +182,21 @@
                             @if ($replies->user->profile)
                                 <img src="{{ asset('storage/'. $replies->user->profile) }}">
                             @else
-                                <img src="{{ asset('images/LOGO/logo.png') }}">
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
+                        <div class="comment-content">
                         <div class="comment-content">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $replies->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
-                            <img src="{{ asset('storage/' . $replies->picture) }}" style="height: 250px;">
-
                             <p style="word-break: break-word;">
-                                {{ $replies->reply }}
+                                {!! $replies->reply !!}
                             </p>
+                        </div>
+                            <div class="comment-options">
                         </div>
                             <div class="comment-options">
 
@@ -212,6 +208,8 @@
                                 <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
 
                             </form>
+                        </div>
+                        </div>
                         </div>
                         </div>
                             @endif
@@ -230,7 +228,7 @@
                             @if ($replies->user->profile)
                                 <img src="{{ asset('storage/'. $replies->user->profile) }}">
                             @else
-                                <img src="{{ asset('images/LOGO/logo.png') }}">
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
                         <div class="commenter-meta">
@@ -239,7 +237,7 @@
                                 <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
                             <p style="word-break: break-word;">
-                                {{ $replies->reply }}
+                                {!! $replies->reply !!}
                             </p>
 
                             @if ($replies->user_id == Auth::user()->id)
@@ -309,6 +307,31 @@
             </div>
         </div>
     </div>
+
+    @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Hello stand-alone UI',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+            var oldIsiValue = {!! json_encode(old('isi')) !!};
+            $('#summernote').summernote('code', oldIsiValue);
+        });
+    </script>
+    @endsection
+
     @if (session('warning'))
     <script>
         toastr.warning("{{ session('warning') }}");

@@ -15,14 +15,28 @@
     <link rel="stylesheet" href="css/responsive.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> --}}
+
+    {{-- @yield('scripts') --}}
+
+
     <style>
-            .large-label {
-        font-size: 16px;
-    }
+        .deskripsi img {
+            max-width: 20px;
+            height: auto;
+        }
+        .large-label {
+            font-size: 16px;
+        }
         .prod-meta {
             display: -webkit-box;
             -webkit-box-orient: vertical;
@@ -181,8 +195,9 @@
         @else
             {{ $contents->judul }}
         @endif</h4>
-        <p>{{ $contents->deskripsi }}</p>
-            </div>
+        <p class="deskripsi">{!! $contents->deskripsi !!}</p>
+
+        </div>
                 <span title="liked" class="liked">
                     <i class="icofont-heart" style="color: #64a4d4;"></i>
                     <ins>{{ $contents->likes_count }}</ins>
@@ -219,12 +234,12 @@
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Description</label>
-                        <textarea type="text" class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi">{{ old('deskripsi') }}</textarea>
-                        @error('deskripsi')
+                        <textarea name="deskripsi" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
+                        {{-- @error('deskripsi')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                        @enderror
+                        @enderror --}}
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
@@ -269,7 +284,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CONTENT</h6>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             </div>
             <div class="modal-body">
                 <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
@@ -330,6 +344,48 @@
 </div>
 @endforeach
 
+
+
+
+
+{{-- @section('scripts') --}}
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const deskripsiElement = document.querySelector('.deskripsi');
+    const maxCharacters = 150; // Ubah sesuai kebutuhan
+
+    if (deskripsiElement.textContent.length > maxCharacters) {
+        const truncatedDeskripsi = deskripsiElement.textContent.substring(0, maxCharacters) + '...';
+        deskripsiElement.textContent = truncatedDeskripsi;
+    }
+});
+
+</script>--}}
+
+
+<script>
+ $(document).ready(function() {
+        $('#summernote').summernote({
+          placeholder: 'Hello stand alone ui',
+          tabsize: 2,
+          height: 120,
+          toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
+        });
+      });
+</script>
+
+{{-- @endsection --}}
+
+
+
 <?php if ($errors->any()): ?>
     <script>
         toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
@@ -372,8 +428,14 @@
 </script>
 <?php endif; ?>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include Summernote JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
 
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>

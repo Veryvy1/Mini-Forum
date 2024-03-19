@@ -156,8 +156,6 @@
 <h5>Total Users</h5>
 </div>
 <div class="d-widget-content">
-<span class="realtime-ico pulse"></span>
-<h6>Updating</h6>
 <h5>{{ $totalUsers }}</h5>
 <i class="icofont-users-alt-3"></i>
 </div>
@@ -169,8 +167,6 @@
 <h5>Total Category</h5>
 </div>
 <div class="d-widget-content">
-<span class="realtime-ico pulse"></span>
-<h6>Updating </h6>
 <h5>{{ $jkategori }}</h5>
 <i class="icofont-optic"></i>
 </div>
@@ -182,8 +178,6 @@
 <h5>Total Content</h5>
 </div>
 <div class="d-widget-content">
-<span class="realtime-ico pulse"></span>
-<h6>Updating </h6>
 <h5>{{ $jcontent }}</h5>
 <i class="icofont-computer"></i>
 </div>
@@ -212,9 +206,9 @@
     <td>{{ $key + 1 }}</td>
 <td style="width: 25%">
 <div class="d-flex align-items-center">
-<div class="avatar avatar-xs">
+<div class="avatar avatar-xs" style="border-radius: 50%; width: 30px; height: 30px; overflow: hidden;">
     <span class="avatar-initial rounded-circle bg-secondary">
-        <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="border-radius: 50%;">
+        <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
     </span>
 </div>
 {{-- <span class="tx-medium mg-l-10">{{ $contents->judul }}</span> --}}

@@ -17,7 +17,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
@@ -69,20 +69,23 @@
 
 <ul class="web-elements">
 <li>
- @if(auth()->check())
-<div class="user-dp">
-    <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-        @if(auth()->user()->profile)
-            <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}">
-        @else
-            <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}">
-        @endif
-    </a>
-    <div class="name">
-        <h4>{{ auth()->user()->name }}</h4>
+    @if(auth()->check())
+    <div class="user-dp">
+        <div style="display: flex; align-items: center;">
+            <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                    @if(auth()->user()->profile)
+                        <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    @endif
+                </a>
+            </div>
+        <div class="name">
+            <h4>{{ auth()->user()->name }}</h4>
+        </div>
     </div>
-</div>
-@endif
+    @endif
 </li>
 <li>
 <a href="#" title>
@@ -92,12 +95,12 @@
 </a>
 <ul class="dropdown">
     <li>
-        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Profile">
             <i class="icofont-user-alt-3"></i> Your Profile
         </a>
     </li>
 <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
-    <i class="icofont-plus"></i>Latest Content</a></a>
+    <i class="icofont-plus"></i>Add Content</a></a>
 </li>
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
@@ -169,19 +172,19 @@
     <div class="main-wraper">
         <div class="user-post">
             <div class="friend-info">
-                <figure>
-                    <em>
-                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
-@if($contents->user->profile)
-<img src="{{ asset('storage/' .  $contents->user->profile) }}">
-@else
-<img alt src="images/LOGO/profil.jpeg">
-@endif
-    </figure>
-    <div class="friend-name">
-        <ins><a title>{{ $contents->user->name }}</a></ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
-    </div>
+                    <figure style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
+                    @if($contents->user->profile)
+                    <img src="{{ asset('storage/' .  $contents->user->profile) }}">
+                    @else
+                    <img alt src="images/LOGO/profil.jpeg">
+                    @endif
+                    </figure>
+                    <div class="friend-name">
+                        <ins><a title>{{ $contents->user->name }}</a></ins>
+                        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span> --}}
+                        <p style="">Categories: {{ optional($contents->kategori)->kategori }},</p>
+                    </div>
     <div class="post-meta">
         <figure>
             <a href="{{ route('content.detail', ['content' => $contents->id]) }}">
@@ -206,6 +209,44 @@
 <div class="we-video-info">
 <div class="stat-tools">
 <div class="box">
+    {{-- <button id="like-btn" data-like="1" data-user="{{ Auth::id() }}" data-content="{{ auth()->user()->id }}">
+        Like
+    </button>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#like-btn').click(function() {
+                var likeBtn = $(this);
+                var likeStatus = likeBtn.data('like');
+                var userId = likeBtn.data('user');
+                var contentId = likeBtn.data('content');
+
+                $.ajax({
+                    url: '{{ route('like.toggle', '') }}/' + contentId,
+                    type: 'POST',
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr('content'),
+                        like: likeStatus,
+                        user: userId,
+                        content: contentId
+                    },
+                    success: function(response) {
+                        if (response.message === 'Like berhasil') {
+                            likeBtn.text('Unlike');
+                            likeBtn.data('like', 0);
+                        } else if (response.message === 'Unlike berhasil') {
+                            likeBtn.text('Like');
+                            likeBtn.data('like', 1);
+                        }
+                    },
+                    error: function() {
+                        console.log('Terjadi kesalahan saat melakukan permintaan AJAX.');
+                    }
+                });
+            });
+        });
+    </script> --}}
+
     <div class="Like">
         @if(isset($likes) && $likes && $likes->user_id == Auth::id() && $likes->content_id == $contents->id)
         <form action="{{ route('like.destroy', $likes->id) }}" method="post">
@@ -222,16 +263,17 @@
             @enderror
             <input type="hidden" name="content_id" value="{{$contents->id}}">
             <button type="submit" class="" style="
-            background: #eae9ee;
+            background: #ff0000;
             border-radius: 4px;
-            color: #82828e;
+            color: #ffffff;
             display: inline-block;
             font-size: 13px;
             padding: 5px 20px;
             vertical-align: middle;
             transition: all 0.2s linear 0s;
             border: none;
-             }"><i class="icofont-like"></i> Unlike</button>        </form>
+             }"><i class="icofont-like"></i> Unlike</button>
+             </form>
         @else
             <form action="/like" method="post">
                 @csrf
@@ -247,9 +289,9 @@
                 @enderror
                 <input type="hidden" name="content_id" value="{{$contents->id}}">
                 <button type="submit" class="" style="
-                background: #eae9ee;
+                background: #0099ff;
                 border-radius: 4px;
-                color: #82828e;
+                color: #ffffff;
                 display: inline-block;
                 font-size: 13px;
                 padding: 5px 20px;
@@ -313,24 +355,21 @@
     {{ $content->links('vendor.sweetalert.pagination') }}
 </div>
 
-
     </div>
     <div class="col-lg-3">
         <div class="main-wraper">
-        <span class="new-title">Search Post</span>
-        <form id="searchForm"  action="{{ route('home.search') }}" method="get">
-            @csrf
-        <div class="d-flex justify-content-between align-items-center">
-
-        <div class="new-post">
-            <div class="input-group">
-                <input type="search" name="search" class="form-control" value="{{ $oldSearch }}" placeholder="Search...">
-                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;"><i class="icofont-search"></i></button>
+            <span class="new-title">Search Post</span>
+            <div class="new-post">
+                <form id="searchForm" action="{{ route('home.search') }}" method="get">
+                    @csrf
+                    <i class="icofont-search"></i>
+                    <input value="{{ $oldSearch }}" type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+                </form>
             </div>
         </div>
-    </div>
-</form>
-</div>
+
+
+
 
 
 <aside class="sidebar static right">
@@ -1370,21 +1409,6 @@ i think that some how, we learn who we really are and then live with that decisi
     </div>
 </div>
 
-<script>
-    function submitSearch() {
-        document.getElementById("searchForm").submit();
-    }
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log("Script is executing!");
-        document.getElementById('createPostInput').addEventListener('click', function() {
-            console.log("Input clicked!");
-            document.getElementById('postPopup').style.display = 'block';
-        });
-    });
-</script>
-
 <?php if ($errors->any()): ?>
     <script>
         toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
@@ -1426,6 +1450,58 @@ i think that some how, we learn who we really are and then live with that decisi
     toastr.success("<?php echo Session::get('success'); ?>");
 </script>
 <?php endif; ?>
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Script is executing!");
+        document.getElementById('createPostInput').addEventListener('click', function() {
+            console.log("Input clicked!");
+            document.getElementById('postPopup').style.display = 'block';
+        });
+    });
+</script>
+
+<script>
+    function showLogoutAlert() {
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Anda yakin ingin keluar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Keluar!',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+            Swal.fire(
+                'Logout Berhasil',
+                'Anda telah berhasil logout.',
+                'success'
+            );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire(
+                'Logout Dibatalkan',
+                'Anda membatalkan logout.',
+                'error'
+            );
+        }
+        });
+    }
+
+</script>
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,3 +1,4 @@
+@extends('summernote')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,27 +50,27 @@
             margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
         }
         .comment-options {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        }
 
-}
-.comment-options1 {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-}
-.comment-options a,
-.comment-options button {
-    text-decoration: underline;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-}
-.comment-options a {
-    margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-    margin-left: 50px; /* Geser tombol Reply ke kanan */
-}
+        .comment-options1 {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .comment-options a,
+        .comment-options button {
+            text-decoration: underline;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .comment-options a {
+            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
+            margin-left: 50px; /* Geser tombol Reply ke kanan */
+        }
 
 .comment-options1 a,
 .comment-options1 button {
@@ -82,9 +83,7 @@
     margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
     margin-left: 20px; /* Geser tombol Reply ke kanan */
 }
-
-</style>
-
+        </style>
 </head>
 
 <body>
@@ -99,13 +98,16 @@
             <li>
              @if(auth()->check())
             <div class="user-dp">
-                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
-                    @if(auth()->user()->profile)
-                        <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}">
-                    @else
-                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}">
-                    @endif
-                </a>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                        <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Edit Profile">
+                            @if(auth()->user()->profile)
+                                <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="{{ auth()->user()->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @endif
+                        </a>
+                    </div>
                 <div class="name">
                     <h4>{{ auth()->user()->name }}</h4>
                 </div>
@@ -124,7 +126,6 @@
                         <i class="icofont-user-alt-3"></i> Your Profile
                     </a>
                 </li>
-            <li><a href="add-new-course.html" title><i class="icofont-plus"></i>Latest Content</a></li>
             <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
             <li class="logout">
@@ -185,15 +186,16 @@
                 @csrf
                 @method('POST')
                 <div style="position: relative;">
-                    <textarea name="comment" id="comment" placeholder="Input your comment........" cols="120" rows="2"
-                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;"></textarea>
-                        <input type="file" name="picture" id="fileInput" style="display: none;">
-                    <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
-                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 335px; transform: translateY(-50%);">
+                    <textarea name="comment" id="summernote" placeholder="Input your comment........" cols="120" rows="2"
+                        style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">
+                    </textarea>
+                    {{-- <input type="file" name="picture" id="fileInput" style="display: none;"> --}}
+                    {{-- <button type="button" onclick="document.getElementById('fileInput').click()" class="btn btn-primary rounded-circle"
+                        style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 305px; transform: translateY(-50%);">
                         <i class="icofont-newspaper"></i>
-                    </button>
+                    </button> --}}
                     <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 265px; transform: translateY(-50%);">
+                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 235px; transform: translateY(-50%);">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -208,21 +210,24 @@
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
                     <li class="comment">
+                    <li class="comment">
                         <div class="commenter-photo">
                             @if ($comments->user->profile)
                             <img src="{{ asset('storage/'. $comments->user->profile) }}">
+                            <img src="{{ asset('storage/'. $comments->user->profile) }}">
                             @else
+                            <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             <img src="{{ asset('images/LOGO/profil.jpeg') }}">
                             @endif
                         </div>
+                        <div class="comment-content">
                         <div class="comment-content">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
-                            <img src="{{ asset('storage/' . $comments->picture) }}" style="height: 250px;">
                             <p style="word-break: break-word;">
-                                {{ $comments->comment }}
+                                {!! $comments->comment !!}
                             </p>
                         </div>
                         <div class="comment-options">
@@ -240,6 +245,7 @@
                         </div>
                     </li>
 
+
                     @else
                     <li>
                         <style>
@@ -256,14 +262,17 @@
                             @endif
                         </div>
                     <div class="comment-content1">
+                    <div class="comment-content1">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
                             </div>
                             <p style="word-break: break-word;">
-                                {{ $comments->comment }}
+                                {!! $comments->comment !!}
                             </p>
+                        </div>
+                        <div class="comment-options1">
                         </div>
                         <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
@@ -275,7 +284,6 @@
                                 </form>
                             {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
-
                         </div>
 
                     </li>
@@ -335,6 +343,30 @@
             </div>
         </div>
     </div>
+
+    @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                placeholder: 'Hello stand-alone UI',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+
+            var oldIsiValue = {!! json_encode(old('isi')) !!};
+            $('#summernote').summernote('code', oldIsiValue);
+        });
+    </script>
+    @endsection
 
 
     <?php if ($errors->any()): ?>
@@ -398,6 +430,11 @@
     <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
+    <script>
+            function submitForm(button) {
+                form.submit();
+            }
+    </script>
     <script>
             function submitForm(button) {
                 form.submit();

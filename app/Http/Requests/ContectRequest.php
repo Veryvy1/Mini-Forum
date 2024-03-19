@@ -26,7 +26,6 @@ class ContectRequest extends FormRequest
             'deskripsi'=>'required',
             'gambar'=>'required|image',
             'kategori_id' => 'required',
-            'dibuat' => 'nullable',
         ];
     }
 

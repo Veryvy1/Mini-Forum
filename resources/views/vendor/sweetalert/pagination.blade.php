@@ -85,6 +85,5 @@ x
                 <span class="page-link" aria-hidden="true">&raquo;</span>
             </li>
         @endif
-    </ul>
+    </ul>
 @endif
-

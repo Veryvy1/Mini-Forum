@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLikeRequest;
+// use App\Http\Requests;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Models\Like;
@@ -10,6 +11,30 @@ use App\Models\Like;
 
 class LikeController extends Controller
 {
+    // public function store(Request $request)
+    // {
+    //     $like = Like::create([
+    //         'like' => $request->input('like'),
+    //         'user_id' => $request->input('user_id'),
+    //         'content_id' => $request->input('content_id'),
+    //     ]);
+
+    //     return response()->json(['success' => true, 'like' => $like]);
+    // }
+
+    // public function destroy(Request $request, $id)
+    // {
+    //     $like = Like::findOrFail($id);
+    //     $like->delete();
+
+    //     return response()->json(['success' => true]);
+    // }
+
+    // public function show($id)
+    // {
+    //     $content = Content::findOrFail($id);
+    //     return view('view', compact('content'));
+    // }
     public function like(Request $request, $id)
     {
         $content = Content::findOrFail($id);
@@ -38,20 +63,12 @@ class LikeController extends Controller
     }
     public function index()
     {
-        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreLikeRequest $request)
     {
         $contentId = $request->content_id;
@@ -83,33 +100,18 @@ class LikeController extends Controller
         ]);
         return back();
     }
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Like $like)
     {
         $contectId = $like->content_id;
