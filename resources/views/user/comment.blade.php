@@ -179,7 +179,7 @@
         </div>
         </div>
         </div>
-            <h3>Input your comment</h3>
+        <h3><i class="icofont-comment"></i> Input your comment</h3>
             <br>
         </br>
             <form action="{{ route('comment.store', ['contentId' => $content->id]) }}" method="post" enctype="multipart/form-data">
@@ -201,7 +201,7 @@
             <br><br>
 
             <div class="comment-area">
-                <h4 class="comment-title">{{ $commentAll }} comments</h4>
+                <h4 class="comment-title">{{ $commentAll }} <i class="icofont-duotone icofont-comment"></i> comments</h4>
                 <ul class="comments">
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
