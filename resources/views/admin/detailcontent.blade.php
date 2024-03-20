@@ -29,6 +29,8 @@
     <style>
         .sidemenu {
             cursor: pointer;
+            margin-top: 50px;
+            margin-left: 50px;
         }
 
         .sidemenu:active .feather {
@@ -40,15 +42,21 @@
         <div class="col-lg-2">
             <div class="sidemenu">
                 @if($userRole == 'admin')
-                <a href="{{ route('content.index') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                {{-- <a href="{{ route('content.index') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
-                </svg></a>
+                </svg></a> --}}
+                <a type="button" href="{{ route('content.index') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
+                    <i class="icofont-arrow-left"></i>
+                </a>
                 @else
-                <a href="{{ route('home') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
+                {{-- <a href="{{ route('home') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
                     <line x1="19" y1="12" x2="5" y2="12"></line>
                     <polyline points="12 19 5 12 12 5"></polyline>
-                </svg></a>
+                </svg></a> --}}
+                <a type="button" href="{{ route('home') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
+                    <i class="icofont-arrow-left"></i>
+                </a>
                 @endif
             </div>
         </div>
@@ -71,7 +79,10 @@
                         </div>
                         <div class="blog-details-meta">
                             <figure><img src="{{ asset('storage/'. $content->gambar) }}" alt="Image"></figure>
-                            <ul>
+                            <div class="deskripsi" style="word-wrap: break-word; margin-top: 100px;">
+                                {!! $content->deskripsi !!}
+                            </div>
+                            <ul style="margin-top: 50px;">
                                 <li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
                                 <li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
                                 <li><i>
@@ -83,9 +94,6 @@
                                         </svg>
                                     </i> {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
                             </ul>
-                            <div class="deskripsi" style="word-wrap: break-word;">
-                                {!! $content->deskripsi !!}
-                            </div>
                             <div class="tag-n-cat">
                                 <div class="tags">
                                     <span><i>
@@ -116,7 +124,7 @@
         <tr>
             <td>{{ $key + 1}}</td>
             <td>{{ $comment->user->name }}</td>
-            <td>{{ $comment->comment }}</td>
+            <td>{!! $comment->comment !!}</td>
             <td>
                 <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $comment->id }}">
                     @csrf

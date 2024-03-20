@@ -204,7 +204,7 @@
 <tbody>
 
     @foreach ($content as $key => $contents)
-<tr>
+<tr style="width: 600px; height: 30px;">
     <td>{{ $key + 1 }}</td>
 <td style="width: 25%">
 <div class="d-flex align-items-center">
@@ -221,13 +221,13 @@
     @endif
 </div>
 </td>
-<td>
+<td style="width: 600px; height: 30px; overflow: hidden;  text-overflow: ellipsis;">
     @if (strlen(strip_tags($contents->deskripsi)) > 60)
     {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
 @else
     {!! $contents->deskripsi !!}
 @endif
-
+</td>
 <td style="width: 10%">
 <center><span>{{ $contents->likes_count }}</span></center>
 </td>

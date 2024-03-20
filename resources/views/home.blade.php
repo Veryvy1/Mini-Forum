@@ -191,14 +191,16 @@
     @else
         {{ $contents->judul }}
     @endif</a>
-    <p>
+    {{-- <p>
+        <div style="height: 100px; width: 100%; overflow: hidden; text-overflow: ellipsis;">
+            @if (strlen(strip_tags($contents->deskripsi)) > 60)
+             {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
+             @else
+             {!! $contents->deskripsi !!}
+             @endif
+        </div>
 
-    @if (strlen(strip_tags($contents->deskripsi)) > 60)
-    {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
-    @else
-    {!! $contents->deskripsi !!}
-    @endif
-    </p>
+    </p> --}}
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
 
 
@@ -402,7 +404,7 @@
                     <script>
                     $(document).ready(function() {
                         $('#summernote').summernote({
-                            placeholder: 'Hello stand alone ui',
+                            placeholder: 'Isi content...',
                             tabsize: 2,
                             height: 120,
                             toolbar: [
@@ -578,7 +580,7 @@
 <script>
     function submitSearch() {
         document.getElementById("searchForm").submit();
-    }
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>

@@ -157,8 +157,8 @@
 
     <div class="row merged-10">
         @forelse($content as $key => $contents)
-        <div class="col-lg-3">
-                <div class="mb-4 prod-item" style="border: 1px solid #cacaca;">
+        <div class="col-lg-3" style="max-width: 25%; overflow: hidden;">
+            <div class="mb-4 prod-item" style="border: 1px solid #cacaca;">
                     <div class="overflow-hidden" style="height: 300px; display: flex; max-width: 100%; align-items: center; justify-content: center;">
                     <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="Deskripsi gambar"  style="object-fit: cover; height: auto;">
                     </div>
@@ -179,16 +179,19 @@
         </form></li>
         </ul>
         </div>
-        <div class="prod-meta">
+        <center>
+        <div class="prod-meta" style="width: 200px; height: 200px overflow: hidden;">
         <h4 title>
             @if(strlen($contents->judul) > 15)
             {{ substr($contents->judul, 0, 15) }}...
         @else
             {{ $contents->judul }}
         @endif</h4>
-        <p class="deskripsi">{!! $contents->deskripsi !!}</p>
+        {{-- <div style="height: 70px; width: 200px; overflow: hidden; text-overflow: ellipsis;">
+            {!! $contents->deskripsi !!}
+        </div> --}}
 
-        </div>
+        </div></center>
                 <span title="liked" class="liked">
                     <i class="icofont-heart" style="color: #64a4d4;"></i>
                     <ins>{{ $contents->likes_count }}</ins>

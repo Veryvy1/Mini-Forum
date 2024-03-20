@@ -47,39 +47,31 @@ class CommentController extends Controller
                 'picture' => 'nullable|image',
             ]);
 
-            $comment = $request->input('comment');
+            $user_id = auth()->id();
 
+            $comment = $request->comment;
             $dom = new DOMDocument();
             $dom->loadHTML($comment, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
             $images = $dom->getElementsByTagName('img');
 
-            foreach ($images as $key => $img) {
-                if ($img->hasAttribute('src')) {
-                    $src = $img->getAttribute('src');
-                    $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $src));
-                    if ($data !== false) {
-                        $image_name = "/uploads" . time() . $key . '.png';
-                        Storage::put('public' . $image_name, $data);
-
-                        $img->removeAttribute('src');
-                        $img->setAttribute('src', $image_name);
-                    }
-                }
+            foreach ($images as $k => $img) {
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+                $data = base64_decode($data);
+                $image_name = "/uploads" . time() . $k . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
             }
-
-            $picture = $request->file('picture');
-
-            if ($picture) {
-                $path = $picture->store('public/images');
-            } else {
-                $path = null;
-            }
+            $comment = $dom->saveHTML();
 
             $commentModel = new Comment();
             $commentModel->content_id = $contentId;
-            $commentModel->user_id = auth()->id();
-            $commentModel->comment = $dom->saveHTML();
+            $commentModel->user_id = $user_id;
+            $commentModel->comment = $comment;
             $commentModel->picture = $path;
             $commentModel->save();
 
@@ -98,8 +90,10 @@ class CommentController extends Controller
         if (Storage::disk('public')->exists($comment->picture)) {
             Storage::disk('public')->delete($comment->picture);
         }
+
         $comment->delete();
 
-        return redirect()->route('berita.index')->with('success', 'BERITA BERHASIL DIHAPUS');
+        return redirect()->back()->with('success', 'Comment successfully deleted');
     }
+
 }

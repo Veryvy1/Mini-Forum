@@ -47,37 +47,41 @@ class ReplyController extends Controller
     public function store(ReplyRequest $request, $commentId)
     {
         try {
-            $data = $request->validate([
+            $request->validate([
                 'reply' => 'required|string',
                 'picture' => 'nullable|image',
             ]);
 
+            $user_id = auth()->id();
+
+            $reply = $request->reply;
             $dom = new DOMDocument();
-            $dom->loadHTML($data['reply'], LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $dom->loadHTML($reply, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-            $pictures = $dom->getElementsByTagName('img');
+            $images = $dom->getElementsByTagName('img');
 
-            foreach ($pictures as $key => $img) {
-                $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
-                $picture_name = "/uploads/" . time() . $key . '.png';
-                Storage::put('public' . $picture_name, $data);
-
+            foreach ($images as $k => $img) {
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+                $data = base64_decode($data);
+                $image_name = "/uploads" . time() . $k . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $data);
                 $img->removeAttribute('src');
-                $img->setAttribute('src', $picture_name);
+                $img->setAttribute('src', $image_name);
             }
+            $comment = $dom->saveHTML();
 
-            if ($request->hasFile('picture')) {
-                $picture = $request->file('picture');
-                $picture_path = $picture->store('public/images');
-            }
 
             $reply = new Reply();
-            $reply->reply = $dom->saveHTML();
+            $reply->reply = $comment;
             $reply->comment_id = $commentId;
-            $reply->user_id = auth()->id();
-            if ($request->hasFile('picture')) {
-                $reply->picture = $picture_path;
-            }
+            $reply->user_id = $user_id;
+            $reply->picture = $path;
+            // if ($request->hasFile('picture')) {
+            //     $reply->picture = $picture_path;
+            // }
             $reply->save();
 
             return redirect()->back()->with('success', 'Successful reply');

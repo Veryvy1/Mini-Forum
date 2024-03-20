@@ -312,7 +312,7 @@
     <script>
         $(document).ready(function() {
             $('#summernote').summernote({
-                placeholder: 'Hello stand-alone UI',
+                placeholder: 'Isi content...',
                 tabsize: 2,
                 height: 120,
                 toolbar: [

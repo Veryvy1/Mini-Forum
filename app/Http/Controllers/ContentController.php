@@ -196,10 +196,24 @@ class ContentController extends Controller
         return view('content',compact('content','kategori'));
     }
 
-    public function update(ContectRequest $request, string $id)
-{
-    try {
+    public function update(Request $request, string $id)
+    {
+        try {
         $content = Content::findOrFail($id);
+
+        $request->validate([
+            'judul'=>'required',
+            'deskripsi'=>'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_id' => 'required',
+        ],[
+            'judul.required'=>'Title must be filled in.',
+            'deskripsi.required'=>'Description must be filled in.',
+            'gambar.image'=>'Must be filled with images.',
+            'gambar.mimes' => 'Invalid PHOTO format. Use jpeg, png, jpg, or gif format.',
+            'kategori_id.required'=>'Category must be filled in.',
+        ]);
+
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
@@ -212,26 +226,22 @@ class ContentController extends Controller
             $foto = $request->file('gambar');
             $path = $foto->store('content', 'public');
             $dataToUpdate['gambar'] = $path;
-        } else {
-            $dataToUpdate['gambar'] = $oldPhotoPath;
         }
 
         $content->update($dataToUpdate);
 
-        if ($content->wasChanged('gambar') && $oldPhotoPath) {
-            Storage::disk('public')->delete($oldPhotoPath);
-            $localFilePath = public_path('storage/' . $oldPhotoPath);
-            if (File::exists($localFilePath)) {
-                File::delete($localFilePath);
+            if ($content->wasChanged('gambar') && $oldPhotoPath) {
+                Storage::disk('public')->delete($oldPhotoPath);
+                $localFilePath = public_path('storage/' . $oldPhotoPath);
+                if (File::exists($localFilePath)) {
+                    File::delete($localFilePath);
+                }
             }
+            return redirect()->route('content.index')->with('success', 'content updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
-
-        return redirect()->route('content.index')->with('success', 'Content updated successfully');
-    } catch (\Exception $e) {
-        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
-}
-
 
 
 
