@@ -24,7 +24,7 @@
             margin-top: 20px;
         }
         .comment-title {
-            font-size: 18px;
+            font-size: 19px;
             margin-bottom: 10px;
         }
         .comments {
@@ -37,9 +37,10 @@
             padding-bottom: 20px;
         }
         .commenter-photo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+    /* Sesuaikan ukuran gambar sesuai keinginan */
+        width: 9%; /* Misalnya, gambar akan memiliki lebar 10% dari lebar kontainer */
+        height: auto; /* Otomatis menghitung tinggi gambar agar proporsi gambar tidak terdistorsi */
+        border-radius: 50%; /* Mengatur border-radius untuk gambar bulat */
         }
         .comment-content {
             margin-left: 50px;
@@ -83,6 +84,15 @@
             margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
             margin-left: 20px; /* Geser tombol Reply ke kanan */
         }
+
+p {
+    height: auto;
+    max-width: 25%;
+    margin-right: 20%;
+    display: flex;
+}
+
+
     </style>
 </head>
 
@@ -207,86 +217,82 @@
                 <h4 class="comment-title">{{ $commentAll }} <i class="icofont-duotone icofont-comment"></i> comments</h4>
                 <ul class="comments">
                     @foreach ($comment as $comments)
-                    @if ($comments->picture)
-                    <li class="comment">
-                        <div class="commenter-photo">
-                            @if ($comments->user->profile)
-                            <img src="{{ asset('storage/'. $comments->user->profile) }}">
-                            @else
-                            <img src="{{ asset('images/LOGO/profil.jpeg') }}">
-                            @endif
-                        </div>
-                        <div class="comment-content">
-                            <div class="comment-titles">
-                                <h6>{{ $comments->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
-                            </div>
-                            <p style="word-break: break-word;">
-                                {!! $comments->comment !!}
-                            </p>
-                        </div>
-                        <div class="comment-options">
-                            <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
-                            @if ($comments->user_id == Auth::user()->id)
-                            <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="text-danger" >Delete</button>
-                            </form>
-                                {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
-                                @endif
-                            </div>
-
-                        </div>
+                        @if ($comments->picture)
+                            <li class="comment">
+                                <div class="commenter-photo">
+                                    @if ($comments->user->profile)
+                                        <img src="{{ asset('storage/'. $comments->user->profile) }}" width="40" height="40">
+                                    @else
+                                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" width="40" height="40">
+                                    @endif
+                                </div>
+                                <div class="comment-content">
+                                    <div class="comment-titles">
+                                        <h6>{{ $comments->user->name }}</h6>
+                                        <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                                    </div>
+                                    <p style="word-break: break-word;">
+                                        {!! $comments->comment !!}
+                                    </p>
+                                </div>
+                                <div class="comment-options">
+                                    <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary"><i class="icofont-reply"></i>Reply</a>
+                                    @if ($comments->user_id == Auth::user()->id)
+                                        <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="text-danger"><i class="icofont-ui-delete"></i> Delete</button>
+                                        </form>
+                                    @endif
+                                </div>
+                    </li>
                     </li>
 
-                    @else
-                    <li>
-                        <style>
-                            .commenter-photo img {
-                                width: 40px;
-                                height: 40px;
-                            }
-                        </style>
-                        <div class="commenter-photo">
-                            @if ($comments->user->profile)
-                                <img src="{{ asset('storage/'. $comments->user->profile) }}">
-                            @else
-                                <img src="{{ asset('images/LOGO/profil.jpeg') }}">
-                            @endif
-                        </div>
-                    <div class="comment-content1">
-                        <div class="commenter-meta">
-                            <div class="comment-titles">
-                                <h6>{{ $comments->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
-                            </div>
-                            <p style="word-break: break-word;">
-                                {!! $comments->comment !!}
-                            </p>
-                        </div>
-                        <div class="comment-options1">
-                            <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary"><i class="icofont-reply"></i> Reply</a>
-                            @if ($comments->user_id == Auth::user()->id)
-                            <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="text-danger" style="border: none; background-color: #ffff">
-                                        <i class="icofont-ui-delete"></i> Delete
-                                    </button>
+                            </li>
 
+                        @else
+                            <li>
+                                <div class="commenter-photo">
+                                    @if ($comments->user->profile)
+                                        <img src="{{ asset('storage/'. $comments->user->profile) }}" width="40" height="40">
+                                    @else
+                                        <img src="{{ asset('images/LOGO/profil.jpeg') }}" width="40" height="40">
+                                    @endif
+                                </div>
+                                <div class="comment-content1">
+                                    <div class="commenter-meta">
+                                        <div class="comment-titles">
+                                            <h6>{{ $comments->user->name }}</h6>
+                                            <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                                        </div>
+                                        <p style="word-break: break-word;">
+                                            {!! $comments->comment !!}
+                                        </p>
+                                    </div>
+                                    <div class="comment-options1">
+                                        <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary"><i class="icofont-reply"></i> Reply</a>
+                                        @if ($comments->user_id == Auth::user()->id)
+                                            <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff">
+                                                    <i class="icofont-ui-delete"></i> Delete
+                                                </button>
+                                </form>
                                 </form>
                             {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
-                            @endif
-                        </div>
-
-                    </li>
-                    <hr>
-                    @endif
-
+                                            </form>
+                            {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
+                                        @endif
+                                    </div>
+                                </div>
+                            </li>
+                            <hr> <!-- Buat baris pemisah antar komentar -->
+                        @endif
                     @endforeach
                 </ul>
             </div>
+
         </div>
     </div>
 
