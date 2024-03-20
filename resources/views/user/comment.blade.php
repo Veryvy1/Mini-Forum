@@ -264,12 +264,15 @@
                             </p>
                         </div>
                         <div class="comment-options1">
-                            <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary">Reply</a>
+                            <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary"><i class="icofont-reply"></i> Reply</a>
                             @if ($comments->user_id == Auth::user()->id)
                             <form action="{{ route('comment.destroy', ['comment' => $comments->id]) }}" method="post" id="deleteForm_{{ $comments->id }}" >
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+                                    <button type="submit" class="text-danger" style="border: none; background-color: #ffff">
+                                        <i class="icofont-ui-delete"></i> Delete
+                                    </button>
+
                                 </form>
                             {{-- <button onclick="deleteComment({{ $comments->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif

@@ -92,7 +92,7 @@
 
         <header class>
             <div class="topbar stick">
-                <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
+                <div class="logo"><img alt src="/images/LOGO/logo.png"><span>GetForums</span></div>
 
             <ul class="web-elements">
             <li>
@@ -148,7 +148,7 @@
             <a onclick="window.history.go(-1);" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
-            <h3>Input your reply comment</h3>
+            <h3><i class="icofont-reply"></i>Input your reply comment</h3>
             <br>
             <form action="{{ route('reply.store', ['commentId' => $comment->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
@@ -157,8 +157,8 @@
                     <textarea name="reply" id="summernote" placeholder="Input your reply........" cols="120" rows="2"
                         style="border-radius: 50px; border: 2px solid #ccc; padding: 12px;">{{ old('reply') }}
                     </textarea>
-                    <button type="submit" class="btn btn-primary rounded-circle"
-                    style="background-color: rgb(40, 144, 204); width: 60px; height: 60px; font-size: 28px; position: absolute; top: 47%; right: 255px; transform: translateY(-50%);">
+                    <button type="submit" class="btn btn-primary"
+                    style="background-color: rgb(40, 144, 204); width: 100px; height: 50px; font-size: 25px; position: absolute; bottom: -58px; right: 1px;">
                     <i class="icofont-paper-plane"></i>
                 </button>
                 </div>
@@ -167,7 +167,7 @@
             <br><br>
 
             <div class="comment-area">
-                <h4 class="comment-title">{{ $replyAll }} replies</h4>
+                <h4 class="comment-title">{{ $replyAll }} <i class="icofont-ui-text-loading"></i>  Replies</h4>
                 <ul class="comments">
                     @foreach ($reply as $replies)
                     @if ($replies->picture)
@@ -244,7 +244,7 @@
                             <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
+                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff"> <i class="icofont-ui-delete"></i>Delete</button>
 
                             </form>
                             {{-- <button onclick="deleteComment({{ $replies->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
