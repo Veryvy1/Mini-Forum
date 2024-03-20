@@ -7,7 +7,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>Dashboard | Admin</title>
-<link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
+<link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
@@ -202,7 +202,7 @@
 </tr>
 </thead>
 <tbody>
-    
+
     @foreach ($content as $key => $contents)
 <tr>
     <td>{{ $key + 1 }}</td>

@@ -9,7 +9,7 @@
     <meta name="keywords" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Content | Admin</title>
-    <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
+    <link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="socimo/css/main.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="css/color.css">

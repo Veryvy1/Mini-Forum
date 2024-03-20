@@ -6,7 +6,7 @@
 <meta name="description" content="Your description here" />
 <meta name="keywords" content="Your, Keywords, Here" />
 <title>GetForums | Detail Content</title>
-<link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
+<link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
 <link rel="stylesheet" href="{{ asset('socimo/css/main.min.css') }}">
 <link rel="stylesheet" href="{{ asset('socimo/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('socimo/css/color.css') }}">

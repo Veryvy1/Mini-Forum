@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <title>Category | Dashboard</title>
-    <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
+    <link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/color.css">

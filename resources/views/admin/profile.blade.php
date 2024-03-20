@@ -8,7 +8,7 @@
 <meta name="description" content />
 <meta name="keywords" content />
 <title>GetForums | Dashboard</title>
-<link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
+<link rel="icon" href="/images/fav.html" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="css/main.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/color.css">
