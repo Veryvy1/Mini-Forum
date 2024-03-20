@@ -202,6 +202,7 @@
 </tr>
 </thead>
 <tbody>
+    
     @foreach ($content as $key => $contents)
 <tr>
     <td>{{ $key + 1 }}</td>

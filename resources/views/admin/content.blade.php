@@ -156,7 +156,7 @@
 <br><br>
 
     <div class="row merged-10">
-        @forelse($content as $contents)
+        @forelse($content as $key => $contents)
         <div class="col-lg-3">
                 <div class="mb-4 prod-item" style="border: 1px solid #cacaca;">
                     <div class="overflow-hidden" style="height: 300px; display: flex; max-width: 100%; align-items: center; justify-content: center;">
@@ -207,7 +207,7 @@
 <script>
  $(document).ready(function() {
     $('#summernoteModal1').summernote({
-        placeholder: 'Hello stand alone ui',
+        placeholder: 'Isi content...',
         tabsize: 2,
         height: 120,
         toolbar: [
@@ -222,7 +222,7 @@
     });
 
     $('#summernoteModal2').summernote({
-        placeholder: 'Hello stand alone ui',
+        placeholder: 'Isi content...',
         tabsize: 2,
         height: 120,
         toolbar: [
@@ -321,11 +321,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">Description</label>
-                        <textarea name="deskripsi" id="summernoteModal2" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
+                        <textarea name="deskripsi" id="summernoteModal2" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar', $contents->gambar) }}">
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                        @if ($contents->gambar)
+                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50"
+                            height="50">
+                        @else
+                        No Image
+                        @endif
                         @error('gambar')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -358,6 +364,34 @@
     </div>
 </div>
 @endforeach
+
+
+
+
+
+{{-- @section('scripts') --}}
+
+{{-- <script>
+ $(document).ready(function() {
+        $('#summernote').summernote({
+          placeholder: 'Hello stand alone ui',
+          tabsize: 2,
+          height: 120,
+          toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
+        });
+      });
+</script> --}}
+
+{{-- @endsection --}}
+
 
 
 <?php if ($errors->any()): ?>

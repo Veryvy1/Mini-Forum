@@ -16,21 +16,19 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $oldSearch = $request->input('search');
+        $contentQuery = Content::withCount('likes')->orderByDesc('likes_count');
+
         if ($request->has('search')) {
             $xxx = $request->input('search');
-            $contact = Content::where('judul', 'LIKE', "%$xxx%")->paginate(5);
-        } else {
-            $content = Content::paginate(5);
+            $contact = Content::where('judul', 'LIKE', "%$xxx%");
         }
 
+        $content = $contentQuery->paginate(5);
         $jkategori = Kategori::count();
         $kategori = Kategori::all();
         $jcontent = Content::count();
-        $content = Content::all();
-
-        $content = Content::withCount('likes')->get();
+        
         $likes = Like::where('user_id', auth()->user()->id)->first();
-
         $totalUsers = User::where('role', 'user')->count();
 
         return view('admin.index', compact('content', 'kategori', 'jcontent', 'jkategori', 'totalUsers','likes','oldSearch'));

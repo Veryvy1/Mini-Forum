@@ -61,34 +61,45 @@
 </div>
 </section>
 <section>
-<div class="gap">
-<div class="container">
-<div class="row">
-<div class="offset-lg-1 col-lg-10">
-<div class="blog-detail">
-<div class="blog-title">
-<h2>{{ $content->judul }}</h2>
-</div>
-<div class="blog-details-meta">
-<figure><img src="{{ asset('storage/'. $content->gambar) }}" alt="Image"></figure>
-<ul>
-<li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
-<li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
-<li><i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i>
-{{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
+    <div class="gap">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-1 col-lg-10">
+                    <div class="blog-detail">
+                        <div class="blog-title">
+                            <h2>{{ $content->judul }}</h2>
+                        </div>
+                        <div class="blog-details-meta">
+                            <figure><img src="{{ asset('storage/'. $content->gambar) }}" alt="Image"></figure>
+                            <ul>
+                                <li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
+                                <li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
+                                <li><i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        </svg>
+                                    </i> {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
+                            </ul>
+                            <div class="deskripsi" style="word-wrap: break-word;">
+                                {!! $content->deskripsi !!}
+                            </div>
+                            <div class="tag-n-cat">
+                                <div class="tags">
+                                    <span><i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter">
+                                                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                                            </svg>
+                                        </i> Post Categories:</span>
+                                    <a href="#">{{ $content->kategori->kategori }}</a>
+                                </div>
+                            </div>
+                        </div>
 
-</ul>
-<p>{!! $content->deskripsi !!}
-</p>
-<div class="tag-n-cat">
-<div class="tags">
-<span><i>
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span>
-<a href="#">{{ $content->kategori->kategori }}</a>
-</div>
-</div>
-</div>
+
+
 @if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>

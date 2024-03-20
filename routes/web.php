@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('admin')->group(function(){
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+        
+        Route::post('/contents/upload-image', [ContentController::class, 'uploadImage'])->name('contents.uploadImage');
 
         Route::get('/content', [ContentController::class, 'index'])->name('content.index');
         Route::get('/content/create', [ContentController::class, 'createForAdmin'])->name('content.create');

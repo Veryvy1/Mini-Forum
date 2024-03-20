@@ -79,39 +79,37 @@ class ContentController extends Controller
 
     public function storeForAdmin(ContectRequest $request)
     {
-        try {
-            // $gambar = $request->file('gambar');
-            // $path = Storage::disk('public')->put('content', $gambar);
+            try{
+        $gambar = $request->file('gambar');
+        $path_gambar = Storage::disk('public')->put('content', $gambar);
 
-            $user_id = auth()->id();
+        $user_id = auth()->id();
 
-            $deskripsi = $request->input('deskripsi');
+        $deskripsi = $request->deskripsi;
+        $dom = new \DomDocument();
+        $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-            $dom = new DOMDocument();
-            $dom->loadHTML($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            $images = $dom->getElementsByTagName('im');
-
-            foreach ($images as $key => $img) {
-                $data = base64_decode(explode(',', explode(',', $img->getAttribute('src'))[1])[1]);
-                $images_name = "/uploads" . time() . $key . '.png';
-                Storage::put('public' . $images_name, $data);
-
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $images_name);
-            }
-
-            $gambar = $request->file('gambar');
-            $path = Storage::disk('public')->put('content', $gambar);
+        $images = $dom->getElementsByTagName('img');
+        foreach ($images as $k => $img) {
+            $data = $img->getAttribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = base64_decode($data);
+            $image_name = "/uploads" . time() . $k . '.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+        $deskripsi = $dom->saveHTML();
 
             Content::create([
+                'user_id' => $user_id,
                 'judul' => $request->input('judul'),
-                'deskripsi' => $dom->saveHTML(),
+                'deskripsi' => $deskripsi,
                 'kategori_id' => $request->input('kategori_id'),
-                'gambar' => $path,
-                'user_id' => auth()->id(),
+                'gambar' => $path_gambar,
             ]);
-
 
             return redirect()->route('content.index')->with('success', 'Content added successfully');
         } catch (\Exception $e) {
@@ -119,22 +117,48 @@ class ContentController extends Controller
         }
     }
 
+// $content = new Content();
+// $content->user_id = auth()->id();
+// $content->judul = $request->input('judul');
+// $content->deskripsi = $request->input('deskripsi');
+// $content->kategori_id = $request->input('kategori_id');
+// $content->gambar = $path;
+// $content->save();
 
     public function storeForUser(ContectRequest $request)
     {
         try {
-        $gambar = $request->file('gambar');
-        $path = Storage::disk('public')->put('content', $gambar);
+            $gambar = $request->file('gambar');
+            $path_gambar = Storage::disk('public')->put('content', $gambar);
 
-        $user_id = auth()->id();
+            $user_id = auth()->id();
 
-        $content = new Content();
-        $content->user_id = auth()->id();
-        $content->judul = $request->input('judul');
-        $content->deskripsi = $request->input('deskripsi');
-        $content->kategori_id = $request->input('kategori_id');
-        $content->gambar = $path;
-        $content->save();
+            $deskripsi = $request->deskripsi;
+            $dom = new \DomDocument();
+            $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+            $images = $dom->getElementsByTagName('img');
+            foreach ($images as $k => $img) {
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+                $data = base64_decode($data);
+                $image_name = "/uploads" . time() . $k . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
+            }
+            $deskripsi = $dom->saveHTML();
+
+                Content::create([
+                    'user_id' => $user_id,
+                    'judul' => $request->input('judul'),
+                    'deskripsi' => $deskripsi,
+                    'kategori_id' => $request->input('kategori_id'),
+                    'gambar' => $path_gambar,
+                ]);
+
             return redirect()->back()->with('success', 'Content added successfully');
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
@@ -173,11 +197,9 @@ class ContentController extends Controller
     }
 
     public function update(ContectRequest $request, string $id)
-    {
-        try {
-
+{
+    try {
         $content = Content::findOrFail($id);
-
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
@@ -190,6 +212,8 @@ class ContentController extends Controller
             $foto = $request->file('gambar');
             $path = $foto->store('content', 'public');
             $dataToUpdate['gambar'] = $path;
+        } else {
+            $dataToUpdate['gambar'] = $oldPhotoPath;
         }
 
         $content->update($dataToUpdate);
@@ -201,11 +225,13 @@ class ContentController extends Controller
                 File::delete($localFilePath);
             }
         }
-            return redirect()->route('content.index')->with('success', 'content updated successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
-        }
+
+        return redirect()->route('content.index')->with('success', 'Content updated successfully');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+}
+
 
 
 
@@ -214,25 +240,21 @@ class ContentController extends Controller
         try {
             $content = Content::findOrFail($id);
 
-            Comment::where('content_id', $content->id)->delete();
-            Like::where('content_id', $content->id)->delete();
-
             if (Storage::disk('public')->exists($content->gambar)) {
-                Storage::disk('public')->delete($content->gambar);
-            }
+                    Storage::disk('public')->delete($content->gambar);
+                }
 
-            $localFilePath = public_path('storage/' . $content->gambar);
-            if (File::exists($localFilePath)) {
-                File::delete($localFilePath);
-            }
+                $localFilePath = public_path('storage/' . $content->gambar);
+                if (File::exists($localFilePath)) {
+                    File::delete($localFilePath);
+                }
 
-            $content->delete();
+                $content->delete();
 
-            return redirect()->route('content.index')->with('success', 'Content successfully deleted');
+                return redirect()->route('content.index')->with('success', 'Content successfully deleted');
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('content.index')->with('error', 'Content not found');
+                return redirect()->route('content.index')->with('error', 'Content not found');
         }
     }
-
 }
 
