@@ -44,7 +44,7 @@ class CommentController extends Controller
         try {
             $request->validate([
                 'comment' => 'required|string',
-                'picture' => 'nullable|image',
+                // 'picture' => 'nullable|image',
             ]);
 
             $user_id = auth()->id();
@@ -72,7 +72,7 @@ class CommentController extends Controller
             $commentModel->content_id = $contentId;
             $commentModel->user_id = $user_id;
             $commentModel->comment = $comment;
-            $commentModel->picture = $path;
+            // $commentModel->picture = $path;
             $commentModel->save();
 
             return redirect()->back()->with('success', 'Successfully commented');
