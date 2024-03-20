@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -174,7 +173,7 @@
                             <button type="submit" title class="button soft-danger"  onclick="swalpFunction()">
                                 <i class="icofont-trash"></i>Delete
                             </button>
-                        </form>
+                    </form>
                 </td>
             </tr>
         @endif
@@ -185,51 +184,7 @@
 </div>
 </div>
 </div>
-
-<div class="popup-wraper">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i class="icofont-envelope"></i> Send Message</h5>
 </div>
-<div class="send-message">
-<form method="post" class="c-form">
-<input type="text" placeholder="Enter Name..">
-<input type="text" placeholder="Subject">
-<textarea placeholder="Write Message"></textarea>
-<div class="uploadimage">
-<i class="icofont-file-jpg"></i>
-<label class="fileContainer">
-<input type="file">Attach file
-</label>
-</div>
-<button type="submit" class="main-btn">Send</button>
-</form>
-</div>
-</div>
-</div>
-</div>
-<div class="side-slide">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="slide-meta">
-<ul class="nav nav-tabs slide-btns">
-<li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-<li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-</ul>
-</div>
-</div>
-</div>
-
-
-{{-- <script>
-    function confirmDelete(userId) {
-        if (confirm("Are you sure you want to delete this user?")) {
-            document.getElementById('deleteForm_' + userId).submit();
-        }
-        return false;
-    }
-</script> --}}
 
 @if (session('warning'))
     <script>
@@ -275,5 +230,4 @@ function swalpFunction(message, type) {
 <script src="js/vivus.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
-
 </html>

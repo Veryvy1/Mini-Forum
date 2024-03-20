@@ -14,15 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
-{{-- </div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="right-compact">
@@ -32,13 +29,6 @@
 <svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
 </i>
 </div>
-<ul class="drop-menu">
-<li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-<li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-<li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-<li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
-</ul>
 </div>
 <div class="res-search">
 <span><i>
@@ -168,7 +158,7 @@
 @endif
 </td>
 <td>
-    <h5>{{  \Carbon\Carbon::parse($kategories->created_at)->isoFormat('D MMMM YYYY') }}</h5>
+    <h5>{{  \Carbon\Carbon::parse($kategories->created_at)->isoFormat('D-MMMM-YYYY') }}</h5>
 </td>
 <td style="width: 10%">
 <div class="actions-btn">
@@ -200,8 +190,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CATEGORY</h6>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Add Category</h6>
             </div>
             <div class="modal-body">
                 <form action="{{ route('kategori.store') }}" method="POST">
@@ -218,8 +207,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>
                 </form>
             </div>
@@ -232,7 +221,7 @@
 <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CATEGORY</h6>
+                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>Edit Category</h6>
         </div>
         <div class="modal-body">
             <form action="{{ route('kategori.update', $kategories->id) }}" method="POST">
@@ -251,8 +240,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                <button type="submit" class="btn btn-primary">SAVE</button>
             </div>
         </form>
     </div>

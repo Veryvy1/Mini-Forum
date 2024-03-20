@@ -21,7 +21,6 @@ class HomeUserController extends Controller
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->take(99)->paginate(6);
         } else {
             $content = Content::take(99)->paginate(6);
-            // a
         }
 
         $likesCount = [];

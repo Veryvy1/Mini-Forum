@@ -194,6 +194,7 @@
     @else
         {{ $contents->judul }}
     @endif</a>
+<<<<<<< Updated upstream
     {{-- <p>
         <div style="height: 100px; width: 100%; overflow: hidden; text-overflow: ellipsis;">
             @if (strlen(strip_tags($contents->deskripsi)) > 60)
@@ -204,6 +205,15 @@
         </div>
 
     </p> --}}
+=======
+    <p>
+    @if (strlen(strip_tags($contents->deskripsi)) > 60)
+    {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
+    @else
+    {!! $contents->deskripsi !!}
+    @endif
+    </p>
+>>>>>>> Stashed changes
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
 
 
@@ -212,6 +222,7 @@
 <div class="box">
     <div class="Like">
         @if($likes && $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->count() > 0)
+<<<<<<< Updated upstream
         <form action="{{ route('like.destroy', $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}" method="post">
             @csrf
             @method('DELETE')
@@ -264,6 +275,60 @@
             }"><i class="icofont-like"></i> Like</button>
         </form>
     @endif
+=======
+                    <form action="{{ route('like.destroy', $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        @error('like')
+                            {{ $message }}
+                        @enderror
+                        @error('user_id')
+                            {{ $message }}
+                        @enderror
+                        @error('content_id')
+                            {{ $message }}
+                        @enderror
+                        <input type="hidden" name="content_id" value="{{$contents->id}}">
+                        <button type="submit" class="" style="
+                        background: #ff0000;
+                        border-radius: 4px;
+                        color: #ffffff;
+                        display: inline-block;
+                        font-size: 13px;
+                        padding: 5px 20px;
+                        vertical-align: middle;
+                        transition: all 0.2s linear 0s;
+                        border: none;
+                        }"><i class="icofont-like"></i> Unlike</button>
+                    </form>
+                @else
+                    <form action="/like" method="post">
+                        @csrf
+                        @method('POST')
+                        @error('like')
+                            {{ $message }}
+                        @enderror
+                        @error('user_id')
+                            {{ $message }}
+                        @enderror
+                        @error('content_id')
+                            {{ $message }}
+                        @enderror
+                        <input type="hidden" name="content_id" value="{{$contents->id}}">
+                        <button type="submit" class="" style="
+                        background: #0099ff;
+                        border-radius: 4px;
+                        color: #ffffff;
+                        display: inline-block;
+                        font-size: 13px;
+                        padding: 5px 20px;
+                        vertical-align: middle;
+                        transition: all 0.2s linear 0s;
+                        border: none;
+                        }"><i class="icofont-like"></i> Like</button>
+                    </form>
+                @endif
+>>>>>>> Stashed changes
     </div>
 </div>
 
@@ -345,6 +410,14 @@
         </form>
     </div>
 </aside>
+<<<<<<< Updated upstream
+</div>
+</div>
+</div>
+</div>
+=======
+
+>>>>>>> Stashed changes
 </div>
 </div>
 </div>
@@ -384,7 +457,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
+                <h6 class="m-0 font-weight-bold">Add Content</h6>
             </div>
             <div class="modal-body">
                 <div id="searchResultsContainer"></div>
@@ -407,7 +480,11 @@
                     <script>
                     $(document).ready(function() {
                         $('#summernote').summernote({
+<<<<<<< Updated upstream
                             placeholder: 'Isi content...',
+=======
+                            placeholder: 'Hello stand alone ui',
+>>>>>>> Stashed changes
                             tabsize: 2,
                             height: 120,
                             toolbar: [
@@ -450,8 +527,8 @@
                         @enderror
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>
                 </form>
             </div>
@@ -465,7 +542,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="searchResultsContainer"></div>
@@ -483,8 +559,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                        <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" form="addContactForm" class="btn btn-primary">SAVE</button>
                     </div>
                 </form>
             </div>
@@ -577,7 +653,6 @@
         }
         });
     }
-
 </script>
 
 <script>

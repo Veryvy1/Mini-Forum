@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\User;
+use App\Models\Kategori;
 use App\Models\Like;
 use App\Models\Comment;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,15 +17,17 @@ class ProfileController extends Controller
     public function index($id)
     {
         $content = Content::all();
+        $kategori = Kategori::all();
         $user = User::find($id);
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
         }
-        return view('user.profile', compact('user','content'));
+        return view('user.profile', compact('user','content','kategori'));
     }
 
     public function profil()
     {
+        $kategori = Kategori::all();
         $content = Content::withCount('likes','comment')->get();
         $user = Auth::user();
         if (!$user) {
@@ -33,14 +36,16 @@ class ProfileController extends Controller
         $likes = Like::where('user_id', auth()->user()->id)->first();
         $comment = Comment::where('user_id', auth()->user()->id)->first();
         $totalPosts = Content::where('user_id', $user->id)->count();
-        return view('profile', compact('user','content','totalPosts','likes','comment'));
+        return view('profile', compact('user','content','totalPosts','likes','comment','kategori'));
     }
 
 
     public function edit(string $id)
     {
+        $content = Content::all();
+        $kategori = Kategori::all();
         $user = User::find($id);
-        return view('user.profile', compact('user'));
+        return view('user.profile', compact('user','content','kategori'));
     }
 
     public function update(Request $request, string $id)
@@ -88,5 +93,4 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.profil')->with('success', 'Profile updated successfully.');
     }
-
 }

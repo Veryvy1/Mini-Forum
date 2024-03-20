@@ -14,15 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
-{{-- </div> --}}
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="right-compact">
@@ -32,13 +29,6 @@
 <svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
 </i>
 </div>
-<ul class="drop-menu">
-<li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-<li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-<li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-<li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
-</ul>
 </div>
 <div class="res-search">
 <span><i>
@@ -133,7 +123,6 @@
 <div class="col-lg-12">
 <div class="panel-content">
 <h4 class="main-title">Contact Message</h4>
-
 <div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">
@@ -180,38 +169,20 @@
 </div>
 </div>
 
-    @if (session('warning'))
+<?php if ($errors->any()): ?>
     <script>
-        toastr.warning("{{ session('warning') }}");
+        toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
     </script>
-    @endif
-<script>
-function swalpFunction() {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            console.log("Data dihapus");
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-            });
-        }
-    });
-}
-</script>
+<?php endif; ?>
 
+<?php if (session('warning')): ?>
+    <script>
+        toastr.warning("<?php echo session('warning'); ?>");
+    </script>
+<?php endif; ?>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    @if (Session::has('success'))
-    toastr.success("{{ Session::get('success') }}")
-    @endif
     function swalpFunction() {
         Swal.fire({
             title: "Are you sure?",
@@ -233,7 +204,12 @@ function swalpFunction() {
         });
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if (Session::has('success')): ?>
+<script>
+    toastr.success("<?php echo Session::get('success'); ?>");
+</script>
+<?php endif; ?>
 
 <script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>

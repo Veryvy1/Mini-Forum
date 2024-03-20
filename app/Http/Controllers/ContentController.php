@@ -9,10 +9,10 @@ use App\Models\Comment;
 use App\Models\Kategori;
 use App\Models\Like;
 use DOMDocument;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -79,11 +79,16 @@ class ContentController extends Controller
 
     public function storeForAdmin(ContectRequest $request)
     {
+<<<<<<< Updated upstream
             try{
         $gambar = $request->file('gambar');
         $path_gambar = Storage::disk('public')->put('content', $gambar);
 
         $user_id = auth()->id();
+=======
+        try {
+            $user_id = auth()->id();
+>>>>>>> Stashed changes
 
         $deskripsi = $request->deskripsi;
         $dom = new \DomDocument();
@@ -242,8 +247,6 @@ class ContentController extends Controller
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
     }
-
-
 
     public function destroy(string $id)
     {

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content=""/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Content | Admin</title>
     <link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
@@ -14,10 +14,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/responsive.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -40,20 +39,6 @@
 <body>
 <div class="responsive-header">
 <div class="right-compact">
-<div class="menu-area">
-<div id="nav-icon3">
-<i>
-<svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
-</i>
-</div>
-<ul class="drop-menu">
-<li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-<li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-<li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-<li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
-</ul>
-</div>
 <div class="res-search">
 <span><i>
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></i></span>
@@ -246,7 +231,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
+                <h6 class="m-0 font-weight-bold">Add Content</h6>
             </div>
             <div class="modal-body">
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
@@ -292,8 +277,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
                     </div>
                 </form>
             </div>
@@ -306,7 +291,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>EDIT CONTENT</h6>
+                <h6 class="m-0 font-weight-bold">Edit Content</h6>
             </div>
             <div class="modal-body">
                 <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
@@ -359,8 +344,8 @@
                     </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                    <button type="submit" class="btn btn-primary">SAVE</button>
                 </div>
             </form>
         </div>
@@ -439,10 +424,9 @@
 </script>
 <?php endif; ?>
 
-<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
+<script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
-<script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 </body>
 </html>

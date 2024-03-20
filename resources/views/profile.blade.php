@@ -1,4 +1,9 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
+=======
+    @extends('summernote')
+    <!DOCTYPE html>
+>>>>>>> Stashed changes
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,7 +23,11 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< Updated upstream
     <style>
+=======
+        <style>
+>>>>>>> Stashed changes
         .friend-info em {
             position: absolute;
             bottom: 11rem;
@@ -76,7 +85,11 @@
         .like i {
             color: #000;
         }
+<<<<<<< Updated upstream
     </style>
+=======
+        </style>
+>>>>>>> Stashed changes
     </head>
     <body>
     <div class="theme-layout">
@@ -139,7 +152,6 @@
     </ul>
     </div>
     </header>
-
     <section>
     <div class="gap" style="
     width: 130%;
@@ -153,7 +165,7 @@
     <div class="col-lg-9">
     <div class="group-feed">
     <div class="group-avatar">
-        @if ($user->bgprofile)
+    @if ($user->bgprofile)
     <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('storage/' . $user->bgprofile) }}">
     @else
     <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('images/LOGO/bguser.jpg') }}" alt >
@@ -170,7 +182,7 @@
     <div class="grp-info about">
     <h4>{{ $user->name }}<span>{{ $user->email }}</span></h4>
     <ul class="joined-info">
-    <li><span>Joined:</span>{{  \Carbon\Carbon::parse($user->created_at)->isoFormat('D MMMM YYYY') }}</li>
+    <li><span>Joined:</span>{{  \Carbon\Carbon::parse($user->created_at)->isoFormat('D-MMMM-YYYY') }}</li>
     <li><span>Posts:</span> {{ $totalPosts }}</li>
     </ul>
     <ul class="more-grp-info">
@@ -220,15 +232,22 @@
                     <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
                     @endif
                 </figure>
+<<<<<<< Updated upstream
                     {{-- <em>
                         <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
                             <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
                         </svg>
                     </em> --}}
+=======
+                    <em>
+                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                            <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
+                        </svg>
+                    </em>
+>>>>>>> Stashed changes
     <div class="friend-name">
         <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
-
+        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
         <div class="more-opt" style="float:right; margin-top: -10px;">
             <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
             <ul id="dropdown-{{ $contents->id }}" style="display: none;">
@@ -246,23 +265,35 @@
     </div>
     <div class="post-meta">
         <figure>
-            <a data-toggle="modal" data-target="#img-comt" href="#">
+            <a href="{{ route('content.detail', ['content' => $contents->id]) }}">
                 <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
             </a>
         </figure>
+<<<<<<< Updated upstream
         <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
+=======
+    <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
+>>>>>>> Stashed changes
     @if(strlen($contents->judul) > 45)
        {{ substr($contents->judul, 0, 45) }}...
     @else
        {{ $contents->judul }}
     @endif</a>
+<<<<<<< Updated upstream
     {{-- <p>
+=======
+    <p>
+>>>>>>> Stashed changes
     @if (strlen(strip_tags($contents->deskripsi)) > 60)
     {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
     @else
     {!! $contents->deskripsi !!}
     @endif
+<<<<<<< Updated upstream
     </p> --}}
+=======
+    </p>
+>>>>>>> Stashed changes
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
     <div class="we-video-info">
             <div class="box">
@@ -376,12 +407,15 @@
     </div>
     </div>
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         <div class="modal" tabindex="-1" id="tambahModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="m-0 font-weight-bold"><i class="fas fa-newspaper me-1"></i>ADD CONTENT</h6>
+                        <h6 class="m-0 font-weight-bold">Add Content</h6>
                     </div>
                     <div class="modal-body">
                         <div id="searchResultsContainer"></div>
@@ -434,11 +468,19 @@
                                 <label for="kategoris" class="form-label">Category</label><br>
                                 <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                                     <option value="" selected>Select Category</option>
+<<<<<<< Updated upstream
                                     {{-- @foreach ($kategori as $kat)
                                         <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
                                             {{ $kat->kategori }}
                                         </option>
                                     @endforeach --}}
+=======
+                                    @foreach ($kategori as $kat)
+                                        <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
+                                            {{ $kat->kategori }}
+                                        </option>
+                                    @endforeach
+>>>>>>> Stashed changes
                                 </select>
                                 @error('kategori_id')
                                     <span class="invalid-feedback" role="alert">
@@ -447,8 +489,13 @@
                                 @enderror
                             </div>
                             <div class="modal-footer">
+<<<<<<< Updated upstream
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+=======
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                                <button type="submit" class="btn btn-primary">SAVE</button>
+>>>>>>> Stashed changes
                             </div>
                         </form>
                     </div>
@@ -461,7 +508,10 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
+<<<<<<< Updated upstream
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+=======
+>>>>>>> Stashed changes
                     </div>
                     <div class="modal-body">
                         <div id="searchResultsContainer"></div>
@@ -477,6 +527,7 @@
                                     </span>
                                 @enderror
                             </div>
+<<<<<<< Updated upstream
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
@@ -488,6 +539,18 @@
             </div>
         </div>
 
+=======
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                                <button type="submit" form="addContactForm" class="btn btn-primary">SAVE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+>>>>>>> Stashed changes
     <?php if ($errors->any()): ?>
     <script>
         toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
@@ -552,11 +615,16 @@
         }
     </script>
 
+<<<<<<< Updated upstream
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
     <script src="js/vivus.min.js" type="text/javascript"></script>
     <script data-cfasync="true" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
+=======
+    <script src="js/main.min.js" type="text/javascript"></script>
+    <script src="js/vivus.min.js" type="text/javascript"></script>
+>>>>>>> Stashed changes
     <script src="js/script.js" type="text/javascript"></script>
-    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="dd66549c18016e84d7b048a6-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d70aca4bd2836b',t:'MTcwOTI3NDAzNy4wNDIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script>
+    <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
     </body>
     </html>

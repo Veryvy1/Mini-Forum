@@ -44,11 +44,11 @@
         }
         .comment-content {
             margin-left: 50px;
-            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+            margin-top: -30px;
         }
         .comment-content1 {
             margin-left: 30px;
-            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+            margin-top: -30px;
         }
         .comment-options {
         margin-top: 10px;
@@ -69,8 +69,8 @@
             cursor: pointer;
         }
         .comment-options a {
-            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-            margin-left: 50px; /* Geser tombol Reply ke kanan */
+            margin-right: 10px;
+            margin-left: 50px; 
         }
 
         .comment-options1 a,
@@ -178,6 +178,11 @@ p {
                 {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
 
                 </ul>
+<<<<<<< Updated upstream
+=======
+                <p>{!! $content->deskripsi !!}
+                </p>
+>>>>>>> Stashed changes
                 <div class="tag-n-cat">
                 <div class="tags">
                 <span><i>

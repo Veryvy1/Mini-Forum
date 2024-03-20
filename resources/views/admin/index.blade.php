@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +23,6 @@
     </style>
 </head>
 <body>
-{{-- <div class="page-loader" id="page-loader"> --}}
 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 <span>Loading...</span>
 </div>
@@ -54,8 +52,6 @@
         @csrf
     </form>
 </li>
-
-
 </ul>
 </div>
 <div class="res-search">
@@ -213,7 +209,6 @@
         <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
     </span>
 </div>
-{{-- <span class="tx-medium mg-l-10">{{ $contents->judul }}</span> --}}
 @if(strlen($contents->judul) > 15)
         {{ substr($contents->judul, 0, 15) }}...
     @else
@@ -267,5 +262,5 @@
 <script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
-<script src="js/graphs-scripts.js" type="text/javascript"></script>
+<script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
 </html>
