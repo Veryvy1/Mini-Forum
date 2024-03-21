@@ -177,8 +177,11 @@
                                 {!! $replies->reply !!}
                             </p>
                         </div>
-                        <div class="comment-options">
-                            @if ($replies->user_id == Auth::user()->id)
+
+                            <div class="comment-options1">
+                                <a href="#" class="reply-btn text-primary">Reply</a>
+                                @if ($replies->user_id == Auth::user()->id)
+                            {{-- <button onclick="deleteComment({{ $replies->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
                                 @csrf
                                 @method('delete')
@@ -214,6 +217,10 @@
                             <p style="word-break: break-word;">
                                 {!! $replies->reply !!}
                             </p>
+                        </div>
+                        <div class="comment-options1">
+                            <a href="#" class="reply-btn text-primary" data-reply="{{ $replies->reply }}"
+                                data-username="{{ $replies->user->name }}">Reply</a>
                             @if ($replies->user_id == Auth::user()->id)
                             <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
                                 @csrf
@@ -221,7 +228,7 @@
                                 <button type="submit" class="text-danger" style="border: none; background-color: #ffff" onclick="swalpFunction()"><i class="icofont-ui-delete"></i>Delete</button>
                             </form>
                             @endif
-                        </div>
+
                     </li>
                     <hr>
                     @endif
@@ -280,25 +287,46 @@
     @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#summernote').summernote({
-                placeholder: 'Isi content...',
-                tabsize: 2,
-                height: 120,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'underline', 'clear']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
+    $('#summernote').summernote({
+        placeholder: 'Isi content...',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
 
-            var oldIsiValue = {!! json_encode(old('isi')) !!};
-            $('#summernote').summernote('code', oldIsiValue);
+    // Set nilai Summernote dengan data lama jika ada
+    var oldIsiValue = {!! json_encode(old('isi')) !!};
+    $('#summernote').summernote('text', oldIsiValue);
+});
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Tambahkan event listener untuk tombol "Reply"
+            $('.reply-btn').click(function(event) {
+                // Hentikan perilaku default dari link
+                event.preventDefault();
+                // Dapatkan nilai atribut data-reply (isi balasan) dan data-username (username)
+                var replyText = $(this).data('reply');
+                var username = $(this).data('username');
+                // Dapatkan nilai yang ada di dalam input summernote
+                var currentText = $('#summernote').val();
+                // Update nilai input summernote dengan menambahkan username dan isi balasan
+                $('#summernote').val("@" + username + " " + currentText);
+                // Berikan fokus ke input summernote
+                $('#summernote').focus();
+            });
         });
     </script>
+
+
     @endsection
 
     <?php if ($errors->any()): ?>
@@ -353,6 +381,7 @@
             }
         }
     </script>
+
     <script>
         (function() {
             var js =

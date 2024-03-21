@@ -132,6 +132,8 @@
 <span id="hours">00</span>
 <span id="point">:</span>
 <span id="min">00</span>
+<span id="point">:</span>
+<span id="sec">00</span>
 </div>
 <span id="date"></span>
 </div>

@@ -68,6 +68,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/comment/{contentId}', [CommentController::class, 'store'])->name('comment.store');
         Route::get('/reply/{id}', [ReplyController::class, 'replyId'])->name('comment.reply');
         Route::post('/reply/{commentId}', [ReplyController::class, 'store'])->name('reply.store');
+        Route::get('/reply1/{id}', [ReplyController::class, 'replyId1'])->name('comment.reply1');
+        Route::post('/reply1/{replyId}', [ReplyController::class, 'store1'])->name('reply1.store');
+        Route::get('/reply2/{id}', [ReplyController::class, 'replyId2'])->name('comment.reply2');
+        Route::post('/reply2/{replyId1}', [ReplyController::class, 'store2'])->name('reply2.store');
         Route::post('/content/{id}/like', [LikeController::class, 'like'])->name('content.like');
         Route::get('/morecontent', [ContentController::class, 'contentMore'])->name('more.home');
 

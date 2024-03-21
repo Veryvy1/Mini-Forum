@@ -17,4 +17,8 @@ $(document).ready(function () {
 				var e = new Date().getHours();
 				$("#hours").html((e < 10 ? "0" : "") + e);
 			}, 1e3);
+            setInterval(function () {
+				var e = new Date().getSeconds();
+				$("#sec").html((e < 10 ? "0" : "") + e);
+			}, 1e3);
 	});
