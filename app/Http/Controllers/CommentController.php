@@ -87,9 +87,9 @@ class CommentController extends Controller
         $id = $request->comment;
         Reply::where('comment_id', $id)->delete();
         $comment = Comment::findOrFail($id);
-        if (Storage::disk('public')->exists($comment->picture)) {
-            Storage::disk('public')->delete($comment->picture);
-        }
+        // if (Storage::disk('public')->exists($comment->picture)) {
+        //     Storage::disk('public')->delete($comment->picture);
+        // }
 
         $comment->delete();
 

@@ -1,9 +1,5 @@
-<<<<<<< Updated upstream
-<!DOCTYPE html>
-=======
     @extends('summernote')
     <!DOCTYPE html>
->>>>>>> Stashed changes
     <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -23,11 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< Updated upstream
-    <style>
-=======
         <style>
->>>>>>> Stashed changes
         .friend-info em {
             position: absolute;
             bottom: 11rem;
@@ -85,11 +77,7 @@
         .like i {
             color: #000;
         }
-<<<<<<< Updated upstream
     </style>
-=======
-        </style>
->>>>>>> Stashed changes
     </head>
     <body>
     <div class="theme-layout">
@@ -126,7 +114,12 @@
     <li>
     <a href="#" title>
     <i>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+        <rect x="3" y="3" width="7" height="7"></rect>
+        <rect x="14" y="3" width="7" height="7"></rect>
+        <rect x="14" y="14" width="7" height="7"></rect>
+        <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
     </i>
     </a>
     <ul class="dropdown">
@@ -232,19 +225,11 @@
                     <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
                     @endif
                 </figure>
-<<<<<<< Updated upstream
                     {{-- <em>
                         <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
                             <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
                         </svg>
                     </em> --}}
-=======
-                    <em>
-                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
-                            <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
-                        </svg>
-                    </em>
->>>>>>> Stashed changes
     <div class="friend-name">
         <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
         <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
@@ -269,31 +254,19 @@
                 <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
             </a>
         </figure>
-<<<<<<< Updated upstream
-        <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
-=======
     <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
->>>>>>> Stashed changes
     @if(strlen($contents->judul) > 45)
        {{ substr($contents->judul, 0, 45) }}...
     @else
        {{ $contents->judul }}
     @endif</a>
-<<<<<<< Updated upstream
     {{-- <p>
-=======
-    <p>
->>>>>>> Stashed changes
     @if (strlen(strip_tags($contents->deskripsi)) > 60)
     {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
     @else
     {!! $contents->deskripsi !!}
     @endif
-<<<<<<< Updated upstream
     </p> --}}
-=======
-    </p>
->>>>>>> Stashed changes
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
     <div class="we-video-info">
             <div class="box">
@@ -368,7 +341,7 @@
                 <div class="we-video-info">
                 <ul><li>
                     <span title="liked" class="liked">
-                    <i class="icofont-heart" style="color: #64a4d4;"></i>
+                    <i class="icofont-like" style="color: #64a4d4;"></i>
                         <ins>{{ $contents->likes_count }}</ins>
                     </span>
                 </li></ul>
@@ -407,10 +380,6 @@
     </div>
     </div>
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         <div class="modal" tabindex="-1" id="tambahModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -419,7 +388,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="searchResultsContainer"></div>
-                        <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('user.contents.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -468,19 +437,12 @@
                                 <label for="kategoris" class="form-label">Category</label><br>
                                 <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                                     <option value="" selected>Select Category</option>
-<<<<<<< Updated upstream
-                                    {{-- @foreach ($kategori as $kat)
-                                        <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
-                                            {{ $kat->kategori }}
-                                        </option>
-                                    @endforeach --}}
-=======
+
                                     @foreach ($kategori as $kat)
                                         <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
                                             {{ $kat->kategori }}
                                         </option>
                                     @endforeach
->>>>>>> Stashed changes
                                 </select>
                                 @error('kategori_id')
                                     <span class="invalid-feedback" role="alert">
@@ -489,13 +451,8 @@
                                 @enderror
                             </div>
                             <div class="modal-footer">
-<<<<<<< Updated upstream
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
-=======
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                                <button type="submit" class="btn btn-primary">SAVE</button>
->>>>>>> Stashed changes
                             </div>
                         </form>
                     </div>
@@ -508,10 +465,6 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
-<<<<<<< Updated upstream
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-=======
->>>>>>> Stashed changes
                     </div>
                     <div class="modal-body">
                         <div id="searchResultsContainer"></div>
@@ -527,7 +480,6 @@
                                     </span>
                                 @enderror
                             </div>
-<<<<<<< Updated upstream
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
@@ -539,18 +491,6 @@
             </div>
         </div>
 
-=======
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                                <button type="submit" form="addContactForm" class="btn btn-primary">SAVE</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
->>>>>>> Stashed changes
     <?php if ($errors->any()): ?>
     <script>
         toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
@@ -604,27 +544,19 @@
         }
     </script>
 
-    <script>
-        function toggleDropdown(contentId) {
-            var dropdown = document.getElementById("dropdown-" + contentId);
-            if (dropdown.style.display === "none") {
-                dropdown.style.display = "block";
-            } else {
-                dropdown.style.display = "none";
-            }
+<script>
+    function toggleDropdown(contentId) {
+        var dropdown = document.getElementById("dropdown-" + contentId);
+        if (dropdown.style.display === "none") {
+            dropdown.style.display = "block";
+        } else {
+            dropdown.style.display = "none";
         }
-    </script>
+    }
+</script>
 
-<<<<<<< Updated upstream
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
-    <script src="js/vivus.min.js" type="text/javascript"></script>
-    <script data-cfasync="true" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js" type="text/javascript"></script>
-=======
-    <script src="js/main.min.js" type="text/javascript"></script>
-    <script src="js/vivus.min.js" type="text/javascript"></script>
->>>>>>> Stashed changes
-    <script src="js/script.js" type="text/javascript"></script>
-    <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
-    </body>
-    </html>
+
+<script src="js/vivus.min.js" type="text/javascript"></script>
+<script src="js/script.js" type="text/javascript"></script>
+</body>
+</html>

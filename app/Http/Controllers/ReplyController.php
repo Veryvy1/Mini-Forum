@@ -44,12 +44,12 @@ class ReplyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ReplyRequest $request, $commentId)
+    public function store(Request $request, $commentId)
     {
         try {
             $request->validate([
                 'reply' => 'required|string',
-                'picture' => 'nullable|image',
+                // 'picture' => 'nullable|image',
             ]);
 
             $user_id = auth()->id();
@@ -78,7 +78,7 @@ class ReplyController extends Controller
             $reply->reply = $comment;
             $reply->comment_id = $commentId;
             $reply->user_id = $user_id;
-            $reply->picture = $path;
+            // $reply->picture = $path;
             // if ($request->hasFile('picture')) {
             //     $reply->picture = $picture_path;
             // }
@@ -109,15 +109,16 @@ class ReplyController extends Controller
     {
         $id = $request->reply;
         $reply = Reply::findOrFail($id);
-        if (Storage::disk('public')->exists($reply->picture)) {
-            Storage::disk('public')->delete($reply->picture);
-        }
+        // if (Storage::disk('public')->exists($reply->picture)) {
+        //     Storage::disk('public')->delete($reply->picture);
+        // }
 
         $localFilePath = public_path('storage/' . $reply->picture);
         if (File::exists($localFilePath)) {
             File::delete($localFilePath);
         }
         $reply->delete();
-        return back();
+        return redirect()->back()->with('success', 'Reply successfully deleted');
+
     }
 }

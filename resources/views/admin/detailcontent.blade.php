@@ -83,7 +83,7 @@
                                 {!! $content->deskripsi !!}
                             </div>
                             <ul style="margin-top: 50px;">
-                                <li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
+                                <li><i class="icofont-like" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
                                 <li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
                                 <li><i>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">

@@ -97,7 +97,7 @@
         </a>
     </li>
 <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
-    <i class="icofont-plus"></i>Latest Content</a></a>
+    <i class="icofont-plus"></i>Add Content</a></a>
 </li>
 <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
 
@@ -194,7 +194,6 @@
     @else
         {{ $contents->judul }}
     @endif</a>
-<<<<<<< Updated upstream
     {{-- <p>
         <div style="height: 100px; width: 100%; overflow: hidden; text-overflow: ellipsis;">
             @if (strlen(strip_tags($contents->deskripsi)) > 60)
@@ -205,15 +204,6 @@
         </div>
 
     </p> --}}
-=======
-    <p>
-    @if (strlen(strip_tags($contents->deskripsi)) > 60)
-    {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
-    @else
-    {!! $contents->deskripsi !!}
-    @endif
-    </p>
->>>>>>> Stashed changes
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
 
 
@@ -222,60 +212,6 @@
 <div class="box">
     <div class="Like">
         @if($likes && $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->count() > 0)
-<<<<<<< Updated upstream
-        <form action="{{ route('like.destroy', $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}" method="post">
-            @csrf
-            @method('DELETE')
-            @error('like')
-                {{ $message }}
-            @enderror
-            @error('user_id')
-                {{ $message }}
-            @enderror
-            @error('content_id')
-                {{ $message }}
-            @enderror
-            <input type="hidden" name="content_id" value="{{$contents->id}}">
-            <button type="submit" class="" style="
-            background: #ff0000;
-            border-radius: 4px;
-            color: #ffffff;
-            display: inline-block;
-            font-size: 13px;
-            padding: 5px 20px;
-            vertical-align: middle;
-            transition: all 0.2s linear 0s;
-            border: none;
-            }"><i class="icofont-like"></i> Unlike</button>
-        </form>
-    @else
-        <form action="/like" method="post">
-            @csrf
-            @method('POST')
-            @error('like')
-                {{ $message }}
-            @enderror
-            @error('user_id')
-                {{ $message }}
-            @enderror
-            @error('content_id')
-                {{ $message }}
-            @enderror
-            <input type="hidden" name="content_id" value="{{$contents->id}}">
-            <button type="submit" class="" style="
-            background: #0099ff;
-            border-radius: 4px;
-            color: #ffffff;
-            display: inline-block;
-            font-size: 13px;
-            padding: 5px 20px;
-            vertical-align: middle;
-            transition: all 0.2s linear 0s;
-            border: none;
-            }"><i class="icofont-like"></i> Like</button>
-        </form>
-    @endif
-=======
                     <form action="{{ route('like.destroy', $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}" method="post">
                         @csrf
                         @method('DELETE')
@@ -328,7 +264,6 @@
                         }"><i class="icofont-like"></i> Like</button>
                     </form>
                 @endif
->>>>>>> Stashed changes
     </div>
 </div>
 
@@ -410,14 +345,6 @@
         </form>
     </div>
 </aside>
-<<<<<<< Updated upstream
-</div>
-</div>
-</div>
-</div>
-=======
-
->>>>>>> Stashed changes
 </div>
 </div>
 </div>
@@ -480,11 +407,7 @@
                     <script>
                     $(document).ready(function() {
                         $('#summernote').summernote({
-<<<<<<< Updated upstream
                             placeholder: 'Isi content...',
-=======
-                            placeholder: 'Hello stand alone ui',
->>>>>>> Stashed changes
                             tabsize: 2,
                             height: 120,
                             toolbar: [

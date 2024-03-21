@@ -20,6 +20,17 @@
 .dropdown-custom {
     font-size: 16px;
 }
+
+/* .table-default tr {
+  height: 50px;
+}
+
+.table-default td div {
+    width: 100%;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
     </style>
 </head>
 <body>
@@ -193,7 +204,7 @@
 <tr>
 <th class="wd-10p">No.</th>
 <th class="wd-25p">Title</th>
-<th class="wd-35p">Description</th>
+<th class="wd-35p">Category</th>
 <th class="wd-20p">Total Liked</th>
 </tr>
 </thead>
@@ -201,8 +212,8 @@
 
     @foreach ($content as $key => $contents)
 <tr style="width: 600px; height: 30px;">
-    <td>{{ $key + 1 }}</td>
-<td style="width: 25%">
+    <td style="width: 10%;">{{ $key + 1 }}</td>
+<td style="width: 30%;">
 <div class="d-flex align-items-center">
 <div class="avatar avatar-xs" style="border-radius: 50%; width: 30px; height: 30px; overflow: hidden;">
     <span class="avatar-initial rounded-circle bg-secondary">
@@ -212,16 +223,22 @@
 @if(strlen($contents->judul) > 15)
         {{ substr($contents->judul, 0, 15) }}...
     @else
+
         {{ $contents->judul }}
     @endif
 </div>
 </td>
-<td style="width: 600px; height: 30px; overflow: hidden;  text-overflow: ellipsis;">
+{{-- <td style="width: 600px; height: 30px; overflow: hidden;  text-overflow: ellipsis;">
+    <div class="">
     @if (strlen(strip_tags($contents->deskripsi)) > 60)
     {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
 @else
     {!! $contents->deskripsi !!}
 @endif
+</div>
+</td> --}}
+<td style="width: 30%">
+    {{ $contents->kategori->kategori }}
 </td>
 <td style="width: 10%">
 <center><span>{{ $contents->likes_count }}</span></center>

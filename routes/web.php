@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('admin')->group(function(){
 
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-        
+
         Route::post('/contents/upload-image', [ContentController::class, 'uploadImage'])->name('contents.uploadImage');
 
         Route::get('/content', [ContentController::class, 'index'])->name('content.index');
@@ -59,8 +59,10 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('user')->group(function(){
         Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
         Route::get('/home/create/{$id}', [ContentController::class, 'createForUser'])->name('user.content.create');
-        Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
+        Route::get('/profil/create/{$id}', [ContentController::class, 'createdForUser'])->name('user.content.created');
         Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
+        Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
+        Route::post('/profilcontent', [ContentController::class, 'storeForUserProfil'])->name('user.contents.store');
         Route::get('/homesearch', [HomeUserController::class, 'index'])->name('home.search');
         Route::get('/comment/{id}', [CommentController::class, 'commentId'])->name('content.comment');
         Route::post('/comment/{contentId}', [CommentController::class, 'store'])->name('comment.store');

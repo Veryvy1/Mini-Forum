@@ -1,12 +1,11 @@
 @extends('summernote')
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
-    <meta name="keywords" content=""/>
+    <meta name="keywords" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Content | Admin</title>
     <link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
@@ -15,7 +14,6 @@
     <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
@@ -39,6 +37,13 @@
 <body>
 <div class="responsive-header">
 <div class="right-compact">
+<div class="menu-area">
+<div id="nav-icon3">
+<i>
+<svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
+</i>
+</div>
+</div>
 <div class="res-search">
 <span><i>
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></i></span>
@@ -52,7 +57,6 @@
 </form>
 </div>
 </div>
-
 <header class>
     <div class="topbar stick">
     <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
@@ -76,8 +80,6 @@
     </ul>
     </div>
 </header>
-
-
 <div class="top-sub-bar">
 <div class="container-fluid">
 <div class="row">
@@ -99,7 +101,6 @@
 </div>
 </div>
 </div>
-
 <nav class="sidebar">
     <ul class="menu-slide">
         <li>
@@ -131,7 +132,6 @@
         </li>
     </ul>
 </nav>
-
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
@@ -139,6 +139,7 @@
 <h3 class="main-title">Content to GetForums</h3>
 <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" style="margin-left: 90%; background-color:rgb(40, 144, 204); color:#fff;"><b>add content</b></a>
 <br><br>
+
 
     <div class="row merged-10">
         @forelse($content as $key => $contents)
@@ -153,7 +154,9 @@
             <li><a href="{{ route('content.detail', ['content' => $contents->id]) }}" title style="font-size: 15px; margin-left:7%;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
             <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
             <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
-        </button></li>
+        </button>
+
+        </li>
         <li>
         <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete">
             @csrf
@@ -163,7 +166,9 @@
             </button>
         </form></li>
         </ul>
+
         </div>
+
         <center>
         <div class="prod-meta" style="width: 200px; height: 200px overflow: hidden;">
         <h4 title>
@@ -172,17 +177,14 @@
         @else
             {{ $contents->judul }}
         @endif</h4>
-        {{-- <div style="height: 70px; width: 200px; overflow: hidden; text-overflow: ellipsis;">
-            {!! $contents->deskripsi !!}
-        </div> --}}
-
         </div></center>
                 <span title="liked" class="liked">
-                    <i class="icofont-heart" style="color: #64a4d4;"></i>
+                    <i class="icofont-like" style="color: #64a4d4;"></i>
                     <ins>{{ $contents->likes_count }}</ins>
         </span>
         </div>
     </div>
+
     @empty
     <center>
         <img src="images/LOGO/datakosong.png" alt="" style="width: 50%;">
@@ -190,10 +192,157 @@
     @endforelse
         </div>
 </div>
+{{--
+@foreach ($content as $contents)
+    <div class="modal" tabindex="-1" id="editModal{{ $contents->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="m-0 font-weight-bold">Edit Content</h6>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="judul" class="form-label">Title</label>
+                                <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
+                                @error('judul')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="deskripsi" class="form-label">Description</label>
+                                <textarea name="deskripsi" id="summernoteModal2" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="gambar" class="form-label">Image</label>
+                                <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                                @if ($contents->gambar)
+                                <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50"
+                                    height="50">
+                                @else
+                                No Image
+                                @endif
+                                @error('gambar')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="kategoris" class="form-label">Category</label>
+                                <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                                    <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+                                    @foreach ($kategori as $kat)
+                                        <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                                            {{ $kat->kategori }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('kategori_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            <button type="submit" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+@endforeach --}}
+@foreach ($content as $contents)
+<div class="modal fade" id="editModal{{ $contents->id }}" tabindex="-1" aria-labelledby="editModal{{ $contents->id }}Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold">Edit Content</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Title</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
+                        @error('judul')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Description</label>
+                        <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                        @if ($contents->gambar)
+                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
+                        @else
+                        No Image
+                        @endif
+                        @error('gambar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">Category</label>
+                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+                            @foreach ($kategori as $kat)
+                            <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                                {{ $kat->kategori }}
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 @section('scripts')
 <script>
  $(document).ready(function() {
+
+    $('.custom-summernote').summernote({
+        placeholder: 'Isi content...',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+
     $('#summernoteModal1').summernote({
         placeholder: 'Isi content...',
         tabsize: 2,
@@ -209,24 +358,9 @@
         ]
     });
 
-    $('#summernoteModal2').summernote({
-        placeholder: 'Isi content...',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-    });
 });
 </script>
 @endsection
-
 <div class="modal" tabindex="-1" id="tambahModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -236,7 +370,6 @@
             <div class="modal-body">
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
                     <div class="mb-3">
                         <label for="judul" class="form-label">Title</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
@@ -286,101 +419,6 @@
     </div>
 </div>
 
-@foreach ($content as $contents)
-<div class="modal" tabindex="-1" id="editModal{{ $contents->id }}">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="m-0 font-weight-bold">Edit Content</h6>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-
-                    <div class="mb-3">
-                        <label for="judul" class="form-label">Title</label>
-                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
-                        @error('judul')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
-                        <textarea name="deskripsi" id="summernoteModal2" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
-                        @if ($contents->gambar)
-                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50"
-                            height="50">
-                        @else
-                        No Image
-                        @endif
-                        @error('gambar')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label>
-                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
-                            @foreach ($kategori as $kat)
-                                <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
-                                    {{ $kat->kategori }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('kategori_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                    <button type="submit" class="btn btn-primary">SAVE</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endforeach
-
-
-
-
-
-{{-- @section('scripts') --}}
-
-{{-- <script>
- $(document).ready(function() {
-        $('#summernote').summernote({
-          placeholder: 'Hello stand alone ui',
-          tabsize: 2,
-          height: 120,
-          toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-          ]
-        });
-      });
-</script> --}}
-
-{{-- @endsection --}}
-
-
 
 <?php if ($errors->any()): ?>
     <script>
@@ -424,9 +462,10 @@
 </script>
 <?php endif; ?>
 
-<script src="js/main.min.js" type="text/javascript"></script>
+<script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>
 <script src="plugins/apex/apexcharts.min.js" type="text/javascript"></script>
+<script src="js/graphs-scripts.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 </body>
 </html>

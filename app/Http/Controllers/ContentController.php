@@ -77,18 +77,14 @@ class ContentController extends Controller
         return view('', compact('content','kategori'));
     }
 
+
     public function storeForAdmin(ContectRequest $request)
     {
-<<<<<<< Updated upstream
             try{
         $gambar = $request->file('gambar');
         $path_gambar = Storage::disk('public')->put('content', $gambar);
 
         $user_id = auth()->id();
-=======
-        try {
-            $user_id = auth()->id();
->>>>>>> Stashed changes
 
         $deskripsi = $request->deskripsi;
         $dom = new \DomDocument();
@@ -130,45 +126,47 @@ class ContentController extends Controller
 // $content->gambar = $path;
 // $content->save();
 
-    public function storeForUser(ContectRequest $request)
-    {
-        try {
-            $gambar = $request->file('gambar');
-            $path_gambar = Storage::disk('public')->put('content', $gambar);
+public function storeForUser(ContectRequest $request)
+{
+    try {
+        $gambar = $request->file('gambar');
+        $path_gambar = Storage::disk('public')->put('content', $gambar);
 
-            $user_id = auth()->id();
+        $user_id = auth()->id();
 
-            $deskripsi = $request->deskripsi;
-            $dom = new \DomDocument();
-            $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $deskripsi = $request->deskripsi;
+        $dom = new \DomDocument();
+        $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-            $images = $dom->getElementsByTagName('img');
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-            }
-            $deskripsi = $dom->saveHTML();
-
-                Content::create([
-                    'user_id' => $user_id,
-                    'judul' => $request->input('judul'),
-                    'deskripsi' => $deskripsi,
-                    'kategori_id' => $request->input('kategori_id'),
-                    'gambar' => $path_gambar,
-                ]);
-
-            return redirect()->back()->with('success', 'Content added successfully');
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        $images = $dom->getElementsByTagName('img');
+        foreach ($images as $k => $img) {
+            $data = $img->getAttribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = base64_decode($data);
+            $image_name = "/uploads" . time() . $k . '.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
         }
+        $deskripsi = $dom->saveHTML();
+
+        $kategori = Kategori::all(); // Fetch the categories
+
+        Content::create([
+            'user_id' => $user_id,
+            'judul' => $request->input('judul'),
+            'deskripsi' => $deskripsi,
+            'kategori_id' => $request->input('kategori_id'),
+            'gambar' => $path_gambar,
+        ]);
+
+        return redirect()->back()->with('success', 'Content added successfully')->with('kategori', $kategori);
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+}
 
     public function show(string $id)
     {

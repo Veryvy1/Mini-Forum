@@ -119,10 +119,7 @@
 
             <div class="user-dp-edit">
             <figure style="width: 105px; height: 105px; border-radius: 50%; overflow: hidden;">
-<<<<<<< Updated upstream
             {{-- <figure> --}}
-=======
->>>>>>> Stashed changes
             @if ($user->profile)
                 <img id="preview-image" src="{{ asset('storage/' . $user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
             @else
@@ -152,18 +149,21 @@
                             <div class="social-links">
                                 <i class="icofont-facebook"></i>
                                 <input type="text" name="link_fb" placeholder="Link Facebook" value="{{ old('link_fb', $user->link_fb) }}">
+                                {{-- <em>Add your Facebook username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="social-links">
                                 <i class="icofont-instagram"></i>
                                 <input type="text" name="link_ig" placeholder="Link Instagram" value="{{ old('link_ig', $user->link_ig) }}">
+                                {{-- <em>Add your Instagram username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="social-links">
                                 <i class="icofont-twitter"></i>
                                 <input type="text" name="link_twt" placeholder="Link Twitter" value="{{ old('link_twt', $user->link_twt) }}">
+                                {{-- <em>Add your Twitter username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
                     </div>
@@ -249,8 +249,8 @@
                             @enderror
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                            <button type="submit" class="btn btn-primary">SAVE</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -280,8 +280,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                            <button type="submit" form="addContactForm" class="btn btn-primary">SAVE</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
+                            <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -325,41 +325,11 @@
         }
     </script>
 
-<<<<<<< Updated upstream
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{-- <script>
-        @if (Session::has('success'))
-        toastr.success("{{ Session::get('success') }}")
-        @endif
-        function swalpFunction() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    console.log("Data dihapus");
-                    Swal.fire({
-                        title: "Deleted!",
-                        text: "Your file has been deleted.",
-                        icon: "success"
-                    });
-                }
-            });
-        }
-    </script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-=======
     <?php if (Session::has('success')): ?>
     <script>
         toastr.success("<?php echo Session::get('success'); ?>");
     </script>
     <?php endif; ?>
->>>>>>> Stashed changes
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -368,12 +338,9 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-<<<<<<< Updated upstream
-=======
             const profileInput = document.getElementById('profile-input');
             const previewImage = document.getElementById('preview-image');
 
->>>>>>> Stashed changes
             profileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 const reader = new FileReader();
@@ -391,12 +358,9 @@
             });
 
 
-<<<<<<< Updated upstream
-=======
             const bgProfileInput = document.getElementById('bgprofile-input');
             const previewBgImage = document.getElementById('preview-bgimage');
 
->>>>>>> Stashed changes
             bgProfileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 const reader = new FileReader();
@@ -408,13 +372,9 @@
                 if (file) {
                     reader.readAsDataURL(file);
                 } else {
-<<<<<<< Updated upstream
-                    // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
-=======
 
->>>>>>> Stashed changes
                     previewBgImage.setAttribute('src', '{{ asset('images/LOGO/background.jpeg') }}');
                 }
             });
         });
-    </script>
+    </script>

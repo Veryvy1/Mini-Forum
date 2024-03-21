@@ -1,7 +1,6 @@
 @extends('summernote')
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -43,11 +41,11 @@
         }
         .comment-content {
             margin-left: 50px;
-            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+            margin-top: -30px;
         }
         .comment-content1 {
             margin-left: 30px;
-            margin-top: -30px; /* mengatur jarak antara foto dan konten komentar */
+            margin-top: -30px;
         }
         .comment-options {
         margin-top: 10px;
@@ -67,10 +65,9 @@
             cursor: pointer;
         }
         .comment-options a {
-            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-            margin-left: 50px; /* Geser tombol Reply ke kanan */
+            margin-right: 10px;
+            margin-left: 50px;
         }
-
         .comment-options1 a,
         .comment-options1 button {
             text-decoration: underline;
@@ -79,8 +76,8 @@
             cursor: pointer;
         }
         .comment-options1 a {
-            margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
-            margin-left: 20px; /* Geser tombol Reply ke kanan */
+            margin-right: 10px;
+            margin-left: 20px;
         }
     </style>
 </head>
@@ -88,8 +85,6 @@
 <body>
     </div>
     <div class="theme-layout">
-
-
         <header class>
             <div class="topbar stick">
                 <div class="logo"><img alt src="/images/LOGO/logo.png"><span>GetForums</span></div>
@@ -121,13 +116,6 @@
             </i>
             </a>
             <ul class="dropdown">
-                <li>
-                    <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Profile">
-                        <i class="icofont-user-alt-3"></i> Your Profile
-                    </a>
-                </li>
-            <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
-
             <li class="logout">
                 <form  action="{{ route('logout') }}" method="POST" >
                     @csrf
@@ -137,13 +125,9 @@
                     </script>
                 </form>
             </li>
-            <li>
-
-            </li>
             </ul>
             </div>
             </header>
-
         <div class="container"><br><br>
             <a onclick="window.history.go(-1);" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
@@ -163,9 +147,7 @@
                 </button>
                 </div>
             </form>
-
             <br><br>
-
             <div class="comment-area">
                 <h4 class="comment-title">{{ $replyAll }} <i class="icofont-ui-text-loading"></i>  Replies</h4>
                 <ul class="comments">
@@ -186,29 +168,22 @@
                             @endif
                         </div>
                         <div class="comment-content">
-                        <div class="comment-content">
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $replies->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
                             </div>
                             <p style="word-break: break-word;">
                                 {!! $replies->reply !!}
                             </p>
                         </div>
-                            <div class="comment-options">
-                        </div>
-                            <div class="comment-options">
-
+                        <div class="comment-options">
                             @if ($replies->user_id == Auth::user()->id)
-                            {{-- <button onclick="deleteComment({{ $replies->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff">Delete</button>
-
+                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff" onclick="swalpFunction()">Delete</button>
                             </form>
-                        </div>
                         </div>
                         </div>
                         </div>
@@ -234,20 +209,17 @@
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $replies->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
                             </div>
                             <p style="word-break: break-word;">
                                 {!! $replies->reply !!}
                             </p>
-
                             @if ($replies->user_id == Auth::user()->id)
                             <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff"> <i class="icofont-ui-delete"></i>Delete</button>
-
+                                <button type="submit" class="text-danger" style="border: none; background-color: #ffff" onclick="swalpFunction()"><i class="icofont-ui-delete"></i>Delete</button>
                             </form>
-                            {{-- <button onclick="deleteComment({{ $replies->id }})" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             @endif
                         </div>
                     </li>
@@ -280,9 +252,7 @@
 </br>
 <br>
 </br>
-
 </div>
-
 <br>
 </br>
 <br>
@@ -307,7 +277,6 @@
             </div>
         </div>
     </div>
-
     @section('scripts')
     <script>
         $(document).ready(function() {
@@ -332,65 +301,51 @@
     </script>
     @endsection
 
-    @if (session('warning'))
+    <?php if ($errors->any()): ?>
     <script>
-        toastr.warning("{{ session('warning') }}");
+        toastr.error("<?php foreach ($errors->all() as $error) echo $error . '\n'; ?>");
     </script>
-    @endif
-<script>
-function swalpFunction() {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            console.log("Data dihapus");
+    <?php endif; ?>
+
+    <?php if (session('warning')): ?>
+        <script>
+            toastr.warning("<?php echo session('warning'); ?>");
+        </script>
+    <?php endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function swalpFunction() {
             Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log("Data dihapus");
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
             });
         }
-    });
-}
-</script>
+    </script>
 
-<script>
-    @if (Session::has('success'))
-    toastr.success("{{ Session::get('success') }}")
-    @endif
-    function swalpFunction() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                console.log("Data dihapus");
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
-        });
-    }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <?php if (Session::has('success')): ?>
+    <script>
+        toastr.success("<?php echo Session::get('success'); ?>");
+    </script>
+    <?php endif; ?>
+
     <script src="{{ asset('js/main.min.js') }}"></script>
     <script src="{{ asset('js/sparkline.js') }}"></script>
-    <script src="{{ asset('js/chart.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-    <script src="path/to/vivus.js"></script>
     <script>
         function deleteReply(replyId) {
             if (confirm('Are you sure you want to delete this comment?')) {
