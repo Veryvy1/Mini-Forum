@@ -48,20 +48,19 @@ class ContentController extends Controller
     }
 
     public function index(Request $request)
-        {
-            if ($request->has('search')) {
-                $ccontent = $request->input('search');
-                $content = Content::where('judul', 'LIKE', "%$ccontent%")->withCount('likes')->get();
-            } else {
-                $content = Content::withCount('likes')->get();
-            }
-
-            $kategori = Kategori::all();
-            $likes = Like::where('user_id', auth()->user()->id)->first();
-
-            return view('admin.content', compact('content', 'kategori', 'likes'));
+    {
+        if ($request->has('search')) {
+            $ccontent = $request->input('search');
+            $content = Content::where('judul', 'LIKE', "%$ccontent%")->withCount(['likes', 'comment'])->get();
+        } else {
+            $content = Content::withCount(['likes', 'comment'])->get();
         }
 
+        $kategori = Kategori::all();
+        $likes = Like::where('user_id', auth()->user()->id)->first();
+
+        return view('admin.content', compact('content', 'kategori', 'likes'));
+    }
     public function createForAdmin()
     {
         $content = Content::all();

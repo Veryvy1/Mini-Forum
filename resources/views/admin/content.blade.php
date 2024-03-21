@@ -178,9 +178,13 @@
             {{ $contents->judul }}
         @endif</h4>
         </div></center>
-                <span title="liked" class="liked">
+                <span title="liked" style="margin-right: 10px;">
                     <i class="icofont-like" style="color: #64a4d4;"></i>
                     <ins>{{ $contents->likes_count }}</ins>
+        </span>
+                <span title="comment">
+                    <i class="icofont-comment" style="color: #64a4d4;"></i>
+                    <ins>{{ $contents->comment_count }}</ins>
         </span>
         </div>
     </div>

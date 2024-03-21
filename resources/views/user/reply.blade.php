@@ -48,9 +48,9 @@
             margin-top: -30px;
         }
         .comment-options {
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
         }
         .comment-options1 {
             margin-top: 10px;
@@ -78,6 +78,10 @@
         .comment-options1 a {
             margin-right: 10px;
             margin-left: 20px;
+        }
+        h5{
+            height: auto;
+            max-width: 25%;
         }
     </style>
 </head>
@@ -110,6 +114,12 @@
             @endif
             </li>
             <li>
+                <a href="{{ route('home') }}" title="Home" data-toggle="tooltip">
+                <i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
+                </a>
+            </li>
+            <li>
             <a href="#" title>
             <i>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -132,6 +142,34 @@
             <a onclick="window.history.go(-1);" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
+            <br>
+            <br>
+                <style>
+                    .commenter-photo img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                </style>
+                <div class="commenter-photo">
+                    @if ($comment->user->profile)
+                        <img src="{{ asset('storage/'. $comment->user->profile) }}">
+                    @else
+                        <img src="{{ asset('images/LOGO/profil.jpeg') }}">
+                    @endif
+                </div>
+                <div class="comment-content1">
+                    <div class="commenter-meta">
+                        <div class="comment-titles">
+                            <h6>{{ $comment->user->name }}</h6>
+                            <span>{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+                        </div>
+                        <p style="word-break: break-word;">
+                            {!! $comment->comment !!}
+                        </p>
+                    </div>
+                </div>
+
+
             <h3><i class="icofont-reply"></i>Input your reply comment</h3>
             <br>
             <form action="{{ route('reply.store', ['commentId' => $comment->id]) }}" method="post" enctype="multipart/form-data">
@@ -215,7 +253,7 @@
                                 <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
                             </div>
                             <p style="word-break: break-word;">
-                                {!! $replies->reply !!}
+                                <h5>{!! $replies->reply !!}</h5>
                             </p>
                         </div>
                         <div class="comment-options1">
@@ -287,28 +325,25 @@
     @section('scripts')
     <script>
         $(document).ready(function() {
-    $('#summernote').summernote({
-        placeholder: 'Isi content...',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-    });
+            $('#summernote').summernote({
+                placeholder: 'Isi content...',
+                tabsize: 2,
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['link', 'picture', 'video']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
 
-    // Set nilai Summernote dengan data lama jika ada
-    var oldIsiValue = {!! json_encode(old('isi')) !!};
-    $('#summernote').summernote('text', oldIsiValue);
-});
-    </script>
-    <script>
-        $(document).ready(function() {
+            // Set nilai Summernote dengan data lama jika ada
+            var oldIsiValue = {!! json_encode(old('isi')) !!};
+            $('#summernote').summernote('code', oldIsiValue);
+
             // Tambahkan event listener untuk tombol "Reply"
             $('.reply-btn').click(function(event) {
                 // Hentikan perilaku default dari link
@@ -316,17 +351,15 @@
                 // Dapatkan nilai atribut data-reply (isi balasan) dan data-username (username)
                 var replyText = $(this).data('reply');
                 var username = $(this).data('username');
-                // Dapatkan nilai yang ada di dalam input summernote
-                var currentText = $('#summernote').val();
-                // Update nilai input summernote dengan menambahkan username dan isi balasan
-                $('#summernote').val("@" + username + " " + currentText);
-                // Berikan fokus ke input summernote
-                $('#summernote').focus();
+                // Dapatkan nilai yang ada di dalam editor Summernote
+                var currentText = $('#summernote').summernote('code');
+                // Update nilai editor Summernote dengan menambahkan username dan isi balasan
+                $('#summernote').summernote('code', "@" + username + " " + currentText);
+                // Berikan fokus ke editor Summernote
+                $('#summernote').summernote('focus');
             });
         });
     </script>
-
-
     @endsection
 
     <?php if ($errors->any()): ?>

@@ -35,24 +35,23 @@
         .sidemenu:active .feather {
             transform: scale(1.2);
         }
+
+        h5{
+                height: auto;
+                max-width: 25%;
+                /* margin-right: 20%; */
+                /* display: flex; */
+        }
     </style>
 
     <div class="row">
         <div class="col-lg-2">
             <div class="sidemenu">
                 @if($userRole == 'admin')
-                {{-- <a href="{{ route('content.index') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg></a> --}}
                 <a type="button" href="{{ route('content.index') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
                     <i class="icofont-arrow-left"></i>
                 </a>
                 @else
-                {{-- <a href="{{ route('home') }}"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg></a> --}}
                 <a type="button" href="{{ route('home') }}" class="btn btn-primary" style="background-color: #2ea8dc;">
                     <i class="icofont-arrow-left"></i>
                 </a>
@@ -68,7 +67,6 @@
 </div>
 </section>
 <section>
-<<<<<<< Updated upstream
     <div class="gap">
         <div class="container">
             <div class="row">
@@ -83,7 +81,7 @@
                                 {!! $content->deskripsi !!}
                             </div>
                             <ul style="margin-top: 50px;">
-                                <li><i class="icofont-like" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
+                                <li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
                                 <li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
                                 <li><i>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
@@ -107,36 +105,6 @@
                         </div>
 
 
-
-=======
-<div class="gap">
-<div class="container">
-<div class="row">
-<div class="offset-lg-1 col-lg-10">
-<div class="blog-detail">
-<div class="blog-title">
-<h2>{{ $content->judul }}</h2>
-</div>
-<div class="blog-details-meta">
-<figure><img src="{{ asset('storage/'. $content->gambar) }}" alt="Image"></figure>
-<ul>
-<li><i class="icofont-heart" style="color: #64a4d4;"></i> {{ $content->likes_count}}</li>
-<li><i class="icofont-comment" style="color: #64a4d4;"></i> {{ $commentsCount}}</li>
-<li><i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i>
-{{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D-MMMM-YYYY') }}</li>
-</ul>
-<p>{!! $content->deskripsi !!}
-</p>
-<div class="tag-n-cat">
-<div class="tags">
-<span><i>
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></i> Post Categories:</span>
-<a href="#">{{ $content->kategori->kategori }}</a>
-</div>
-</div>
-</div>
->>>>>>> Stashed changes
 @if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
@@ -151,9 +119,11 @@
     <tbody>
         @foreach ($comments ?? [] as $key => $comment)
         <tr>
-            <td>{{ $key + 1}}</td>
+            <td style="">{{ $key + 1}}</td>
             <td>{{ $comment->user->name }}</td>
-            <td>{!! $comment->comment !!}</td>
+            <td>
+                <h5>{!! $comment->comment !!}</h5>
+            </td>
             <td>
                 <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $comment->id }}">
                     @csrf
@@ -233,4 +203,3 @@
 <script src="{{ asset('js/chart.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 </html>
-

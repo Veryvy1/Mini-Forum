@@ -83,6 +83,11 @@
             margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
             margin-left: 20px; /* Geser tombol Reply ke kanan */
         }
+       h5{
+        height: auto;
+                max-width: 25%;
+
+       }
     </style>
 </head>
 
@@ -243,9 +248,9 @@
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
                             </div>
-                            <p style="word-break: break-word;">
+                            <h5 style="word-break: break-word;">
                                 {!! $comments->comment !!}
-                            </p>
+                            </h5>
                         </div>
                         <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary"><i class="icofont-reply"></i> Reply</a>
