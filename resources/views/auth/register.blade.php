@@ -37,7 +37,7 @@
 <div class="fileds">
 <label class="input-icon">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></label>
-<input type="text" name="name" placeholder="Username">
+<input type="text" name="name" placeholder="Username" value="{{ old('name') }}">
     @error('name')
         <div class="text-danger">{{ $message }}</div>
     @enderror
@@ -46,27 +46,32 @@
 <div class="col-lg-6 col-sm-6 col-md-6">
 <div class="fileds">
 <label class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-at-sign"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg></label>
-<input type="email" name="email" placeholder="Email @">
+<input type="email" name="email" placeholder="Email @" value="{{ old('email') }}">
 @error('email')
     <div class="text-danger">{{ $message }}</div>
 @enderror
 </div>
 </div>
 <div class="col-lg-6 col-sm-6 col-md-6">
-<div class="fileds">
-<label class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></label>
-<input type="password" name="password" placeholder="Password">
-@error('password')
-    <div class="text-danger">{{ $message }}</div>
-@enderror
-</div>
+    <div class="fileds">
+        <label class="input-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </label>
+        <input type="password" name="password" placeholder="Password" value="{{ old('password') }}">
+        @error('password')
+            <div class="text-danger">{{ $message }}</div>
+        @enderror
+    </div>
 </div>
 <div class="col-lg-6 col-sm-6 col-md-6">
-<div class="fileds">
-<label class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></label>
-<input type="password" name="password_confirmation" placeholder="Confirm Password">
+    <div class="fileds">
+        <label class="input-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        </label>
+        <input type="password" name="password_confirmation" placeholder="Confirm Password" value="{{ old('password_confirmation') }}">
+    </div>
 </div>
-</div>
+
 
 <div style="margin-bottom:3%;">
     <span>Already have an account? <a href="{{ Route('login') }}">Sign In</a></span>

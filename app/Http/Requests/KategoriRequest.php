@@ -22,13 +22,14 @@ class KategoriRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kategori' => 'required|unique:kategoris,kategori',
+            'kategori' => 'required|max:25|unique:kategoris,kategori',
         ];
     }
     public function messages(): array
     {
         return [
             'kategori.required' => 'Category must be filled in.',
+            'kategori.max' => 'Category must not exceed 25 characters.',
             'kategori.unique' => 'This category already exists.',
         ];
     }

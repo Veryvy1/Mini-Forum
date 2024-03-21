@@ -142,7 +142,6 @@
 </div>
 
 <div class="col-lg-6">
-
     <div class="main-wraper">
         <span class="new-title">Create New Post</span>
         <div class="text-center">
@@ -153,18 +152,14 @@
         <div class="new-post">
         <form method="post">
         </form>
-
         </div>
         </div>
-
         @if ($content->isEmpty())
         <center>
             <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
         </center>
     @else
-
     @forelse ($content as $contents)
-
     <div class="main-wraper">
         <div class="user-post">
             <div class="friend-info">
@@ -175,14 +170,9 @@
                     <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
                     @endif
                 </figure>
-                    {{-- <em>
-                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
-                            <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
-                        </svg>
-                    </em> --}}
     <div class="friend-name">
         <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
     </div>
     <div class="post-meta">
         <figure>
@@ -196,16 +186,6 @@
     @else
         {{ $contents->judul }}
     @endif</a>
-    {{-- <p>
-        <div style="height: 100px; width: 100%; overflow: hidden; text-overflow: ellipsis;">
-            @if (strlen(strip_tags($contents->deskripsi)) > 60)
-             {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
-             @else
-             {!! $contents->deskripsi !!}
-             @endif
-        </div>
-
-    </p> --}}
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
 
 
@@ -214,61 +194,60 @@
 <div class="box">
     <div class="Like">
         @if($likes && $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->count() > 0)
-                    <form action="{{ route('like.destroy', $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        @error('like')
-                            {{ $message }}
-                        @enderror
-                        @error('user_id')
-                            {{ $message }}
-                        @enderror
-                        @error('content_id')
-                            {{ $message }}
-                        @enderror
-                        <input type="hidden" name="content_id" value="{{$contents->id}}">
-                        <button type="submit" class="" style="
-                        background: #ff0000;
-                        border-radius: 4px;
-                        color: #ffffff;
-                        display: inline-block;
-                        font-size: 13px;
-                        padding: 5px 20px;
-                        vertical-align: middle;
-                        transition: all 0.2s linear 0s;
-                        border: none;
-                        }"><i class="icofont-like"></i> Unlike</button>
-                    </form>
-                @else
-                    <form action="/like" method="post">
-                        @csrf
-                        @method('POST')
-                        @error('like')
-                            {{ $message }}
-                        @enderror
-                        @error('user_id')
-                            {{ $message }}
-                        @enderror
-                        @error('content_id')
-                            {{ $message }}
-                        @enderror
-                        <input type="hidden" name="content_id" value="{{$contents->id}}">
-                        <button type="submit" class="" style="
-                        background: #0099ff;
-                        border-radius: 4px;
-                        color: #ffffff;
-                        display: inline-block;
-                        font-size: 13px;
-                        padding: 5px 20px;
-                        vertical-align: middle;
-                        transition: all 0.2s linear 0s;
-                        border: none;
-                        }"><i class="icofont-like"></i> Like</button>
-                    </form>
-                @endif
+        <form action="{{ route('like.destroy', $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            @error('like')
+                {{ $message }}
+            @enderror
+            @error('user_id')
+                {{ $message }}
+            @enderror
+            @error('content_id')
+                {{ $message }}
+            @enderror
+            <input type="hidden" name="content_id" value="{{$contents->id}}">
+            <button type="submit" class="" style="
+            background: #ff0000;
+            border-radius: 4px;
+            color: #ffffff;
+            display: inline-block;
+            font-size: 13px;
+            padding: 5px 20px;
+            vertical-align: middle;
+            transition: all 0.2s linear 0s;
+            border: none;
+            }"><i class="icofont-like"></i> Unlike</button>
+        </form>
+    @else
+        <form action="/like" method="post">
+            @csrf
+            @method('POST')
+            @error('like')
+                {{ $message }}
+            @enderror
+            @error('user_id')
+                {{ $message }}
+            @enderror
+            @error('content_id')
+                {{ $message }}
+            @enderror
+            <input type="hidden" name="content_id" value="{{$contents->id}}">
+            <button type="submit" class="" style="
+            background: #0099ff;
+            border-radius: 4px;
+            color: #ffffff;
+            display: inline-block;
+            font-size: 13px;
+            padding: 5px 20px;
+            vertical-align: middle;
+            transition: all 0.2s linear 0s;
+            border: none;
+            }"><i class="icofont-like"></i> Like</button>
+        </form>
+    @endif
     </div>
 </div>
-
 <a title href="{{ route('content.comment', $contents->id) }}" class="comment-to"><i class="icofont-comment"></i> Comment</a>
 <div class="emoji-state">
 
@@ -356,6 +335,10 @@
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <figure class="bottom-mockup"><img src="images/footer.png" alt></figure>
 <div class="bottombar">
@@ -389,7 +372,6 @@
                 <h6 class="m-0 font-weight-bold">Add Content</h6>
             </div>
             <div class="modal-body">
-                <div id="searchResultsContainer"></div>
                 <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -469,7 +451,6 @@
                 <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
             </div>
             <div class="modal-body">
-                <div id="searchResultsContainer"></div>
                 <form id="addContactForm" action="{{ route('contact.index') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 

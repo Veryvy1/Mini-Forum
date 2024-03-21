@@ -22,9 +22,9 @@ class ContectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul'=>'required',
-            'deskripsi'=>'required',
-            'gambar'=>'required|image',
+            'judul' => 'required|max:10',
+            'deskripsi' => 'required|max:250',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'kategori_id' => 'required',
         ];
     }
@@ -32,11 +32,14 @@ class ContectRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'judul.required'=>'Title must be filled in.',
-            'deskripsi.required'=>'Description must be filled in.',
-            'gambar.required'=>'Picture must be filled in.',
-            'gambar.image'=>'Must be filled with images.',
-            'kategori_id.required'=>'Category must be filled in.',
+            'judul.required' => 'Title must be filled in.',
+            'judul.max' => 'Title must not exceed 10 characters.',
+            'deskripsi.required' => 'Description must be filled in.',
+            'deskripsi.max' => 'Deskripsi must not exceed 250 characters.',
+            'gambar.image' => 'Must be filled with images.',
+            'gambar.mimes' => 'Invalid photo format. Use jpeg, png, jpg, or gif format.',
+            'kategori_id.required' => 'Category must be filled in.',
         ];
     }
+
 }

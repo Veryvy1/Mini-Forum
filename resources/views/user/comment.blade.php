@@ -83,11 +83,11 @@
             margin-right: 10px; /* Jarak antara tombol Reply dan Delete */
             margin-left: 20px; /* Geser tombol Reply ke kanan */
         }
-       h5{
-        height: auto;
-                max-width: 25%;
 
-       }
+        h5 {
+            height: auto;
+            max-width: 25%;
+        }
     </style>
 </head>
 
@@ -118,6 +118,12 @@
                 </div>
             </div>
             @endif
+            </li>
+            <li>
+                <a href="{{ route('home') }}" title="Home" data-toggle="tooltip">
+                <i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
+                </a>
             </li>
             <li>
             <a href="#" title>
@@ -170,11 +176,11 @@
                 </div>
                 </div>
                 </div>
-            </div>
-        </div>
-        </div>
-        </div>
-        </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
         <h3><i class="icofont-comment"></i> Input your comment</h3>
             <br>
         </br>
@@ -224,8 +230,8 @@
                                 <button type="submit" class="text-danger" onclick="swalpFunction()">Delete</button>
                             </form>
                              @endif
-                            </div>
                         </div>
+            </div>
                     </li>
                     @else
                     <li>
@@ -248,9 +254,9 @@
                                 <h6>{{ $comments->user->name }}</h6>
                                 <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
                             </div>
-                            <h5 style="word-break: break-word;">
-                                {!! $comments->comment !!}
-                            </h5>
+                            <p style="word-break: break-word;">
+                                <h5>{!! $comments->comment !!}</h5>
+                            </p>
                         </div>
                         <div class="comment-options1">
                             <a href="{{ route('comment.reply',  $comments->id) }}" class="text-primary"><i class="icofont-reply"></i> Reply</a>
@@ -341,31 +347,28 @@
                 ]
             });
 
-            // Set old value
-            var oldIsiValue = {!! json_encode(old('isi')) !!};
-            $('#summernote').summernote('code', oldIsiValue);
+            var oldcommentValue = {!! json_encode(old('comment')) !!};
+            $('#summernote').summernote('code', oldcommentValue);
 
-            // Function to handle form submission
             function submitForm() {
                 var content = $('#summernote').summernote('code');
-                // Perform any actions needed with the content, like form submission
-                // Example: sending content via AJAX
+
                 $.ajax({
                     url: '/submit-url',
                     method: 'POST',
                     data: { content: content },
                     success: function(response) {
-                        // Handle success response
+
                         console.log('Content submitted successfully');
                     },
                     error: function(xhr, status, error) {
-                        // Handle error response
+
                         console.error('Error submitting content:', error);
                     }
                 });
             }
 
-            // Attach submitForm function to the submit button click event
+
             $('#submitBtn').click(function() {
                 submitForm();
             });

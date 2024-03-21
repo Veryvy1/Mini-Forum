@@ -20,6 +20,7 @@
 .dropdown-custom {
     font-size: 16px;
 }
+</style>
 
 /* .table-default tr {
   height: 50px;
@@ -47,10 +48,6 @@
 </i>
 </div>
 <ul class="drop-menu">
-<li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-<li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-<li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
 <li>
     <a title href="{{ route('logout') }}" class="logout"
        onclick="event.preventDefault();
@@ -205,13 +202,15 @@
 <th class="wd-10p">No.</th>
 <th class="wd-25p">Title</th>
 <th class="wd-35p">Category</th>
+<th class="wd-35p">Category</th>
 <th class="wd-20p">Total Liked</th>
 </tr>
 </thead>
 <tbody>
-
-    @foreach ($content as $key => $contents)
+@foreach ($content as $key => $contents)
 <tr style="width: 600px; height: 30px;">
+    <td style="width: 10%;">{{ $key + 1 }}</td>
+<td style="width: 30%;">
     <td style="width: 10%;">{{ $key + 1 }}</td>
 <td style="width: 30%;">
 <div class="d-flex align-items-center">
@@ -224,10 +223,13 @@
         {{ substr($contents->judul, 0, 15) }}...
     @else
 
+
         {{ $contents->judul }}
     @endif
 </div>
 </td>
+<td style="width: 30%">
+    {{ $contents->kategori->kategori }}
 {{-- <td style="width: 600px; height: 30px; overflow: hidden;  text-overflow: ellipsis;">
     <div class="">
     @if (strlen(strip_tags($contents->deskripsi)) > 60)
@@ -247,31 +249,6 @@
 @endforeach
 </tbody>
 </table>
-</div>
-</div>
-
-<div class="popup-wraper">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i class="icofont-envelope"></i> Send Message</h5>
-</div>
-<div class="send-message">
-<form method="post" class="c-form">
-<input type="text" placeholder="Enter Name..">
-<input type="text" placeholder="Subject">
-<textarea placeholder="Write Message"></textarea>
-<div class="uploadimage">
-<i class="icofont-file-jpg"></i>
-<label class="fileContainer">
-<input type="file">Attach file
-</label>
-</div>
-<button type="submit" class="main-btn">Send</button>
-</form>
-</div>
-</div>
 </div>
 </div>
 </div>

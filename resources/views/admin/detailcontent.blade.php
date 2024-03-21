@@ -16,6 +16,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+    .table img {
+        max-width: 100%;
+        height: auto;
+    }
+    h5 {
+        height: auto;
+        max-width: 25%;
+    }
+</style>
+
 </head>
 <body>
     @php
@@ -108,22 +119,19 @@
 @if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
-    <tr>
-    <th style="width: 10%;">No</th>
-    <th style="width: 20%;">Name</th>
-    <th style="width: 50%;">Comment</th>
-    <th style="width: 10%;">Delete</th>
-
-    </tr>
+        <tr>
+            <th style="width: 10%;">No</th>
+            <th style="width: 20%;">Name</th>
+            <th style="width: 50%;">Comment</th>
+            <th style="width: 10%;">Delete</th>
+        </tr>
     </thead>
     <tbody>
         @foreach ($comments ?? [] as $key => $comment)
         <tr>
             <td style="">{{ $key + 1}}</td>
             <td>{{ $comment->user->name }}</td>
-            <td>
-                <h5>{!! $comment->comment !!}</h5>
-            </td>
+            <td><h5>{!! $comment->comment !!}</h5></td>
             <td>
                 <form action="{{ route('comment.destroy', ['comment' => $comment->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $comment->id }}">
                     @csrf
@@ -134,9 +142,9 @@
                 </form>
             </td>
         </tr>
-    @endforeach
+        @endforeach
     </tbody>
-    </table>
+</table>
 @endif
 </div>
 </div>
@@ -155,6 +163,8 @@
 </div>
 </div>
 </div>
+
+
 
 <?php if ($errors->any()): ?>
     <script>

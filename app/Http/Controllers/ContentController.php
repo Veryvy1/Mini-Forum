@@ -9,10 +9,10 @@ use App\Models\Comment;
 use App\Models\Kategori;
 use App\Models\Like;
 use DOMDocument;
-use Illuminate\Support\Facades\Response;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 Use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -79,14 +79,14 @@ class ContentController extends Controller
 
     public function storeForAdmin(ContectRequest $request)
     {
-            try{
+        try{
         $gambar = $request->file('gambar');
         $path_gambar = Storage::disk('public')->put('content', $gambar);
 
         $user_id = auth()->id();
 
         $deskripsi = $request->deskripsi;
-        $dom = new \DomDocument();
+        $dom = new DomDocument();
         $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         $images = $dom->getElementsByTagName('img');
@@ -117,14 +117,6 @@ class ContentController extends Controller
         }
     }
 
-// $content = new Content();
-// $content->user_id = auth()->id();
-// $content->judul = $request->input('judul');
-// $content->deskripsi = $request->input('deskripsi');
-// $content->kategori_id = $request->input('kategori_id');
-// $content->gambar = $path;
-// $content->save();
-
 public function storeForUser(ContectRequest $request)
 {
     try {
@@ -134,7 +126,7 @@ public function storeForUser(ContectRequest $request)
         $user_id = auth()->id();
 
         $deskripsi = $request->deskripsi;
-        $dom = new \DomDocument();
+        $dom = new DomDocument();
         $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
         $images = $dom->getElementsByTagName('img');
@@ -151,7 +143,7 @@ public function storeForUser(ContectRequest $request)
         }
         $deskripsi = $dom->saveHTML();
 
-        $kategori = Kategori::all(); // Fetch the categories
+        $kategori = Kategori::all();
 
         Content::create([
             'user_id' => $user_id,
@@ -203,19 +195,6 @@ public function storeForUser(ContectRequest $request)
         try {
         $content = Content::findOrFail($id);
 
-        $request->validate([
-            'judul'=>'required',
-            'deskripsi'=>'required',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'kategori_id' => 'required',
-        ],[
-            'judul.required'=>'Title must be filled in.',
-            'deskripsi.required'=>'Description must be filled in.',
-            'gambar.image'=>'Must be filled with images.',
-            'gambar.mimes' => 'Invalid PHOTO format. Use jpeg, png, jpg, or gif format.',
-            'kategori_id.required'=>'Category must be filled in.',
-        ]);
-
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
@@ -245,26 +224,42 @@ public function storeForUser(ContectRequest $request)
         }
     }
 
-    public function destroy(string $id)
-    {
-        try {
-            $content = Content::findOrFail($id);
+        public function destroy(string $id)
+        {
+            try {
+                $content = Content::findOrFail($id);
 
-            if (Storage::disk('public')->exists($content->gambar)) {
+                Comment::where('content_id', $content->id)->delete();
+                Like::where('content_id', $content->id)->delete();
+
+
+                if (Storage::disk('public')->exists($content->gambar)) {
                     Storage::disk('public')->delete($content->gambar);
                 }
+
 
                 $localFilePath = public_path('storage/' . $content->gambar);
                 if (File::exists($localFilePath)) {
                     File::delete($localFilePath);
                 }
 
+
+                $dom = new DOMDocument();
+                $dom->loadHTML($content->deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+                $images = $dom->getElementsByTagName('img');
+                foreach ($images as $img) {
+                    $imagePath = public_path() . $img->getAttribute('src');
+                    if (file_exists($imagePath)) {
+                        unlink($imagePath);
+                    }
+                }
+
                 $content->delete();
 
                 return redirect()->route('content.index')->with('success', 'Content successfully deleted');
-        } catch (ModelNotFoundException $e) {
+            } catch (ModelNotFoundException $e) {
                 return redirect()->route('content.index')->with('error', 'Content not found');
+            }
         }
-    }
 }
 

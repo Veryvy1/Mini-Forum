@@ -1,4 +1,4 @@
-    @extends('summernote')
+@extends('summernote')
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -19,7 +19,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-        <style>
+    <style>
         .friend-info em {
             position: absolute;
             bottom: 11rem;
@@ -145,6 +145,7 @@
     </ul>
     </div>
     </header>
+
     <section>
     <div class="gap" style="
     width: 130%;
@@ -158,7 +159,7 @@
     <div class="col-lg-9">
     <div class="group-feed">
     <div class="group-avatar">
-    @if ($user->bgprofile)
+        @if ($user->bgprofile)
     <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('storage/' . $user->bgprofile) }}">
     @else
     <img style="object-fit: cover; width:1000px; height:300px;" src="{{ asset('images/LOGO/bguser.jpg') }}" alt >
@@ -225,14 +226,9 @@
                     <img src="images/LOGO/profil.jpeg" alt style="width: 100%; height: 100%; object-fit: cover;">
                     @endif
                 </figure>
-                    {{-- <em>
-                        <svg style="vertical-align: middle;" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
-                            <path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path>
-                        </svg>
-                    </em> --}}
     <div class="friend-name">
         <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
         <div class="more-opt" style="float:right; margin-top: -10px;">
             <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
             <ul id="dropdown-{{ $contents->id }}" style="display: none;">
@@ -250,23 +246,23 @@
     </div>
     <div class="post-meta">
         <figure>
-            <a href="{{ route('content.detail', ['content' => $contents->id]) }}">
+            <a data-toggle="modal" data-target="#img-comt" href="#">
                 <img src="{{ asset('storage/'.  $contents->gambar ) }}" style="" alt>
             </a>
         </figure>
-    <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
+        <a href="{{ route('content.detail', ['content' => $contents->id]) }}" class="post-title">
     @if(strlen($contents->judul) > 45)
        {{ substr($contents->judul, 0, 45) }}...
     @else
        {{ $contents->judul }}
     @endif</a>
-    {{-- <p>
+    <p>
     @if (strlen(strip_tags($contents->deskripsi)) > 60)
     {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
     @else
     {!! $contents->deskripsi !!}
     @endif
-    </p> --}}
+    </p>
     <p>Categories: {{ optional($contents->kategori)->kategori }},</p>
     <div class="we-video-info">
             <div class="box">
@@ -437,7 +433,6 @@
                                 <label for="kategoris" class="form-label">Category</label><br>
                                 <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                                     <option value="" selected>Select Category</option>
-
                                     @foreach ($kategori as $kat)
                                         <option value="{{ $kat->id }}" {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
                                             {{ $kat->kategori }}
@@ -555,8 +550,7 @@
     }
 </script>
 
-
-<script src="js/vivus.min.js" type="text/javascript"></script>
-<script src="js/script.js" type="text/javascript"></script>
-</body>
-</html>
+    <script src="js/vivus.min.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
+    </body>
+    </html>

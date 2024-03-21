@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\Comment;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,24 +49,8 @@ class ProfileController extends Controller
         return view('user.profile', compact('user','content','kategori'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(ProfileRequest $request, string $id)
     {
-        $request->validate([
-            'name' => 'nullable|unique:users,name,' . $id,
-            'email' => 'nullable|unique:users,email,' . $id,
-            'profile' => 'nullable|image',
-            'bgprofile' => 'nullable|image',
-            'link_fb' => 'nullable',
-            'link_ig' => 'nullable',
-            'link_twt' => 'nullable',
-            'bio' => 'nullable',
-        ], [
-            'profile.image' => 'Only image files are allowed.',
-            'bgprofile.image' => 'Only image files are allowed.',
-            'name.unique' => 'Name is already in use',
-            'email.unique' => 'Email is already in use',
-        ]);
-
         $userData = $request->except(['_token', '_method']);
 
         $user = User::find($id);

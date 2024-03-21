@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLikeRequest;
-// use App\Http\Requests;
+use App\Http\Requests;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Models\Like;
@@ -11,30 +11,6 @@ use App\Models\Like;
 
 class LikeController extends Controller
 {
-    // public function store(Request $request)
-    // {
-    //     $like = Like::create([
-    //         'like' => $request->input('like'),
-    //         'user_id' => $request->input('user_id'),
-    //         'content_id' => $request->input('content_id'),
-    //     ]);
-
-    //     return response()->json(['success' => true, 'like' => $like]);
-    // }
-
-    // public function destroy(Request $request, $id)
-    // {
-    //     $like = Like::findOrFail($id);
-    //     $like->delete();
-
-    //     return response()->json(['success' => true]);
-    // }
-
-    // public function show($id)
-    // {
-    //     $content = Content::findOrFail($id);
-    //     return view('view', compact('content'));
-    // }
     public function like(Request $request, $id)
     {
         $content = Content::findOrFail($id);

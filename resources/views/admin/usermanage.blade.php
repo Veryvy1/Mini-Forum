@@ -18,7 +18,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
 <div class="theme-layout">
 <div class="responsive-header">
 <div class="right-compact">
@@ -28,13 +27,6 @@
 <svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
 </i>
 </div>
-<ul class="drop-menu">
-<li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-<li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-<li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-<li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
-</ul>
 </div>
 <div class="res-search">
 <span><i>
@@ -92,7 +84,6 @@
 </div>
 </div>
 </div>
-
 <nav class="sidebar">
     <ul class="menu-slide">
         <li>
@@ -124,13 +115,11 @@
         </li>
     </ul>
 </nav>
-
 <div class="container-fluid">
 <div class="row">
 <div class="col-lg-12">
 <div class="panel-content">
 <h4 class="main-title">Manage User</h4>
-
 <div class="row merged20 mb-4">
 <div class="col-lg-12">
 <div class="d-widget">
@@ -163,9 +152,8 @@
                         <span>{{ $use->name }}</span>
                     </figure>
                 </td>
-
                 <td>{{ $use->email }}</td>
-                <td>{{ \Carbon\Carbon::parse($use->created_at)->isoFormat('D MMMM YYYY') }}</td>
+                <td>{{ \Carbon\Carbon::parse($use->created_at)->isoFormat('D-MMMM-YYYY') }}</td>
                 <td>
                     <form action="{{ route('usermanage.destroy', ['usermanage' => $use->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $use->id }}">
                         @csrf
@@ -225,7 +213,6 @@ function swalpFunction(message, type) {
 @endif
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>
 <script src="js/script.js" type="text/javascript"></script>

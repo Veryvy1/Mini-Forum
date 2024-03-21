@@ -24,7 +24,6 @@ class CommentController extends Controller
         $commentAll = Comment::where('content_id', $id)->count();
         $profil = User::find($user->id)->profil;
         return view('user.comment', compact('commentGet','user','content','comment','commentAll','profil'));
-
     }
 
     public function index()
@@ -39,14 +38,9 @@ class CommentController extends Controller
         return view('user.comment', compact('comment'));
     }
 
-    public function store(Request $request, $contentId)
+    public function store(CommentRequest $request, $contentId)
     {
         try {
-            $request->validate([
-                'comment' => 'required|string',
-                // 'picture' => 'nullable|image',
-            ]);
-
             $user_id = auth()->id();
 
             $comment = $request->comment;
@@ -72,7 +66,6 @@ class CommentController extends Controller
             $commentModel->content_id = $contentId;
             $commentModel->user_id = $user_id;
             $commentModel->comment = $comment;
-            // $commentModel->picture = $path;
             $commentModel->save();
 
             return redirect()->back()->with('success', 'Successfully commented');
@@ -81,19 +74,24 @@ class CommentController extends Controller
         }
     }
 
-
     public function destroy(Request $request)
-    {
-        $id = $request->comment;
-        Reply::where('comment_id', $id)->delete();
-        $comment = Comment::findOrFail($id);
-        // if (Storage::disk('public')->exists($comment->picture)) {
-        //     Storage::disk('public')->delete($comment->picture);
-        // }
+{
+    $id = $request->comment;
+    Reply::where('comment_id', $id)->delete();
+    $comment = Comment::findOrFail($id);
 
-        $comment->delete();
-
-        return redirect()->back()->with('success', 'Comment successfully deleted');
+    $dom = new DOMDocument();
+    $dom->loadHTML($comment->comment, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    $images = $dom->getElementsByTagName('img');
+    foreach ($images as $img) {
+        $imagePath = public_path() . $img->getAttribute('src');
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
     }
 
+    $comment->delete();
+
+    return redirect()->back()->with('success', 'Comment successfully deleted');
+}
 }

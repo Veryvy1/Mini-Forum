@@ -22,15 +22,14 @@ class CommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'comment' => 'required',
-            'picture' => 'nullable|image'
+            'comment' => 'required|string',
         ];
     }
     public function messages(): array
     {
         return [
             'comment.required'=>'input your comment!',
-            'picture.image'=>'please input image file!'
+            'comment.string'=>'Comments must be text. Please enter valid comments',
         ];
     }
 }

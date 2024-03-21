@@ -22,13 +22,14 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'messages'=>'required',
+            'messages'=>'required|max:250',
         ];
     }
     public function messages(): array
     {
         return [
             'messages.required'=>'Messages must be filled in.',
+            'messages.max' => 'Messages must not exceed 250 characters.',
         ];
     }
 }

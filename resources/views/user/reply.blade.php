@@ -215,11 +215,9 @@
                                 {!! $replies->reply !!}
                             </p>
                         </div>
-
                             <div class="comment-options1">
                                 <a href="#" class="reply-btn text-primary">Reply</a>
                                 @if ($replies->user_id == Auth::user()->id)
-                            {{-- <button onclick="deleteComment({{ $replies->id }})" type="button" class="text-danger" style="border: none; background-color: #ffff">Delete</button> --}}
                             <form action="{{ route('reply.destroy',['reply' => $replies]) }}" method="POST">
                                 @csrf
                                 @method('delete')
@@ -322,9 +320,13 @@
             </div>
         </div>
     </div>
+
+
     @section('scripts')
+    @parent
     <script>
         $(document).ready(function() {
+
             $('#summernote').summernote({
                 placeholder: 'Isi content...',
                 tabsize: 2,
@@ -344,23 +346,18 @@
             var oldIsiValue = {!! json_encode(old('isi')) !!};
             $('#summernote').summernote('code', oldIsiValue);
 
-            // Tambahkan event listener untuk tombol "Reply"
             $('.reply-btn').click(function(event) {
-                // Hentikan perilaku default dari link
                 event.preventDefault();
-                // Dapatkan nilai atribut data-reply (isi balasan) dan data-username (username)
                 var replyText = $(this).data('reply');
                 var username = $(this).data('username');
-                // Dapatkan nilai yang ada di dalam editor Summernote
                 var currentText = $('#summernote').summernote('code');
-                // Update nilai editor Summernote dengan menambahkan username dan isi balasan
                 $('#summernote').summernote('code', "@" + username + " " + currentText);
-                // Berikan fokus ke editor Summernote
                 $('#summernote').summernote('focus');
             });
         });
     </script>
     @endsection
+
 
     <?php if ($errors->any()): ?>
     <script>

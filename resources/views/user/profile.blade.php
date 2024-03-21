@@ -119,7 +119,6 @@
 
             <div class="user-dp-edit">
             <figure style="width: 105px; height: 105px; border-radius: 50%; overflow: hidden;">
-            {{-- <figure> --}}
             @if ($user->profile)
                 <img id="preview-image" src="{{ asset('storage/' . $user->profile) }}" style="width: 100%; height: 100%; object-fit: cover;" alt="">
             @else
@@ -265,7 +264,6 @@
                     <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
                 </div>
                 <div class="modal-body">
-                    <div id="searchResultsContainer"></div>
                     <form id="addContactForm" action="{{ route('contact.index') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
@@ -338,9 +336,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            const profileInput = document.getElementById('profile-input');
-            const previewImage = document.getElementById('preview-image');
-
             profileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 const reader = new FileReader();
@@ -358,9 +353,6 @@
             });
 
 
-            const bgProfileInput = document.getElementById('bgprofile-input');
-            const previewBgImage = document.getElementById('preview-bgimage');
-
             bgProfileInput.addEventListener('change', function() {
                 const file = this.files[0];
                 const reader = new FileReader();
@@ -372,7 +364,7 @@
                 if (file) {
                     reader.readAsDataURL(file);
                 } else {
-
+                    // Jika tidak ada gambar yang dipilih, tampilkan gambar sebelumnya
                     previewBgImage.setAttribute('src', '{{ asset('images/LOGO/background.jpeg') }}');
                 }
             });
