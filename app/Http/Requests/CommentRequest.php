@@ -29,7 +29,6 @@ class CommentRequest extends FormRequest
     {
         return [
             'comment.required'=>'input your comment!',
-            'comment.string'=>'Comments must be text. Please enter valid comments',
         ];
     }
 }

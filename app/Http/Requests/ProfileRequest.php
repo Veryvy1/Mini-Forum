@@ -23,7 +23,7 @@ class ProfileRequest extends FormRequest
 {
     return [
         'name' => 'nullable|max:25|unique:users,name',
-        'email' => 'nullable|unique:users,email',
+        'email' => 'nullable|email|unique:users,email',
         'profile' => 'nullable|image',
         'bgprofile' => 'nullable|image',
         'link_fb' => 'nullable|max:150|url',
@@ -40,6 +40,7 @@ public function messages(): array
         'bgprofile.image' => 'Only image files are allowed for background profile picture.',
         'name.unique' => 'The name is already in use.',
         'email.unique' => 'The email is already in use.',
+        'email.email' => 'The email is invalid.',
         'link_fb.url' => 'The Facebook link must be a valid URL.',
         'link_ig.url' => 'The Instagram link must be a valid URL.',
         'link_twt.url' => 'The Twitter link must be a valid URL.',

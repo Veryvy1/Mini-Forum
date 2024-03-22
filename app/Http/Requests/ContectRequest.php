@@ -22,8 +22,8 @@ class ContectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'judul' => 'required|max:10',
-            'deskripsi' => 'required|max:250',
+            'judul' => 'required|max:255',
+            'deskripsi' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'kategori_id' => 'required',
         ];
@@ -33,7 +33,7 @@ class ContectRequest extends FormRequest
     {
         return [
             'judul.required' => 'Title must be filled in.',
-            'judul.max' => 'Title must not exceed 10 characters.',
+            'judul.max' => 'Title must not exceed 255 characters.',
             'deskripsi.required' => 'Description must be filled in.',
             'deskripsi.max' => 'Deskripsi must not exceed 250 characters.',
             'gambar.image' => 'Must be filled with images.',
