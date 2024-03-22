@@ -48,33 +48,6 @@ class ContentController extends Controller
         return view('profile', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
     }
 
-    public function filter(Request $request)
-    {
-        $oldSearch = $request->input('search');
-        $kategori = Kategori::all();
-        $user = Auth::user();
-        $kategori_ids = $request->input('kategori_id');
-
-        $query = Content::query()->with('user');
-
-        if (!empty($kategori_ids)) {
-            $query->whereIn('kategori_id', $kategori_ids);
-        }
-
-        $content = $query->paginate(6);
-
-        $likesCount = [];
-        $commentCount = [];
-
-        foreach ($content as $post) {
-            $likesCount[$post->id] = Like::where('content_id', $post->id)->count();
-            $commentCount[$post->id] = Comment::where('content_id', $post->id)->count();
-        }
-
-        $likes = Like::where('user_id', Auth::id())->first();
-
-        return view('admin.content', compact('content', 'user', 'kategori', 'kategori_ids', 'oldSearch', 'likesCount', 'likes', 'commentCount'));
-    }
 
     public function index(Request $request)
     {
@@ -90,6 +63,40 @@ class ContentController extends Controller
 
         return view('admin.content', compact('content', 'kategori', 'likes'));
     }
+
+   public function filter(Request $request)
+{
+    $oldSearch = $request->input('search');
+    $kategori = Kategori::all();
+    $user = Auth::user();
+    $kategori_ids = $request->input('kategori_id');
+
+    $query = Content::query()->with('user');
+
+    if (!empty($kategori_ids)) {
+        $query->whereIn('kategori_id', $kategori_ids);
+    }
+
+    $content = $query->paginate(6);
+
+    $likesCount = [];
+    $commentCount = [];
+
+    foreach ($content as $post) {
+        $likesCount[$post->id] = Like::where('content_id', $post->id)->count();
+        $commentCount[$post->id] = Comment::where('content_id', $post->id)->count();
+    }
+
+    // Jumlah total like dan comment untuk semua konten
+    $totalLikes = Like::count();
+    $totalComments = Comment::count();
+
+    $likes = Like::where('user_id', Auth::id())->first();
+
+    return view('admin.content', compact('content', 'user', 'kategori', 'kategori_ids', 'oldSearch', 'likesCount', 'likes', 'commentCount', 'totalLikes', 'totalComments'));
+}
+
+
     public function createForAdmin()
     {
         $content = Content::all();

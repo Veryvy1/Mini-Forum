@@ -183,21 +183,21 @@
                         </center>
                         <span title="liked" style="margin-right: 10px;">
                             <i class="icofont-like" style="color: #64a4d4;"></i>
-                            <ins>{{ $contents->likes_count }}</ins>
+                            <ins>{{ $totalLikes }}</ins>
                         </span>
                         <span title="comment">
                             <i class="icofont-comment" style="color: #64a4d4;"></i>
-                            <ins>{{ $contents->comment_count }}</ins>
+                            <ins>{{ $totalComments }}</ins>
                         </span>
-                        <div style="display: flex; justify-content: flex-end;">
-                            <span>
+                        {{-- <div > --}}
+                            <span style="display: flex; justify-content: flex-end; margin-top: -15px;">
                         @if($contents->created_at->diffInWeeks() >= 1)
                             {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
                         @else
                             {{ $contents->created_at->diffForHumans() }}
                     @endif
 </span>
-                </div>
+                {{-- </div> --}}
                     </div>
                 </div>
             @empty
