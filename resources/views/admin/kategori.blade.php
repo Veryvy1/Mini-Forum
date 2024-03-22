@@ -158,7 +158,7 @@
 @endif
 </td>
 <td>
-    <h5>{{  \Carbon\Carbon::parse($kategories->created_at)->isoFormat('D-MMMM-YYYY') }}</h5>
+    <h5>{{  \Carbon\Carbon::parse($kategories->created_at)->isoFormat('D MMMM YYYY') }}</h5>
 </td>
 <td style="width: 10%">
 <div class="actions-btn">

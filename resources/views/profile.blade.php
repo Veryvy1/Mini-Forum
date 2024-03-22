@@ -114,12 +114,7 @@
     <li>
     <a href="#" title>
     <i>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
-        <rect x="3" y="3" width="7" height="7"></rect>
-        <rect x="14" y="3" width="7" height="7"></rect>
-        <rect x="14" y="14" width="7" height="7"></rect>
-        <rect x="3" y="14" width="7" height="7"></rect>
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
     </i>
     </a>
     <ul class="dropdown">
@@ -384,7 +379,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="searchResultsContainer"></div>
-                        <form action="{{ route('user.contents.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -397,7 +392,8 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                    <label for="deskripsi" class="form-label">Description</label>
+                                    <label for="deskripsi" class="form-label">
+                                        Fill Content</label>
                                     <textarea name="deskripsi" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
                                 @section('scripts')
                             <script>
@@ -539,16 +535,16 @@
         }
     </script>
 
-<script>
-    function toggleDropdown(contentId) {
-        var dropdown = document.getElementById("dropdown-" + contentId);
-        if (dropdown.style.display === "none") {
-            dropdown.style.display = "block";
-        } else {
-            dropdown.style.display = "none";
+    <script>
+        function toggleDropdown(contentId) {
+            var dropdown = document.getElementById("dropdown-" + contentId);
+            if (dropdown.style.display === "none") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
         }
-    }
-</script>
+    </script>
 
     <script src="js/vivus.min.js" type="text/javascript"></script>
     <script src="js/script.js" type="text/javascript"></script>

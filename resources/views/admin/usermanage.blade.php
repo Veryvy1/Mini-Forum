@@ -130,7 +130,7 @@
 <table class="table table-default all-events table-striped table-responsive-lg">
 <thead>
 <tr>
-<th style="width:5%;">ID#</th>
+<th style="width:5%;">No</th>
 <th>Name</th>
 <th>Email</th>
 <th>Date</th>
@@ -138,10 +138,10 @@
 </tr>
 </thead>
 <tbody>
-    @foreach ($users as $key => $use)
+    @foreach ($users as $index => $use)
         @if ($use->role == 'user')
             <tr>
-                <td style="width: 5%;"><b>{{ $key + 1 }}</b></td>
+                <td style="width: 5%;"><b>{{ $index  }}</b></td>
                 <td class="user-pic" style=" display: flex; justify-content: flex-start; width:50%;">
                     <figure style="margin-right: 10px; justify-content: flex-start;">
                         @if(auth()->user()->profil)

@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/contents/upload-image', [ContentController::class, 'uploadImage'])->name('contents.uploadImage');
 
         Route::get('/content', [ContentController::class, 'index'])->name('content.index');
+        Route::get('/contentfilter', [ContentController::class, 'filter'])->name('content.filter');
         Route::get('/content/create', [ContentController::class, 'createForAdmin'])->name('content.create');
         Route::post('/content', [ContentController::class, 'storeForAdmin'])->name('content.store');
         Route::put('/content/{content}/edit', [ContentController::class, 'edit'])->name('content.edit');

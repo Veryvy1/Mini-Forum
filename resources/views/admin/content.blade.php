@@ -9,14 +9,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Content | Admin</title>
     <link rel="icon" href="/images/LOGO/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="socimo/css/main.min.css">
+    <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="css/color.css">
     <link rel="stylesheet" href="css/responsive.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Bootstrap JS -->
@@ -144,117 +142,94 @@
 <a type="button" class="btn btn-primary" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" style="margin-left: 90%; background-color:rgb(40, 144, 204); color:#fff;"><b>add content</b></a>
 <br><br>
 
+<div class="row merged-10">
+    <div class="col-lg-9">
+        <div class="row">
+            @forelse($content as $key => $contents)
+                <div class="col-lg-4 mb-4">
+                    <div class="prod-item" style="border: 1px solid #cacaca;">
+                        <div class="overflow-hidden" style="height: 300px; display: flex; max-width: 100%; align-items: center; justify-content: center;">
+                            <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="Deskripsi gambar" style="object-fit: cover; height: auto;">
+                        </div>
+                        <div class="more-opt">
+                            <span><i class="icofont-dotted-down"></i></span>
+                            <ul>
+                                <li><a href="{{ route('content.detail', ['content' => $contents->id]) }}" title style="font-size: 15px; margin-left:7%;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
+                                <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
+                                    <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
+                                </button>
+                                <li>
+                                    <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="swalpFunction()">
+                                            <i class="icofont-trash" style="color: #b91e1e"></i> Delete
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        <center>
+                            <div class="prod-meta" style="width: 100px; height: 100px; overflow: hidden;">
+                                <h4 title>
+                                    @if(strlen($contents->judul) > 15)
+                                        {{ substr($contents->judul, 0, 15) }}...
+                                    @else
+                                        {{ $contents->judul }}
+                                    @endif
+                                </h4>
+                            </div>
 
-    <div class="row merged-10">
-        @forelse($content as $key => $contents)
-        <div class="col-lg-3" style="max-width: 25%; overflow: hidden;">
-            <div class="mb-4 prod-item" style="border: 1px solid #cacaca;">
-                    <div class="overflow-hidden" style="height: 300px; display: flex; max-width: 100%; align-items: center; justify-content: center;">
-                    <img src="{{ asset('storage/'.  $contents->gambar ) }}" alt="Deskripsi gambar"  style="object-fit: cover; height: auto;">
+                        </center>
+                        <span title="liked" style="margin-right: 10px;">
+                            <i class="icofont-like" style="color: #64a4d4;"></i>
+                            <ins>{{ $contents->likes_count }}</ins>
+                        </span>
+                        <span title="comment">
+                            <i class="icofont-comment" style="color: #64a4d4;"></i>
+                            <ins>{{ $contents->comment_count }}</ins>
+                        </span>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <span>
+                        @if($contents->created_at->diffInWeeks() >= 1)
+                            {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
+                        @else
+                            {{ $contents->created_at->diffForHumans() }}
+                    @endif
+</span>
+                </div>
                     </div>
-            <div class="more-opt">
-        <span><i class="icofont-dotted-down"></i></span>
-        <ul>
-            <li><a href="{{ route('content.detail', ['content' => $contents->id]) }}" title style="font-size: 15px; margin-left:7%;"><i class="icofont-eye" style="color: #1e76b9"></i> Detail</a></li>
-            <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
-            <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
-        </button>
-
-        </li>
-        <li>
-        <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete">
-            @csrf
-            @method('DELETE')
-            <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="swalpFunction()">
-                <i class="icofont-trash" style="color: #b91e1e"></i> Delete
-            </button>
-        </form></li>
-        </ul>
-
-        </div>
-
-        <center>
-        <div class="prod-meta" style="width: 200px; height: 200px overflow: hidden;">
-        <h4 title>
-            @if(strlen($contents->judul) > 15)
-            {{ substr($contents->judul, 0, 15) }}...
-        @else
-            {{ $contents->judul }}
-        @endif</h4>
-        </div></center>
-                <span title="liked" style="margin-right: 10px;">
-                    <i class="icofont-like" style="color: #64a4d4;"></i>
-                    <ins>{{ $contents->likes_count }}</ins>
-        </span>
-                <span title="comment">
-                    <i class="icofont-comment" style="color: #64a4d4;"></i>
-                    <ins>{{ $contents->comment_count }}</ins>
-        </span>
+                </div>
+            @empty
+                <div class="col-lg-12">
+                    <center>
+                        <img src="images/LOGO/datakosong.png" alt="" style="width: 50%;">
+                    </center>
+                </div>
+            @endforelse
         </div>
     </div>
 
-    @empty
-    <center>
-        <img src="images/LOGO/datakosong.png" alt="" style="width: 50%;">
-    </center>
-    @endforelse
+    <aside class="sidebar static right col-lg-3">
+        <div class="widget">
+            <form action="{{ route('content.filter') }}" method="GET">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="widget-title"><b>Category</b></h4>
+                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                </div>
+                @php
+                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                @endphp
+                @foreach ($kategori as $key => $category)
+                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                    <label for="category{{ $category->id }}" class="large-label">
+                        {{ $category->kategori }}
+                    </label><br>
+                @endforeach
+            </form>
         </div>
+    </aside>
 </div>
-@foreach ($content as $contents)
-<div class="modal fade" id="editModal{{ $contents->id }}" tabindex="-1" aria-labelledby="editModal{{ $contents->id }}Label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h6 class="m-0 font-weight-bold">Edit Content</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="judul" class="form-label">Title</label>
-                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
-                        @error('judul')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
-                        <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
-                        @if ($contents->gambar)
-                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
-                        @else
-                        No Image
-                        @endif
-                        @error('gambar')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label>
-                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
-                            @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
-                                {{ $kat->kategori }}
-                            </option>
-                            @endforeach
-                        </select>
-                        @error('kategori_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
 
 @foreach ($content as $contents)
 <div class="modal fade" id="editModal{{ $contents->id }}" tabindex="-1" aria-labelledby="editModal{{ $contents->id }}Label" aria-hidden="true">
@@ -278,7 +253,8 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
+                        <label for="deskripsi" class="form-label">
+                            Fill Content</label>
                         <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
                     </div>
                     <div class="mb-3">
@@ -378,7 +354,8 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
+                        <label for="deskripsi" class="form-label">
+                            Fill Content</label>
                         <textarea name="deskripsi" id="summernoteModal1" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
                     </div>
                     <div class="mb-3">
@@ -458,7 +435,6 @@
     toastr.success("<?php echo Session::get('success'); ?>");
 </script>
 <?php endif; ?>
-
 
 <script src="js/main.min.js" type="101cca6ef11d27050cf841ef-text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>

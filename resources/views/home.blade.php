@@ -171,8 +171,15 @@
                     @endif
                 </figure>
     <div class="friend-name">
-        <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+        <ins><a title >{{ $contents->user->name }}</a></ins>
+        <span><i class="icofont-globe"></i> published:
+            {{-- {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }} --}}
+            @if($contents->created_at->diffInWeeks() >= 1)
+            {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
+            @else
+            {{ $contents->created_at->diffForHumans() }}
+        @endif
+                </span>
     </div>
     <div class="post-meta">
         <figure>
@@ -385,7 +392,8 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Description</label>
+                        <label for="deskripsi" class="form-label">
+                            Fill Content</label>
                         <textarea name="deskripsi" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
                     @section('scripts')
                     <script>

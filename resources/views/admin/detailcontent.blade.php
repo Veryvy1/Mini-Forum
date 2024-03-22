@@ -101,7 +101,14 @@
                                             <line x1="8" y1="2" x2="8" y2="6"></line>
                                             <line x1="3" y1="10" x2="21" y2="10"></line>
                                         </svg>
-                                    </i> {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}</li>
+                                    </i>
+                                    {{-- {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }} --}}
+                                    @if($content->created_at->diffInWeeks() >= 1)
+                                    {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                    {{ $content->created_at->diffForHumans() }}
+                                @endif
+                            </li>
                             </ul>
                             <div class="tag-n-cat">
                                 <div class="tags">

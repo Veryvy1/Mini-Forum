@@ -161,7 +161,13 @@
                     <div class="commenter-meta">
                         <div class="comment-titles">
                             <h6>{{ $comment->user->name }}</h6>
-                            <span>{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+                            <span>
+                                @if($comment->created_at->diffInWeeks() >= 1)
+                                {{  \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM YYYY') }}
+                                @else
+                                {{ $comment->created_at->diffForHumans() }}
+                            @endif
+                            </span>
                         </div>
                         <p style="word-break: break-word;">
                             {!! $comment->comment !!}
@@ -209,7 +215,13 @@
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $replies->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+                                <span>
+                                    @if($replies->created_at->diffInWeeks() >= 1)
+                                    {{  \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                    {{ $replies->created_at->diffForHumans() }}
+                                @endif
+                                </span>
                             </div>
                             <p style="word-break: break-word;">
                                 {!! $replies->reply !!}
@@ -248,7 +260,13 @@
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $replies->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($replies->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+                                <span>
+                                    @if($replies->created_at->diffInWeeks() >= 1)
+                                    {{  \Carbon\Carbon::parse($replies->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                    {{ $replies->created_at->diffForHumans() }}
+                                @endif
+                                </span>
                             </div>
                             <p style="word-break: break-word;">
                                 <h5>{!! $replies->reply !!}</h5>
@@ -356,7 +374,7 @@
             });
         });
     </script>
-    @endsection
+    @endsection
 
 
     <?php if ($errors->any()): ?>

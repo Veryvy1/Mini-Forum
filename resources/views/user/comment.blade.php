@@ -166,7 +166,11 @@
             </p>
                 <ul style="margin-top: 50px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></i>
-                {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D-MMMM-YYYY') }}</li>
+                @if($content->created_at->diffInWeeks() >= 1)
+                {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}
+                @else
+                {{ $content->created_at->diffForHumans() }}
+            @endif            </li>
                 </ul>
                 <div class="tag-n-cat">
                 <div class="tags">
@@ -215,7 +219,13 @@
                         <div class="comment-content">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+                                <span>
+                                    @if($comments->created_at->diffInWeeks() >= 1)
+                                    {{  \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                    {{ $comments->created_at->diffForHumans() }}
+                                @endif
+                                </span>
                             </div>
                             <p style="word-break: break-word; ">
                                 {!! $comments->comment !!}
@@ -252,7 +262,13 @@
                         <div class="commenter-meta">
                             <div class="comment-titles">
                                 <h6>{{ $comments->user->name }}</h6>
-                                <span>{{ \Carbon\Carbon::parse($comments->created_at)->isoFormat('D-MMMM-YYYY') }}</span>
+                                <span>
+                                    @if($comments->created_at->diffInWeeks() >= 1)
+                                    {{  \Carbon\Carbon::parse($comments->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                    {{ $comments->created_at->diffForHumans() }}
+                                @endif
+                                </span>
                             </div>
                             <p style="word-break: break-word;">
                                 <h5>{!! $comments->comment !!}</h5>
