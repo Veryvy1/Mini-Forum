@@ -207,15 +207,12 @@
 <th class="wd-10p">No.</th>
 <th class="wd-25p">Title</th>
 <th class="wd-35p">Category</th>
-<th class="wd-35p">Category</th>
 <th class="wd-20p">Total Liked</th>
 </tr>
 </thead>
 <tbody>
 @foreach ($content as $key => $contents)
 <tr style="width: 600px; height: 30px;">
-    <td style="width: 10%;">{{ $key + 1 }}</td>
-<td style="width: 30%;">
     <td style="width: 10%;">{{ $key + 1 }}</td>
 <td style="width: 30%;">
 <div class="d-flex align-items-center">
@@ -233,17 +230,6 @@
     @endif
 </div>
 </td>
-<td style="width: 30%">
-    {{ $contents->kategori->kategori }}
-{{-- <td style="width: 600px; height: 30px; overflow: hidden;  text-overflow: ellipsis;">
-    <div class="">
-    @if (strlen(strip_tags($contents->deskripsi)) > 60)
-    {!! Illuminate\Support\Str::limit(strip_tags($contents->deskripsi), 60, '...') !!}
-@else
-    {!! $contents->deskripsi !!}
-@endif
-</div>
-</td> --}}
 <td style="width: 30%">
     {{ $contents->kategori->kategori }}
 </td>

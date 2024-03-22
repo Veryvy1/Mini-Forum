@@ -138,10 +138,17 @@
 </tr>
 </thead>
 <tbody>
+    @if ($users->isEmpty())
+    <tr>
+        <td colspan="5" class="text-center">
+            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 60%;">
+        </td>
+    </tr>
+@else
     @foreach ($users as $index => $use)
-        @if ($use->role == 'user')
+        {{-- @if ($use->role == 'user') --}}
             <tr>
-                <td style="width: 5%;"><b>{{ $index  }}</b></td>
+                <td style="width: 5%;"><b>{{ $index + 1 }}</b></td>
                 <td class="user-pic" style=" display: flex; justify-content: flex-start; width:50%;">
                     <figure style="margin-right: 10px; justify-content: flex-start;">
                         @if(auth()->user()->profil)
@@ -164,8 +171,9 @@
                     </form>
                 </td>
             </tr>
-        @endif
+        {{-- @endif --}}
     @endforeach
+    @endif
 </tbody>
 </table>
 {{ $users->links() }}

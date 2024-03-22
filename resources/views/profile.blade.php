@@ -12,9 +12,11 @@
         <link rel="stylesheet" href="socimo/css/style.css">
         <link rel="stylesheet" href="socimo/css/color.css">
         <link rel="stylesheet" href="socimo/css/responsive.css">
+
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <!-- Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -171,7 +173,7 @@
     <div class="grp-info about">
     <h4>{{ $user->name }}<span>{{ $user->email }}</span></h4>
     <ul class="joined-info">
-    <li><span>Joined:</span>{{  \Carbon\Carbon::parse($user->created_at)->isoFormat('D-MMMM-YYYY') }}</li>
+    <li><span>Joined:</span>{{  \Carbon\Carbon::parse($user->created_at)->isoFormat('D MMMM YYYY') }}</li>
     <li><span>Posts:</span> {{ $totalPosts }}</li>
     </ul>
     <ul class="more-grp-info">
@@ -222,8 +224,13 @@
                     @endif
                 </figure>
     <div class="friend-name">
-        <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
-        <span><i class="icofont-globe"></i> published: {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}</span>
+        <ins><a title >{{ $contents->user->name }}</a></ins>
+        <span><i class="icofont-globe"></i> published:
+            @if($contents->created_at->diffInWeeks() >= 1)
+            {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
+            @else
+            {{ $contents->created_at->diffForHumans() }}
+        @endif        </span>
         <div class="more-opt" style="float:right; margin-top: -10px;">
             <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
             <ul id="dropdown-{{ $contents->id }}" style="display: none;">
@@ -442,8 +449,8 @@
                                 @enderror
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                                <button type="submit" class="btn btn-primary">SAVE</button>
                             </div>
                         </form>
                     </div>
@@ -473,8 +480,8 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                                <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"></i>CANCEL</button>
+                                <button type="submit" form="addContactForm" class="btn btn-primary"></i>SAVE</button>
                             </div>
                         </form>
                     </div>

@@ -131,10 +131,10 @@
             </figure>
             <div class="users-name">
                 <h5 style="text-align: center;">
-                    <input type="text" id="name" name="name" value="{{ $user->name }}" style="border: none; text-align: center;  margin-top:30px;">
+                    <input type="text" id="name" name="name" value="{{ $user->name }}" style="text-align: center;  margin-top:30px;">
                 </h5>
             <span style="text-align: center;">
-                <input type="text" id="email" name="email" value="{{ $user->email }}" style="border: none; text-align: center; margin-top:15px;">
+                <input type="text" id="email" name="email" value="{{ $user->email }}" style="text-align: center; margin-top:15px;">
             </span>
             </div>
             </div>
@@ -248,8 +248,8 @@
                             @enderror
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            <button type="submit" class="btn btn-primary">SAVE</button>
                         </div>
                     </form>
                 </div>
@@ -278,8 +278,8 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-undo me-1"></i>CANCEL</button>
-                            <button type="submit" form="addContactForm" class="btn btn-primary"><i class="fas fa-check-circle me-1"></i>SAVE</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            <button type="submit" form="addContactForm" class="btn btn-primary">SAVE</button>
                         </div>
                     </form>
                 </div>

@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'user',
         ]);
+       
         Kategori::create([
             'kategori' => 'Game',
         ]);

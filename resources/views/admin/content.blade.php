@@ -189,7 +189,7 @@
                             <i class="icofont-comment" style="color: #64a4d4;"></i>
                             <ins>{{ $contents->comment_count }}</ins>
                         </span>
-                        <div style="display: flex; justify-content: flex-end;">
+                        <div style="display: flex; justify-content: flex-end; margin-top: -15px;">
                             <span>
                         @if($contents->created_at->diffInWeeks() >= 1)
                             {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
