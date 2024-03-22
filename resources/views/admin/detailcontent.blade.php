@@ -122,7 +122,11 @@
                             </div>
                         </div>
 
-
+                        @if ($comments->isEmpty())
+                        <center>
+                            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
+                        </center>
+                    @else
 @if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
@@ -152,6 +156,7 @@
         @endforeach
     </tbody>
 </table>
+@endif
 @endif
 </div>
 </div>

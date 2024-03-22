@@ -196,6 +196,11 @@
 <h5>Most Liked Posts</h5>
 </div>
 <div id="searchResultsContainer"></div>
+@if ($content->isEmpty())
+    <center>
+        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
+    </center>
+@else
 <table class="table-default table table-striped table-responsive-md">
 <thead>
 <tr>
@@ -249,6 +254,7 @@
 @endforeach
 </tbody>
 </table>
+@endif
 </div>
 </div>
 </div>

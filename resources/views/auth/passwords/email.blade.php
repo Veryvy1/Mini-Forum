@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content />
     <meta name="keywords" content />
-    <title>Socimo | Social Media Network Template</title>
+    <title>GetForums</title>
     <link rel="icon" href="/images/LOGO/logo.png" type="/image/png" sizes="16x16">
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -15,9 +15,9 @@
 </head>
 
 <body>
-    <div class="page-loader" id="page-loader">
+    {{-- <div class="page-loader" id="page-loader">
         <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
-    </div>
+    </div> --}}
     <div class="theme-layout gray-bg">
         <div class="container-lg-0">
             <div class="row justify-content-md-center">
@@ -53,9 +53,9 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc">
+                                <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; margin-right: 10px;">
                                     {{ __('Send Password Reset Link') }}
-                                </button> <span>Go back to <a href="{{ route('login') }}"><span style="color: #2ea8dc;">Sign In</span></a></span>
+                                </button><span>Go back to <a href="{{ route('login') }}"><span style="color: #2ea8dc;">Sign In</span></a></span>
 
                             </div>
                         </div>
@@ -74,7 +74,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <span class>&copy; Copyright All rights reserved by Socimo 2020</span>
+                    <span class>&copy; Copyright All rights reserved by GetForums 2023</span>
                 </div>
             </div>
         </div>
