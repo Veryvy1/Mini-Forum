@@ -77,7 +77,7 @@ class ContentController extends Controller
             $query->whereIn('kategori_id', $kategori_ids);
         }
 
-        $content = $query->paginate(6);
+        $content = $query->get();
 
         $likesCount = [];
         $commentCount = [];

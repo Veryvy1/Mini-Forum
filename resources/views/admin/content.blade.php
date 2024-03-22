@@ -211,22 +211,26 @@
     </div>
 
     <aside class="sidebar static right col-lg-3">
-        <div class="widget">
-            <form action="{{ route('content.filter') }}" method="GET">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h4 class="widget-title"><b>Category</b></h4>
-                    <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
-                </div>
-                @php
-                  $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
-                @endphp
-                @foreach ($kategori as $key => $category)
-                    <input type="checkbox" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
-                    <label for="category{{ $category->id }}" class="large-label">
-                        {{ $category->kategori }}
-                    </label><br>
-                @endforeach
-            </form>
+        <div class="widget card">
+            <div class="card-body">
+                <form action="{{ route('content.filter') }}" method="GET">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="widget-title"><b>Category</b></h4>
+                        <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                    </div>
+                    @php
+                      $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                    @endphp
+                    @foreach ($kategori as $key => $category)
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="category{{ $category->id }}" name="kategori_id[]" value="{{ $category->id }}" @if(in_array($category->id, (array)$kategori_ids)) checked @endif>
+                            <label class="form-check-label" for="category{{ $category->id }}">
+                                {{ $category->kategori }}
+                            </label>
+                        </div>
+                    @endforeach
+                </form>
+            </div>
         </div>
     </aside>
 </div>
