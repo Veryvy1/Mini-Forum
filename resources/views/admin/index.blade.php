@@ -196,11 +196,7 @@
 <h5>Most Liked Posts</h5>
 </div>
 <div id="searchResultsContainer"></div>
-@if ($content->isEmpty())
-    <center>
-        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
-    </center>
-@else
+
 <table class="table-default table table-striped table-responsive-md">
 <thead>
 <tr>
@@ -211,6 +207,13 @@
 </tr>
 </thead>
 <tbody>
+    @if ($content->isEmpty())
+    <tr>
+        <td colspan="5" class="text-center">
+            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 30%;">
+        </td>
+    </tr>
+@else
 @foreach ($content as $key => $contents)
 <tr style="width: 600px; height: 30px;">
     <td style="width: 10%;">{{ $key + 1 }}</td>

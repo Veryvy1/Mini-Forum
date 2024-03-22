@@ -131,11 +131,7 @@
 <div class="d-widget-title">
 </div>
 <div id="searchResultsContainer"></div>
-@if ($kategori->isEmpty())
-    <center>
-        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
-    </center>
-@else
+
 <table class="table-default manage-user table table-striped table-responsive-md">
 <thead>
 <tr>
@@ -147,6 +143,13 @@
 </tr>
 </thead>
 <tbody>
+    @if ($kategori->isEmpty())
+    <tr>
+        <td colspan="5" class="text-center">
+            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 40%;">
+        </td>
+    </tr>
+@else
 @foreach ($kategori as $key => $kategories)
 <tr>
     <td>

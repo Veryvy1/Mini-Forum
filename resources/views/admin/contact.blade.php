@@ -127,11 +127,7 @@
 <div class="col-lg-12">
 <div class="d-widget">
 <div id="searchResultsContainer"></div>
-@if ($contact->isEmpty())
-    <center>
-        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
-    </center>
-@else
+
 <table class="table-default manage-user table table-striped table-responsive-md">
 <thead>
 <tr>
@@ -141,6 +137,13 @@
 </tr>
 </thead>
 <tbody>
+    @if ($contact->isEmpty())
+<tr>
+    <td colspan="5" class="text-center">
+        <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 40%;">
+    </td>
+</tr>
+@else
 @foreach ($contact as $key => $contactes)
 <tr>
     <td>

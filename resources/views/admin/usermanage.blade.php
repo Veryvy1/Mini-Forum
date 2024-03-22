@@ -141,7 +141,7 @@
     @if ($users->isEmpty())
     <tr>
         <td colspan="5" class="text-center">
-            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 60%;">
+            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 55%;">
         </td>
     </tr>
 @else

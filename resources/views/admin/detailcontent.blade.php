@@ -122,11 +122,7 @@
                             </div>
                         </div>
 
-                        @if ($comments->isEmpty())
-                        <center>
-                            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="" style="width: 60%;">
-                        </center>
-                    @else
+
 @if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
@@ -138,6 +134,13 @@
         </tr>
     </thead>
     <tbody>
+         @if ($comments->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 60%;">
+                            </td>
+                        </tr>
+                    @else
         @foreach ($comments ?? [] as $key => $comment)
         <tr>
             <td style="">{{ $key + 1}}</td>
