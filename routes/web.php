@@ -30,6 +30,7 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
+
 Auth::routes(['verify' => true]);
 Route::middleware(['auth'])->group(function () {
 

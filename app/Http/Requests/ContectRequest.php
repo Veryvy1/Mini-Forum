@@ -25,7 +25,7 @@ class ContectRequest extends FormRequest
             'judul' => 'required|max:255',
             'deskripsi' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'kategori_id' => 'required',
+            'kategori_id' => 'required|exists:kategoris,id',
         ];
     }
 
@@ -39,6 +39,7 @@ class ContectRequest extends FormRequest
             'gambar.image' => 'Must be filled with images.',
             'gambar.mimes' => 'Invalid photo format. Use jpeg, png, jpg, or gif format.',
             'kategori_id.required' => 'Category must be filled in.',
+            'kategori_id.exists' => 'The Category you entered is invalid.',
         ];
     }
 
