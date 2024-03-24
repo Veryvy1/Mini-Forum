@@ -139,7 +139,7 @@
             </div>
             </header>
         <div class="container"><br><br>
-            <a onclick="window.history.go(-1);" class="btn btn-primary" style="background-color: #2ea8dc;">
+            <a href="{{ route('content.comment', $comment->content_id) }}" class="btn btn-primary" style="background-color: #2ea8dc;">
                 <i class="icofont-arrow-left"></i>
             </a>
             <br>
