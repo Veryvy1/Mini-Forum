@@ -39,8 +39,9 @@ class ReplyController extends Controller
         //
     }
 
-    public function store(Request $request, $commentId)
+    public function store(Request $request, $replyId)
     {
+
         try {
             $user_id = auth()->id();
 
@@ -65,6 +66,7 @@ class ReplyController extends Controller
 
             $reply = new Reply();
             $reply->reply = $comment;
+            $reply->comment_id = $replyId;
             $reply->user_id = $user_id;
             $reply->save();
 
