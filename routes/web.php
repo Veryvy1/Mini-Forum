@@ -45,8 +45,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/contentfilter', [ContentController::class, 'filter'])->name('content.filter');
         Route::get('/content/create', [ContentController::class, 'createForAdmin'])->name('content.create');
         Route::post('/content', [ContentController::class, 'storeForAdmin'])->name('content.store');
-        Route::put('/content/{content}/edit', [ContentController::class, 'edit'])->name('content.edit');
-        Route::put('/content/{content}', [ContentController::class, 'update'])->name('content.update');
+        Route::put('/content/{content}/edit', [ContentController::class, 'editForAdmin'])->name('content.edit');
+        Route::put('/content/{content}', [ContentController::class, 'updateForAdmin'])->name('content.update');
+        Route::get('/contentfilter', [ContentController::class, 'filter'])->name('content.filter');
 
         Route::resource('kategori', KategoriController::class);
 
@@ -76,7 +77,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/reply2/{replyId1}', [ReplyController::class, 'store2'])->name('reply2.store');
         Route::post('/content/{id}/like', [LikeController::class, 'like'])->name('content.like');
         Route::get('/morecontent', [ContentController::class, 'contentMore'])->name('more.home');
-
+        Route::put('/homecontent/{content}', [ContentController::class, 'updateForUser'])->name('user.content.update');
+        Route::put('/home/{content}/edit', [ContentController::class, 'editForUser'])->name('user.content.edit');
 
         Route::get('blog', function () {
             return view('user.blog');

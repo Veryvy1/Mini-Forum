@@ -234,11 +234,14 @@
             <div class="more-opt" style="float:right; margin-top: -10px;">
             <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
             <ul id="dropdown-{{ $contents->id }}" style="display: none;">
+                <button type="button" title  style="font-size: 15px;  background-color:#fff; border:none;" data-bs-toggle="modal" data-bs-target="#editModal{{ $contents->id }}">
+                    <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
+                </button>
                 <li>
                     <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete-{{ $contents->id }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="swalpFunction()">
+                        <button type="button" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="deleteContent('{{ $contents->id }}')">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
@@ -379,8 +382,113 @@
     </div>
     </div>
     <div class="pagination">
-        {{ $content->links() }}
+        {{ $content->links('vendor.sweetalert.pagination') }}
     </div>
+
+    @foreach ($content as $contents)
+<div class="modal fade" id="editModal{{ $contents->id }}" tabindex="-1" aria-labelledby="editModal{{ $contents->id }}Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="m-0 font-weight-bold">Edit Content</h6>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Title</label>
+                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
+                        @error('judul')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">
+                            Fill Content</label>
+                        <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gambar" class="form-label">Image</label>
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                        @if ($contents->gambar)
+                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
+                        @else
+                        No Image
+                        @endif
+                        @error('gambar')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="kategoris" class="form-label">Category</label>
+                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
+                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+                            @foreach ($kategori as $kat)
+                            <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                                {{ $kat->kategori }}
+                            </option>
+                            @endforeach
+                        </select>
+                        @error('kategori_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+@section('scripts')
+<script>
+ $(document).ready(function() {
+
+    $('.custom-summernote').summernote({
+        placeholder: 'Isi content...',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+
+    $('#summernoteModal1').summernote({
+        placeholder: 'Isi content...',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+});
+</script>
+@endsection
+
         <div class="modal" tabindex="-1" id="tambahModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -402,29 +510,9 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                    <label for="deskripsi" class="form-label">
-                                        Fill Content</label>
-                                    <textarea name="deskripsi" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
-                                @section('scripts')
-                            <script>
-                            $(document).ready(function() {
-                                $('#summernote').summernote({
-                                    placeholder: 'Hello stand alone ui',
-                                    tabsize: 2,
-                                    height: 120,
-                                    toolbar: [
-                                        ['style', ['style']],
-                                        ['font', ['bold', 'underline', 'clear']],
-                                        ['color', ['color']],
-                                        ['para', ['ul', 'ol', 'paragraph']],
-                                        ['table', ['table']],
-                                        ['insert', ['link', 'picture', 'video']],
-                                        ['view', ['fullscreen', 'codeview', 'help']]
-                                    ]
-                                });
-                            });
-                            </script>
-                            @endsection
+                                <label for="deskripsi" class="form-label">
+                                    Fill Content</label>
+                                <textarea name="deskripsi" id="summernoteModal1" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="gambar" class="form-label">Image</label>
@@ -506,25 +594,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function swalpFunction() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
+        async function deleteContent(id) {
+            try {
+                const result = await Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                });
+
                 if (result.isConfirmed) {
-                    console.log("Data dihapus");
-                    Swal.fire({
+                    
+                    document.getElementById('delete-' + id).submit();
+                    await Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
                         icon: "success"
                     });
                 }
-            });
+            } catch (error) {
+                console.error("Error:", error);
+            }
         }
     </script>
 
