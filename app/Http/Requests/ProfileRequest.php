@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProfileRequest extends FormRequest
 {
@@ -20,18 +21,30 @@ class ProfileRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-{
-    return [
-        'name' => 'nullable|max:25|unique:users,name',
-        'email' => 'nullable|email|unique:users,email',
-        'profile' => 'nullable|image',
-        'bgprofile' => 'nullable|image',
-        'link_fb' => 'nullable|max:150|url',
-        'link_ig' => 'nullable|max:150|url',
-        'link_twt' => 'nullable|max:150|url',
-        'bio' => 'nullable',
-    ];
-}
+    {
+        $userId = $this->user()->id ?? null;
+
+        return [
+            'name' => [
+                'nullable',
+                'max:150',
+                Rule::unique('users', 'name')->ignore($userId),
+            ],
+            'email' => [
+                'nullable',
+                'max:150',
+                'email',
+                Rule::unique('users', 'email')->ignore($userId),
+            ],
+            'profile' => 'nullable|image|max:2048',
+            'bgprofile' => 'nullable|image|max:2048',
+            'link_fb' => 'nullable|max:250|url',
+            'link_ig' => 'nullable|max:250|url',
+            'link_twt' => 'nullable|max:250|url',
+            'bio' => 'nullable',
+        ];
+    }
+
 
 public function messages(): array
 {
@@ -44,10 +57,13 @@ public function messages(): array
         'link_fb.url' => 'The Facebook link must be a valid URL.',
         'link_ig.url' => 'The Instagram link must be a valid URL.',
         'link_twt.url' => 'The Twitter link must be a valid URL.',
-        'name.max' => 'The name may not be greater than 25 characters.',
-        'link_fb.max' => 'The Facebook link may not be greater than 150 characters.',
-        'link_ig.max' => 'The Instagram link may not be greater than 150 characters.',
-        'link_twt.max' => 'The Twitter link may not be greater than 150 characters.',
+        'name.max' => 'The name may not be greater than 150 characters.',
+        'email.max' => 'The email may not be greater than 150 characters.',
+        'profile.max' => 'The email may not be greater than 2048 characters.',
+        'bgprofile.max' => 'The email may not be greater than 2048 characters.',
+        'link_fb.max' => 'The Facebook link may not be greater than 250 characters.',
+        'link_ig.max' => 'The Instagram link may not be greater than 250 characters.',
+        'link_twt.max' => 'The Twitter link may not be greater than 250 characters.',
     ];
 }
 
