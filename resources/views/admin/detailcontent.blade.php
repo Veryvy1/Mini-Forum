@@ -48,10 +48,8 @@
         }
 
         h5{
-                height: auto;
-                max-width: 25%;
-                /* margin-right: 20%; */
-                /* display: flex; */
+            height: auto;
+            max-width: 25%;
         }
     </style>
 
@@ -102,7 +100,6 @@
                                             <line x1="3" y1="10" x2="21" y2="10"></line>
                                         </svg>
                                     </i>
-                                    {{-- {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }} --}}
                                     @if($content->created_at->diffInWeeks() >= 1)
                                     {{  \Carbon\Carbon::parse($content->created_at)->isoFormat('D MMMM YYYY') }}
                                     @else
@@ -121,8 +118,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 @if($userRole == 'admin')
 <table class="table table-default all-events table-striped table-responsive-lg">
     <thead>
@@ -134,13 +129,13 @@
         </tr>
     </thead>
     <tbody>
-         @if ($comments->isEmpty())
-                        <tr>
-                            <td colspan="5" class="text-center">
-                                <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 60%;">
-                            </td>
-                        </tr>
-                    @else
+        @if ($comments->isEmpty())
+        <tr>
+            <td colspan="5" class="text-center">
+                <img src="{{ asset('images/LOGO/datakosong.png') }}" alt="No Data" style="width: 60%;">
+            </td>
+        </tr>
+            @else
         @foreach ($comments ?? [] as $key => $comment)
         <tr>
             <td style="">{{ $key + 1}}</td>
@@ -159,6 +154,7 @@
         @endforeach
     </tbody>
 </table>
+{{ $comments->links('vendor.sweetalert.pagination1') }}
 @endif
 @endif
 </div>
@@ -167,16 +163,19 @@
 </div>
 </div>
 </section>
+@if($userRole == 'user')
+<!-- Footer section -->
 <figure class="bottom-mockup"><img src="/images/footer.png" alt="Footer"></figure>
 <div class="bottombar">
-<div class="container">
-<div class="row">
-<div class="col-lg-12">
-<span>&copy; copyright All rights reserved by GetForums 2024</span>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span>&copy; copyright All rights reserved by GetForums 2024</span>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div>
-</div>
+@endif
 </div>
 
 

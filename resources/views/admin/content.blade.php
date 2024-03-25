@@ -66,7 +66,7 @@
         <form id="searchForm" action="{{ route('content.search') }}" method="get">
             @csrf
             {{-- <i class="icofont-search"></i> --}}
-           <input type="search"  value="{{ $oldSearch }}" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+           <input type="search"  name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
         </form>
     </div>
     <ul class="web-elements">
@@ -160,13 +160,14 @@
                                     <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
                                 </button>
                                 <li>
-                                    <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete">
+                                    <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="deleteForm">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" title style="font-size: 15px; background-color:#fff; border:none;"  onclick="swalpFunction()">
+                                        <button type="button" title style="font-size: 15px; background-color:#fff; border:none;" onclick="deleteContent()">
                                             <i class="icofont-trash" style="color: #b91e1e"></i> Delete
                                         </button>
                                     </form>
+
                                 </li>
                             </ul>
                         </div>
@@ -180,7 +181,6 @@
                                     @endif
                                 </h4>
                             </div>
-
                         </center>
                         <span title="liked" style="margin-right: 10px;">
                             <i class="icofont-like" style="color: #64a4d4;"></i>
@@ -196,8 +196,8 @@
                             {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
                         @else
                             {{ $contents->created_at->diffForHumans() }}
-                    @endif
-</span>
+                        @endif
+                </span>
                 </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@
                 <form action="{{ route('content.filter') }}" method="GET">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="widget-title"><b>Category</b></h4>
-                        <button type="submit" class="btn btn-primary" style="background-color: #2ea8dc; border:none;">Filter</button>
+                        <button type="submit" class="btn btn-primary" style="background-color:rgb(40, 144, 204); border:none;">Filter</button>
                     </div>
                     @php
                       $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
@@ -242,7 +242,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h6 class="m-0 font-weight-bold">Edit Content</h6>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
@@ -336,7 +335,6 @@
             ['view', ['fullscreen', 'codeview', 'help']]
         ]
     });
-
 });
 </script>
 @endsection
@@ -365,13 +363,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" onchange="previewImage(event)">
+                        @if(old('gambar'))
+                            <img id="preview" src="{{ asset('storage/' . old('gambar')) }}" alt="Old gambar" style="max-width: 100px; max-height: 100px;">
+                        @endif
                         @error('gambar')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="kategoris" class="form-label">Category</label><br>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
@@ -399,6 +401,18 @@
     </div>
 </div>
 
+
+<script>
+    function previewImage(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('preview');
+            output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>
+
 <script>
     function submitSearch() {
         document.getElementById("searchForm").submit();
@@ -419,25 +433,30 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function swalpFunction() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
+    async function deleteContent() {
+        try {
+            const result = await Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            });
+
             if (result.isConfirmed) {
-                console.log("Data dihapus");
-                Swal.fire({
+                // Submit the form
+                document.getElementById('deleteForm').submit();
+                await Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",
                     icon: "success"
                 });
             }
-        });
+        } catch (error) {
+            console.error("Error:", error);
+        }
     }
 </script>
 

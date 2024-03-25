@@ -242,6 +242,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="button" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="deleteContent('{{ $contents->id }}')">
+                        <button type="button" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="deleteContent('{{ $contents->id }}')">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
@@ -606,8 +607,20 @@
                     confirmButtonText: "Yes, delete it!"
                 });
 
+        async function deleteContent(id) {
+            try {
+                const result = await Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                });
+
                 if (result.isConfirmed) {
-                    
+
                     document.getElementById('delete-' + id).submit();
                     await Swal.fire({
                         title: "Deleted!",
@@ -615,6 +628,9 @@
                         icon: "success"
                     });
                 }
+            } catch (error) {
+                console.error("Error:", error);
+            }
             } catch (error) {
                 console.error("Error:", error);
             }

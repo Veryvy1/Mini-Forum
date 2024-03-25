@@ -14,8 +14,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+<style>.theme-layout {
+    background-color: #fff; /* Ganti dengan warna latar belakang yang diinginkan */
+}</style>
+
+
 </head>
 <body>
+   
+
 <div class="theme-layout">
 <div class="authtication">
     <img src="images/LOGO/bgLogin.png" alt="">
@@ -102,6 +109,7 @@
     toastr.success("<?php echo Session::get('success'); ?>");
 </script>
 <?php endif; ?>
+
 
 <script src="js/main.min.js" type="a2204abaa3f10749f80d57d8-text/javascript"></script>
 <script src="js/script.js" type="a2204abaa3f10749f80d57d8-text/javascript"></script>
