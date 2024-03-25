@@ -8,7 +8,7 @@
         <meta name="keywords" content="">
         <title>GetForums | Profile</title>
         <link rel="icon" href="images/LOGO/logo.png" type="image/x-icon">
-        <link rel="stylesheet" href="socimo/css/main.min.css">
+        <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
         <link rel="stylesheet" href="socimo/css/style.css">
         <link rel="stylesheet" href="socimo/css/color.css">
         <link rel="stylesheet" href="socimo/css/responsive.css">
@@ -224,14 +224,14 @@
                     @endif
                 </figure>
     <div class="friend-name">
-        <ins><a title >{{ $contents->user->name }}</a></ins>
+        <ins><a title >{{ $contents->user->name }}</a> Has Posted</ins>
         <span><i class="icofont-globe"></i> published:
             @if($contents->created_at->diffInWeeks() >= 1)
             {{  \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
             @else
             {{ $contents->created_at->diffForHumans() }}
         @endif        </span>
-        <div class="more-opt" style="float:right; margin-top: -10px;">
+            <div class="more-opt" style="float:right; margin-top: -10px;">
             <span onclick="toggleDropdown({{ $contents->id }})"><i class="fas fa-ellipsis-v"></i></span>
             <ul id="dropdown-{{ $contents->id }}" style="display: none;">
                 <li>
@@ -347,16 +347,17 @@
             </div>
             <div class="popover_wrapper">
                 <div class="we-video-info">
-                <ul><li>
+            <ul>
+                <li>
                     <span title="Comments" class="Recommend">
-                            <svg class="feather feather-message-square" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="16" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></i>
+                            <i class="icofont-comment" style="color: #64a4d4"></i>
                             <ins>{{ $contents->comment_count }}</ins>
                     </span>
-                </li></ul>
+                </li>
+            </ul>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="new-comment" style="display: none;">
         <form method="post">
@@ -377,7 +378,9 @@
     @endforelse
     </div>
     </div>
-
+    <div class="pagination">
+        {{ $content->links() }}
+    </div>
         <div class="modal" tabindex="-1" id="tambahModal">
             <div class="modal-dialog">
                 <div class="modal-content">

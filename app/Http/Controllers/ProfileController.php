@@ -17,7 +17,7 @@ class ProfileController extends Controller
 {
     public function index($id)
     {
-        $content = Content::all();
+        $content = Content::all()->paginate(3);
         $kategori = Kategori::all();
         $user = User::find($id);
         if (!$user) {
@@ -29,7 +29,7 @@ class ProfileController extends Controller
     public function profil()
     {
         $kategori = Kategori::all();
-        $content = Content::withCount('likes','comment')->get();
+        $content = Content::withCount('likes','comment')->paginate(3);
         $user = Auth::user();
         if (!$user) {
             return redirect()->back()->with('error', 'User not found.');
