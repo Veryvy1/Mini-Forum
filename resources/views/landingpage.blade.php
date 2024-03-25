@@ -169,12 +169,11 @@
                                     <h4>Follow Us</h4>
                                 </div>
                                 <ul class="quick-links">
-                                    <li><a href="#" title><i class="icofont-facebook"></i>Facebook</a></li>
-                                    <li><a href="#" title><i class="icofont-twitter"></i>Twitter</a></li>
-                                    <li><a href="#" title><i class="icofont-instagram"></i>Instagram</a></li>
-                                    <li><a href="#" title><i class="icofont-google-plus"></i>Google +</a></li>
-                                    <li><a href="#" title><i class="icofont-whatsapp"></i>WhatsApp</a></li>
-                                    <li><a href="#" title><i class="icofont-reddit"></i>Reddit</a></li>
+                                    <li><a href="https://www.facebook.com" title><i class="icofont-facebook"></i>Facebook</a></li>
+                                    <li><a href="https://www.twitter.com" title><i class="icofont-twitter"></i>Twitter</a></li>
+                                    <li><a href="https://www.instagram.com" title><i class="icofont-instagram"></i>Instagram</a></li>
+                                    <li><a href="https://www.whatsapp.com" title><i class="icofont-whatsapp"></i>WhatsApp</a></li>
+                                    {{-- <li><a href="#" title><i class="icofont-reddit"></i>Reddit</a></li> --}}
                                 </ul>
                             </div>
                         </div>
