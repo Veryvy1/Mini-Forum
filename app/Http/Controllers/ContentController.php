@@ -51,6 +51,7 @@ class ContentController extends Controller
 
     public function index(Request $request)
     {
+        $oldSearch = $request->input('search');
         if ($request->has('search')) {
             $ccontent = $request->input('search');
             $content = Content::where('judul', 'LIKE', "%$ccontent%")->withCount(['likes', 'comment'])->get();
@@ -61,7 +62,7 @@ class ContentController extends Controller
         $kategori = Kategori::all();
         $likes = Like::where('user_id', auth()->user()->id)->first();
 
-        return view('admin.content', compact('content', 'kategori', 'likes'));
+        return view('admin.content', compact('content', 'kategori', 'likes','oldSearch'));
     }
 
     public function filter(Request $request)
@@ -148,47 +149,47 @@ class ContentController extends Controller
         }
     }
 
-public function storeForUser(ContectRequest $request)
-{
-    try {
-        $gambar = $request->file('gambar');
-        $path_gambar = Storage::disk('public')->put('content', $gambar);
+    public function storeForUser(ContectRequest $request)
+    {
+        try {
+            $gambar = $request->file('gambar');
+            $path_gambar = Storage::disk('public')->put('content', $gambar);
 
-        $user_id = auth()->id();
+            $user_id = auth()->id();
 
-        $deskripsi = $request->deskripsi;
-        $dom = new DomDocument();
-        $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+            $deskripsi = $request->deskripsi;
+            $dom = new DomDocument();
+            $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-        $images = $dom->getElementsByTagName('img');
-        foreach ($images as $k => $img) {
-            $data = $img->getAttribute('src');
-            list($type, $data) = explode(';', $data);
-            list(, $data) = explode(',', $data);
-            $data = base64_decode($data);
-            $image_name = "/uploads" . time() . $k . '.png';
-            $path = public_path() . $image_name;
-            file_put_contents($path, $data);
-            $img->removeAttribute('src');
-            $img->setAttribute('src', $image_name);
+            $images = $dom->getElementsByTagName('img');
+            foreach ($images as $k => $img) {
+                $data = $img->getAttribute('src');
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+                $data = base64_decode($data);
+                $image_name = "/uploads" . time() . $k . '.png';
+                $path = public_path() . $image_name;
+                file_put_contents($path, $data);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
+            }
+            $deskripsi = $dom->saveHTML();
+
+            $kategori = Kategori::all();
+
+            Content::create([
+                'user_id' => $user_id,
+                'judul' => $request->input('judul'),
+                'deskripsi' => $deskripsi,
+                'kategori_id' => $request->input('kategori_id'),
+                'gambar' => $path_gambar,
+            ]);
+
+            return redirect()->back()->with('success', 'Content added successfully')->with('kategori', $kategori);
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
-        $deskripsi = $dom->saveHTML();
-
-        $kategori = Kategori::all();
-
-        Content::create([
-            'user_id' => $user_id,
-            'judul' => $request->input('judul'),
-            'deskripsi' => $deskripsi,
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path_gambar,
-        ]);
-
-        return redirect()->back()->with('success', 'Content added successfully')->with('kategori', $kategori);
-    } catch (\Exception $e) {
-        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
-}
 
     public function show(string $id)
     {

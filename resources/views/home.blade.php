@@ -8,7 +8,8 @@
 <meta name="keywords" content />
 <title>GetForums | Social Media </title>
 <link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="socimo/css/main.min.css">
+<link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
+{{-- <link rel="stylesheet" href="socimo/css/main.min.css"> --}}
 <link rel="stylesheet" href="socimo/css/style.css">
 <link rel="stylesheet" href="socimo/css/color.css">
 <link rel="stylesheet" href="socimo/css/responsive.css">

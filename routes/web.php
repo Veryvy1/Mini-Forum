@@ -12,6 +12,7 @@ use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\UserController;
+use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/contents/upload-image', [ContentController::class, 'uploadImage'])->name('contents.uploadImage');
 
         Route::get('/content', [ContentController::class, 'index'])->name('content.index');
+        Route::get('/contentsearch', [ContentController::class, 'index'])->name('content.search');
         Route::get('/contentfilter', [ContentController::class, 'filter'])->name('content.filter');
         Route::get('/content/create', [ContentController::class, 'createForAdmin'])->name('content.create');
         Route::post('/content', [ContentController::class, 'storeForAdmin'])->name('content.store');
