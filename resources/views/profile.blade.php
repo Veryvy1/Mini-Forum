@@ -238,7 +238,7 @@
                     <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="delete-{{ $contents->id }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="swalpFunction()">
+                        <button type="button" style="font-size: 15px; border: none; background-color: transparent; color: #b91e1e;" onclick="deleteContent('{{ $contents->id }}')">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </form>
@@ -379,7 +379,7 @@
     </div>
     </div>
     <div class="pagination">
-        {{ $content->links() }}
+        {{ $content->links('vendor.sweetalert.pagination') }}
     </div>
         <div class="modal" tabindex="-1" id="tambahModal">
             <div class="modal-dialog">
@@ -506,25 +506,30 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        function swalpFunction() {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
+        async function deleteContent(id) {
+            try {
+                const result = await Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                });
+
                 if (result.isConfirmed) {
-                    console.log("Data dihapus");
-                    Swal.fire({
+                    // Submit the form with the correct ID
+                    document.getElementById('delete-' + id).submit();
+                    await Swal.fire({
                         title: "Deleted!",
                         text: "Your file has been deleted.",
                         icon: "success"
                     });
                 }
-            });
+            } catch (error) {
+                console.error("Error:", error);
+            }
         }
     </script>
 

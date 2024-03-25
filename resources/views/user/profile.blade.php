@@ -144,28 +144,26 @@
                 <div class="d-widget mt-6" style="box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);">
                     <div class="d-widget-title"><h5>Social Links</h5></div>
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-md-6">
                             <div class="social-links">
                                 <i class="icofont-facebook"></i>
                                 <input type="text" name="link_fb" placeholder="Link Facebook" value="{{ old('link_fb', $user->link_fb) }}">
-                                {{-- <em>Add your Facebook username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-md-6">
                             <div class="social-links">
                                 <i class="icofont-instagram"></i>
                                 <input type="text" name="link_ig" placeholder="Link Instagram" value="{{ old('link_ig', $user->link_ig) }}">
-                                {{-- <em>Add your Instagram username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-md-6">
                             <div class="social-links">
                                 <i class="icofont-twitter"></i>
                                 <input type="text" name="link_twt" placeholder="Link Twitter" value="{{ old('link_twt', $user->link_twt) }}">
-                                {{-- <em>Add your Twitter username (e.g. johndoe).</em> --}}
                             </div>
                         </div>
                     </div>
+
                     <div class="social-links">
                         <label for="bio">About me</label>
                         <textarea name="bio" id="bio" class="form-control" placeholder="About me.." rows="5">{{ old('bio', $user->bio) }}</textarea>
@@ -177,6 +175,7 @@
     </div>
 </div>
 </div>
+
     </form>
 
     <div class="modal" tabindex="-1" id="tambahModal">

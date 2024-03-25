@@ -154,13 +154,14 @@
 </td>
 <td style="width: 10%">
 <div class="actions-btn">
-    <form action="{{ route('contact.destroy', ['contact' => $contactes->id]) }}" method="POST" style="display:inline">
+    <form action="{{ route('contact.destroy', ['contact' => $contactes->id]) }}" method="POST" style="display:inline" id="deleteForm">
         @csrf
         @method('DELETE')
-        <button type="submit" class="iconbox button soft-danger" onclick="swalpFunction()">
-        <i class="icofont-trash"></i>
+        <button type="button" class="iconbox button soft-danger" onclick="deleteContent()">
+            <i class="icofont-trash"></i>
         </button>
     </form>
+
 </div>
 </td>
 </tr>
@@ -192,25 +193,30 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function swalpFunction() {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
+    async function deleteContent() {
+        try {
+            const result = await Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            });
+
             if (result.isConfirmed) {
-                console.log("Data dihapus");
-                Swal.fire({
+                // Submit the form with the correct ID
+                document.getElementById('deleteForm').submit();
+                await Swal.fire({
                     title: "Deleted!",
                     text: "Your file has been deleted.",
                     icon: "success"
                 });
             }
-        });
+        } catch (error) {
+            console.error("Error:", error);
+        }
     }
 </script>
 

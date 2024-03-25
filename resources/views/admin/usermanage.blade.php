@@ -164,11 +164,12 @@
                 <td>
                     <form action="{{ route('usermanage.destroy', ['usermanage' => $use->id]) }}" method="POST" style="display:inline" id="deleteForm_{{ $use->id }}">
                         @csrf
-                            @method('DELETE')
-                            <button type="submit" title class="button soft-danger"  onclick="swalpFunction()">
-                                <i class="icofont-trash"></i>Delete
-                            </button>
+                        @method('DELETE')
+                        <button type="button" title class="button soft-danger"  onclick="deleteContent({{ $use->id }})">
+                            <i class="icofont-trash"></i>Delete
+                        </button>
                     </form>
+
                 </td>
             </tr>
         {{-- @endif --}}
@@ -194,32 +195,35 @@
     </script>
 @endif
 
-<script>
-function swalpFunction(message, type) {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: type,
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            console.log("Data dihapus");
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-            });
-        }
-    });
-}
 
-@if (Session::has('success'))
-    swalpFunction("{{ Session::get('success') }}", "success");
-@endif
+<script>
+    async function deleteContent(userId) {
+        try {
+            const result = await Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            });
+
+            if (result.isConfirmed) {
+                // Submit the correct form
+                document.getElementById('deleteForm_' + userId).submit();
+                await Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/main.min.js" type="text/javascript"></script>
 <script src="js/vivus.min.js" type="text/javascript"></script>

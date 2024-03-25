@@ -112,8 +112,6 @@ class ContentController extends Controller
     public function storeForAdmin(ContectRequest $request)
     {
         try{
-        $gambar = $request->file('gambar');
-        $path_gambar = Storage::disk('public')->put('content', $gambar);
 
         $user_id = auth()->id();
 
@@ -135,6 +133,8 @@ class ContentController extends Controller
         }
         $deskripsi = $dom->saveHTML();
 
+        $path_gambar = Storage::disk('public')->put('content', $request->file('gambar'));
+
             Content::create([
                 'user_id' => $user_id,
                 'judul' => $request->input('judul'),
@@ -152,8 +152,6 @@ class ContentController extends Controller
     public function storeForUser(ContectRequest $request)
     {
         try {
-            $gambar = $request->file('gambar');
-            $path_gambar = Storage::disk('public')->put('content', $gambar);
 
             $user_id = auth()->id();
 
@@ -176,6 +174,9 @@ class ContentController extends Controller
             $deskripsi = $dom->saveHTML();
 
             $kategori = Kategori::all();
+
+            $gambar = $request->file('gambar');
+            $path_gambar = Storage::disk('public')->put('content', $gambar);
 
             Content::create([
                 'user_id' => $user_id,
@@ -226,6 +227,20 @@ class ContentController extends Controller
     {
         try {
         $content = Content::findOrFail($id);
+
+        $request->validate([
+            'judul'=>'required',
+            'deskripsi'=>'required',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'kategori_id' => 'required',
+        ],[
+            'judul.required'=>'Title must be filled in.',
+            'deskripsi.required'=>'Description must be filled in.',
+            'gambar.image'=>'Must be filled with images.',
+            'gambar.mimes' => 'Invalid PHOTO format. Use jpeg, png, jpg, or gif format.',
+            'kategori_id.required'=>'Category must be filled in.',
+        ]);
+
 
         $oldPhotoPath = $content->gambar;
 
