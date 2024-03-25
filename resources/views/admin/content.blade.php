@@ -53,20 +53,21 @@
 </div>
 <div class="restop-search">
 <span class="hide-search"><i class="icofont-close-circled"></i></span>
-<form id="searchForm" action="{{ route('content.index') }}" method="get">
+{{-- <form id="searchForm"  action="{{ route('content.search') }}" method="get">
     @csrf
-   <input type="search" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
-</form>
+   <input type="search" name="search"  class="form-control" placeholder="Search..." oninput="submitSearch()">
+</form> --}}
 </div>
 </div>
 <header class>
     <div class="topbar stick">
     <div class="logo"><img alt src="images/LOGO/logo.png"><span>GetForums</span></div>
     <div class="searches">
-    <form method="post">
-    <input type="text" placeholder="Search...">
-    <button type="submit"><i class="icofont-search"></i></button>
-    </form>
+        <form id="searchForm" action="{{ route('content.search') }}" method="get">
+            @csrf
+            {{-- <i class="icofont-search"></i> --}}
+           <input type="search"  value="{{ $oldSearch }}" name="search" class="form-control" placeholder="Search..." oninput="submitSearch()">
+        </form>
     </div>
     <ul class="web-elements">
     <li>
@@ -397,6 +398,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function submitSearch() {
+        document.getElementById("searchForm").submit();
+    }
+</script>
 
 <?php if ($errors->any()): ?>
     <script>
