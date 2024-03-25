@@ -48,8 +48,11 @@
                                         <div class="forget-password">
                                             <figure class="logo"><img src="/images/LOGO/logo.png" alt><span>GetForums</span></figure>
             <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
+                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+                <figure class="">
+                    <img src="/images/LOGO/16.png" alt="" style="width: 200px;">
+                </figure>
                 <div class="card-body">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
