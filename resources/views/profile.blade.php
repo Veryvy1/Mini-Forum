@@ -399,49 +399,56 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="judul" class="form-label">Title</label>
-                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
-                        @error('judul')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                        <input type="text" class="form-control @error('edit_judul') is-invalid @enderror" id="judul" name="edit_judul" value="{{ old('edit_judul', $contents->judul) }}">
+                        @error('edit_judul')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
+                    <!-- Description Input -->
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">
-                            Fill Content</label>
-                        <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                        <label for="deskripsi" class="form-label">Fill Content</label>
+                        <textarea name="edit_deskripsi" class="custom-summernote" aria-label="With textarea">{{ old('edit_deskripsi', $contents->deskripsi) }}</textarea>
+                        @error('edit_deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+                    <!-- Image Input -->
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
+                        <input type="file" class="form-control @error('edit_gambar') is-invalid @enderror" id="gambar" name="edit_gambar">
                         @if ($contents->gambar)
-                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
+                            <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
                         @else
-                        No Image
+                            No Image
                         @endif
-                        @error('gambar')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                        @error('edit_gambar')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
+                    <!-- Category Input -->
                     <div class="mb-3">
                         <label for="kategoris" class="form-label">Category</label>
-                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+                        <select class="form-control @error('edit_kategori_id') is-invalid @enderror" id="kategoris" name="edit_kategori_id" aria-label="Default select example">
+                            <option value="" {{old('edit_kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
                             @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
-                                {{ $kat->kategori }}
-                            </option>
+                                <option value="{{ $kat->id }}" {{ old('edit_kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                                    {{ $kat->kategori }}
+                                </option>
                             @endforeach
                         </select>
-                        @error('kategori_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                        @error('edit_kategori_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
-
+                    <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
                         <button type="submit" class="btn btn-primary">SAVE</button>

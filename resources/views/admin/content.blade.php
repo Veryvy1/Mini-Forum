@@ -235,7 +235,6 @@
         </div>
     </aside>
 </div>
-
 @foreach ($content as $contents)
 <div class="modal fade" id="editModal{{ $contents->id }}" tabindex="-1" aria-labelledby="editModal{{ $contents->id }}Label" aria-hidden="true">
     <div class="modal-dialog">
@@ -244,64 +243,74 @@
                 <h6 class="m-0 font-weight-bold">Edit Content</h6>
             </div>
             <div class="modal-body">
-                <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="judul" class="form-label">Title</label>
-                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
-                        @error('judul')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="deskripsi" class="form-label">
-                            Fill Content</label>
-                        <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar">
-                        @if ($contents->gambar)
-                        <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
-                        @else
-                        No Image
-                        @endif
-                        @error('gambar')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label>
-                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
-                            @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
-                                {{ $kat->kategori }}
-                            </option>
-                            @endforeach
-                        </select>
-                        @error('kategori_id')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
+               <form action="{{ route('content.update', $contents->id) }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <!-- Title Input -->
+    <div class="mb-3">
+        <label for="edit_judul" class="form-label">Title</label>
+        <input type="text" class="form-control @error('edit_judul') is-invalid @enderror" id="edit_judul" name="edit_judul" value="{{ old('edit_judul', $contents->judul) }}">
+        @error('edit_judul')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <!-- Description Input -->
+    <div class="mb-3">
+        <label for="edit_deskripsi" class="form-label">Fill Content</label>
+        <textarea name="edit_deskripsi" class="custom-summernote" aria-label="With textarea">{{ old('edit_deskripsi', $contents->deskripsi) }}</textarea>
+        @error('edit_deskripsi')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <!-- Image Input -->
+    <div class="mb-3">
+        <label for="edit_gambar" class="form-label">Image</label>
+        <input type="file" class="form-control @error('edit_gambar') is-invalid @enderror" id="edit_gambar" name="edit_gambar">
+        @if ($contents->gambar)
+            <img src="{{ asset('storage/' . $contents->gambar) }}" alt="" width="50" height="50">
+        @else
+            No Image
+        @endif
+        @error('edit_gambar')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <!-- Category Input -->
+    <div class="mb-3">
+        <label for="edit_kategori_id" class="form-label">Category</label>
+        <select class="form-control @error('edit_kategori_id') is-invalid @enderror" id="edit_kategori_id" name="edit_kategori_id" aria-label="Default select example">
+            <option value="" {{old('edit_kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+            @foreach ($kategori as $kat)
+                <option value="{{ $kat->id }}" {{ old('edit_kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                    {{ $kat->kategori }}
+                </option>
+            @endforeach
+        </select>
+        @error('edit_kategori_id')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+        <button type="submit" class="btn btn-primary">SAVE</button>
+    </div>
+</form>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
-                        <button type="submit" class="btn btn-primary">SAVE</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 </div>
 @endforeach
+
 @section('scripts')
 <script>
  $(document).ready(function() {
@@ -338,6 +347,8 @@
 });
 </script>
 @endsection
+
+
 <div class="modal" tabindex="-1" id="tambahModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -347,6 +358,7 @@
             <div class="modal-body">
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <!-- Title Input -->
                     <div class="mb-3">
                         <label for="judul" class="form-label">Title</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
@@ -356,26 +368,29 @@
                             </span>
                         @enderror
                     </div>
+                    <!-- Description Input -->
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">
-                            Fill Content</label>
+                        <label for="deskripsi" class="form-label">Fill Content</label>
                         <textarea name="deskripsi" id="summernoteModal1" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
+                        @error('deskripsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+                    <!-- Image Input -->
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" onchange="previewImage(event)">
-                        @if(old('gambar'))
-                            <img id="preview" src="{{ asset('storage/' . old('gambar')) }}" alt="Old gambar" style="max-width: 100px; max-height: 100px;">
-                        @endif
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
                         @error('gambar')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-
+                    <!-- Category Input -->
                     <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label><br>
+                        <label for="kategoris" class="form-label">Category</label>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                             <option value="" selected>Select Category</option>
                             @foreach ($kategori as $kat)
@@ -390,7 +405,7 @@
                             </span>
                         @enderror
                     </div>
-
+                    <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
                         <button type="submit" class="btn btn-primary">SAVE</button>

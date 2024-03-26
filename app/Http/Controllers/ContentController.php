@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContectRequest;
+use App\Http\Requests\EditcontentRequest;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Comment;
@@ -239,7 +240,7 @@ class ContentController extends Controller
         return view('',compact('content','kategori'));
     }
 
-    public function updateForAdmin(ContectRequest $request, string $id)
+    public function updateForAdmin(EditcontentRequest $request, string $id)
     {
         try {
         $content = Content::findOrFail($id);
@@ -247,9 +248,9 @@ class ContentController extends Controller
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
+            'judul' => $request->input('edit_judul'),
+            'deskripsi' => $request->input('edit_deskripsi'),
+            'kategori_id' => $request->input('edit_kategori_id'),
         ];
 
         if ($request->hasFile('gambar')) {
@@ -275,7 +276,7 @@ class ContentController extends Controller
         }
     }
 
-    public function updateForUser(ContectRequest $request, string $id)
+    public function updateForUser(EditcontentRequest $request, string $id)
     {
         try {
         $content = Content::findOrFail($id);
@@ -283,9 +284,9 @@ class ContentController extends Controller
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
-            'judul' => $request->input('judul'),
-            'deskripsi' => $request->input('deskripsi'),
-            'kategori_id' => $request->input('kategori_id'),
+            'judul' => $request->input('edit_judul'),
+            'deskripsi' => $request->input('edit_deskripsi'),
+            'kategori_id' => $request->input('edit_kategori_id'),
         ];
 
         if ($request->hasFile('gambar')) {

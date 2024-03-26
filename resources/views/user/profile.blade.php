@@ -178,7 +178,6 @@
     </div>
 </div>
 </div>
-
     </form>
 
     <div class="modal" tabindex="-1" id="tambahModal">
