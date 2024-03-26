@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreLikeRequest;
+use App\Http\Requests\LikeRequest;
 use App\Http\Requests;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Models\Like;
-
+use App\Models\Notification;
 
 class LikeController extends Controller
 {
@@ -45,7 +45,7 @@ class LikeController extends Controller
     {
     }
 
-    public function store(StoreLikeRequest $request)
+    public function store(LikeRequest $request)
     {
         $contentId = $request->content_id;
         $userId = auth()->user()->id;
@@ -60,7 +60,9 @@ class LikeController extends Controller
 
         $contentId = $request->content_id;
         $userId = auth()->user()->id;
-
+        Notification::create([
+            'user_id' => auth()->user()->id
+        ]);
         $existingLike = Like::where('user_id', $userId)
                             ->where('content_id', $contentId)
                             ->first();
