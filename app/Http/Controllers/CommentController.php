@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Models\User;
+use App\Models\Notification;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
@@ -61,7 +62,10 @@ class CommentController extends Controller
                 $img->setAttribute('src', $image_name);
             }
             $comment = $dom->saveHTML();
-
+            Notification::create([
+                'content_id' => $contentId,
+                'user_id' => auth()->user()->id
+            ]);
             $commentModel = new Comment();
             $commentModel->content_id = $contentId;
             $commentModel->user_id = $user_id;

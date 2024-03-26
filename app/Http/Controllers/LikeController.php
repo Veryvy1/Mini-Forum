@@ -61,6 +61,7 @@ class LikeController extends Controller
         $contentId = $request->content_id;
         $userId = auth()->user()->id;
         Notification::create([
+            'content_id' => $contentId,
             'user_id' => auth()->user()->id
         ]);
         $existingLike = Like::where('user_id', $userId)

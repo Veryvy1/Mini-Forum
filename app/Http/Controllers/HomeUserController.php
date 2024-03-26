@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\Kategori;
 use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,16 @@ class HomeUserController extends Controller
         $kategori = Kategori::all();
         $likes = Like::where('user_id', Auth::id())->first();
 
-        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount','oldSearch'));
+        $userId = Auth::id();
+
+        $notifications = Notification::select('notifications.*')
+        ->join('contents', 'notifications.content_id', '=', 'contents.id')
+        ->where('contents.user_id', $userId)
+        ->orderBy('notifications.created_at', 'desc')
+        ->take(5)
+        ->get();
+
+        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount', 'oldSearch', 'notifications'));
     }
 
     public function filter(Request $request)
@@ -62,6 +72,11 @@ class HomeUserController extends Controller
 
         $likes = Like::where('user_id', Auth::id())->first();
 
-        return view('home', compact('content', 'user', 'kategori', 'kategori_ids', 'oldSearch', 'likesCount', 'likes', 'commentCount'));
+        $notifications = Notification::where('user_id', Auth::id())
+        ->orderBy('created_at', 'desc')
+        ->take(5) // Ambil lima notifikasi terbaru
+        ->get();
+
+        return view('home', compact('content', 'user', 'kategori', 'kategori_ids', 'oldSearch', 'likesCount', 'likes', 'commentCount', 'notifications'));
     }
 }

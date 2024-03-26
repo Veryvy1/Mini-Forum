@@ -52,6 +52,51 @@
             margin-right: 1px;
             margin-top: 59px;
         }
+        .notification-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .notification-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Baris ini mengatur layout kolom */
+    align-items: flex-start; /* Mengatur nama dan waktu ke atas */
+    margin-right: 10px;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #888;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 10px; /* Saya mengubah margin-left untuk pemisah antara gambar profil dan pesan */
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
     </style>
 </head>
 
@@ -182,24 +227,37 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="myModalLabel">Notifications</h5>
                         {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button> --}}
+                        <span aria-hidden="true">&times;</span>
+                        </button> --}}
                     </div>
-
                     <!-- Modal body -->
                     <div class="modal-body">
                         @foreach ($notifications as $notification)
-                            <div>
-                                <p>{{ $notification->user->name }}</p>
-                                <a href="">Lihat</a>
-                            </div>
+                                <div class="notification-item">
+                                    <div class="message-info">
+                                        <span class="user-name">{{ $notification->user->name }}</span>
+                                        <span class="notification-time">
+                                            @if($notification->created_at->diffInWeeks() >= 1)
+                                                {{  \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                            @else
+                                                {{ $notification->created_at->diffForHumans() }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <figure class="profile-image">
+                                        @if ($notification->user->profile)
+                                            <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                                        @else
+                                            <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                                        @endif
+                                    </figure>
+                                </div>
                         @endforeach
                     </div>
+
                 </div>
             </div>
         </div>
-
-
 
 
         <section>
