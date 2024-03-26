@@ -59,7 +59,7 @@ class RegisterController extends Controller
             'email.required' => 'Email address must be filled.',
             'email.email' => 'Invalid email address format.',
             'email.unique' => 'Email address is already registered.',
-            'password.required' => 'Password must be filled..',
+            'password.required' => 'Password must be filled.',
             'password.min' => 'Password must be at least 8 characters long.',
             'password.confirmed' => 'Password confirmation does not match.',
         ]);
