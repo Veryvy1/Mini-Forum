@@ -249,8 +249,8 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="judul" class="form-label">Title</label>
-                        <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul', $contents->judul) }}">
-                        @error('judul')
+                        <input type="text" class="form-control @error('judul_update') is-invalid @enderror" id="judul" name="judul_update" value="{{ old('judul_update', $contents->judul) }}">
+                        @error('judul_update')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -259,7 +259,10 @@
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">
                             Fill Content</label>
-                        <textarea name="deskripsi" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi', $contents->deskripsi) }}</textarea>
+                            @error('deskripsi_update')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        <textarea name="deskripsi_update" class="custom-summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi_update', $contents->deskripsi) }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
@@ -277,15 +280,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="kategoris" class="form-label">Category</label>
-                        <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
-                            <option value="" {{old('kategori_id',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
+                        <select class="form-control @error('kategori_id_update') is-invalid @enderror" id="kategoris" name="kategori_id_update" aria-label="Default select example">
+                            <option value="" {{old('kategori_id_update',  $contents->kategori_id) ? '' : 'selected' }}>Select Category</option>
                             @foreach ($kategori as $kat)
-                            <option value="{{ $kat->id }}" {{ old('kategori_id', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
+                            <option value="{{ $kat->id }}" {{ old('kategori_id_update', $contents->kategori_id) == $kat->id ? 'selected' : '' }}>
                                 {{ $kat->kategori }}
                             </option>
                             @endforeach
                         </select>
-                        @error('kategori_id')
+                        @error('kategori_id_update')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -359,6 +362,9 @@
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">
                             Fill Content</label>
+                            @error('deskripsi')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         <textarea name="deskripsi" id="summernoteModal1" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
                     </div>
                     <div class="mb-3">
