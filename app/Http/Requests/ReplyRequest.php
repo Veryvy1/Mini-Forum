@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLikeRequest extends FormRequest
+class ReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,13 @@ class StoreLikeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'like' => 'nullable',
-            'content_id' => 'required',
-            'user_id' => 'nullable'
+            'reply' => 'required|string',
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'reply.required'=>'input your Reply!',
         ];
     }
 }

@@ -86,6 +86,16 @@
     @endif
 </li>
 <li>
+    <a class="mesg-notif" href="#" title="Messages" data-toggle="modal" data-target="#myModal">
+        <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </i>
+    </a>
+    <span></span>
+</li>
+<li>
 <a href="#" title>
 <i>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -100,7 +110,7 @@
 <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#tambahModal" type="button">
     <i class="icofont-plus"></i>Add Content</a></a>
 </li>
-<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Messages</a></li>
+<li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Contact</a></li>
 
 <li class="logout">
     <form  action="{{ route('logout') }}" method="POST" >
@@ -116,6 +126,61 @@
 </ul>
 </div>
 </header>
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-slideout" role="document">
+        <div class="modal-content modal-content-slideout">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Messages & Notifications</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="side-slide" id="notificationContainer">
+                    <!-- Your existing content here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Function to show notification in the modal
+function showNotification(notification) {
+    // Get reference to the notification container element
+    var notificationContainer = document.getElementById('notificationContainer');
+
+    // Create a new notification element
+    var notificationElement = document.createElement('div');
+    notificationElement.className = 'notification';
+    notificationElement.textContent = notification;
+
+    // Add the notification to the container
+    notificationContainer.appendChild(notificationElement);
+}
+
+// Example: Show a notification when the modal is opened
+document.getElementById('myModal').addEventListener('shown.bs.modal', function () {
+    var receivedNotification = 'You have a new message!';
+    showNotification(receivedNotification);
+});
+</script>
+
+
+
+<!-- JavaScript to initialize the modal -->
+<script>
+    $(document).ready(function(){
+        $('.mesg-notif').click(function(){
+            $('#myModal').modal('show');
+        });
+    });
+</script>
 
 <section>
 <div class="gap">
@@ -395,6 +460,9 @@
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">
                             Fill Content</label>
+                            @error('deskripsi')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         <textarea name="deskripsi" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
                     @section('scripts')
                     <script>
