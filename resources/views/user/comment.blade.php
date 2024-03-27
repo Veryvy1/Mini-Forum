@@ -208,7 +208,7 @@
                 <ul class="comments">
                     @foreach ($comment as $comments)
                     @if ($comments->picture)
-                    <li class="comment">
+                    <li class="comment" id="comment_id_{{ $comments->id }}">
                         <div class="commenter-photo">
                             @if ($comments->user->profile)
                             <img src="{{ asset('storage/'. $comments->user->profile) }}">

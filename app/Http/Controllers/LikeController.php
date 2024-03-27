@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LikeRequest;
 use App\Http\Requests;
+use App\Http\Requests\LikeRequest;
 use App\Models\Content;
 use Illuminate\Http\Request;
 use App\Models\Like;
@@ -58,18 +58,15 @@ class LikeController extends Controller
             return back()->with('error', 'Anda hanya dapat memberikan suka sekali.');
         }
 
-        $contentId = $request->content_id;
-        $userId = auth()->user()->id;
-        Notification::create([
-            'content_id' => $contentId,
-            'user_id' => auth()->user()->id
-        ]);
-        $existingLike = Like::where('user_id', $userId)
-                            ->where('content_id', $contentId)
-                            ->first();
-
-        if ($existingLike) {
-            return back()->with('error', 'Anda hanya dapat memberikan suka sekali.');
+        // Cek apakah pengguna yang memberi suka adalah pemilik konten
+        $content = Content::find($contentId);
+        if ($content && $content->user_id !== $userId) {
+            // Hanya buat notifikasi jika pengguna yang memberi suka bukan pemilik konten
+            Notification::create([
+                'content_id' => $contentId,
+                'user_id' => auth()->user()->id,
+                'type' => 'like',
+            ]);
         }
 
         Like::create([
@@ -77,8 +74,10 @@ class LikeController extends Controller
             'user_id' => $userId,
             'content_id' => $contentId
         ]);
+
         return back();
     }
+
     public function show(string $id)
     {
     }

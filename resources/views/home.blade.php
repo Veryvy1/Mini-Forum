@@ -233,27 +233,34 @@
                     <!-- Modal body -->
                     <div class="modal-body">
                         @foreach ($notifications as $notification)
-                                <div class="notification-item">
-                                    <div class="message-info">
-                                        <span class="user-name">{{ $notification->user->name }}</span>
-                                        <span class="notification-time">
-                                            @if($notification->created_at->diffInWeeks() >= 1)
-                                                {{  \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
-                                            @else
-                                                {{ $notification->created_at->diffForHumans() }}
-                                            @endif
-                                        </span>
-                                    </div>
-                                    <figure class="profile-image">
-                                        @if ($notification->user->profile)
-                                            <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
-                                        @else
-                                            <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                            <div class="notification-item">
+                                <div class="message-info">
+                                    <span class="user-name">{{ $notification->user->name }}</span>
+                                    <span class="notification-time">
+                                        @if($notification->type == 'like')
+                                        <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
+                                        @elseif($notification->type == 'comment')
+                                        <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
                                         @endif
-                                    </figure>
+
+                                        @if($notification->created_at->diffInWeeks() >= 1)
+                                            {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                        @else
+                                            {{ $notification->created_at->diffForHumans() }}
+                                        @endif
+                                    </span>
                                 </div>
+                                <figure class="profile-image">
+                                    @if ($notification->user->profile)
+                                        <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                                    @else
+                                        <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                                    @endif
+                                </figure>
+                            </div>
                         @endforeach
                     </div>
+
 
                 </div>
             </div>
@@ -379,16 +386,16 @@
                                                                                     <button type="submit"
                                                                                         class=""
                                                                                         style="
-            background: #ff0000;
-            border-radius: 4px;
-            color: #ffffff;
-            display: inline-block;
-            font-size: 13px;
-            padding: 5px 20px;
-            vertical-align: middle;
-            transition: all 0.2s linear 0s;
-            border: none;
-            }"><i
+                                                                                            background: #ff0000;
+                                                                                            border-radius: 4px;
+                                                                                            color: #ffffff;
+                                                                                            display: inline-block;
+                                                                                            font-size: 13px;
+                                                                                            padding: 5px 20px;
+                                                                                            vertical-align: middle;
+                                                                                            transition: all 0.2s linear 0s;
+                                                                                            border: none;
+                                                                                            }"><i
                                                                                             class="icofont-like"></i>
                                                                                         Unlike</button>
                                                                                 </form>
@@ -411,16 +418,16 @@
                                                                                     <button type="submit"
                                                                                         class=""
                                                                                         style="
-            background: #0099ff;
-            border-radius: 4px;
-            color: #ffffff;
-            display: inline-block;
-            font-size: 13px;
-            padding: 5px 20px;
-            vertical-align: middle;
-            transition: all 0.2s linear 0s;
-            border: none;
-            }"><i
+                                                                                            background: #0099ff;
+                                                                                            border-radius: 4px;
+                                                                                            color: #ffffff;
+                                                                                            display: inline-block;
+                                                                                            font-size: 13px;
+                                                                                            padding: 5px 20px;
+                                                                                            vertical-align: middle;
+                                                                                            transition: all 0.2s linear 0s;
+                                                                                            border: none;
+                                                                                            }"><i
                                                                                             class="icofont-like"></i>
                                                                                         Like</button>
                                                                                 </form>

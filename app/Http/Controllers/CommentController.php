@@ -31,6 +31,8 @@ class CommentController extends Controller
     {
         $comment = Comment::all();
         return view('user.comment', compact('comment'));
+
+
     }
 
     public function create()
@@ -40,43 +42,49 @@ class CommentController extends Controller
     }
 
     public function store(CommentRequest $request, $contentId)
-    {
-        try {
-            $user_id = auth()->id();
+{
+    try {
+        $user_id = auth()->id();
 
-            $comment = $request->comment;
-            $dom = new DOMDocument();
-            $dom->loadHTML($comment, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $comment = $request->comment;
+        $dom = new DOMDocument();
+        $dom->loadHTML($comment, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-            $images = $dom->getElementsByTagName('img');
+        $images = $dom->getElementsByTagName('img');
 
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-            }
-            $comment = $dom->saveHTML();
+        foreach ($images as $k => $img) {
+            $data = $img->getAttribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = base64_decode($data);
+            $image_name = "/uploads" . time() . $k . '.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+        $comment = $dom->saveHTML();
+
+        $content = Content::find($contentId);
+        if ($content && $content->user_id !== $user_id) {
             Notification::create([
                 'content_id' => $contentId,
-                'user_id' => auth()->user()->id
+                'user_id' => $user_id,
+                'type' => 'comment',
             ]);
-            $commentModel = new Comment();
-            $commentModel->content_id = $contentId;
-            $commentModel->user_id = $user_id;
-            $commentModel->comment = $comment;
-            $commentModel->save();
-
-            return redirect()->back()->with('success', 'Successfully commented');
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         }
+
+        $commentModel = new Comment();
+        $commentModel->content_id = $contentId;
+        $commentModel->user_id = $user_id;
+        $commentModel->comment = $comment;
+        $commentModel->save();
+
+        return redirect()->back()->with('success', 'Successfully commented');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+}
 
     public function destroy(Request $request)
 {

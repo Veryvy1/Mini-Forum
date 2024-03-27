@@ -17,6 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('content_id')->constrained()->onDelete('cascade');
+            $table->enum('type', ['like','comment']);
             $table->timestamps();
         });
     }

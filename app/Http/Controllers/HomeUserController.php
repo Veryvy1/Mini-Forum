@@ -11,9 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
 class HomeUserController extends Controller
 {
-
     public function index(Request $request)
     {
         $oldSearch = $request->input('search');
@@ -39,12 +39,24 @@ class HomeUserController extends Controller
 
         $notifications = Notification::select('notifications.*')
         ->join('contents', 'notifications.content_id', '=', 'contents.id')
-        ->where('contents.user_id', $userId)
+        ->where('contents.user_id', Auth::id())
         ->orderBy('notifications.created_at', 'desc')
         ->take(5)
         ->get();
 
+        foreach ($notifications as $notification) {
+            $notification->type = $notification->type;
+            $notification->content->judul = $notification->judul_content;
+        }
+
         return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount', 'oldSearch', 'notifications'));
+    }
+
+    public function show($id)
+    {
+        $notifications = Notification::all(); // Assuming you retrieve notifications from the database
+        $content = Content::findOrFail($id);
+        return view('home', compact('content')); // Sesuaikan dengan view yang sesuai
     }
 
     public function filter(Request $request)

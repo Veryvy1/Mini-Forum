@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContectRequest;
-use App\Http\Requests\EditcontentRequest;
+use App\Http\Requests\StoreContentRequest;
+use App\Http\Requests\UpdateContentRequest;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\Comment;
@@ -31,6 +31,8 @@ class ContentController extends Controller
         $contentA = Content::all();
         return view('allcontent', compact('contentGet', 'user', 'content', 'contentA','commentGet'));
     }
+
+
     public function content(Request $request, $id)
     {
         $contentGet = Content::with('likes')->where('id', $id)->get();
@@ -108,7 +110,7 @@ class ContentController extends Controller
     }
 
 
-    public function storeForAdmin(ContectRequest $request)
+    public function storeForAdmin(StoreContentRequest $request)
 {
     try {
         $gambar = $request->file('gambar');
@@ -149,11 +151,11 @@ class ContentController extends Controller
 
         return redirect()->route('content.index')->with('success', 'Content added successfully');
     } catch (\Exception $e) {
-        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()])->with('validation_source', 'tambah');
     }
 }
 
-    public function storeForUser(ContectRequest $request)
+    public function storeForUser(StoreContentRequest $request)
 {
     try {
         $gambar = $request->file('gambar');
@@ -202,12 +204,21 @@ class ContentController extends Controller
 }
 
 
-    public function show(string $id)
+    // public function show(string $id)
+    // {
+    //     $content = Content::findOrFail($id);
+    //     $comments= $content->comments()->with('user')->get();
+    //     return view('comment', compact('content','comments'));
+    // }
+
+    public function show($id)
     {
         $content = Content::findOrFail($id);
-        $comments= $content->comments()->with('user')->get();
-        return view('comment', compact('content','comments'));
+        // $comments = $content->comment()->with('user')->get();
+        
+        return view('home', compact('content'));
     }
+
 
     public function detail($id)
     {
@@ -240,7 +251,9 @@ class ContentController extends Controller
         return view('',compact('content','kategori'));
     }
 
-    public function updateForAdmin(EditcontentRequest $request, string $id)
+
+
+    public function updateForAdmin(UpdateContentRequest $request, string $id)
     {
         try {
         $content = Content::findOrFail($id);
@@ -248,9 +261,9 @@ class ContentController extends Controller
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
-            'judul' => $request->input('edit_judul'),
-            'deskripsi' => $request->input('edit_deskripsi'),
-            'kategori_id' => $request->input('edit_kategori_id'),
+            'judul' => $request->input('judul_update'),
+            'deskripsi' => $request->input('deskripsi_update'),
+            'kategori_id' => $request->input('kategori_id_update'),
         ];
 
         if ($request->hasFile('gambar')) {
@@ -272,11 +285,11 @@ class ContentController extends Controller
 
             return redirect()->route('content.index')->with('success', 'content updated successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()])->with('validation_source', 'edit');
         }
     }
 
-    public function updateForUser(EditcontentRequest $request, string $id)
+    public function updateForUser(UpdateContentRequest $request, string $id)
     {
         try {
         $content = Content::findOrFail($id);
@@ -284,9 +297,9 @@ class ContentController extends Controller
         $oldPhotoPath = $content->gambar;
 
         $dataToUpdate = [
-            'judul' => $request->input('edit_judul'),
-            'deskripsi' => $request->input('edit_deskripsi'),
-            'kategori_id' => $request->input('edit_kategori_id'),
+            'judul' => $request->input('judul_update'),
+            'deskripsi' => $request->input('deskripsi_update'),
+            'kategori_id' => $request->input('kategori_id_update'),
         ];
 
         if ($request->hasFile('gambar')) {
@@ -307,7 +320,7 @@ class ContentController extends Controller
 
             return redirect()->route('profile.profil')->with('success', 'content updated successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()])->with('validation_source', 'edit');
         }
     }
 
@@ -349,4 +362,3 @@ class ContentController extends Controller
             }
         }
 }
-
