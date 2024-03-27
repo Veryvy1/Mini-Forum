@@ -53,50 +53,46 @@
             margin-top: 59px;
         }
         .notification-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        background-color:#2ea8dc;
         }
 
-        .notification-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
+        .notification-item.read {
+            background-color: #fff; /* Warna putih untuk notifikasi yang sudah dibaca */
+        }
 
-.message-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column; /* Baris ini mengatur layout kolom */
-    align-items: flex-start; /* Mengatur nama dan waktu ke atas */
-    margin-right: 10px;
-}
+        .message-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 10px;
+        }
 
-.user-name {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+        .user-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
-.notification-time {
-    font-size: 12px;
-    color: #888;
-}
+        .notification-time {
+            font-size: 12px;
+        }
 
-.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-left: 10px; /* Saya mengubah margin-left untuk pemisah antara gambar profil dan pesan */
-}
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 10px;
+        }
 
-.profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -226,9 +222,6 @@
                     <!-- Modal header -->
                     <div class="modal-header">
                         <h5 class="modal-title" id="myModalLabel">Notifications</h5>
-                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button> --}}
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
@@ -259,6 +252,8 @@
                                 </figure>
                             </div>
                         @endforeach
+                        <!-- Tambahkan tombol "Tandai Semua Dibaca" di sini -->
+                        <button id="mark-all-read" class="btn btn-primary">TANDAI SEMUA DIBACA</button>
                     </div>
 
 
@@ -266,6 +261,43 @@
             </div>
         </div>
 
+        <script>
+            // Fungsi untuk menambahkan event listener ke notifikasi yang belum dibaca
+            function addClickEventToUnreadNotifications() {
+                var unreadNotifications = document.querySelectorAll('.notification-item.unread');
+                unreadNotifications.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        item.classList.toggle('read');
+                    });
+                });
+            }
+
+            // Memanggil fungsi untuk menambahkan event listener ke notifikasi yang belum dibaca
+            addClickEventToUnreadNotifications();
+
+            // Menambahkan event listener ke tombol "Tandai Semua Dibaca"
+            document.getElementById('mark-all-read').addEventListener('click', function() {
+                var allNotifications = document.querySelectorAll('.notification-item.unread');
+                allNotifications.forEach(function(item) {
+                    item.classList.remove('unread');
+                    item.classList.add('read');
+                });
+            });
+
+            // Memanggil fungsi tersebut setelah menambahkan notifikasi baru
+            function addNewNotification() {
+                // Menemukan notifikasi terbaru yang belum memiliki status "dibaca"
+                var newNotificationItem = document.querySelector('.notification-item:last-child');
+                if (newNotificationItem && newNotificationItem.classList.contains('unread')) {
+                    newNotificationItem.addEventListener('click', function() {
+                        newNotificationItem.classList.toggle('read');
+                    });
+                }
+            }
+
+            // Memanggil fungsi setelah menambahkan notifikasi baru
+            addNewNotification();
+        </script>
 
         <section>
             <div class="gap">
