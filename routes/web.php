@@ -11,6 +11,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReplyController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Support\Facades\Auth;
@@ -61,8 +62,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware('user')->group(function(){
         Route::middleware('verified')->get('/home', [HomeUserController::class, 'index'])->name('home');
-        Route::get('/home/create/{$id}', [ContentController::class, 'createForUser'])->name('user.content.create');
-        Route::get('/profil/create/{$id}', [ContentController::class, 'createdForUser'])->name('user.content.created');
+        Route::get('/home/create/{id}', [ContentController::class, 'createForUser'])->name('user.content.create');
+        Route::get('/profil/create/{id}', [ContentController::class, 'createdForUser'])->name('user.content.created');
         Route::get('/homefilter', [HomeUserController::class, 'filter'])->name('home.filter');
         Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
         Route::post('/profilcontent', [ContentController::class, 'storeForUserProfil'])->name('user.contents.store');
@@ -79,6 +80,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/morecontent', [ContentController::class, 'contentMore'])->name('more.home');
         Route::put('/homecontent/{content}', [ContentController::class, 'updateForUser'])->name('user.content.update');
         Route::put('/home/{content}/edit', [ContentController::class, 'editForUser'])->name('user.content.edit');
+        Route::resource('notifications', NotificationsController::class);
+        Route::delete('/notifications/destroyAll', 'NotificationController@destroyAll')->name('notifications.destroyAll');
+
+        Route::get('blog', function () {
+            return view('user.blog');
+        });
 
         Route::get('blog', function () {
             return view('user.blog');
