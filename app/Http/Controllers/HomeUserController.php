@@ -37,26 +37,41 @@ class HomeUserController extends Controller
 
         $userId = Auth::id();
 
-        $notifications = Notification::select('notifications.*')
+        // Mengambil notifikasi terbaru dari admin
+        $adminNotification = Notification::select('notifications.*')
+        ->where('notifications.type', 'admin')
+        ->orderBy('notifications.created_at', 'desc')
+        ->first();
+
+        // Menggabungkan notifikasi admin dengan notifikasi untuk user saat ini
+        $userNotifications = Notification::select('notifications.*')
         ->join('contents', 'notifications.content_id', '=', 'contents.id')
         ->where('contents.user_id', Auth::id())
         ->orderBy('notifications.created_at', 'desc')
         ->take(5)
         ->get();
 
+        // Jika ada notifikasi admin, tambahkan ke array notifikasi user
+        if ($adminNotification) {
+            $notifications = collect([$adminNotification])->merge($userNotifications)->sortByDesc('created_at');
+        } else {
+            $notifications = $userNotifications->sortByDesc('created_at');
+        }
+
         foreach ($notifications as $notification) {
             $notification->type = $notification->type;
             $notification->content->judul = $notification->judul_content;
         }
 
-        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount', 'oldSearch', 'notifications'));
-    }
+        $notificationCount = $notifications->count();
 
+        return view('home', compact('kategori', 'content', 'likesCount', 'likes', 'commentCount', 'oldSearch', 'notifications', 'notificationCount'));
+    }
     public function show($id)
     {
-        $notifications = Notification::all(); // Assuming you retrieve notifications from the database
+        $notifications = Notification::all();
         $content = Content::findOrFail($id);
-        return view('home', compact('content')); // Sesuaikan dengan view yang sesuai
+        return view('home', compact('content'));
     }
 
     public function filter(Request $request)
