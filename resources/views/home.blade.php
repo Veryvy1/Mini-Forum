@@ -182,7 +182,7 @@
                                 </svg>
                             </i>
                             <span class="notification-count">{{ $notificationCount }}</span>
-                        </a>
+                        </a>
                     </li>
 
                     <li>
@@ -239,7 +239,14 @@
                                 Notifications
                             </strong>
                         </h5>
-                        <button id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="">Mark all read</button>
+                        <form action="{{ route('notifications.destroyAll') }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="background-color: #e27a7a; border: none;">
+                                Mark all read
+                            </button>
+                        </form>
+                        {{-- <button id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="">Mark all read</button> --}}
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body" style="position: relative; -ms-overflow-style: none;
@@ -304,70 +311,27 @@
         </div>
 
         <script>
-            // Function untuk menambahkan event listener ke notifikasi yang belum dibaca
-            const addClickEventToUnreadNotifications = () => {
-                const unreadNotifications = document.querySelectorAll('.notification-item.unread');
-                unreadNotifications.forEach(item => {
-                    item.addEventListener('click', toggleReadStatus);
-                });
-            };
-
-            // Function untuk menandai notifikasi sebagai dibaca atau belum dibaca
-            const toggleReadStatus = function() {
-                this.classList.toggle('read');
-                const notificationId = this.dataset.id;
-                const isRead = this.classList.contains('read');
-                localStorage.setItem('notification_' + notificationId, isRead ? 'read' : 'unread');
-            };
-
-            // Function untuk menambahkan notifikasi baru
-            const addNewNotification = () => {
-                // Menambahkan notifikasi baru
-                const newNotificationItem = document.querySelector('.notification-item:last-child');
-                if (newNotificationItem) {
-                    // Menetapkan status 'unread' pada notifikasi baru di localStorage
-                    const notificationId = newNotificationItem.dataset.id;
-                    localStorage.setItem('notification_' + notificationId, 'unread');
-
-                    // Menambahkan event listener ke notifikasi baru
-                    newNotificationItem.addEventListener('click', toggleReadStatus);
-                }
-            };
-
-            // Function untuk memuat status notifikasi dari localStorage saat halaman dimuat
-            const loadNotificationStatus = () => {
-                const notifications = document.querySelectorAll('.notification-item');
-                notifications.forEach(item => {
-                    const notificationId = item.dataset.id;
-                    const status = localStorage.getItem('notification_' + notificationId);
-                    if (status === 'read') {
-                        item.classList.add('read');
-                    }
-                });
-            };
-
-            // Memanggil fungsi untuk memuat status notifikasi saat halaman dimuat
-            loadNotificationStatus();
-
-            // Menambahkan event listener ke tombol "Tandai Semua Dibaca"
-            document.getElementById('mark-all-read').addEventListener('click', () => {
-                const allNotifications = document.querySelectorAll('.notification-item.unread');
-                allNotifications.forEach(item => {
-                    item.classList.remove('unread');
-                    item.classList.add('read');
-                    const notificationId = item.dataset.id;
-                    localStorage.setItem('notification_' + notificationId, 'read');
-                });
-            });
-
-            // Memanggil fungsi untuk menambahkan event listener ke notifikasi yang belum dibaca
-            addClickEventToUnreadNotifications();
-
-            // Memanggil fungsi setelah menambahkan notifikasi baru
-            addNewNotification();
+          document.getElementById('mark-all-read').addEventListener('click', function() {
+    // Mengirim permintaan Ajax ke endpoint untuk menghapus semua notifikasi
+    fetch('{{ route("notifications.destroyAll") }}', {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to mark all notifications as read');
+        }
+        // Jika berhasil, reload halaman untuk memperbarui tampilan notifikasi
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error marking all notifications as read:', error);
+    });
+});
         </script>
-
-
 
         <section>
             <div class="gap">
