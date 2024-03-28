@@ -9,6 +9,8 @@ use App\Models\Content;
 use App\Models\Comment;
 use App\Models\Kategori;
 use App\Models\Like;
+use App\Models\Notification;
+use App\Models\User;
 use DOMDocument;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -111,49 +113,58 @@ class ContentController extends Controller
 
 
     public function storeForAdmin(StoreContentRequest $request)
-{
-    try {
-        $gambar = $request->file('gambar');
-        $path_gambar = null;
-        if ($gambar) {
-            $path_gambar = Storage::disk('public')->put('content', $gambar);
-        }
-
-        $user_id = auth()->id();
-        $deskripsi = $request->deskripsi;
-
-        if (!empty($deskripsi)) {
-            $dom = new \DomDocument();
-            $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-
-            $images = $dom->getElementsByTagName('img');
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
+    {
+        try {
+            $gambar = $request->file('gambar');
+            $path_gambar = null;
+            if ($gambar) {
+                $path_gambar = Storage::disk('public')->put('content', $gambar);
             }
-            $deskripsi = $dom->saveHTML();
+
+            $user_id = auth()->id();
+            $deskripsi = $request->deskripsi;
+
+            if (!empty($deskripsi)) {
+                $dom = new \DomDocument();
+                $dom->loadHtml($deskripsi, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+                $images = $dom->getElementsByTagName('img');
+                foreach ($images as $k => $img) {
+                    $data = $img->getAttribute('src');
+                    list($type, $data) = explode(';', $data);
+                    list(, $data) = explode(',', $data);
+                    $data = base64_decode($data);
+                    $image_name = "/uploads" . time() . $k . '.png';
+                    $path = public_path() . $image_name;
+                    file_put_contents($path, $data);
+                    $img->removeAttribute('src');
+                    $img->setAttribute('src', $image_name);
+                }
+                $deskripsi = $dom->saveHTML();
+            }
+
+            $content = Content::create([
+                'user_id' => $user_id,
+                'judul' => $request->input('judul'),
+                'deskripsi' => $deskripsi,
+                'kategori_id' => $request->input('kategori_id'),
+                'gambar' => $path_gambar,
+            ]);
+
+            $users = User::where('role', '!=', 'admin')->get();
+        foreach ($users as $user) {
+            Notification::create([
+                'content_id' => $content->id,
+                'user_id' => $user->id,
+                'type' => 'admin',
+            ]);
         }
 
-        Content::create([
-            'user_id' => $user_id,
-            'judul' => $request->input('judul'),
-            'deskripsi' => $deskripsi,
-            'kategori_id' => $request->input('kategori_id'),
-            'gambar' => $path_gambar,
-        ]);
-
-        return redirect()->route('content.index')->with('success', 'Content added successfully');
-    } catch (\Exception $e) {
-        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()])->with('validation_source', 'tambah');
+            return redirect()->route('content.index')->with('success', 'Content added successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        }
     }
-}
 
     public function storeForUser(StoreContentRequest $request)
 {
@@ -215,7 +226,7 @@ class ContentController extends Controller
     {
         $content = Content::findOrFail($id);
         // $comments = $content->comment()->with('user')->get();
-        
+
         return view('home', compact('content'));
     }
 

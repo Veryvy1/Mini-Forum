@@ -29,7 +29,6 @@ class StoreContentRequest extends FormRequest
         ];
     }
 
-    INI
     public function messages(): array
     {
         return [

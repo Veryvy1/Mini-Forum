@@ -160,14 +160,13 @@
                                     <i class="icofont-pen-alt-1" style="color: #dca02f"></i> Edit
                                 </button>
                                 <li>
-                                    <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="deleteForm">
+                                    <form action="{{ route('content.destroy', ['content' => $contents->id]) }}" method="POST" style="display:inline" id="deleteForm{{ $contents->id }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="button" title style="font-size: 15px; background-color:#fff; border:none;" onclick="deleteContent()">
+                                        <button type="button" title style="font-size: 15px; background-color:#fff; border:none;" onclick="deleteContent('{{ $contents->id }}')">
                                             <i class="icofont-trash" style="color: #b91e1e"></i> Delete
                                         </button>
                                     </form>
-
                                 </li>
                             </ul>
                         </div>
@@ -235,6 +234,7 @@
         </div>
     </aside>
 </div>
+
 @foreach ($content as $contents)
 <div class="modal fade" id="editModal{{ $contents->id }}" tabindex="-1" aria-labelledby="editModal{{ $contents->id }}Label" aria-hidden="true">
     <div class="modal-dialog">
@@ -294,12 +294,16 @@
                         @enderror
                     </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 @endforeach
-
 @section('scripts')
 <script>
  $(document).ready(function() {
@@ -336,8 +340,6 @@
 });
 </script>
 @endsection
-
-
 <div class="modal" tabindex="-1" id="tambahModal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -347,7 +349,6 @@
             <div class="modal-body">
                 <form action="{{ route('content.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <!-- Title Input -->
                     <div class="mb-3">
                         <label for="judul" class="form-label">Title</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}">
@@ -357,7 +358,6 @@
                             </span>
                         @enderror
                     </div>
-                    <!-- Description Input -->
                     <div class="mb-3">
                         <label for="deskripsi" class="form-label">
                             Fill Content</label>
@@ -365,25 +365,22 @@
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         <textarea name="deskripsi" id="summernoteModal1" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
-                        @error('deskripsi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
-                    <!-- Image Input -->
                     <div class="mb-3">
                         <label for="gambar" class="form-label">Image</label>
-                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" value="{{ old('gambar') }}">
+                        <input type="file" class="form-control @error('gambar') is-invalid @enderror" id="gambar" name="gambar" onchange="previewImage(event)">
+                        @if(old('gambar'))
+                            <img id="preview" src="{{ asset('storage/' . old('gambar')) }}" alt="Old gambar" style="max-width: 100px; max-height: 100px;">
+                        @endif
                         @error('gambar')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <!-- Category Input -->
+
                     <div class="mb-3">
-                        <label for="kategoris" class="form-label">Category</label>
+                        <label for="kategoris" class="form-label">Category</label><br>
                         <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris" name="kategori_id" aria-label="Default select example">
                             <option value="" selected>Select Category</option>
                             @foreach ($kategori as $kat)
@@ -398,7 +395,7 @@
                             </span>
                         @enderror
                     </div>
-                    <!-- Modal Footer -->
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
                         <button type="submit" class="btn btn-primary">SAVE</button>
@@ -441,7 +438,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    async function deleteContent() {
+    async function deleteContent(contentId) {
         try {
             const result = await Swal.fire({
                 title: "Are you sure?",
@@ -454,11 +451,12 @@
             });
 
             if (result.isConfirmed) {
-                // Submit the form
-                document.getElementById('deleteForm').submit();
+                // Submit the form using AJAX
+                const deleteForm = document.getElementById('deleteForm' + contentId);
+                deleteForm.submit();
                 await Swal.fire({
                     title: "Deleted!",
-                    text: "Your file has been deleted.",
+                    text: "Your content has been deleted.",
                     icon: "success"
                 });
             }
@@ -467,6 +465,8 @@
         }
     }
 </script>
+
+
 
 <?php if (Session::has('success')): ?>
 <script>

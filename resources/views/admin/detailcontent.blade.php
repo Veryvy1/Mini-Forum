@@ -105,7 +105,7 @@
                                     @else
                                     {{ $content->created_at->diffForHumans() }}
                                 @endif
-                            </li>
+                            </li> 
                             </ul>
                             <div class="tag-n-cat">
                                 <div class="tags">
