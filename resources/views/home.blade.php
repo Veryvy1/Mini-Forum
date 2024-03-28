@@ -56,7 +56,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 10px;
-        background-color:#2ea8dc;
+        background-color:#90c7df;
         }
 
         .notification-item.read {
@@ -93,6 +93,7 @@
             height: 100%;
             object-fit: cover;
         }
+
         .notification-count {
             position: absolute;
             top: 6px;
@@ -105,8 +106,8 @@
             width: 15px;
             height: 15px;
             line-height: 11px;
-            text-align: center;
-}
+            text-align:center;
+        }
     </style>
 </head>
 
@@ -180,8 +181,8 @@
                                     <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                                 </svg>
                             </i>
-                            <span class="notification-count">1</span> <!-- notif -->
-                        </a>
+                            <span class="notification-count">{{ $notificationCount }}</span>
+                        </a>
                     </li>
 
                     <li>
@@ -233,39 +234,69 @@
                 <div class="modal-content modal-content-slideout">
                     <!-- Modal header -->
                     <div class="modal-header">
-                        <h5 class="modal-title" id="myModalLabel">Notifications</h5>
+                        <h5 class="modal-title" id="myModalLabel">
+                            <strong>
+                                Notifications
+                            </strong>
+                        </h5>
+                        <button id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="">Mark all read</button>
                     </div>
                     <!-- Modal body -->
-                    <div class="modal-body">
-                        @foreach ($notifications as $notification)
-                            <div class="notification-item">
-                                <div class="message-info">
-                                    <span class="user-name">{{ $notification->user->name }}</span>
-                                    <span class="notification-time">
-                                        @if($notification->type == 'like')
-                                        <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
-                                        @elseif($notification->type == 'comment')
-                                        <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
-                                        @endif
+                    <div class="modal-body" style="position: relative; -ms-overflow-style: none;
+                    overflow: hidden !important;
+                    overflow-anchor: none;
+                    touch-action: auto;
+                    -ms-touch-action: auto;">
+                    @foreach ($notifications as $notification)
+                    <div class="notification-item {{ $notification->read ? 'read' : 'unread' }}">
+                        <div class="message-info">
 
-                                        @if($notification->created_at->diffInWeeks() >= 1)
-                                            {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
-                                        @else
-                                            {{ $notification->created_at->diffForHumans() }}
-                                        @endif
-                                    </span>
-                                </div>
-                                <figure class="profile-image">
-                                    @if ($notification->user->profile)
-                                        <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                            @if($notification->type == 'admin')
+                                <span class="user-name">Admin</span>
+                                <span class="notification-time">
+                                        <p><a href="{{ route('content.detail', $notification->content_id) }}">admin has posted content</a></p>
+
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
                                     @else
-                                        <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                                        {{ $notification->created_at->diffForHumans() }}
                                     @endif
-                                </figure>
-                            </div>
-                        @endforeach
-                        <!-- Tambahkan tombol "Tandai Semua Dibaca" di sini -->
-                        <button id="mark-all-read" class="btn btn-primary">TANDAI SEMUA DIBACA</button>
+                                </span>
+                            @else
+                                <span class="user-name">{{ $notification->user->name }}</span>
+                                <span class="notification-time">
+                                    @if($notification->type == 'like')
+                                            <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
+                                        @elseif($notification->type == 'comment')
+                                            <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
+                                        @elseif($notification->type == 'reply')
+                                        <p><a href="{{ route('comment.reply', $notification->content_id) }}">replied to your comment</a></p>
+                                    @endif
+
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
+                            @endif
+                        </div>
+                        <form action="{{ route('notifications.destroy', ['notification' => $notification->id]) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="iconbox rounded-circle" style="background-color: #e27a7a; border: none;">
+                                <i class="icofont-close" style="color: #fff"></i>
+                            </button>
+                        </form>
+                        <figure class="profile-image">
+                            @if ($notification->user->profile)
+                                <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                            @else
+                                <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                            @endif
+                        </figure>
+                    </div>
+                @endforeach
                     </div>
 
                 </div>
@@ -273,42 +304,70 @@
         </div>
 
         <script>
-            // Fungsi untuk menambahkan event listener ke notifikasi yang belum dibaca
-            function addClickEventToUnreadNotifications() {
-                var unreadNotifications = document.querySelectorAll('.notification-item.unread');
-                unreadNotifications.forEach(function(item) {
-                    item.addEventListener('click', function() {
-                        item.classList.toggle('read');
-                    });
+            // Function untuk menambahkan event listener ke notifikasi yang belum dibaca
+            const addClickEventToUnreadNotifications = () => {
+                const unreadNotifications = document.querySelectorAll('.notification-item.unread');
+                unreadNotifications.forEach(item => {
+                    item.addEventListener('click', toggleReadStatus);
                 });
-            }
+            };
+
+            // Function untuk menandai notifikasi sebagai dibaca atau belum dibaca
+            const toggleReadStatus = function() {
+                this.classList.toggle('read');
+                const notificationId = this.dataset.id;
+                const isRead = this.classList.contains('read');
+                localStorage.setItem('notification_' + notificationId, isRead ? 'read' : 'unread');
+            };
+
+            // Function untuk menambahkan notifikasi baru
+            const addNewNotification = () => {
+                // Menambahkan notifikasi baru
+                const newNotificationItem = document.querySelector('.notification-item:last-child');
+                if (newNotificationItem) {
+                    // Menetapkan status 'unread' pada notifikasi baru di localStorage
+                    const notificationId = newNotificationItem.dataset.id;
+                    localStorage.setItem('notification_' + notificationId, 'unread');
+
+                    // Menambahkan event listener ke notifikasi baru
+                    newNotificationItem.addEventListener('click', toggleReadStatus);
+                }
+            };
+
+            // Function untuk memuat status notifikasi dari localStorage saat halaman dimuat
+            const loadNotificationStatus = () => {
+                const notifications = document.querySelectorAll('.notification-item');
+                notifications.forEach(item => {
+                    const notificationId = item.dataset.id;
+                    const status = localStorage.getItem('notification_' + notificationId);
+                    if (status === 'read') {
+                        item.classList.add('read');
+                    }
+                });
+            };
+
+            // Memanggil fungsi untuk memuat status notifikasi saat halaman dimuat
+            loadNotificationStatus();
+
+            // Menambahkan event listener ke tombol "Tandai Semua Dibaca"
+            document.getElementById('mark-all-read').addEventListener('click', () => {
+                const allNotifications = document.querySelectorAll('.notification-item.unread');
+                allNotifications.forEach(item => {
+                    item.classList.remove('unread');
+                    item.classList.add('read');
+                    const notificationId = item.dataset.id;
+                    localStorage.setItem('notification_' + notificationId, 'read');
+                });
+            });
 
             // Memanggil fungsi untuk menambahkan event listener ke notifikasi yang belum dibaca
             addClickEventToUnreadNotifications();
 
-            // Menambahkan event listener ke tombol "Tandai Semua Dibaca"
-            document.getElementById('mark-all-read').addEventListener('click', function() {
-                var allNotifications = document.querySelectorAll('.notification-item.unread');
-                allNotifications.forEach(function(item) {
-                    item.classList.remove('unread');
-                    item.classList.add('read');
-                });
-            });
-
-            // Memanggil fungsi tersebut setelah menambahkan notifikasi baru
-            function addNewNotification() {
-                // Menemukan notifikasi terbaru yang belum memiliki status "dibaca"
-                var newNotificationItem = document.querySelector('.notification-item:last-child');
-                if (newNotificationItem && newNotificationItem.classList.contains('unread')) {
-                    newNotificationItem.addEventListener('click', function() {
-                        newNotificationItem.classList.toggle('read');
-                    });
-                }
-            }
-
             // Memanggil fungsi setelah menambahkan notifikasi baru
             addNewNotification();
         </script>
+
+
 
         <section>
             <div class="gap">
