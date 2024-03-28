@@ -268,7 +268,6 @@
                         <button id="mark-all-read" class="btn btn-primary">TANDAI SEMUA DIBACA</button>
                     </div>
 
-
                 </div>
             </div>
         </div>
