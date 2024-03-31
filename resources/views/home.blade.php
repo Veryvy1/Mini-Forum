@@ -56,11 +56,11 @@
         display: flex;
         align-items: center;
         margin-bottom: 10px;
-        background-color:#90c7df;
+        /* background-color:#90c7df; */
         }
 
         .notification-item.read {
-            background-color: #fff; /* Warna putih untuk notifikasi yang sudah dibaca */
+            background-color: #fff;
         }
 
         .message-info {
@@ -260,7 +260,7 @@
                     touch-action: auto;
                     -ms-touch-action: auto;">
                     @foreach ($notifications as $notification)
-                    <div class="notification-item {{ $notification->read ? 'read' : 'unread' }}">
+                    <div class="notification-item">
                         <div class="message-info">
 
                             @if($notification->type == 'admin')
@@ -275,7 +275,14 @@
                                     @endif
                                 </span>
                             @else
-                                <span class="user-name">{{ $notification->user->name }}</span>
+                            <span class="user-name">
+                                @if($notification->user)
+                                    {{ $notification->user->name }}
+                                @else
+                                    User Deleted
+                                @endif
+                            </span>
+                                {{-- <span class="user-name">{{ $notification->user->name }}</span> --}}
                                 <span class="notification-time">
                                     @if($notification->type == 'like')
                                             <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
@@ -301,12 +308,19 @@
                             </button>
                         </form>
                         <figure class="profile-image">
-                            @if ($notification->user->profile)
+                            @if ($notification->user && $notification->user->profile)
                                 <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
                             @else
                                 <img src="images/LOGO/profil.jpeg" alt="Profile Image">
                             @endif
                         </figure>
+                        {{-- <figure class="profile-image">
+                            @if ($notification->user->profile)
+                                <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                            @else
+                                <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                            @endif
+                        </figure> --}}
                     </div>
                 @endforeach
                     </div>
