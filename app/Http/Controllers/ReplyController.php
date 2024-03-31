@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Reply;
+use App\Models\Notification;
 use App\Models\Comment;
 use App\Models\Content;
 use App\Models\User;
@@ -19,6 +20,7 @@ class ReplyController extends Controller
 {
     public function replyId(Request $request, $id)
     {
+    $notifications = Notification::all();
     $user = auth()->user();
     $comment = Comment::findOrFail($id);
     $reply = Reply::where('comment_id', $id)->orderBy('created_at', 'desc')->get();
@@ -39,42 +41,117 @@ class ReplyController extends Controller
         //
     }
 
-    public function store(Request $request, $replyId)
-    {
+    public function store(ReplyRequest $request, $replyId)
+{
+    try {
+        $user_id = auth()->id();
 
-        try {
-            $user_id = auth()->id();
+        $reply = $request->reply;
+        $dom = new DOMDocument();
+        $dom->loadHTML($reply, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
-            $reply = $request->reply;
-            $dom = new DOMDocument();
-            $dom->loadHTML($reply, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
 
-            $images = $dom->getElementsByTagName('img');
-
-            foreach ($images as $k => $img) {
-                $data = $img->getAttribute('src');
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-                $data = base64_decode($data);
-                $image_name = "/uploads" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $data);
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-            }
-            $comment = $dom->saveHTML();
-
-            $reply = new Reply();
-            $reply->reply = $comment;
-            $reply->comment_id = $replyId;
-            $reply->user_id = $user_id;
-            $reply->save();
-
-            return redirect()->back()->with('success', 'Successful reply');
-        } catch (\Exception $e) {
-            return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+        foreach ($images as $k => $img) {
+            $data = $img->getAttribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+            $data = base64_decode($data);
+            $image_name = "/uploads" . time() . $k . '.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
         }
+        $reply = $dom->saveHTML();
+
+        $commentModel = Comment::find($replyId);
+        if (!$commentModel) {
+            return redirect()->back()->withErrors(['error' => 'Comment not found']);
+        }
+
+        // Mencari komentar yang akan dibalas (reply)
+        $commentModel = Comment::find($replyId);
+        if (!$commentModel) {
+            return redirect()->back()->withErrors(['error' => 'Comment not found']);
+        }
+
+        // Mendapatkan ID konten terkait dari komentar
+        $contentId = $commentModel->content_id;
+        $content = Content::find($contentId);
+
+            Notification::create([
+                'content_id' => $contentId,
+                'user_id' => $user_id,
+                'type' => 'reply',
+                'comment_id' => $replyId,
+            ]);
+
+        // Menyimpan balasan (reply) ke dalam database
+        $replyModel = new Reply();
+        $replyModel->reply = $reply;
+        $replyModel->comment_id = $replyId;
+        $replyModel->user_id = $user_id;
+        $replyModel->save();
+
+        return redirect()->back()->with('success', 'Successful reply');
+    } catch (\Exception $e) {
+        return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     }
+}
+
+
+    // public function store(ReplyRequest $request, $replyId)
+    // {
+    //     try {
+    //         $user_id = auth()->id();
+
+    //         $reply = $request->reply;
+    //         $dom = new DOMDocument();
+    //         $dom->loadHTML($reply, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+    //         $images = $dom->getElementsByTagName('img');
+
+    //         foreach ($images as $k => $img) {
+    //             $data = $img->getAttribute('src');
+    //             list($type, $data) = explode(';', $data);
+    //             list(, $data) = explode(',', $data);
+    //             $data = base64_decode($data);
+    //             $image_name = "/uploads" . time() . $k . '.png';
+    //             $path = public_path() . $image_name;
+    //             file_put_contents($path, $data);
+    //             $img->removeAttribute('src');
+    //             $img->setAttribute('src', $image_name);
+    //         }
+    //         $reply = $dom->saveHTML();
+
+    //         $commentModel = Comment::find($replyId);
+    //         if (!$commentModel) {
+    //             return redirect()->back()->withErrors(['error' => 'Comment not found']);
+    //         }
+
+    //         $contentId = $commentModel->content_id;
+    //         $content = Content::find($contentId);
+
+    //         if ($content && $content->user_id !== $user_id) {
+    //             Notification::create([
+    //                 'content_id' => $contentId,
+    //                 'user_id' => $user_id,
+    //                 'type' => 'reply',
+    //             ]);
+    //         }
+
+    //         $replyModel = new Reply();
+    //         $replyModel->reply = $reply;
+    //         $replyModel->comment_id = $replyId;
+    //         $replyModel->user_id = $user_id;
+    //         $replyModel->save();
+
+    //         return redirect()->back()->with('success', 'Successful reply');
+    //     } catch (\Exception $e) {
+    //         return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
+    //     }
+    // }
 
     public function show($id) {
         $comment = Comment::find($id);

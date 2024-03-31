@@ -18,6 +18,7 @@ class CommentController extends Controller
 {
     public function commentId(Request $request, $id)
     {
+        $notifications = Notification::all();
         $commentGet = Comment::where('id', $id)->get();
         $user = auth()->user();
         $content = Content::find($id);
@@ -41,7 +42,7 @@ class CommentController extends Controller
         return view('user.comment', compact('comment'));
     }
 
-    public function store(CommentRequest $request, $contentId)
+public function store(CommentRequest $request, $contentId)
 {
     try {
         $user_id = auth()->id();
@@ -65,8 +66,10 @@ class CommentController extends Controller
         }
         $comment = $dom->saveHTML();
 
+        // Mencari konten terkait untuk memeriksa pemilik konten
         $content = Content::find($contentId);
         if ($content && $content->user_id !== $user_id) {
+            // Jika pemilik konten bukan pengguna yang sedang mengomentari, buat dan simpan notifikasi "comment"
             Notification::create([
                 'content_id' => $contentId,
                 'user_id' => $user_id,

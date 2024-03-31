@@ -44,52 +44,33 @@ class HomeUserController extends Controller
     }
 
     private function getNotifications() {
-        // Mengambil notifikasi terbaru dari admin
-        $adminNotifications = Notification::select('notifications.*')
-            ->orderBy('notifications.created_at', 'desc')
-            ->get();
-
-        // Menyiapkan array untuk semua notifikasi yang akan ditampilkan
-        $notifications = collect();
-
-        // Iterasi notifikasi
-        foreach ($adminNotifications as $notification) {
-            // Jika notifikasi adalah notifikasi balasan (reply)
-            if ($notification->type === 'reply') {
-                // Cari pengguna yang memiliki konten terkait notifikasi balasan
-                $contentOwner = Content::find($notification->content_id)->user;
-
-                // Tambahkan pemilik konten ke dalam notifikasi
-                if ($contentOwner) {
-                    $notifications->push($contentOwner);
-                }
-
-                // Cari pengguna yang telah melakukan komentar
-                $comment = Comment::find($notification->comment_id);
-                if ($comment) { // Periksa apakah komentar ditemukan
-                    $commentOwner = $comment->user;
-                    if ($commentOwner) { // Periksa apakah pengguna terkait komentar ditemukan
-                        $notifications->push($commentOwner);
-
-                        // Jika pengguna yang membalas komentar adalah pemilik konten atau pemilik konten sendiri membalas, tambahkan juga pengguna yang memiliki konten dan pengguna yang memiliki komentar
-                        if (($comment->user_id === Auth::id() && $comment->content->user_id !== Auth::id()) || $comment->content->user_id === Auth::id()) {
-                            $notifications->push($contentOwner);
-                            $notifications->push($commentOwner);
-                        }
-                    }
-                }
-            }
-        }
-
-        // Menggabungkan notifikasi admin dengan notifikasi untuk user saat ini
+        // Mengambil notifikasi like dan komentar terbaru untuk konten pengguna saat ini
         $userNotifications = Notification::select('notifications.*')
             ->join('contents', 'notifications.content_id', '=', 'contents.id')
             ->where('contents.user_id', Auth::id())
+            ->whereIn('notifications.type', ['like', 'comment'])
             ->orderBy('notifications.created_at', 'desc')
             ->take(5)
             ->get();
 
-        $notifications = $notifications->merge($userNotifications)->sortByDesc('created_at')->take(5);
+        // Mengambil notifikasi balasan (reply) terbaru yang merupakan balasan untuk komentar pada konten pengguna saat ini
+        $replyNotifications = Notification::select('notifications.*')
+            ->join('comments', 'notifications.comment_id', '=', 'comments.id')
+            ->join('contents', 'comments.content_id', '=', 'contents.id')
+            ->where(function($query) {
+                $query->where('comments.user_id', Auth::id()) // Memfilter balasan yang dikirim oleh pengguna saat ini
+                    ->orWhere('contents.user_id', Auth::id()); // Menambahkan filter untuk pemilik konten dari konten yang dikomentari
+            })
+            ->where('notifications.type', 'reply')
+            ->orderBy('notifications.created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        // Menggabungkan notifikasi ke dalam satu koleksi
+        $notifications = $userNotifications->merge($replyNotifications);
+
+        // Mengurutkan notifikasi berdasarkan waktu pembuatan
+        $notifications = $notifications->sortByDesc('created_at')->take(5);
 
         return $notifications;
     }
