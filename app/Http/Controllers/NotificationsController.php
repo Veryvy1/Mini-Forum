@@ -11,20 +11,20 @@ class NotificationsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $notifications = $user->notifications()->paginate(10); // Ganti paginate(10) dengan sesuai kebutuhan
+        $notifications = $user->notifications()->paginate(10); // Change paginate(10) as needed
         return view('user.profile', compact('notifications', 'user'));
     }
 
-    public function destroyAll()
+    public function destroyAll(Request $request)
     {
-        $user = auth()->user(); // Mendapatkan pengguna saat ini
-        $user->notifications()->delete(); // Menghapus semua notifikasi yang terkait dengan pengguna
+        $user = $request->user(); // Get the current user
+        $user->notifications()->delete(); // Delete all notifications related to the user
         return redirect()->back()->with('success', 'All notifications have been deleted.');
     }
 
     public function destroy(Notification $notification)
     {
-        $notification->delete();
+        $notification->delete(); // Delete a specific notification
         return back();
     }
 }

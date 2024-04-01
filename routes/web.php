@@ -68,7 +68,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/homecontent', [ContentController::class, 'storeForUser'])->name('user.content.store');
         Route::post('/profilcontent', [ContentController::class, 'storeForUserProfil'])->name('user.contents.store');
         Route::get('/homesearch', [HomeUserController::class, 'index'])->name('home.search');
+        // Route::get('/notifications', [HomeUserController::class, 'notifcomment'])->name('notifcomment');
+
         Route::get('/comment/{id}', [CommentController::class, 'commentId'])->name('content.comment');
+        // Route::get('/comment/{id}', [HomeUserController::class, 'notifcomment'])->name('comment.notif');
         Route::post('/comment/{contentId}', [CommentController::class, 'store'])->name('comment.store');
         Route::get('/reply/{id}', [ReplyController::class, 'replyId'])->name('comment.reply');
         Route::post('/reply/{commentId}', [ReplyController::class, 'store'])->name('reply.store');
@@ -80,8 +83,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/morecontent', [ContentController::class, 'contentMore'])->name('more.home');
         Route::put('/homecontent/{content}', [ContentController::class, 'updateForUser'])->name('user.content.update');
         Route::put('/home/{content}/edit', [ContentController::class, 'editForUser'])->name('user.content.edit');
-        Route::resource('notifications', NotificationsController::class);
-        Route::delete('/notifications/destroyAll', 'NotificationController@destroyAll')->name('notifications.destroyAll');
+        Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+        Route::delete('/notifications/delete-all', [NotificationsController::class, 'destroyAll'])->name('notifications.destroyAll');
+        Route::delete('/notifications/{notification}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
 
         Route::get('blog', function () {
             return view('user.blog');
@@ -102,9 +106,9 @@ Route::middleware(['auth'])->group(function () {
             return view('user.allcontent');
         });
 
-        Route::get('comment', function () {
-            return view('user.comment');
-        })->name('comment');
+        // Route::get('comment', function () {
+        //     return view('user.comment');
+        // })->name('comment');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
         Route::get('/profile/{profile}/edit', [ProfileController::class, 'edit'])->name('profile.edit');

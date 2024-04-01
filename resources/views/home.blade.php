@@ -26,6 +26,18 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
     <style>
+        .notification-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Sesuaikan dengan ukuran lingkaran */
+    height: 30px; /* Sesuaikan dengan ukuran lingkaran */
+    background-color: red; /* Sesuaikan dengan warna lingkaran */
+    border-radius: 50%; /* Membuat lingkaran */
+    color: white; /* Warna teks di dalam lingkaran */
+    font-size: 14px; /* Ukuran teks */
+}
+
         .large-label {
             font-size: 16px;
         }
@@ -233,8 +245,7 @@
         </header>
 
         <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-            aria-hidden="true" data-backdrop="true">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
             <div class="modal-dialog modal-sm modal-dialog-slideout" role="document">
                 <div class="modal-content modal-content-slideout">
                     <!-- Modal header -->
@@ -254,11 +265,12 @@
                         {{-- <button id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="">Mark all read</button> --}}
                     </div>
                     <!-- Modal body -->
-                    <div class="modal-body" style="position: relative; -ms-overflow-style: none;
-                    overflow: hidden !important;
+                    <div class="modal-body" style="position: relative; overflow-y: scroll; overflow-x: hidden;
+                    max-height: calc(80vh - 180px); /* Sesuaikan nilai 200px sesuai kebutuhan */
+                    scrollbar-width: none;
                     overflow-anchor: none;
-                    touch-action: auto;
-                    -ms-touch-action: auto;">
+                    touch-action: auto;">
+
                     @foreach ($notifications as $notification)
                     <div class="notification-item">
                         <div class="message-info">
@@ -266,8 +278,23 @@
                             @if($notification->type == 'admin')
                                 <span class="user-name">Admin</span>
                                 <span class="notification-time">
-                                        <p><a href="{{ route('content.detail', $notification->content_id) }}">admin has posted content</a></p>
+                                    <p><a href="{{ route('content.detail', $notification->content_id) }}">admin has posted content</a></p>
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
 
+                                @elseif($notification->type == 'reply')
+                                @php
+                                    $reply = \App\Models\Reply::find($notification->content_id);
+                                @endphp
+                                @if($reply)
+                                    <span class="user-name">{{ $reply->user->name }}</span>
+                                @endif
+                                <span class="notification-time">
+                                    <p><a href="{{ route('comment.reply', $notification->content_id) }}">replied to your comment</a></p>
                                     @if($notification->created_at->diffInWeeks() >= 1)
                                         {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
                                     @else
@@ -285,10 +312,10 @@
                                 {{-- <span class="user-name">{{ $notification->user->name }}</span> --}}
                                 <span class="notification-time">
                                     @if($notification->type == 'like')
-                                            <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
-                                        @elseif($notification->type == 'comment')
-                                            <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
-                                        @elseif($notification->type == 'reply')
+                                        <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
+                                    @elseif($notification->type == 'comment')
+                                        <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
+                                    @elseif($notification->type == 'reply')
                                         <p><a href="{{ route('comment.reply', $notification->content_id) }}">replied to your comment</a></p>
                                     @endif
 
@@ -322,13 +349,25 @@
                             @endif
                         </figure> --}}
                     </div>
-                @endforeach
+                        @endforeach
                     </div>
-
                 </div>
             </div>
         </div>
 
+        <script>
+            // Ambil elemen modal body
+            const modalBody = document.getElementById('modalBody');
+
+            // Cek apakah konten melebihi ketinggian maksimum
+            if (modalBody.scrollHeight > modalBody.clientHeight) {
+                // Jika iya, tampilkan scroll
+                modalBody.style.overflowY = 'scroll';
+            } else {
+                // Jika tidak, sembunyikan scroll
+                modalBody.style.overflowY = 'hidden';
+            }
+        </script>
         <script>
           document.getElementById('mark-all-read').addEventListener('click', function() {
     // Mengirim permintaan Ajax ke endpoint untuk menghapus semua notifikasi

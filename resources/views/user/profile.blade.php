@@ -20,6 +20,100 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
         <style>
+                 .notification-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Sesuaikan dengan ukuran lingkaran */
+    height: 30px; /* Sesuaikan dengan ukuran lingkaran */
+    background-color: red; /* Sesuaikan dengan warna lingkaran */
+    border-radius: 50%; /* Membuat lingkaran */
+    color: white; /* Warna teks di dalam lingkaran */
+    font-size: 14px; /* Ukuran teks */
+}
+
+        .large-label {
+            font-size: 16px;
+        }
+
+        .emoji-state {
+            position: relative;
+            top: -20px;
+        }
+
+        .post-new-popup {
+            display: none;
+        }
+
+        .like {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .like i {
+            color: #000;
+        }
+
+        .modal-dialog-slideout {
+            margin-right: 1px;
+            margin-top: 59px;
+        }
+        .notification-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        /* background-color:#90c7df; */
+        }
+
+        .notification-item.read {
+            background-color: #fff;
+        }
+
+        .message-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .notification-time {
+            font-size: 12px;
+        }
+
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 10px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: 6px;
+            right: -1px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 4px;
+            font-size: 11px;
+            width: 15px;
+            height: 15px;
+            line-height: 11px;
+            text-align:center;
+        }
             .container-fluid {
                 height: 100vh;
                 margin-top: 8%;
@@ -64,6 +158,23 @@
      </div>
         @endif
         </li>
+        <li>
+            <a class="mesg-notif" href="#" title="Messages" data-bs-toggle="modal" data-bs-target="#myModal">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                </i>
+                @if($notificationCount == 0)
+            @else
+                <span class="notification-count">{{ $notificationCount }}</span>
+            @endif
+
+            </a>
+
+        </li>
+
         <li>
         <a href="#" title>
         <i>
@@ -287,6 +398,148 @@
             </div>
         </div>
     </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+            <div class="modal-dialog modal-sm modal-dialog-slideout" role="document">
+                <div class="modal-content modal-content-slideout">
+                    <!-- Modal header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">
+                            <strong>
+                                Notifications
+                            </strong>
+                        </h5>
+                        <form action="{{ route('notifications.destroyAll') }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="background-color: #e27a7a; border: none;">
+                                Mark all read
+                            </button>
+                        </form>
+                        {{-- <button id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="">Mark all read</button> --}}
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body" style="position: relative; overflow-y: scroll; overflow-x: hidden;
+                    max-height: calc(80vh - 180px); /* Sesuaikan nilai 200px sesuai kebutuhan */
+                    scrollbar-width: none;
+                    overflow-anchor: none;
+                    touch-action: auto;">
+
+                    @foreach ($notifications as $notification)
+                    <div class="notification-item">
+                        <div class="message-info">
+
+                            @if($notification->type == 'admin')
+                                <span class="user-name">Admin</span>
+                                <span class="notification-time">
+                                    <p><a href="{{ route('content.detail', $notification->content_id) }}">admin has posted content</a></p>
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
+
+                                @elseif($notification->type == 'reply')
+                                @php
+                                    $reply = \App\Models\Reply::find($notification->content_id);
+                                @endphp
+                                @if($reply)
+                                    <span class="user-name">{{ $reply->user->name }}</span>
+                                @endif
+                                <span class="notification-time">
+                                    <p><a href="{{ route('comment.reply', $notification->content_id) }}">replied to your comment</a></p>
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
+                            @else
+                            <span class="user-name">
+                                @if($notification->user)
+                                    {{ $notification->user->name }}
+                                @else
+                                    User Deleted
+                                @endif
+                            </span>
+                                <span class="notification-time">
+                                    @if($notification->type == 'like')
+                                        <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
+                                    @elseif($notification->type == 'comment')
+                                        <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
+                                    @elseif($notification->type == 'reply')
+                                        <p><a href="{{ route('comment.reply', $notification->content_id) }}">replied to your comment</a></p>
+                                    @endif
+
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
+                            @endif
+                        </div>
+                        <form action="{{ route('notifications.destroy', ['notification' => $notification->id]) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="iconbox rounded-circle" style="background-color: #e27a7a; border: none;">
+                                <i class="icofont-close" style="color: #fff"></i>
+                            </button>
+                        </form>
+                        <figure class="profile-image">
+                            @if ($notification->user && $notification->user->profile)
+                                <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                            @else
+                                <img src="{{ asset('images/LOGO/profil.jpeg') }}" alt="Profile Image">
+                            @endif
+                        </figure>
+
+                    </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Ambil elemen modal body
+            const modalBody = document.getElementById('modalBody');
+
+            // Cek apakah konten melebihi ketinggian maksimum
+            if (modalBody.scrollHeight > modalBody.clientHeight) {
+                // Jika iya, tampilkan scroll
+                modalBody.style.overflowY = 'scroll';
+            } else {
+                // Jika tidak, sembunyikan scroll
+                modalBody.style.overflowY = 'hidden';
+            }
+        </script>
+        <script>
+          document.getElementById('mark-all-read').addEventListener('click', function() {
+    // Mengirim permintaan Ajax ke endpoint untuk menghapus semua notifikasi
+    fetch('{{ route("notifications.destroyAll") }}', {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to mark all notifications as read');
+        }
+        // Jika berhasil, reload halaman untuk memperbarui tampilan notifikasi
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error marking all notifications as read:', error);
+    });
+});
+        </script>
+
 
     <?php if ($errors->any()): ?>
     <script>

@@ -1,418 +1,960 @@
+@extends('summernote')
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:02 GMT -->
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content />
-<meta name="keywords" content />
-<title>socimo | Dashboard</title>
-<link rel="icon" href="images/fav.html" type="image/png" sizes="16x16">
-<link rel="stylesheet" href="css/main.min.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/color.css">
-<link rel="stylesheet" href="css/responsive.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content />
+    <meta name="keywords" content />
+    <title>GetForums | Social Media </title>
+    <link rel="icon" href="images/LOGO/logo.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
+    {{-- <link rel="stylesheet" href="socimo/css/main.min.css"> --}}
+    <link rel="stylesheet" href="socimo/css/style.css">
+    <link rel="stylesheet" href="socimo/css/color.css">
+    <link rel="stylesheet" href="socimo/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .large-label {
+            font-size: 16px;
+        }
 
+        .emoji-state {
+            position: relative;
+            top: -20px;
+        }
+
+        .post-new-popup {
+            display: none;
+        }
+
+        .like {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .like i {
+            color: #000;
+        }
+
+        .modal-dialog-slideout {
+            margin-right: 1px;
+            margin-top: 59px;
+        }
+        .notification-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        /* background-color:#90c7df; */
+        }
+
+        .notification-item.read {
+            background-color: #fff;
+        }
+
+        .message-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .notification-time {
+            font-size: 12px;
+        }
+
+        .profile-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-left: 10px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: 6px;
+            right: -1px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 4px;
+            font-size: 11px;
+            width: 15px;
+            height: 15px;
+            line-height: 11px;
+            text-align:center;
+        }
+    </style>
 </head>
+
 <body>
+    <div class="theme-layout">
+        <div class="responsive-header">
+            <div class="logo res"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
 
-<div class="theme-layout">
-<div class="responsive-header">
-<div class="res-logo"><img src="images/logo.png" alt></div>
-<div class="user-avatar mobile">
-<a href="profile.html" title="View Profile"><img alt src="images/resources/user.jpg"></a>
-<div class="name">
-<h4>Saim Turan</h4>
-<span>Antalaya, Turky</span>
-</div>
-</div>
-<div class="right-compact">
-<div class="menu-area">
-<div id="nav-icon3">
-<i>
-<svg class="feather feather-grid" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="18" width="18" xmlns="http://www.w3.org/2000/svg"><rect height="7" width="7" y="3" x="3" /><rect height="7" width="7" y="3" x="14" /><rect height="7" width="7" y="14" x="14" /><rect height="7" width="7" y="14" x="3" /></svg>
-</i>
-</div>
-<ul class="drop-menu">
-<li><a title="profile.html" href="profile.html"><i class="icofont-user-alt-1"></i>Your Profile</a></li>
-<li><a title href="#"><i class="icofont-question-circle"></i>Help</a></li>
-<li><a title href="#"><i class="icofont-gear"></i>Setting</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i>Dark Mode</a></li>
-<li><a title href="login-register.html" class="logout"><i class="icofont-logout"></i>Logout</a></li>
-</ul>
-</div>
-<div class="res-search">
-<span><i>
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></i></span>
-</div>
-</div>
-<div class="restop-search">
-<span class="hide-search"><i class="icofont-close-circled"></i></span>
-<form method="post">
-<input type="text" placeholder="Search...">
-</form>
-</div>
-</div>
-<header class>
-<div class="topbar stick">
-<div class="logo"><img alt src="images/logo.png"><span>Socimo</span></div>
-<div class="searches">
-<form method="post">
-<input type="text" placeholder="Search...">
-<button type="submit"><i class="icofont-search"></i></button>
-</form>
-</div>
-<ul class="web-elements">
-<li>
-<div class="user-dp">
-<a href="profile-page2.html" title>
-<img src="images/resources/user.jpg" alt>
-<div class="name">
-<h4>Danial Cardos</h4>
-</div>
-</a>
-</div>
-</li>
-<li>
-<a href="index-2.html" title="Home" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
-</a>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-</a>
-<span></span>
-</li>
-<li>
-<a class="create" href="#" title="Add New" data-toggle="tooltip">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
-</a>
-</li>
-<li>
-<a title href="#">
-<i>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-</i>
-</a>
-<ul class="dropdown">
-<li><a href="profile.html" title><i class="icofont-user-alt-3"></i> Your Profile</a></li>
-<li><a href="add-new-course.html" title><i class="icofont-plus"></i> New Course</a></li>
-<li><a class="invite-new" href="#" title><i class="icofont-brand-slideshare"></i> Invite Collegue</a></li>
-<li><a href="pay-out.html" title><i class="icofont-price"></i> Payout</a></li>
-<li><a href="price-plan.html" title><i class="icofont-flash"></i> Upgrade</a></li>
-<li><a href="help-faq.html" title><i class="icofont-question-circle"></i> Help</a></li>
-<li><a href="settings.html" title><i class="icofont-gear"></i> Setting</a></li>
-<li><a href="privacy-n-policy.html" title><i class="icofont-notepad"></i> Privacy</a></li>
-<li><a class="dark-mod" title href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
-<li class="logout"><a href="sign-in.html" title><i class="icofont-power"></i> Logout</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</header>
-<div class="top-sub-bar">
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-6 col-md-6 col-sm-6">
-<div class="menu-btn">
-<i class>
-<svg id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
-</div>
-<div class="page-title">
-<h4>User Profile</h4>
-</div>
-</div>
-<div class="col-lg-6 col-md-6 col-sm-6">
-<ul class="breadcrumb">
-<li><a href="#" title>Home</a></li>
-<li><a href="#" title>Profile</a></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<nav class="sidebar">
-<ul class="menu-slide">
-<li class>
-<a class href="index-2.html" title>
-<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg></i> Dashboard
-</a>
-</li>
-<li class>
-<a class href="analytics.html" title>
-<i class><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg></i>Analytics
-</a>
-</li>
-<li class="active">
-<a class href="profile.html" title>
-<i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle r="4" cy="7" cx="9" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg></i>
-Profile
-</a>
-</li>
-<li class>
-<a class href="reviews.html" title>
-<i class>
-<svg id="ab3" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></i>Reviews
-</a>
-</li>
-<li class>
-<a class href="events.html" title><i class>
-<svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></i>Events
-</a>
-</li>
-<li class>
-<a class href="products.html" title>
-<i class>
-<svg id="ab5" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg></i>Products
-</a>
-</li>
-<li class>
-<a class href="blog.html" title>
-<i class>
-<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-coffee"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
-</i>Blogs
-</a>
-</li>
-<li class>
-<a class href="messages-inbox.html" title>
-<i class>
-<svg id="ab2" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></i>Messages
-</a>
-</li>
-<li class>
-<a class href="team.html" title>
-<i class>
-<svg id="team" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg></i>Team
-</a>
-</li>
-<li class>
-<a class href="login-register.html" title>
-<i class>
-<svg id="ab9" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></i>Login/Register
-</a>
-</li>
-<li class="menu-item-has-children">
-<a class href="#" title>
-<i><svg id="ab8" class="feather feather-file" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" /><polyline points="13 2 13 9 20 9" /></svg></i>Pages
-</a>
-<ul class="submenu">
-<li><a href="404.html" title>Error 404</a></li>
-<li><a href="forgot-password.html" title>Forgot Password</a></li>
-<li><a href="loaders.html" title>Loaders/spiners</a></li>
-<li><a href="invoice-edit.html" title>Invoice</a></li>
-<li><a href="maps.html" title>Google Maps</a></li>
-<li><a href="https://wpkixx.com/html/socimo/development-elements.html" title>Elements</a></li>
-<li><a href="https://wpkixx.com/html/socimo/development-component.html" title>Components</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-<div class="container-fluid">
-<div class="row">
-<div class="col-lg-12">
-<div class="panel-content">
-<h4 class="main-title">User Profile <i class="icofont-pen-alt-1"></i></h4>
-<div class="row merged20 mb-4">
-<div class="col-lg-4">
-<div class="d-widget text-center">
-<div class="user-avatar-edit">
-<figure><img src="images/resources/user-mockupbg.jpg" alt></figure>
-<div class="fileupload">
-<span class="btn-text">edit</span>
-<input type="file" class="upload">
-</div>
-</div>
-<div class="user-dp-edit">
-<figure>
-<img src="images/resources/admin.jpg" alt>
-<div class="fileupload">
-<span class="btn-text"><i class="icofont-camera"></i></span>
-<input type="file" class="upload">
-</div>
-</figure>
-<div class="users-name">
-<h5>Madalyn Rascon</h5>
-<span>Developer Geek</span>
-</div>
-</div>
-<ul class="folowerss">
-<li><span>Posts</span> <i>345</i></li>
-<li><span>Followers</span> <i>256</i></li>
-<li><span>Follow</span> <i>123</i></li>
-</ul>
-<a class="button primary circle" href="#" title><i class="icofont-pen-alt-1"></i> Edit</a>
-<a class="button primary circle	danger" href="#" title><i class="icofont-ban"></i> Block</a>
-</div>
+            <div class="right-compact">
+                <div class="sidemenu">
+                    <i>
+                        <svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg></i>
+                </div>
+                <div class="res-search">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-search">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg></span>
+                </div>
+            </div>
+            <div class="restop-search">
+                <span class="hide-search"><i class="icofont-close-circled"></i></span>
+                <form method="post">
+                    <input type="text" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+        <header class>
+            <div class="topbar stick">
+                <div class="logo"><img src="images/LOGO/logo.png" alt><span>GetForums</span></div>
+                <ul class="web-elements">
+                    <li>
+                        @if (auth()->check())
+                            <div class="user-dp">
+                                <div style="display: flex; align-items: center;">
+                                    <div
+                                        style="width: 25px; height: 25px; border-radius: 50%; overflow: hidden; margin-right: 10px;">
+                                        <a href="{{ route('profile.profil', auth()->user()->id) }}"
+                                            title="Edit Profile">
+                                            @if (auth()->user()->profile)
+                                                <img src="{{ asset('storage/' . auth()->user()->profile) }}"
+                                                    alt="{{ auth()->user()->name }}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            @else
+                                                <img src="{{ asset('images/LOGO/profil.jpeg') }}"
+                                                    alt="{{ auth()->user()->name }}"
+                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                            @endif
+                                        </a>
+                                    </div>
+                                    <div class="name">
+                                        <h4>{{ auth()->user()->name }}</h4>
+                                    </div>
+                                </div>
+                        @endif
+                    </li>
+                    <li>
+                        <a class="mesg-notif" href="#" title="Messages" data-toggle="modal" data-target="#myModal">
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
+                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                </svg>
+                            </i>
+                            @if($notificationCount == 0)
+                        @else
+                            <span class="notification-count">{{ $notificationCount }}</span>
+                        @endif
 
-</div>
-<div class="col-lg-8">
-    <div class="d-widget mt-4">
-        <div class="d-widget-title"><h5>Social Links</h5></div>
-        <div class="social-links">
-        <i class="icofont-facebook"></i>
-        <input type="text" placeholder="Facebook Profile">
-        <em>Add your Facebook username (e.g. johndoe).</em>
-        </div>
-        <div class="social-links">
-        <i class="icofont-instagram"></i>
-        <input type="text" placeholder="Facebook Profile">
-        <em>Add your Facebook username (e.g. johndoe).</em>
-        </div>
-        <div class="social-links">
-        <i class="icofont-twitter"></i>
-        <input type="text" placeholder="Facebook Profile">
-        <em>Add your Facebook username (e.g. johndoe).</em>
-        </div>
-        <div class="social-links">
-        <i class="icofont-pinterest"></i>
-        <input type="text" placeholder="Facebook Profile">
-        <em>Add your Facebook username (e.g. johndoe).</em>
-        </div>
-        </div>
-<a href="#" title class="button primary circle mt-5">Save Changes</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="popup-wraper">
-<div class="popup">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="popup-meta">
-<div class="popup-head">
-<h5><i class="icofont-envelope"></i> Send Message</h5>
-</div>
-<div class="send-message">
-<form method="post" class="c-form">
-<input type="text" placeholder="Enter Name..">
-<input type="text" placeholder="Subject">
-<textarea placeholder="Write Message"></textarea>
-<div class="uploadimage">
-<i class="icofont-file-jpg"></i>
-<label class="fileContainer">
-<input type="file">Attach file
-</label>
-</div>
-<button type="submit" class="main-btn">Send</button>
-</form>
-</div>
-</div>
-</div>
-</div>
-<div class="side-slide">
-<span class="popup-closed"><i class="icofont-close"></i></span>
-<div class="slide-meta">
-<ul class="nav nav-tabs slide-btns">
-<li class="nav-item"><a class="active" href="#messages" data-toggle="tab">Messages</a></li>
-<li class="nav-item"><a class href="#notifications" data-toggle="tab">Notifications</a></li>
-</ul>
+                        </a>
 
-<div class="tab-content">
-<div class="tab-pane active fade show" id="messages">
-<h4><i class="icofont-envelope"></i> messages</h4>
-<a href="#" class="send-mesg" title="New Message" data-toggle="tooltip"><i class="icofont-edit"></i></a>
-<ul class="new-messages">
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Ibrahim Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fatima J.</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Fawad Ahmed</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Saim Turan</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>Helo dear i wanna talk to you</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-<div class="tab-pane fade" id="notifications">
-<h4><i class="icofont-bell-alt"></i> notifications</h4>
-<ul class="notificationz">
-<li>
-<figure><img src="images/resources/user5.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user4.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user2.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user1.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>share your post <strong>a good time today!</strong></a>
-</div>
-</li>
-<li>
-<figure><img src="images/resources/user3.jpg" alt></figure>
-<div class="mesg-info">
-<span>Alis wells</span>
-<a href="#" title>recommend your post</a>
-</div>
-</li>
-</ul>
-<a href="#" title class="main-btn" data-ripple>view all</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script src="js/main.min.js" type="fd0c1240374019ed17673e95-text/javascript"></script>
-<script src="js/vivus.min.js" type="fd0c1240374019ed17673e95-text/javascript"></script>
-<script src="js/script.js" type="fd0c1240374019ed17673e95-text/javascript"></script>
+                    </li>
 
-<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="fd0c1240374019ed17673e95-|49" defer></script><script>(function(){var js = "window['__CF$cv$params']={r:'85d591f259b79e29',t:'MTcwOTI1ODYwMS41MzIwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../cdn-cgi/challenge-platform/h/g/scripts/jsd/a0d8959cb7d0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+                    <li>
+                        <a href="#" title>
+                            <i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid">
+                                    <rect x="3" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="3" width="7" height="7"></rect>
+                                    <rect x="14" y="14" width="7" height="7"></rect>
+                                    <rect x="3" y="14" width="7" height="7"></rect>
+                                </svg>
+                            </i>
+                        </a>
+                        <ul class="dropdown">
+                            <li>
+                                <a href="{{ route('profile.profil', auth()->user()->id) }}" title="Profile">
+                                    <i class="icofont-user-alt-3"></i> Your Profile
+                                    </a>
+                            </li>
+                            <li><a href="#" data-toggle="tooltip" data-bs-toggle="modal"
+                                    data-bs-target="#tambahModal" type="button">
+                                    <i class="icofont-plus"></i>Add Content</a></a>
+                            </li>
+                            <li><a type="button" class="invite-new" data-toggle="tooltip" data-bs-toggle="modal"
+                                    data-bs-target="#addContactModal"><i class="icofont-envelope"></i> Contact</a>
+                            </li>
 
-<!-- Mirrored from wpkixx.com/html/socimo-panel/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 01 Mar 2024 02:04:31 GMT -->
+                            <li class="logout">
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-outline-primary w-100" onclick="showLogoutAlert()">
+                                        <i class="icofont-power"></i> Logout
+                                    </button>
+                                    </script>
+                                </form>
+                            </li>
+                            <li>
+                            </li>
+                        </ul>
+            </div>
+        </header>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true" data-backdrop="true">
+            <div class="modal-dialog modal-sm modal-dialog-slideout" role="document">
+                <div class="modal-content modal-content-slideout">
+                    <!-- Modal header -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">
+                            <strong>
+                                Notifications
+                            </strong>
+                        </h5>
+                        <form action="{{ route('notifications.destroyAll') }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="background-color: #e27a7a; border: none;">
+                                Mark all read
+                            </button>
+                        </form>
+                        {{-- <button id="mark-all-read" class="btn-xs btn-primary rounded-pill" style="">Mark all read</button> --}}
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body" style="position: relative; -ms-overflow-style: none;
+                    overflow: hidden !important;
+                    overflow-anchor: none;
+                    touch-action: auto;
+                    -ms-touch-action: auto;">
+                    @foreach ($notifications as $notification)
+                    <div class="notification-item">
+                        <div class="message-info">
+
+                            @if($notification->type == 'admin')
+                                <span class="user-name">Admin</span>
+                                <span class="notification-time">
+                                    <p><a href="{{ route('content.detail', $notification->content_id) }}">admin has posted content</a></p>
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
+                            @else
+                            <span class="user-name">
+                                @if($notification->user)
+                                    {{ $notification->user->name }}
+                                  @else
+                                    User Deleted
+                                @endif
+                            </span>
+                                {{-- <span class="user-name">{{ $notification->user->name }}</span> --}}
+                                <span class="notification-time">
+                                    @if($notification->type == 'like')
+                                            <p><a href="{{ route('content.detail', $notification->content_id) }}">liked your content</a></p>
+                                        @elseif($notification->type == 'comment')
+                                            <p><a href="{{ route('content.comment', ['id' => $notification->content_id]) }}#comment_id_{{ $notification->comments_id }}">commented on your content</a></p>
+                                        @elseif($notification->type == 'reply')
+                                        <p><a href="{{ route('comment.reply', $notification->content_id) }}">replied to your comment</a></p>
+                                    @endif
+
+                                    @if($notification->created_at->diffInWeeks() >= 1)
+                                        {{ \Carbon\Carbon::parse($notification->created_at)->isoFormat('D MMMM YYYY') }}
+                                    @else
+                                        {{ $notification->created_at->diffForHumans() }}
+                                    @endif
+                                </span>
+                            @endif
+                        </div>
+                        <form action="{{ route('notifications.destroy', ['notification' => $notification->id]) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="iconbox rounded-circle" style="background-color: #e27a7a; border: none;">
+                                <i class="icofont-close" style="color: #fff"></i>
+                            </button>
+                        </form>
+                        <figure class="profile-image">
+                            @if ($notification->user && $notification->user->profile)
+                                <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                            @else
+                                <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                            @endif
+                        </figure>
+                        {{-- <figure class="profile-image">
+                            @if ($notification->user->profile)
+                                <img src="{{ asset('storage/' . $notification->user->profile) }}" alt="Profile Image">
+                            @else
+                                <img src="images/LOGO/profil.jpeg" alt="Profile Image">
+                            @endif
+                        </figure> --}}
+                    </div>
+                @endforeach
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+          document.getElementById('mark-all-read').addEventListener('click', function() {
+    // Mengirim permintaan Ajax ke endpoint untuk menghapus semua notifikasi
+    fetch('{{ route("notifications.destroyAll") }}', {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to mark all notifications as read');
+        }
+        // Jika berhasil, reload halaman untuk memperbarui tampilan notifikasi
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error marking all notifications as read:', error);
+    });
+});
+        </script>
+
+        <section>
+            <div class="gap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="page-contents" class="row merged20">
+                                <div class="col-lg-3">
+                                    <aside class="sidebar static left">
+                                        <div class="widget whitish low-opacity">
+                                            <img src="images/time-clock.png" alt>
+                                            <div class="bg-image"
+                                                style="background-image: url(images/resources/time-bg.jpg)"></div>
+                                            <div class="date-time">
+                                                <div class="realtime">
+                                                    <span id="hours">00</span>
+                                                    <span id="point">:</span>
+                                                    <span id="min">00</span>
+                                                    <span id="point">:</span>
+                                                    <span id="sec">00</span>
+                                                </div>
+                                                <span id="date"></span>
+                                            </div>
+                                        </div>
+                                    </aside>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="main-wraper">
+                                        <span class="new-title">Create New Post</span>
+                                        <div class="text-center">
+                                            <a href="#" class="btn btn-primary btn-lg rounded-pill"
+                                                data-toggle="tooltip" data-bs-toggle="modal"
+                                                data-bs-target="#tambahModal" type="button"
+                                                style="background-color: #2ea8dc; width: 200px; border: none;">
+                                                <i class="icofont-plus text-white"></i>
+                                            </a>
+                                        </div>
+                                        <div class="new-post">
+                                            <form method="post">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    @if ($content->isEmpty())
+                                        <center>
+                                            <img src="{{ asset('images/LOGO/datakosong.png') }}" alt=""
+                                                style="width: 60%;">
+                                        </center>
+                                    @else
+                                        @forelse ($content as $contents)
+                                            <div class="main-wraper">
+                                                <div class="user-post">
+                                                    <div class="friend-info">
+                                                        <figure
+                                                            style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; position: relative;">
+                                                            @if ($contents->user->profile)
+                                                                <img src="{{ asset('storage/' . $contents->user->profile) }}"
+                                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                                            @else
+                                                                <img src="images/LOGO/profil.jpeg" alt
+                                                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                                            @endif
+                                                        </figure>
+                                                        <div class="friend-name">
+                                                            <ins><a title>{{ $contents->user->name }}</a></ins>
+                                                            <span><i class="icofont-globe"></i> published:
+                                                                @if ($contents->created_at->diffInWeeks() >= 1)
+                                                                    {{ \Carbon\Carbon::parse($contents->created_at)->isoFormat('D MMMM YYYY') }}
+                                                                @else
+                                                                    {{ $contents->created_at->diffForHumans() }}
+                                                                @endif
+                                                            </span>
+                                                        </div>
+                                                        <div class="post-meta">
+                                                            <figure>
+                                                                <a
+                                                                    href="{{ route('content.detail', ['content' => $contents->id]) }}">
+                                                                    <img src="{{ asset('storage/' . $contents->gambar) }}"
+                                                                        style="" alt>
+                                                                </a>
+                                                            </figure>
+                                                            <a href="{{ route('content.detail', ['content' => $contents->id]) }}"
+                                                                class="post-title">
+                                                                @if (strlen($contents->judul) > 45)
+                                                                    {{ substr($contents->judul, 0, 45) }}...
+                                                                @else
+                                                                    {{ $contents->judul }}
+                                                                @endif
+                                                            </a>
+                                                            <p>Categories:
+                                                                {{ optional($contents->kategori)->kategori }},</p>
+
+
+                                                            <div class="we-video-info">
+                                                                <div class="stat-tools">
+                                                                    <div class="box">
+                                                                        <div class="Like">
+                                                                            @if (
+                                                                                $likes &&
+                                                                                    $likes->where('user_id', Auth::id())->where('content_id', $contents->id)->count() > 0)
+                                                                                <form
+                                                                                    action="{{ route('like.destroy',$likes->where('user_id', Auth::id())->where('content_id', $contents->id)->first()->id) }}"
+                                                                                    method="post">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    @error('like')
+                                                                                        {{ $message }}
+                                                                                    @enderror
+                                                                                    @error('user_id')
+                                                                                        {{ $message }}
+                                                                                    @enderror
+                                                                                    @error('content_id')
+                                                                                        {{ $message }}
+                                                                                    @enderror
+                                                                                    <input type="hidden"
+                                                                                        name="content_id"
+                                                                                        value="{{ $contents->id }}">
+                                                                                    <button type="submit"
+                                                                                        class=""
+                                                                                        style="
+                                                                                            background: #ff0000;
+                                                                                            border-radius: 4px;
+                                                                                            color: #ffffff;
+                                                                                            display: inline-block;
+                                                                                            font-size: 13px;
+                                                                                            padding: 5px 20px;
+                                                                                            vertical-align: middle;
+                                                                                            transition: all 0.2s linear 0s;
+                                                                                            border: none;
+                                                                                            }"><i
+                                                                                            class="icofont-like"></i>
+                                                                                        Unlike</button>
+                                                                                </form>
+                                                                            @else
+                                                                                <form action="/like" method="post">
+                                                                                    @csrf
+                                                                                    @method('POST')
+                                                                                    @error('like')
+                                                                                        {{ $message }}
+                                                                                    @enderror
+                                                                                    @error('user_id')
+                                                                                        {{ $message }}
+                                                                                    @enderror
+                                                                                    @error('content_id')
+                                                                                        {{ $message }}
+                                                                                    @enderror
+                                                                                    <input type="hidden"
+                                                                                        name="content_id"
+                                                                                        value="{{ $contents->id }}">
+                                                                                    <button type="submit"
+                                                                                        class=""
+                                                                                        style="
+                                                                                            background: #0099ff;
+                                                                                            border-radius: 4px;
+                                                                                            color: #ffffff;
+                                                                                            display: inline-block;
+                                                                                            font-size: 13px;
+                                                                                            padding: 5px 20px;
+                                                                                            vertical-align: middle;
+                                                                                            transition: all 0.2s linear 0s;
+                                                                                            border: none;
+                                                                                            }"><i
+                                                                                            class="icofont-like"></i>
+                                                                                        Like</button>
+                                                                                </form>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <a title
+                                                                        href="{{ route('content.comment', $contents->id) }}"
+                                                                        class="comment-to"><i
+                                                                            class="icofont-comment"></i> Comment</a>
+                                                                    <div class="emoji-state">
+
+                                                                        <div class="popover_wrapper">
+                                                                            <div class="we-video-info">
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <span title="liked"
+                                                                                            class="liked">
+                                                                                            <i class="icofont-like"
+                                                                                                style="color: #64a4d4;"></i>
+                                                                                            <ins>{{ $likesCount[$contents->id] }}</ins>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="popover_wrapper">
+                                                                            <div class="we-video-info">
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <span title="Comments"
+                                                                                            class="Recommend">
+                                                                                            <i>
+                                                                                                <svg class="feather feather-message-square"
+                                                                                                    stroke-linejoin="round"
+                                                                                                    stroke-linecap="round"
+                                                                                                    stroke-width="2"
+                                                                                                    stroke="currentColor"
+                                                                                                    fill="none"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    height="16"
+                                                                                                    width="16"
+                                                                                                    xmlns="http://www.w3.org/2000/svg">
+                                                                                                    <path
+                                                                                                        d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                                                                                </svg></i>
+                                                                                            <i class="icofont-comment"
+                                                                                                style="color: #ffffff"></i>
+                                                                                            <ins>{{ $commentCount[$contents->id] }}</ins>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="new-comment" style="display: none;">
+                                                                    <form method="post">
+                                                                        <input type="text"
+                                                                            placeholder="write comment">
+                                                                        <button type="submit"><i
+                                                                                class="icofont-paper-plane"></i></button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                    <div class="pagination">
+                                        {{ $content->links() }}
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="main-wraper">
+                                        <span class="new-title">Search Post</span>
+                                        <div class="new-post">
+                                            <form id="searchForm" value="{{ $oldSearch }}"
+                                                action="{{ route('home.search') }}" method="get">
+                                                @csrf
+                                                <i class="icofont-search"></i>
+                                                <input type="search" name="search" value="{{ $oldSearch }}"
+                                                    class="form-control" placeholder="Search..."
+                                                    oninput="submitSearch()">
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <aside class="sidebar static right">
+                                        <div class="widget">
+                                            <form action="{{ route('home.filter') }}" method="GET">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h4 class="widget-title"><b>Category</b></h4>
+                                                    <button type="submit" class="btn btn-primary"
+                                                        style="background-color: #2ea8dc; border:none;">Filter</button>
+                                                </div>
+                                                @php
+                                                    $kategori_ids = isset($kategori_ids) ? $kategori_ids : [];
+                                                @endphp
+                                                @foreach ($kategori as $key => $category)
+                                                    <input type="checkbox" id="category{{ $category->id }}"
+                                                        name="kategori_id[]" value="{{ $category->id }}"
+                                                        @if (in_array($category->id, (array) $kategori_ids)) checked @endif>
+                                                    <label for="category{{ $category->id }}" class="large-label">
+                                                        {{ $category->kategori }}
+                                                    </label><br>
+                                                @endforeach
+                                            </form>
+                                        </div>
+                                    </aside>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+    <figure class="bottom-mockup"><img src="images/footer.png" alt></figure>
+    <div class="bottombar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class>&copy; copyright All rights reserved by GetForums 2024</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .post-new-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+        }
+    </style>
+
+    <div class="modal" tabindex="-1" id="tambahModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="m-0 font-weight-bold">Add Content</h6>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.content.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="judul" class="form-label">Title</label>
+                            <input type="text" class="form-control @error('judul') is-invalid @enderror"
+                                id="judul" name="judul" value="{{ old('judul') }}">
+                            @error('judul')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="deskripsi" class="form-label">
+                                Fill Content</label>
+                            @error('deskripsi')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            <textarea name="deskripsi" id="summernote" class="custom-summernote" aria-label="With textarea">{{ old('deskripsi') }}</textarea>
+                            @section('scripts')
+                                <script>
+                                    $(document).ready(function() {
+                                        $('#summernote').summernote({
+                                            placeholder: 'Isi content...',
+                                            tabsize: 2,
+                                            height: 120,
+                                            toolbar: [
+                                                ['style', ['style']],
+                                                ['font', ['bold', 'underline', 'clear']],
+                                                ['color', ['color']],
+                                                ['para', ['ul', 'ol', 'paragraph']],
+                                                ['table', ['table']],
+                                                ['insert', ['link', 'picture', 'video']],
+                                                ['view', ['fullscreen', 'codeview', 'help']]
+                                            ]
+                                        });
+                                    });
+                                </script>
+                            @endsection
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambar" class="form-label">Image</label>
+                            <input type="file" class="form-control @error('gambar') is-invalid @enderror"
+                                id="gambar" name="gambar" value="{{ old('gambar') }}">
+                            @error('gambar')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="kategoris" class="form-label">Category</label><br>
+                            <select class="form-control @error('kategori_id') is-invalid @enderror" id="kategoris"
+                                name="kategori_id" aria-label="Default select example">
+                                <option value="" selected>Select Category</option>
+                                @foreach ($kategori as $kat)
+                                    <option value="{{ $kat->id }}"
+                                        {{ old('kategori_id') == $kat->id ? 'selected' : '' }}>
+                                        {{ $kat->kategori }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('kategori_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            <button type="submit" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="addContactModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addContactModalLabel">Add Contact</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="addContactForm" action="{{ route('contact.index') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="messages" class="form-label">Messages</label>
+                            <textarea type="text" class="form-control @error('messages') is-invalid @enderror" id="messages"
+                                name="messages">{{ old('messages') }}</textarea>
+                            @error('messages')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                            <button type="submit" form="addContactForm" class="btn btn-primary">SAVE</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php if ($errors->any()): ?>
+    <script>
+        toastr.error("<?php foreach ($errors->all() as $error) {
+            echo $error . '\n';
+        } ?>");
+    </script>
+    <?php endif; ?>
+
+    <?php if (session('warning')): ?>
+    <script>
+        toastr.warning("<?php echo session('warning'); ?>");
+    </script>
+    <?php endif; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function swalpFunction() {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log("Data dihapus");
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        }
+    </script>
+
+    <?php if (Session::has('success')): ?>
+    <script>
+        toastr.success("<?php echo Session::get('success'); ?>");
+    </script>
+    <?php endif; ?>
+
+    <script>
+        function submitSearch() {
+            document.getElementById("searchForm").submit();
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Script is executing!");
+            document.getElementById('createPostInput').addEventListener('click', function() {
+                console.log("Input clicked!");
+                document.getElementById('postPopup').style.display = 'block';
+            });
+        });
+    </script>
+
+    <script>
+        function showLogoutAlert() {
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Anda yakin ingin keluar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Keluar!',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Swal.fire(
+                        'Logout Berhasil',
+                        'Anda telah berhasil logout.',
+                        'success'
+                    );
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Logout Dibatalkan',
+                        'Anda membatalkan logout.',
+                        'error'
+                    );
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function submitSearch() {
+            document.getElementById("searchForm").submit();
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.min.js" type="text/javascript"></script>
+    <script src="js/date-time.js" type="text/javascript"></script>
+    <script src="js/script.js" type="b792af529d8fc78a3581caf5-text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.btn-like').on('click', function() {
+                var contentId = $(this).closest('.like-button').data('content-id');
+
+                $.ajax({
+                    url: '/content/' + contentId + '/like',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        console.log('Like berhasil');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Gagal melakukan like:', error);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        let posts = [];
+
+        function submitPost() {
+            const postInput = document.getElementById('postInput').value;
+
+            if (postInput.trim() !== '') {
+                const post = {
+                    content: postInput,
+                    likes: 0,
+                    liked: false
+                };
+
+                posts.push(post);
+                renderPosts();
+                document.getElementById('postInput').value = '';
+            }
+        }
+
+        function toggleLike(index) {
+            posts[index].liked = !posts[index].liked;
+
+            if (posts[index].liked) {
+                posts[index].likes++;
+            } else {
+                posts[index].likes--;
+            }
+
+            renderPosts();
+        }
+
+        function renderPosts() {
+            const postList = document.getElementById('postList');
+            postList.innerHTML = '';
+
+            posts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
+                <p>${post.content}</p>
+                <div class="like" onclick="toggleLike(${index})">
+                    <a class="like__link"><i class="icofont-like${post.liked ? ' liked' : ''}"></i> <span>${post.likes}</span> Like</a>
+                </div>
+            `;
+                postList.appendChild(postElement);
+            });
+        }
+    </script>
+</body>
+
 </html>

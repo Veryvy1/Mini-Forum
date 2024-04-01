@@ -15,20 +15,53 @@ use DOMDocument;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReplyController extends Controller
 {
     public function replyId(Request $request, $id)
     {
-    $notifications = Notification::all();
-    $user = auth()->user();
-    $comment = Comment::findOrFail($id);
-    $reply = Reply::where('comment_id', $id)->orderBy('created_at', 'desc')->get();
-    $replyAll = Reply::where('comment_id', $id)->count();
-    $profil = User::find($user->id)->profil;
-    return view('user.reply', compact('comment', 'user', 'reply', 'replyAll', 'profil'));
+        $user = auth()->user();
+        $comment = Comment::findOrFail($id);
+        $reply = Reply::where('comment_id', $id)->orderBy('created_at', 'desc')->get();
+        $replyAll = Reply::where('comment_id', $id)->count();
+        $profil = User::find($user->id)->profil; // Pastikan profil memiliki nilai
+        $notifications = $this->getNotifications();
+        $notificationCount = $notifications->count();
+
+        return view('user.reply', compact('comment', 'user', 'reply', 'replyAll', 'profil', 'notifications', 'notificationCount'));
     }
 
+    private function getNotifications()
+    {
+        // Mengambil notifikasi like dan komentar terbaru untuk konten pengguna saat ini
+        $userNotifications = Notification::select('notifications.*')
+            ->join('contents', 'notifications.content_id', '=', 'contents.id')
+            ->where('contents.user_id', Auth::id())
+            ->whereIn('notifications.type', ['like', 'comment'])
+            ->orderBy('notifications.created_at', 'desc')
+            ->get();
+
+        // Mengambil notifikasi balasan (reply) terbaru yang merupakan balasan untuk komentar pada konten pengguna saat ini
+        $replyNotifications = Notification::select('notifications.*')
+            ->join('comments', 'notifications.comment_id', '=', 'comments.id')
+            ->join('contents', 'comments.content_id', '=', 'contents.id')
+            ->where(function ($query) {
+                $query->where('comments.user_id', Auth::id()) // Memfilter balasan yang dikirim oleh pengguna saat ini
+                    ->orWhere('contents.user_id', Auth::id()); // Menambahkan filter untuk pemilik konten dari konten yang dikomentari
+            })
+            ->where('notifications.type', 'reply')
+            ->orderBy('notifications.created_at', 'desc')
+            ->get();
+
+        // Menggabungkan notifikasi ke dalam satu koleksi
+        $notifications = $userNotifications->merge($replyNotifications);
+
+        // Mengurutkan notifikasi berdasarkan waktu pembuatan
+        $notifications = $notifications->sortByDesc('created_at');
+
+        return $notifications;
+    }
 
 
     public function index()
@@ -152,6 +185,8 @@ class ReplyController extends Controller
     //         return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
     //     }
     // }
+
+
 
     public function show($id) {
         $comment = Comment::find($id);
